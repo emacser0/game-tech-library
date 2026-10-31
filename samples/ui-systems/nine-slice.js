@@ -6,18 +6,18 @@ GTL.register({
   views: { a: '단순 확대', b: '9-슬라이스' },
   controls: '뷰 안에서 드래그하면 큰 패널의 오른쪽 아래 모서리가 따라옴. 자동 크기 변화를 끄면 드래그한 크기가 유지됨.',
   info: `
-    <p><b>9-슬라이스</b>(9-slice, 9-patch)는 작은 테두리 이미지 하나로 여러 크기의 패널을 그리는 방법.</p>
-    <p>이미지 하나를 패널마다 그대로 늘리면 문제가 생김.</p>
+    <p><b>9-슬라이스</b>(9-slice, 9-patch)는 작은 테두리 이미지 하나로 여러 크기의 패널을 그리는 방법</p>
+    <p>이미지 하나를 패널마다 그대로 늘리면 문제가 생김</p>
     <ul>
-      <li>모서리의 둥근 곡선과 장식이 타원으로 찌그러짐.</li>
-      <li>테두리 두께가 패널 크기에 따라 달라짐.</li>
-      <li>크기별로 이미지를 따로 만들면 메모리와 작업량이 늘어남.</li>
+      <li>모서리의 둥근 곡선과 장식이 타원으로 찌그러짐</li>
+      <li>테두리 두께가 패널 크기에 따라 달라짐</li>
+      <li>크기별로 이미지를 따로 만들면 메모리와 작업량이 늘어남</li>
     </ul>
-    <p>동작 원리: 원본을 가로 3칸, 세로 3칸으로 나눔.</p>
+    <p>동작 원리: 원본을 가로 3칸, 세로 3칸으로 나눔</p>
     <ul>
-      <li>네 모서리: 원본 크기 그대로 그림.</li>
+      <li>네 모서리: 원본 크기 그대로 그림</li>
       <li>위아래 테두리: 가로로만 늘림. 좌우 테두리: 세로로만 늘림.</li>
-      <li>가운데: 남은 영역을 채우도록 양방향으로 늘림.</li>
+      <li>가운데: 남은 영역을 채우도록 양방향으로 늘림</li>
       <li>테두리 반복 방식은 늘리는 대신 무늬를 반복해서 붙임. 줄무늬나 사슬 같은 테두리에 맞음.</li>
     </ul>
     <p>단점: 그리기 호출이 1번에서 9번으로 늘어남. 패널이 모서리 두 개보다 작아지면 모서리를 줄여야 함. 엔진은 보통 9칸을 메시 하나로 묶어 호출 수 문제를 없앰.</p>`,
@@ -49,11 +49,11 @@ GTL.register({
     '처음 화면에서 A의 리벳(모서리 원)이 넓은 패널에서는 가로 타원, 좁고 긴 패널에서는 세로 타원이 됨. B는 모든 패널에서 원 모양 유지.',
     'B의 "슬라이스 테두리"를 4px로 줄이면 모서리 장식이 가운데 칸에 들어가서 B도 찌그러짐. 테두리 값은 장식 크기 이상이어야 함.',
     'B의 방식을 "테두리 반복"으로 바꾸면 테두리 줄무늬 간격이 패널 크기와 관계없이 일정해짐. 대신 그리기 호출 수가 늘어남.',
-    '자동 크기 변화를 끄고 큰 패널을 아주 작게 드래그하면 9-슬라이스의 모서리가 패널 크기에 맞춰 줄어듦.',
+    '자동 크기 변화를 끄고 큰 패널을 아주 작게 드래그하면 9-슬라이스의 모서리가 패널 크기에 맞춰 줄어듦',
   ],
   refs: [
-    { type: 'engine', title: 'Unity Manual - 9-slicing', url: 'https://docs.unity3d.com/Manual/9SliceSprites.html', note: 'Sprite Editor에서 테두리를 지정하고 Draw Mode를 Sliced 또는 Tiled로 설정.' },
-    { type: 'engine', title: 'Godot - NinePatchRect', url: 'https://docs.godotengine.org/en/stable/classes/class_ninepatchrect.html', note: 'axis_stretch_horizontal 값으로 늘리기와 반복을 고름.' },
+    { type: 'engine', title: 'Unity Manual - 9-slicing', url: 'https://docs.unity3d.com/Manual/9SliceSprites.html', note: 'Sprite Editor에서 테두리를 지정하고 Draw Mode를 Sliced 또는 Tiled로 설정' },
+    { type: 'engine', title: 'Godot - NinePatchRect', url: 'https://docs.godotengine.org/en/stable/classes/class_ninepatchrect.html', note: 'axis_stretch_horizontal 값으로 늘리기와 반복을 고름' },
     { type: 'engine', title: 'Android Developers - Create resizable bitmaps (9-Patch files)', url: 'https://developer.android.com/studio/write/draw9patch' },
     { type: 'article', title: 'MDN - border-image', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS/border-image', note: '웹 CSS의 9-슬라이스. stretch, repeat, round 옵션.' },
   ],

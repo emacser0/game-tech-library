@@ -2,26 +2,26 @@
 GTL.register({
   id: 'sh-light-probes',
   title: '구면 조화(SH) 라이트 프로브',
-  summary: '움직이는 물체에 간접광을 주는 방법을 비교함. 상수 앰비언트는 어디서나 같은 색이라 물체가 평평해 보임. 격자에 둔 SH 프로브를 물체 위치에서 보간하면 빨간 벽 쪽 면은 붉게, 하늘 쪽 면은 푸르게 물듦.',
+  summary: '움직이는 물체에 간접광을 주는 방법을 비교. 상수 앰비언트는 어디서나 같은 색이라 물체가 평평해 보임. 격자에 둔 SH 프로브를 물체 위치에서 보간하면 빨간 벽 쪽 면은 붉게, 하늘 쪽 면은 푸르게 물듦.',
   renderer: 'webgl',
   views: { a: '상수 앰비언트', b: 'SH 프로브 보간' },
   controls: '마우스 드래그: 카메라 회전, 휠: 줌',
   info: `
     <p><b>라이트 프로브(light probe)</b>는 공간의 한 점에 모든 방향에서 들어오는 빛을 저장한 것. 라이트맵을 쓸 수 없는 움직이는 물체에 간접광을 줄 때 씀.</p>
-    <p>모든 방향의 빛을 그대로 저장하면 너무 큼. 그래서 <b>구면 조화 함수(spherical harmonics, SH)</b>로 압축함. SH는 구 위의 함수를 대역(band)별 기저 함수의 합으로 나타냄:</p>
+    <p>모든 방향의 빛을 그대로 저장하면 너무 큼. 그래서 <b>구면 조화 함수(spherical harmonics, SH)</b>로 압축. SH는 구 위의 함수를 대역(band)별 기저 함수의 합으로 나타냄:</p>
     <ul>
       <li>L0: 계수 1개. 모든 방향의 평균 색.</li>
       <li>L1: 계수 3개 추가. 빛이 한쪽에서 더 많이 오는 기울기.</li>
       <li>L2: 계수 5개 추가. 위아래와 좌우가 다른 세부 분포. 합쳐서 색마다 9개.</li>
     </ul>
-    <p>Ramamoorthi와 Hanrahan(2001)은 확산 반사의 조도(irradiance)가 L2까지만으로 평균 오차 약 1% 안에 들어온다는 것을 보임. 그래서 게임은 프로브마다 RGB 계수 27개를 저장함.</p>
+    <p>Ramamoorthi와 Hanrahan(2001)은 확산 반사의 조도(irradiance)가 L2까지만으로 평균 오차 약 1% 안에 들어온다는 것을 보임. 그래서 게임은 프로브마다 RGB 계수 27개를 저장.</p>
     <p>동작:</p>
     <ol>
-      <li>굽기: 격자의 각 프로브에서 주변을 보고 SH 계수로 투영함(적분).</li>
-      <li>실행: 물체 위치를 둘러싼 프로브 8개를 3중 선형(trilinear) 가중치로 섞음.</li>
-      <li>셰이더: 법선 방향으로 SH를 계산해 조도를 얻음.</li>
+      <li>굽기: 격자의 각 프로브에서 주변을 보고 SH 계수로 투영(적분)</li>
+      <li>실행: 물체 위치를 둘러싼 프로브 8개를 3중 선형(trilinear) 가중치로 섞음</li>
+      <li>셰이더: 법선 방향으로 SH를 계산해 조도를 얻음</li>
     </ol>
-    <p>Unity Light Probe Group은 프로브를 사면체로 나눠 4개를 보간함. Unreal의 Volumetric Lightmap은 격자에 SH를 저장하고 3중 선형으로 보간함.</p>
+    <p>Unity Light Probe Group은 프로브를 사면체로 나눠 4개를 보간. Unreal의 Volumetric Lightmap은 격자에 SH를 저장하고 3중 선형으로 보간.</p>
     <p>단점: 물체 하나에 보간값 하나라 큰 물체는 한쪽 끝과 반대쪽 끝의 빛 차이를 못 담음. 프로브 사이에 벽이 있으면 빛이 새어 들어옴(light leaking).</p>`,
   // 도식: 격자 셀 안 물체의 보간 가중치, SH 대역별 기저 함수 모양
   diagram: (L) => `<svg viewBox="0 0 540 200" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +54,7 @@ GTL.register({
     'A의 구와 상자는 어느 면이나 같은 회색이라 평평해 보임. B는 왼쪽 면이 붉고, 오른쪽 면이 초록, 윗면이 푸름.',
     'B에서 구가 빨간 벽에 가까워지면 전체가 더 붉어지고, 초록 벽 쪽으로 가면 초록이 강해짐. 위치마다 빛이 달라짐.',
     'SH 차수를 L0으로 낮추면 방향 정보가 사라져 A처럼 평평해짐(색만 위치에 따라 바뀜). L1에서 방향이 생기고 L2에서 위아래 차이가 또렷해짐.',
-    '보간을 "가장 가까운 프로브"로 바꾸면 물체가 셀 경계를 지날 때 색이 툭 바뀜(popping).',
+    '보간을 "가장 가까운 프로브"로 바꾸면 물체가 셀 경계를 지날 때 색이 툭 바뀜(popping)',
   ],
   refs: [
     { type: 'paper', title: 'An Efficient Representation for Irradiance Environment Maps (Ramamoorthi, Hanrahan)', url: 'https://graphics.stanford.edu/papers/envmap/', year: 2001, note: 'SIGGRAPH 2001. L2 SH 9개 계수로 조도를 근사하는 공식.' },

@@ -122,17 +122,17 @@
     views: { a: '버퍼 2프레임', b: '버퍼 4프레임' },
     controls: '←↑→↓ / WASD: 큰 원 이동 (서버 쪽 입력)',
     info: `
-      <p><b>지터 버퍼</b>: 도착한 프레임을 잠시 쌓아두었다가 일정한 박자로 꺼내 재생하는 버퍼.</p>
+      <p><b>지터 버퍼</b>: 도착한 프레임을 잠시 쌓아두었다가 일정한 박자로 꺼내 재생하는 버퍼</p>
       <p>왜 필요한가: 서버는 일정한 간격으로 프레임을 보냄. 하지만 인터넷을 지나며 패킷마다 지연이 달라짐(<b>지터</b>).
       VoIP(RTP, RFC 3550)와 스냅샷 보간 모두 같은 문제를 풂.</p>
       <ul>
-        <li>수신 측은 프레임 k를 <code>재생 시각(k) = k × 간격 + 기본 지연 + 버퍼 지연</code>에 꺼냄.</li>
-        <li>추가 지연이 버퍼 지연보다 작은 패킷은 모두 제때 재생됨.</li>
+        <li>수신 측은 프레임 k를 <code>재생 시각(k) = k × 간격 + 기본 지연 + 버퍼 지연</code>에 꺼냄</li>
+        <li>추가 지연이 버퍼 지연보다 작은 패킷은 모두 제때 재생됨</li>
         <li>더 늦게 온 패킷은 재생 시점이 이미 지나 <b>버려짐</b>. 그동안 화면이 멈춤(언더런).</li>
-        <li><b>적응형</b> 모드: 최근 2초간 관측한 도착 편차(최소 지연 대비)를 덮을 만큼만 버퍼를 자동 조절함.</li>
-        <li>RFC 3550의 지터 추정값 <code>J += (|D| − J)/16</code>도 함께 표시함.</li>
+        <li><b>적응형</b> 모드: 최근 2초간 관측한 도착 편차(최소 지연 대비)를 덮을 만큼만 버퍼 자동 조절</li>
+        <li>RFC 3550의 지터 추정값 <code>J += (|D| − J)/16</code>도 함께 표시</li>
       </ul>
-      <p>단점: 버퍼가 크면 끊김은 줄지만 <b>모든 프레임이 그만큼 늦게</b> 보임.</p>`,
+      <p>단점: 버퍼가 크면 끊김은 줄지만 <b>모든 프레임이 그만큼 늦게</b> 보임</p>`,
     diagram: (L) => `<svg viewBox="0 0 540 186" xmlns="http://www.w3.org/2000/svg">
       <text x="4" y="34">${L('송신', 'Send')}</text>
       <text x="4" y="79">${L('도착', 'Arrive')}</text>
@@ -146,13 +146,13 @@
     </svg>`,
     look: [
       '두 뷰의 원을 비교하면, A는 자주 멈칫함(다음 프레임이 아직 안 와서 언더런). B는 매끄럽지만 "총 지연"이 더 큼.',
-      'A의 버퍼 크기를 0~1로 줄이면 "버퍼 상태"에 빨간 칸(늦어서 버린 프레임)이 생김.',
+      'A의 버퍼 크기를 0~1로 줄이면 "버퍼 상태"에 빨간 칸(늦어서 버린 프레임)이 생김',
       '지터를 0으로 낮추면 A도 매끄러워짐. 버퍼는 지터를 덮을 만큼만 있으면 충분함.',
-      '버퍼 모드를 "적응형"으로 바꾸고 지터를 바꾸면 버퍼 지연이 따라서 늘고 줄어듦.',
+      '버퍼 모드를 "적응형"으로 바꾸고 지터를 바꾸면 버퍼 지연이 따라서 늘고 줄어듦',
       '손실률을 올리면 B에서도 가끔 멈춤(손실 칸은 보라색). 손실은 버퍼로 해결할 수 없음.',
     ],
     refs: [
-      { type: 'paper', title: 'RFC 3550 - RTP: A Transport Protocol for Real-Time Applications', url: 'https://www.rfc-editor.org/rfc/rfc3550', year: 2003, note: '6.4.1절 도착 간격 지터 추정식.' },
+      { type: 'paper', title: 'RFC 3550 - RTP: A Transport Protocol for Real-Time Applications', url: 'https://www.rfc-editor.org/rfc/rfc3550', year: 2003, note: '6.4.1절 도착 간격 지터 추정식' },
       { type: 'article', title: 'Snapshot Interpolation', url: 'https://gafferongames.com/post/snapshot_interpolation/', note: 'Glenn Fiedler. 지터를 덮는 보간 버퍼 크기 선택.' },
       { type: 'article', title: 'What Every Programmer Needs To Know About Game Networking', url: 'https://gafferongames.com/post/what_every_programmer_needs_to_know_about_game_networking/', note: 'Glenn Fiedler.' },
       { type: 'engine', title: 'Source Multiplayer Networking - Entity interpolation', url: 'https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking', note: 'Valve. 보간 지연(cl_interp)이 지터 버퍼 역할을 함.' },

@@ -8,7 +8,7 @@ GTL.register({
   info: `
     <p>애니메이션 레이어는 기본 동작 위에 다른 클립을 겹치는 기능. 레이어마다 가중치와 본 마스크(적용할 관절 목록)가 있음.</p>
     <p><b>덮어쓰기(override)</b>: <code>pose = lerp(base, layer, w)</code>. 레이어 클립의 포즈 자체로 바꿈. 피격 클립이 서 있는 자세로 만들어졌다면, 걷는 중에 맞아도 다리가 서 있는 자세로 끌려감.</p>
-    <p><b>애디티브(additive)</b>: 레이어 클립에서 <b>기준 포즈(reference pose)</b>를 뺀 차이만 저장함. 그리고 <code>pose = base + w * (layer - ref)</code>로 더함.
+    <p><b>애디티브(additive)</b>: 레이어 클립에서 <b>기준 포즈(reference pose)</b>를 뺀 차이만 저장. 그리고 <code>pose = base + w * (layer - ref)</code>로 더함.
     그래서 숨쉬기 하나를 걷기, 웅크리기, 대기 어디에나 얹을 수 있음.</p>
     <p>실제 엔진은 회전을 쿼터니언으로 다룸. 차이는 <code>inverse(ref) * layer</code>, 적용은 곱셈. 여기서는 2D 관절 각도라 덧셈으로 충분함.</p>
     <p>단점: 차이를 더하므로 기본 포즈가 기준 포즈와 많이 다르면 관절이 한계를 넘을 수 있음. 웅크린 자세에 상체 젖힘을 더하는 경우처럼.</p>`,
@@ -47,12 +47,12 @@ GTL.register({
     '맞는 순간 A는 다리가 서 있는 자세로 끌려가 미끄러짐. B는 걸음을 유지한 채 상체만 젖혀짐.',
     '"하체 차이" 값을 보면 피격 중 A는 수십 도, B는 몇 도. 희미한 흰 실루엣이 기본 동작 포즈.',
     '기본 동작을 "웅크려 걷기"로 바꾸면 A는 피격 때 몸을 펴 버림. B는 웅크린 채 젖혀짐.',
-    'B의 "피격 가중치"를 2 가까이 올리면 차이가 두 배로 더해져 관절이 과하게 꺾임.',
+    'B의 "피격 가중치"를 2 가까이 올리면 차이가 두 배로 더해져 관절이 과하게 꺾임',
   ],
   refs: [
-    { type: 'engine', title: 'Unity Manual - Animation Layers', url: 'https://docs.unity3d.com/Manual/AnimationLayers.html', note: 'Override와 Additive 블렌딩, Avatar Mask로 본 마스크 지정.' },
-    { type: 'engine', title: 'Unreal Engine - Additive Animations', note: 'Additive Anim Type, Base Pose Type(Reference Pose), Apply Additive 노드.' },
-    { type: 'book', title: 'Game Engine Architecture (Jason Gregory) - Additive Blending', note: '차이 클립(difference clip)을 만들고 더하는 방법과 한계.' },
+    { type: 'engine', title: 'Unity Manual - Animation Layers', url: 'https://docs.unity3d.com/Manual/AnimationLayers.html', note: 'Override와 Additive 블렌딩, Avatar Mask로 본 마스크 지정' },
+    { type: 'engine', title: 'Unreal Engine - Additive Animations', note: 'Additive Anim Type, Base Pose Type(Reference Pose), Apply Additive 노드' },
+    { type: 'book', title: 'Game Engine Architecture (Jason Gregory) - Additive Blending', note: '차이 클립(difference clip)을 만들고 더하는 방법과 한계' },
   ],
   params: [
     { key: 'mode', label: '레이어 합성', type: 'select', group: '레이어', options: [

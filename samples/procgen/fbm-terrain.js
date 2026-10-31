@@ -8,7 +8,7 @@ GTL.register({
   info: `
     <p><b>fBm(프랙털 브라운 운동)</b>: 크기가 다른 노이즈를 여러 겹(옥타브) 더하는 방식.
     식은 <code>Σ amp<sub>i</sub> × noise(p × freq<sub>i</sub>)</code>.
-    옥타브마다 <code>freq *= lacunarity</code>, <code>amp *= gain</code>을 적용함.</p>
+    옥타브마다 <code>freq *= lacunarity</code>, <code>amp *= gain</code>을 적용.</p>
     <ul>
       <li><b>라쿠나리티</b>: 옥타브마다 곱하는 주파수 배율. 표준값 2.</li>
       <li><b>게인</b>: 옥타브마다 곱하는 진폭 배율. 표준값 0.5.</li>
@@ -17,11 +17,11 @@ GTL.register({
     게인을 올리면 고주파가 강해져 거칠어짐(프랙털 차원↑). 낮추면 매끄러워짐.</p>
     <p>변형:</p>
     <ul>
-      <li><b>Ridged</b>: <code>1 − |noise|</code>를 제곱함. 0을 지나는 선이 날카로운 능선이 됨(산맥).</li>
+      <li><b>Ridged</b>: <code>1 − |noise|</code>를 제곱. 0을 지나는 선이 날카로운 능선이 됨(산맥).</li>
       <li><b>Billow</b>: <code>|noise|</code>를 씀. 둥근 골짜기가 생김(구름, 언덕).</li>
     </ul>
-    <p>옥타브마다 좌표를 회전, 이동하면 격자 방향 아티팩트가 겹쳐 보이는 현상이 줄어듦.</p>
-    <p>Minecraft 지형 높이, No Man's Sky 행성 지형 등 대부분의 노이즈 기반 지형이 이 fBm 변형을 바탕으로 함.</p>`,
+    <p>옥타브마다 좌표를 회전, 이동하면 격자 방향 아티팩트가 겹쳐 보이는 현상이 줄어듦</p>
+    <p>Minecraft 지형 높이, No Man's Sky 행성 지형 등 대부분의 노이즈 기반 지형이 이 fBm 변형을 바탕으로 함</p>`,
   // 도식: 옥타브마다 주파수 2배, 진폭 절반인 노이즈를 더해 1 옥타브 위에 디테일이 쌓이는 과정
   diagram: (L) => {
     const o = (t) => Math.sin(t) + 0.5 * Math.sin(t * 2.3 + 1.1);
@@ -52,14 +52,14 @@ GTL.register({
     'A의 옥타브를 1→2→4로 올리면 해안선이 점점 복잡해짐. 8 이상은 화면 해상도보다 작아져 차이가 거의 없고 비용만 늘어남.',
     '게인을 0.7 이상으로 올리면 지형이 잡음처럼 거칠어짐. 0.3으로 내리면 1옥타브와 비슷하게 매끈해짐.',
     '변형을 Ridged로 바꾸고 해수면을 낮추면 날카로운 산맥이 보임. 아래 단면 그래프에서도 봉우리가 뾰족해짐.',
-    '"옥타브별 단면"을 켜면 각 옥타브가 단면에 더하는 기여(주파수↑ 진폭↓)가 따로 보임.',
-    '라쿠나리티를 2 대신 1.9~2.1로 두면 옥타브 격자가 정렬되지 않아 패턴 반복이 덜 눈에 띔.',
+    '"옥타브별 단면"을 켜면 각 옥타브가 단면에 더하는 기여(주파수↑ 진폭↓)가 따로 보임',
+    '라쿠나리티를 2 대신 1.9~2.1로 두면 옥타브 격자가 정렬되지 않아 패턴 반복이 덜 눈에 띔',
   ],
   refs: [
-    { type: 'book', title: 'Texturing & Modeling: A Procedural Approach (Ebert, Musgrave, Peachey, Perlin, Worley)', year: 2002, note: 'Musgrave의 fBm, ridged multifractal 지형 장.' },
-    { type: 'article', title: 'Inigo Quilez: fBm', url: 'https://iquilezles.org/articles/fbm/', note: '게인과 Hurst 지수, 스펙트럼 관점 해설.' },
-    { type: 'article', title: 'Red Blob Games: Making maps with noise functions', url: 'https://www.redblobgames.com/maps/terrain-from-noise/', note: '옥타브, 재분배(redistribution), 고도→바이옴 매핑.' },
-    { type: 'game', title: "Minecraft / No Man's Sky", note: '노이즈 옥타브 합성 기반 지형 생성의 대표 사례.' },
+    { type: 'book', title: 'Texturing & Modeling: A Procedural Approach (Ebert, Musgrave, Peachey, Perlin, Worley)', year: 2002, note: 'Musgrave의 fBm, ridged multifractal 지형 장' },
+    { type: 'article', title: 'Inigo Quilez: fBm', url: 'https://iquilezles.org/articles/fbm/', note: '게인과 Hurst 지수, 스펙트럼 관점 해설' },
+    { type: 'article', title: 'Red Blob Games: Making maps with noise functions', url: 'https://www.redblobgames.com/maps/terrain-from-noise/', note: '옥타브, 재분배(redistribution), 고도→바이옴 매핑' },
+    { type: 'game', title: "Minecraft / No Man's Sky", note: '노이즈 옥타브 합성 기반 지형 생성의 대표 사례' },
   ],
   params: [
     { key: 'octaves', label: '옥타브', type: 'int', min: 1, max: 10, a: 1, b: 6, group: 'fBm' },
@@ -70,7 +70,7 @@ GTL.register({
       { value: 'ridged', label: 'Ridged (능선)' },
       { value: 'billow', label: 'Billow (둥근)' },
     ], default: 'fbm' },
-    { key: 'rotate', label: '옥타브마다 회전', type: 'bool', default: true, help: '격자 방향 아티팩트를 줄임.' },
+    { key: 'rotate', label: '옥타브마다 회전', type: 'bool', default: true, help: '격자 방향 아티팩트를 줄임' },
     { key: 'scale', label: '기본 주파수', type: 'range', min: 1, max: 8, step: 0.1, default: 3, shared: true, group: '지형' },
     { key: 'sea', label: '해수면', type: 'range', min: 0, max: 0.9, step: 0.01, default: 0.45, shared: true },
     { key: 'colormap', label: '색상', type: 'select', options: [

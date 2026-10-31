@@ -2,20 +2,20 @@
 GTL.register({
   id: 'combo-buffer',
   title: '콤보 입력 버퍼 & 캔슬 윈도우',
-  summary: '콤보의 다음 공격은 정해진 프레임 구간(캔슬 윈도우)에서만 나감. 버퍼가 없으면 몇 프레임 일찍 누른 입력이 버려져 콤보가 끊김. 입력 버퍼는 이른 입력을 저장했다가 윈도우가 열리는 순간 실행함.',
+  summary: '콤보의 다음 공격은 정해진 프레임 구간(캔슬 윈도우)에서만 나감. 버퍼가 없으면 몇 프레임 일찍 누른 입력이 버려져 콤보가 끊김. 입력 버퍼는 이른 입력을 저장했다가 윈도우가 열리는 순간 실행.',
   views: { a: '버퍼 없음 (0 프레임)', b: '입력 버퍼 8 프레임' },
   controls: 'X / J / Z / Space 공격 (키를 누르면 자동 데모가 잠시 멈춤)',
   info: `
     <p><b>프레임 데이터</b>: 공격 하나는 세 구간으로 나뉨. 발생(startup, 노랑), 판정(active, 빨강), 후딜(recovery, 파랑). 단위는 60fps 프레임.</p>
     <p><b>캔슬 윈도우(Cancel Window)</b>: 후딜을 끊고 다음 공격을 낼 수 있는 구간(초록 괄호). 보통 공격이 맞았을 때만 열림(히트 캔슬).
     윈도우는 몇 프레임뿐이라 정확히 그 안에 누르기 어려움. 사람은 대개 <b>조금 일찍</b> 누름.</p>
-    <p><b>입력 버퍼(Input Buffer)</b>: 누른 입력을 N 프레임 동안 보관함. 보관 중에 윈도우가 열리면 그 프레임에 실행함.
+    <p><b>입력 버퍼(Input Buffer)</b>: 누른 입력을 N 프레임 동안 보관. 보관 중에 윈도우가 열리면 그 프레임에 실행.
     프레임 데이터 표에서 뷰 색 띠가 버퍼 덕분에 앞으로 늘어난 유효 입력 구간.</p>
     <pre>if (pressed) buffer = { frame: now };
 if (buffer && canAct()) { startNext(); buffer = null; }
 else if (buffer && now - buffer.frame > BUFFER) { buffer = null; /* 드롭 */ }</pre>
     <ul>
-      <li>경계 사례: 버퍼에 입력이 둘 이상 쌓일 때 어떤 것을 쓸지(이 샘플은 마지막 입력), 헛친 공격에서 버퍼를 비울지, 피격되면 버퍼를 지울지.</li>
+      <li>경계 사례: 버퍼에 입력이 둘 이상 쌓일 때 어떤 것을 쓸지(이 샘플은 마지막 입력), 헛친 공격에서 버퍼를 비울지, 피격되면 버퍼를 지울지</li>
       <li>단점: 버퍼가 너무 길면 의도하지 않은 공격이 늦게 튀어나옴. 연타가 "예약"처럼 느껴짐.</li>
     </ul>`,
   // 도식: 공격 프레임 데이터와 캔슬 윈도우, 이른 입력이 버려지는 경우와 버퍼에서 실행되는 경우
@@ -46,8 +46,8 @@ else if (buffer && now - buffer.frame > BUFFER) { buffer = null; /* 드롭 */ }<
     '버퍼를 20 프레임으로 키우고 직접 연타해 보면 손을 뗀 뒤에도 공격이 이어 나감. 너무 긴 버퍼의 부작용.',
   ],
   refs: [
-    { type: 'game', title: 'Street Fighter II (Capcom)', year: 1991, note: '캔슬로 일반기를 필살기에 잇는 콤보가 널리 알려진 계기.' },
-    { type: 'game', title: 'Street Fighter 6 (Capcom)', year: 2023, note: '게임 안 프레임 데이터 표에서 발생, 지속, 경직 프레임과 캔슬 가능 여부를 보여 줌.' },
+    { type: 'game', title: 'Street Fighter II (Capcom)', year: 1991, note: '캔슬로 일반기를 필살기에 잇는 콤보가 널리 알려진 계기' },
+    { type: 'game', title: 'Street Fighter 6 (Capcom)', year: 2023, note: '게임 안 프레임 데이터 표에서 발생, 지속, 경직 프레임과 캔슬 가능 여부를 보여 줌' },
     { type: 'article', title: 'SuperCombo Wiki - Glossary (Buffer, Cancel, Link)', note: '대전 격투 커뮤니티 위키의 용어 정리. 게임마다 버퍼 길이가 다름.' },
     { type: 'book', title: 'Game Feel: A Game Designer\'s Guide to Virtual Sensation (Steve Swink)', year: 2008 },
   ],

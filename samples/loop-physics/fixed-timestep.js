@@ -1,19 +1,19 @@
 // 고정 타임스텝 vs 가변 타임스텝 (+ 렌더 보간)
-// 참조 샘플: 새 샘플 작성 시 이 파일의 구조를 따름.
+// 참조 샘플: 새 샘플 작성 시 이 파일의 구조를 따름
 GTL.register({
   id: 'fixed-timestep',
   title: '고정 타임스텝 & 렌더 보간',
   summary: '프레임 시간(dt)을 그대로 물리에 쓰면 프레임레이트에 따라 결과가 달라짐. 고정 스텝과 렌더 보간을 함께 쓰면 같은 결과와 부드러운 화면을 모두 얻음.',
   views: { a: '가변 dt', b: '고정 스텝 + 보간' },
-  controls: '조작 없음. 캐릭터가 자동으로 점프를 반복함.',
+  controls: '조작 없음. 캐릭터가 자동으로 점프를 반복.',
   info: `
-    <p><b>고정 타임스텝</b>은 물리를 항상 같은 시간 간격(<code>dt</code>)으로 진행하는 게임 루프 방식.</p>
+    <p><b>고정 타임스텝</b>은 물리를 항상 같은 시간 간격(<code>dt</code>)으로 진행하는 게임 루프 방식</p>
     <p>매 프레임 잰 <code>dt</code>를 그대로 쓰면(가변 타임스텝) 프레임레이트에 따라 적분 오차가 달라짐.
     그래서 <b>점프 높이와 충돌 결과가 기기마다 달라짐</b>. 프레임이 크게 튀면 벽을 뚫기도 함.</p>
     <p>동작 원리:</p>
     <ul>
-      <li>실제로 흐른 시간을 <code>accumulator</code>에 쌓음.</li>
-      <li>쌓인 시간만큼 같은 <code>dt</code>로 물리를 여러 번 진행함.</li>
+      <li>실제로 흐른 시간을 <code>accumulator</code>에 쌓음</li>
+      <li>쌓인 시간만큼 같은 <code>dt</code>로 물리를 여러 번 진행</li>
       <li>남은 시간 비율 <code>alpha = accumulator / dt</code>로 이전 상태와 현재 상태를 <b>보간해 그림</b>. 물리 주기가 낮아도 화면이 부드러움.</li>
     </ul>
     <p>단점: 보간 때문에 화면이 물리보다 최대 한 스텝 늦음. 한 프레임에 스텝이 너무 많이 쌓이면 밀린 시간을 버려야 함.</p>
@@ -52,7 +52,7 @@ GTL.register({
     { type: 'article', title: 'Fix Your Timestep!', url: 'https://gafferongames.com/post/fix_your_timestep/', year: 2004, note: 'Glenn Fiedler. accumulator와 보간 패턴의 고전.' },
     { type: 'article', title: 'Game Programming Patterns - Game Loop', url: 'https://gameprogrammingpatterns.com/game-loop.html', year: 2014, note: 'Robert Nystrom.' },
     { type: 'engine', title: 'Unity - FixedUpdate / Time.fixedDeltaTime', url: 'https://docs.unity3d.com/Manual/fixed-updates.html', note: '물리는 FixedUpdate에서 진행. Rigidbody Interpolate 옵션이 렌더 보간.' },
-    { type: 'engine', title: 'Godot - physics_ticks_per_second & physics interpolation', url: 'https://docs.godotengine.org/en/stable/tutorials/physics/interpolation/index.html', year: 2024, note: 'Godot 4.3에서 2D, 4.4에서 3D 물리 보간 도입.' },
+    { type: 'engine', title: 'Godot - physics_ticks_per_second & physics interpolation', url: 'https://docs.godotengine.org/en/stable/tutorials/physics/interpolation/index.html', year: 2024, note: 'Godot 4.3에서 2D, 4.4에서 3D 물리 보간 도입' },
   ],
   params: [
     { key: 'hostFps', label: '호스트 FPS', type: 'int', min: 5, max: 144, default: 24, shared: true, group: '프레임 시뮬레이션', help: '실제 게임의 프레임레이트를 흉내 냄' },

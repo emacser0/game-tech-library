@@ -7,7 +7,7 @@ GTL.register({
   controls: '조작 없음. "자동 슬로모션"이 켜져 있으면 1배속과 슬로모션을 번갈아 함.',
   info: `
     <p><b>타임 스케일(Time Scale)</b>은 게임 시간이 흐르는 속도를 바꾸는 값. 불릿 타임, 히트스톱, 일시정지에 씀.</p>
-    <p>구현 방식에 따라 결과가 크게 다름.</p>
+    <p>구현 방식에 따라 결과가 크게 다름</p>
     <ul>
       <li><b>dt × 스케일</b>: 매 프레임 <code>step(dt * scale)</code>. 가장 쉬움. 스텝 크기가 달라져 충돌 결과와 궤적이 1배속과 달라짐. 프레임레이트에 따라서도 달라짐.</li>
       <li><b>고정 스텝 유지</b>: 누적기에 <code>dt * scale</code>를 더하고 고정 <code>h</code>로 스텝. 궤적이 1배속과 같음. 0.2배속이면 물리가 5프레임에 한 번만 움직여 화면이 뚝뚝 끊김.</li>
@@ -36,13 +36,13 @@ GTL.register({
   look: [
     '슬로모션 구간이 지나면 A의 공이 흰 원(1배속 기준)에서 벗어나 다른 길로 떨어짐. B는 공과 흰 원이 계속 겹침(기준 대비 오차 0).',
     'B를 "고정 스텝 (보간 없음)"으로 바꾸면 슬로모션에서 공이 뚝뚝 끊겨 움직임. "멈춘 프레임 비율"이 80% 가까이 오름.',
-    'A를 "스텝 크기도 스케일"로 바꾸면 화면은 부드럽지만 오차가 생기고 초당 물리 스텝이 60으로 유지됨.',
+    'A를 "스텝 크기도 스케일"로 바꾸면 화면은 부드럽지만 오차가 생기고 초당 물리 스텝이 60으로 유지됨',
     '"자동 슬로모션"을 끄고 타임 스케일을 1로 두면 A도 기준과 거의 겹침. 브라우저 프레임 간격이 흔들리면 A만 조금씩 벗어남.',
   ],
   refs: [
-    { type: 'engine', title: 'Unity - Time.timeScale', url: 'https://docs.unity3d.com/ScriptReference/Time-timeScale.html', note: 'timeScale을 바꿀 때 fixedDeltaTime도 같은 비율로 줄이라고 권함.' },
-    { type: 'engine', title: 'Unity - Rigidbody.interpolation', url: 'https://docs.unity3d.com/ScriptReference/Rigidbody-interpolation.html', note: '고정 스텝 사이 렌더 보간.' },
-    { type: 'article', title: 'Fix Your Timestep! (Glenn Fiedler)', url: 'https://gafferongames.com/post/fix_your_timestep/', year: 2004, note: '누적기와 상태 보간.' },
+    { type: 'engine', title: 'Unity - Time.timeScale', url: 'https://docs.unity3d.com/ScriptReference/Time-timeScale.html', note: 'timeScale을 바꿀 때 fixedDeltaTime도 같은 비율로 줄이라고 권함' },
+    { type: 'engine', title: 'Unity - Rigidbody.interpolation', url: 'https://docs.unity3d.com/ScriptReference/Rigidbody-interpolation.html', note: '고정 스텝 사이 렌더 보간' },
+    { type: 'article', title: 'Fix Your Timestep! (Glenn Fiedler)', url: 'https://gafferongames.com/post/fix_your_timestep/', year: 2004, note: '누적기와 상태 보간' },
   ],
   params: [
     { key: 'mode', label: '타임 스케일 방식', type: 'select', group: '타임 스케일', options: [

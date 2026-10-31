@@ -8,7 +8,7 @@ GTL.register({
   controls: '마우스 드래그: 카메라 회전, 휠: 줌',
   info: `
     <p>방향광 섀도 맵은 직교 투영 한 장으로 그림자 거리 전체를 덮음. 거리 100m를 1024 텍셀로 덮으면 텍셀 하나가 10cm 이상이 됨. 카메라 앞 물체의 그림자가 계단처럼 뭉개짐.</p>
-    <p><b>캐스케이드 섀도 맵(CSM)</b>은 카메라 시야(프러스텀)를 깊이 구간으로 나눔. 구간마다 그 구간만 감싸는 섀도 맵을 렌더함. 가까운 구간은 좁은 영역을 같은 해상도로 덮어서 선명함.</p>
+    <p><b>캐스케이드 섀도 맵(CSM)</b>은 카메라 시야(프러스텀)를 깊이 구간으로 나눔. 구간마다 그 구간만 감싸는 섀도 맵을 렌더. 가까운 구간은 좁은 영역을 같은 해상도로 덮어서 선명함.</p>
     <p>분할 방식:</p>
     <ul>
       <li><b>uniform</b>: 같은 간격. 가까운 구간이 너무 넓어 효과가 적음.</li>
@@ -16,7 +16,7 @@ GTL.register({
       <li><b>PSSM</b>(Zhang 2006): 두 방식을 λ로 섞음. 실무에서 λ 0.5~0.9를 많이 씀.</li>
     </ul>
     <p><b>안정화</b>: 카메라가 돌 때마다 섀도 맵 영역이 바뀌면 텍셀 경계가 움직여 그림자 가장자리가 지글거림(shimmering). 구간을 경계 구로 감싸 크기를 고정하고, 섀도 맵 원점을 텍셀 격자에 맞추면(texel snapping) 멈춤. 대신 영역이 커져 해상도가 조금 낮아짐.</p>
-    <p>단점: 구간 수만큼 그림자 패스가 늘어남. 구간 경계에서 해상도가 갑자기 바뀌어 선이 보일 수 있음. 엔진은 경계에서 두 구간을 섞거나 디더링함.</p>`,
+    <p>단점: 구간 수만큼 그림자 패스가 늘어남. 구간 경계에서 해상도가 갑자기 바뀌어 선이 보일 수 있음. 엔진은 경계에서 두 구간을 섞거나 디더링.</p>`,
   // 도식: 위에서 본 카메라 프러스텀. 섀도 맵 1장과 깊이 구간별 캐스케이드의 텍셀 크기
   diagram: (L) => `<svg viewBox="0 0 540 202" xmlns="http://www.w3.org/2000/svg">
     <text x="10" y="14" class="t-a">${L('A: 섀도 맵 1장이 전체를 덮음', 'A: one shadow map covers all')}</text>
@@ -63,8 +63,8 @@ GTL.register({
   refs: [
     { type: 'paper', title: 'Parallel-Split Shadow Maps for Large-scale Virtual Environments (Fan Zhang, Hanqiu Sun, Leilei Xu, Lee Kit Lun)', year: 2006, note: 'VRCIA 2006. PSSM 분할식 (log와 uniform을 λ로 섞음).' },
     { type: 'book', title: 'GPU Gems 3, Chapter 10: Parallel-Split Shadow Maps on Programmable GPUs (Fan Zhang, Hanqiu Sun, Oskari Nyman)', url: 'https://developer.nvidia.com/gpugems/gpugems3/part-ii-light-and-shadows/chapter-10-parallel-split-shadow-maps-programmable-gpus', year: 2007 },
-    { type: 'article', title: 'Cascaded Shadow Maps (Microsoft Docs)', url: 'https://learn.microsoft.com/en-us/windows/win32/dxtecharts/cascaded-shadow-maps', note: '구간 선택, 경계 구 맞춤, 텍셀 스냅으로 shimmering 제거.' },
-    { type: 'book', title: 'ShaderX6: Stable Rendering of Cascaded Shadow Maps (Michal Valient)', year: 2008, note: 'Killzone 2의 경계 구 맞춤과 텍셀 스냅.' },
+    { type: 'article', title: 'Cascaded Shadow Maps (Microsoft Docs)', url: 'https://learn.microsoft.com/en-us/windows/win32/dxtecharts/cascaded-shadow-maps', note: '구간 선택, 경계 구 맞춤, 텍셀 스냅으로 shimmering 제거' },
+    { type: 'book', title: 'ShaderX6: Stable Rendering of Cascaded Shadow Maps (Michal Valient)', year: 2008, note: 'Killzone 2의 경계 구 맞춤과 텍셀 스냅' },
     { type: 'article', title: 'LearnOpenGL: CSM', url: 'https://learnopengl.com/Guest-Articles/2021/CSM' },
   ],
   params: [

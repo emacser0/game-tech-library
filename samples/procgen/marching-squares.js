@@ -8,12 +8,12 @@ GTL.register({
   info: `
     <p><b>마칭 스퀘어</b>: 격자 꼭짓점에서 샘플한 값(스칼라 필드)으로 경계선(등치선)을 그리는 방법.
     3D 버전은 마칭 큐브(Lorensen & Cline 1987).</p>
-    <p>쓰임: 2D 지형 파괴(Worms류), 안개나 영역 경계, 메타볼 UI, 등고선 지도.</p>
+    <p>쓰임: 2D 지형 파괴(Worms류), 안개나 영역 경계, 메타볼 UI, 등고선 지도</p>
     <p>동작 원리:</p>
     <ul>
-      <li>칸마다 네 꼭짓점이 임계값보다 큰지(안) 작은지(밖) 확인함.</li>
-      <li>결과를 4비트로 묶어 <b>16가지 경우</b> 중 하나를 고름.</li>
-      <li>미리 정한 표에 따라 선분을 0~2개 그림.</li>
+      <li>칸마다 네 꼭짓점이 임계값보다 큰지(안) 작은지(밖) 확인</li>
+      <li>결과를 4비트로 묶어 <b>16가지 경우</b> 중 하나를 고름</li>
+      <li>미리 정한 표에 따라 선분을 0~2개 그림</li>
     </ul>
     <p>선분 끝점 위치:</p>
     <ul>
@@ -53,9 +53,9 @@ GTL.register({
   ],
   refs: [
     { type: 'paper', title: 'Marching Cubes: A High Resolution 3D Surface Construction Algorithm (Lorensen & Cline, SIGGRAPH 1987)', url: 'https://dl.acm.org/doi/10.1145/37402.37422', year: 1987 },
-    { type: 'article', title: 'Jamie Wong: Metaballs and Marching Squares', url: 'https://jamie-wong.com/2014/08/19/metaballs-and-marching-squares/', year: 2014, note: '선형 보간과 안장점 처리를 그림으로 설명.' },
-    { type: 'article', title: 'Wikipedia: Marching squares', url: 'https://en.wikipedia.org/wiki/Marching_squares', note: '16가지 케이스 표와 안장점 판정.' },
-    { type: 'article', title: 'Sebastian Lague: Coding Adventure: Marching Cubes', note: 'Unity로 마칭 큐브 지형을 만드는 영상 시리즈.' },
+    { type: 'article', title: 'Jamie Wong: Metaballs and Marching Squares', url: 'https://jamie-wong.com/2014/08/19/metaballs-and-marching-squares/', year: 2014, note: '선형 보간과 안장점 처리를 그림으로 설명' },
+    { type: 'article', title: 'Wikipedia: Marching squares', url: 'https://en.wikipedia.org/wiki/Marching_squares', note: '16가지 케이스 표와 안장점 판정' },
+    { type: 'article', title: 'Sebastian Lague: Coding Adventure: Marching Cubes', note: 'Unity로 마칭 큐브 지형을 만드는 영상 시리즈' },
   ],
   params: [
     { key: 'method', label: '윤곽 방식', type: 'select', group: '추출', options: [

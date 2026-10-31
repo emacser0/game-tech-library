@@ -2,21 +2,21 @@
 GTL.register({
   id: 'sweep-and-prune',
   title: 'Sweep and Prune: 정렬 축과 시간적 일관성',
-  summary: 'AABB를 한 축으로 정렬하고, 축 위 구간이 겹치는 쌍만 검사함. 오브젝트가 넓게 퍼진 축을 고르면 검사 수가 급감함. 지난 프레임 순서를 재사용하면 정렬 비용이 거의 O(n)이 됨.',
+  summary: 'AABB를 한 축으로 정렬하고, 축 위 구간이 겹치는 쌍만 검사. 오브젝트가 넓게 퍼진 축을 고르면 검사 수가 급감. 지난 프레임 순서를 재사용하면 정렬 비용이 거의 O(n)이 됨.',
   views: { a: 'X축 고정', b: '분산이 큰 축 자동 선택' },
-  controls: '마우스를 박스 위에 올리면 그 박스의 스윕 구간(축 위에서 겹치는 구간)이 보임.',
+  controls: '마우스를 박스 위에 올리면 그 박스의 스윕 구간(축 위에서 겹치는 구간)이 보임',
   info: `
     <p><b>Sweep and Prune</b>(Sort and Sweep)은 정렬로 검사 쌍을 줄이는 브로드페이즈. 동작 순서:</p>
     <ol>
-      <li>모든 AABB(축 정렬 경계 상자)를 한 축의 <code>min</code> 값으로 정렬함.</li>
-      <li>앞에서부터 훑다가 <code>min[j] &gt; max[i]</code>가 되면 i의 검사를 끝냄.</li>
-      <li>축 위 구간이 겹친 쌍만 다른 축으로 다시 확인함.</li>
+      <li>모든 AABB(축 정렬 경계 상자)를 한 축의 <code>min</code> 값으로 정렬</li>
+      <li>앞에서부터 훑다가 <code>min[j] &gt; max[i]</code>가 되면 i의 검사를 끝냄</li>
+      <li>축 위 구간이 겹친 쌍만 다른 축으로 다시 확인</li>
     </ol>
     <p>효율은 <b>축 선택</b>에 달림. 오브젝트가 세로로 늘어서 있는데 X축으로 정렬하면 거의 모든 구간이 겹침. 이때 검사 수가 O(n²)에 가까워짐.
-    Ericson은 매 프레임 각 축의 <b>분산</b>을 구해 가장 큰 축을 고르는 방법을 소개함.</p>
+    Ericson은 매 프레임 각 축의 <b>분산</b>을 구해 가장 큰 축을 고르는 방법을 소개.</p>
     <p>프레임 사이에 오브젝트는 조금씩만 움직임. 그래서 지난 프레임의 순서가 이미 거의 정렬된 상태(<b>시간적 일관성</b>).
-    <b>삽입 정렬</b>은 거의 정렬된 배열에서 O(n + 교환 수)로 동작함. Box2D v2.x 이전 버전과 Bullet의 <code>btAxisSweep3</code>가 이 방식을 씀.</p>
-    <p>단점: 오브젝트가 빠르게 움직이면 순서가 많이 바뀌어 삽입 정렬의 이득이 줄어듦.</p>`,
+    <b>삽입 정렬</b>은 거의 정렬된 배열에서 O(n + 교환 수)로 동작. Box2D v2.x 이전 버전과 Bullet의 <code>btAxisSweep3</code>가 이 방식을 씀.</p>
+    <p>단점: 오브젝트가 빠르게 움직이면 순서가 많이 바뀌어 삽입 정렬의 이득이 줄어듦</p>`,
   diagram: (L) => {
     const B = [[30, 16, 60, 18], [50, 42, 70, 18], [25, 68, 60, 18], [60, 94, 55, 18], [35, 120, 65, 18]];
     return `<svg viewBox="0 0 540 192" xmlns="http://www.w3.org/2000/svg">
@@ -47,9 +47,9 @@ GTL.register({
     '장면을 "가로 띠"로 바꾸면 B는 자동으로 X축을 고름. A를 Y축으로 바꾸면 반대로 성능이 나빠짐.',
   ],
   refs: [
-    { type: 'book', title: 'Real-Time Collision Detection, 7.5 Sort and Sweep (Christer Ericson)', year: 2005, note: '분산 기반 축 선택, 삽입 정렬 활용.' },
-    { type: 'paper', title: 'I-COLLIDE: An Interactive and Exact Collision Detection System for Large-Scale Environments (Cohen, Lin, Manocha, Ponamgi)', year: 1995, note: 'Sweep and Prune과 시간적 일관성 활용을 널리 알린 논문.' },
-    { type: 'engine', title: 'Bullet Physics, btAxisSweep3 / bt32BitAxisSweep3', url: 'https://github.com/bulletphysics/bullet3', note: '증분 SAP 브로드페이즈.' },
+    { type: 'book', title: 'Real-Time Collision Detection, 7.5 Sort and Sweep (Christer Ericson)', year: 2005, note: '분산 기반 축 선택, 삽입 정렬 활용' },
+    { type: 'paper', title: 'I-COLLIDE: An Interactive and Exact Collision Detection System for Large-Scale Environments (Cohen, Lin, Manocha, Ponamgi)', year: 1995, note: 'Sweep and Prune과 시간적 일관성 활용을 널리 알린 논문' },
+    { type: 'engine', title: 'Bullet Physics, btAxisSweep3 / bt32BitAxisSweep3', url: 'https://github.com/bulletphysics/bullet3', note: '증분 SAP 브로드페이즈' },
   ],
   params: [
     { key: 'count', label: '박스 개수', type: 'int', min: 100, max: 2000, default: 1200, shared: true, reset: true, group: '장면' },

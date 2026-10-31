@@ -16,13 +16,13 @@ GTL.register({
     <p><b>Bridson(2007)</b> 동작 원리:</p>
     <ul>
       <li>배경 격자를 둠. 셀 크기가 r/√2라서 셀마다 점이 최대 1개.</li>
-      <li><i>활성 목록</i>에서 점 하나를 고름.</li>
-      <li>그 점 둘레 [r, 2r] 고리에서 후보를 최대 k번 뽑음.</li>
-      <li>근처 셀만 검사해 r보다 가까운 점이 없으면 후보를 추가함.</li>
-      <li>k번 모두 실패하면 그 점을 활성 목록에서 뺌.</li>
+      <li><i>활성 목록</i>에서 점 하나를 고름</li>
+      <li>그 점 둘레 [r, 2r] 고리에서 후보를 최대 k번 뽑음</li>
+      <li>근처 셀만 검사해 r보다 가까운 점이 없으면 후보 추가</li>
+      <li>k번 모두 실패하면 그 점을 활성 목록에서 뺌</li>
     </ul>
-    <p>공정하게 비교하려고 랜덤과 지터 그리드는 포아송 결과와 같은 개수를 뿌림.</p>`,
-  // 도식: Bridson 알고리즘 한 단계. 활성 점 둘레 [r, 2r] 고리에서 후보를 뽑고 근처 셀만 검사함
+    <p>공정하게 비교하려고 랜덤과 지터 그리드는 포아송 결과와 같은 개수를 뿌림</p>`,
+  // 도식: Bridson 알고리즘 한 단계. 활성 점 둘레 [r, 2r] 고리에서 후보를 뽑고 근처 셀만 검사
   diagram: (L) => {
     let grid = '';
     for (let x = 20; x <= 290; x += 30) grid += `<line x1="${x}" y1="10" x2="${x}" y2="190" class="d-dim" opacity="0.5"/>`;
@@ -54,15 +54,15 @@ GTL.register({
   },
   look: [
     'A와 B의 빨간 선(거리 < r인 쌍)을 비교하면 A(랜덤)는 수십 개, B(포아송)는 0개. "최소 거리 / r" 수치도 차이가 남.',
-    '"생성 과정 애니메이션"을 켜면 B에서 활성 점(밝은 고리)이 경계를 따라 퍼져 나가는 모습이 보임.',
+    '"생성 과정 애니메이션"을 켜면 B에서 활성 점(밝은 고리)이 경계를 따라 퍼져 나가는 모습이 보임',
     'A를 지터 그리드로 바꾸고 지터를 0.2 이하로 낮추면 격자 줄이 눈에 띔. 1.0으로 올리면 랜덤처럼 겹침.',
-    'B의 시도 횟수 k를 3으로 낮추면 빨리 끝나지만 빈틈이 남아 점 개수가 줄어듦.',
+    'B의 시도 횟수 k를 3으로 낮추면 빨리 끝나지만 빈틈이 남아 점 개수가 줄어듦',
   ],
   refs: [
     { type: 'paper', title: 'Fast Poisson Disk Sampling in Arbitrary Dimensions (Robert Bridson, SIGGRAPH 2007 sketches)', url: 'https://www.cs.ubc.ca/~rbridson/docs/bridson-siggraph07-poissondisk.pdf', year: 2007 },
-    { type: 'article', title: 'Mike Bostock: Poisson-Disc Sampling', url: 'https://bost.ocks.org/mike/algorithms/', year: 2014, note: '랜덤, best-candidate, Bridson 비교 시각화.' },
+    { type: 'article', title: 'Mike Bostock: Poisson-Disc Sampling', url: 'https://bost.ocks.org/mike/algorithms/', year: 2014, note: '랜덤, best-candidate, Bridson 비교 시각화' },
     { type: 'article', title: 'Red Blob Games: Making maps with noise functions (나무 배치 / blue noise 절)', url: 'https://www.redblobgames.com/maps/terrain-from-noise/' },
-    { type: 'paper', title: 'Stochastic Sampling in Computer Graphics (Robert L. Cook, ACM TOG 1986)', year: 1986, note: '지터 샘플링과 포아송 디스크 분포의 렌더링 응용.' },
+    { type: 'paper', title: 'Stochastic Sampling in Computer Graphics (Robert L. Cook, ACM TOG 1986)', year: 1986, note: '지터 샘플링과 포아송 디스크 분포의 렌더링 응용' },
   ],
   params: [
     { key: 'method', label: '배치 방식', type: 'select', group: '배치', options: [

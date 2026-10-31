@@ -8,13 +8,13 @@ GTL.register({
   controls: '←→ 카메라 이동 (자동 스크롤을 끄면)',
   info: `
     <p><b>패럴랙스 스크롤링(Parallax Scrolling)</b>은 먼 배경을 느리게, 가까운 전경을 빠르게 움직이는 기법. 기차 창밖에서 먼 산이 천천히 지나가는 것과 같은 원리임.</p>
-    <p>레이어마다 깊이 z를 정하고 화면 위치를 <code>x_screen = x_world - camX * f</code>로 계산함. 원근 투영에서는 <code>f = 1 / z</code>이고, 지면(z = 1)은 카메라와 같은 속도로 움직임.</p>
+    <p>레이어마다 깊이 z를 정하고 화면 위치를 <code>x_screen = x_world - camX * f</code>로 계산. 원근 투영에서는 <code>f = 1 / z</code>이고, 지면(z = 1)은 카메라와 같은 속도로 움직임.</p>
     <ul>
-    <li><b>단일 레이어</b>: 모든 레이어가 f = 1. 그림 한 장을 미는 것과 같아서 깊이 단서가 없음.</li>
+    <li><b>단일 레이어</b>: 모든 레이어가 f = 1. 그림 한 장을 미는 것과 같아서 깊이 단서 없음.</li>
     <li><b>다중 레이어</b>: 레이어마다 f가 다름. 움직임 자체가 깊이 단서(운동 시차)가 됨.</li>
     <li><b>대기 원근</b>: 먼 레이어일수록 하늘색에 가깝게 칠함. 멈춘 화면에서도 깊이가 보임.</li>
     </ul>
-    <p>단점: 레이어가 많으면 겹쳐 그리는 픽셀(오버드로)이 늘어남. f가 1보다 큰 전경은 시야를 가리기 쉬워서 얇고 드물게 배치함.</p>`,
+    <p>단점: 레이어가 많으면 겹쳐 그리는 픽셀(오버드로)이 늘어남. f가 1보다 큰 전경은 시야를 가리기 쉬워서 얇고 드물게 배치.</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 176" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arr" class="m-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
     <marker id="arrb" class="m-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -32,13 +32,13 @@ GTL.register({
   look: [
     'A와 B를 나란히 보면 A는 산과 나무가 한 덩어리로 흘러감. B는 먼 산이 거의 멈춰 있고 앞쪽 풀이 빠르게 지나감.',
     'B의 "레이어 수"를 2로 줄이면 깊이감이 약해짐. 6으로 올리면 산맥 사이에 거리가 생김.',
-    '"속도 공식"을 "선형"으로 바꾸면 먼 레이어도 꽤 빠르게 움직여서 원근이 어색해짐.',
-    '"속도 표시"를 켜면 화면 오른쪽에 레이어별 배율 f와 실제 이동 속도가 나옴.',
+    '"속도 공식"을 "선형"으로 바꾸면 먼 레이어도 꽤 빠르게 움직여서 원근이 어색해짐',
+    '"속도 표시"를 켜면 화면 오른쪽에 레이어별 배율 f와 실제 이동 속도가 나옴',
   ],
   refs: [
-    { type: 'game', title: 'Moon Patrol (Irem)', year: 1982, note: '아케이드 게임에서 다층 패럴랙스 배경을 쓴 초기 사례로 자주 언급됨.' },
-    { type: 'game', title: 'Sonic the Hedgehog (Sega)', year: 1991, note: '메가 드라이브의 라인 스크롤로 배경을 여러 속도로 움직임.' },
-    { type: 'engine', title: 'Godot Engine: ParallaxBackground / ParallaxLayer (motion_scale)', url: 'https://docs.godotengine.org/en/stable/classes/class_parallaxlayer.html', note: 'motion_scale이 이 샘플의 배율 f에 해당함.' },
+    { type: 'game', title: 'Moon Patrol (Irem)', year: 1982, note: '아케이드 게임에서 다층 패럴랙스 배경을 쓴 초기 사례로 자주 언급됨' },
+    { type: 'game', title: 'Sonic the Hedgehog (Sega)', year: 1991, note: '메가 드라이브의 라인 스크롤로 배경을 여러 속도로 움직임' },
+    { type: 'engine', title: 'Godot Engine: ParallaxBackground / ParallaxLayer (motion_scale)', url: 'https://docs.godotengine.org/en/stable/classes/class_parallaxlayer.html', note: 'motion_scale이 이 샘플의 배율 f에 해당' },
   ],
   params: [
     { key: 'mode', label: '방식', type: 'select', group: '패럴랙스', options: [

@@ -10,21 +10,21 @@ GTL.register({
     <p><b>앰비언트 오클루전(AO)</b>: 주변 물체가 환경광을 가리는 정도. <b>SSAO</b>는 이를 화면(깊이 버퍼)만으로 추정하는 기법. AO가 없으면 물체가 바닥에서 떠 보임.</p>
     <p>동작 순서:</p>
     <ol>
-      <li>장면을 그려 <b>깊이 텍스처</b>와 뷰 공간 <b>법선</b>을 저장함.</li>
-      <li>픽셀의 뷰 공간 위치 P 주변에 샘플 점을 뿌려 화면에 투영함. 그 위치의 깊이 버퍼 값이 샘플보다 앞이면 "막힘"으로 셈.</li>
-      <li>4×4 회전 노이즈로 생긴 무늬를 4×4 블러로 지움.</li>
-      <li>최종 셰이딩에서 <b>환경광에만</b> 곱함.</li>
+      <li>장면을 그려 <b>깊이 텍스처</b>와 뷰 공간 <b>법선</b>을 저장</li>
+      <li>픽셀의 뷰 공간 위치 P 주변에 샘플 점을 뿌려 화면에 투영. 그 위치의 깊이 버퍼 값이 샘플보다 앞이면 "막힘"으로 셈.</li>
+      <li>4×4 회전 노이즈로 생긴 무늬를 4×4 블러로 지움</li>
+      <li>최종 셰이딩에서 <b>환경광에만</b> 곱함</li>
     </ol>
     <p>샘플 분포 방식:</p>
     <ul>
       <li><b>Crytek 방식</b>(Crysis, 2007): 법선 없이 <i>구</i> 안에 샘플을 뿌림. 평평한 면도 샘플 절반이 표면 아래라 막힘으로 판정됨. 그래서 전체가 회색이 되고 모서리가 밝게 뜸.</li>
-      <li><b>법선 반구</b> 방식: 법선 쪽 반구에만 샘플을 둠. 평면은 하얗고 오목한 곳만 어두워짐. 샘플은 중심에 몰리도록 가중함.</li>
+      <li><b>법선 반구</b> 방식: 법선 쪽 반구에만 샘플을 둠. 평면은 하얗고 오목한 곳만 어두워짐. 샘플은 중심에 몰리도록 가중.</li>
     </ul>
     <p>단점과 조정:</p>
     <ul>
       <li><b>반경</b>이 크면 넓은 그늘이 생김. 대신 실루엣 뒤 먼 물체까지 막힘으로 잘못 판정해 <b>헤일로</b>가 생김. 거리 범위 검사(range check)로 줄임.</li>
-      <li><b>바이어스</b>가 너무 작으면 깊이 정밀도 때문에 평면에 얼룩(self-occlusion)이 생김.</li>
-      <li>AO는 절반 해상도에서 계산함.</li>
+      <li><b>바이어스</b>가 너무 작으면 깊이 정밀도 때문에 평면에 얼룩(self-occlusion)이 생김</li>
+      <li>AO는 절반 해상도에서 계산</li>
     </ul>`,
   // 도식: 구 샘플(Crytek 방식)과 법선 반구 샘플이 평면과 모서리에서 다르게 판정되는 이유
   diagram: (L) => `<svg viewBox="0 0 540 194" xmlns="http://www.w3.org/2000/svg">
@@ -71,13 +71,13 @@ GTL.register({
   </svg>`,
   look: [
     'B에서 벽과 바닥이 만나는 모서리, 상자 밑, 구가 바닥에 닿는 점을 보면 어두워져 물체가 접지됨. A는 물체가 떠 보임.',
-    '"AO만 보기"로 바꾸고 방식을 Crytek으로 하면 평평한 바닥이 회색이 되고 물체 윤곽이 밝게 뜸.',
+    '"AO만 보기"로 바꾸고 방식을 Crytek으로 하면 평평한 바닥이 회색이 되고 물체 윤곽이 밝게 뜸',
     '반경을 2로 올리면 물체 주변에 넓은 어두운 헤일로가 생김. 블러를 끄면 4×4 노이즈 무늬가 드러남.',
     '샘플 수를 8로 줄이면 얼룩이 늘어남. 품질과 비용을 맞바꾸는 관계.',
   ],
   refs: [
     { type: 'talk', title: 'Finding Next Gen: CryEngine 2 (Martin Mittring)', url: 'https://dl.acm.org/doi/10.1145/1281500.1281671', year: 2007, note: 'SIGGRAPH 2007 Advanced Real-Time Rendering course. SSAO 최초 공개.' },
-    { type: 'article', title: 'LearnOpenGL: SSAO', url: 'https://learnopengl.com/Advanced-Lighting/SSAO', note: '법선 지향 반구 커널, 4×4 노이즈, range check.' },
+    { type: 'article', title: 'LearnOpenGL: SSAO', url: 'https://learnopengl.com/Advanced-Lighting/SSAO', note: '법선 지향 반구 커널, 4×4 노이즈, range check' },
     { type: 'paper', title: 'Image-Space Horizon-Based Ambient Occlusion (Bavoil, Sainz, Dimitrov)', year: 2008, note: 'SIGGRAPH 2008 Talks. HBAO.' },
     { type: 'talk', title: 'Practical Real-Time Strategies for Accurate Indirect Occlusion (Jimenez et al.)', year: 2016, note: 'SIGGRAPH 2016 PBS course. GTAO.' },
   ],

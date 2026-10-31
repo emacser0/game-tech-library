@@ -10,8 +10,8 @@ GTL.register({
     그래서 값 128은 빛의 양으로 255의 50%가 아니라 약 <b>21%</b>임.</p>
     <p>빛 덧셈, 알파 블렌딩, 필터링(블러, 축소), 그라디언트 보간은 모두 <b>실제 빛의 양</b>을 다루는 연산. 따라서
     <code>decode(sRGB) → 연산 → encode</code> 순서로 처리해야 함. 엔진에서는 sRGB 텍스처 포맷(<code>SRGB8_ALPHA8</code>)과 sRGB 렌더 타겟이
-    샘플링과 블렌딩 때 이 변환을 하드웨어로 처리함.</p>
-    <p>화면은 네 패널로 나뉨.</p>
+    샘플링과 블렌딩 때 이 변환을 하드웨어로 처리.</p>
+    <p>화면은 네 패널로 나뉨</p>
     <ul>
     <li><b>①</b> 그라디언트 보간</li>
     <li><b>②</b> 겹치는 컬러 조명</li>
@@ -43,7 +43,7 @@ GTL.register({
     <text x="260" y="156" class="t-small t-dim">${L('블렌딩, 필터링, 조명 덧셈 모두 같은 원리', 'Blending, filtering and lighting work the same way')}</text>
   </svg>`,
   look: [
-    '① 빨강→초록 그라디언트의 가운데를 보면 A는 칙칙한 갈색, B는 밝은 노랑임.',
+    '① 빨강→초록 그라디언트의 가운데를 보면 A는 칙칙한 갈색, B는 밝은 노랑임',
     '③ 화면에서 조금 떨어져 보면 1px 흑백 체커(왼쪽)와 밝기가 같은 쪽은 B의 50% 블렌드(가운데)임. A는 확연히 어두움.',
     '③ 회전하는 가는 선을 보면 A는 각도에 따라 굵기가 출렁여 "로프"처럼 보임. 안티에일리어싱 커버리지가 비선형으로 표시되기 때문.',
     '④ 블러 반경을 키우면 A의 별빛은 거의 사라지고 회색으로 죽음. B는 빛의 총량이 그대로 남음.',
@@ -51,7 +51,7 @@ GTL.register({
   ],
   refs: [
     { type: 'book', title: 'GPU Gems 3, Ch.24: The Importance of Being Linear (Larry Gritz, Eugene d\'Eon)', url: 'https://developer.nvidia.com/gpugems/gpugems3/part-iv-image-effects/chapter-24-importance-being-linear', year: 2007 },
-    { type: 'paper', title: 'IEC 61966-2-1: Default RGB colour space - sRGB', year: 1999, note: 'sRGB 전달 함수(선형 구간 + 2.4 지수)의 정의.' },
+    { type: 'paper', title: 'IEC 61966-2-1: Default RGB colour space - sRGB', year: 1999, note: 'sRGB 전달 함수(선형 구간 + 2.4 지수)의 정의' },
     { type: 'talk', title: 'Uncharted 2: HDR Lighting (John Hable)', year: 2010, note: 'GDC 2010. 선형 공간 조명과 감마의 중요성을 설명한 고전 발표.' },
     { type: 'engine', title: 'Unity: Linear or gamma workflow', url: 'https://docs.unity3d.com/Manual/LinearRendering-LinearOrGammaWorkflow.html' },
   ],

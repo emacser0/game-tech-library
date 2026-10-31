@@ -9,9 +9,9 @@ GTL.register({
     <p><b>Catmull-Rom</b>은 모든 제어점을 <b>통과하는</b> 보간 스플라인. 그래서 카메라 경로와 웨이포인트 이동에 많이 씀.</p>
     <p>각 구간은 앞뒤 네 점으로 만듦. 노트(knot, 구간 경계의 매개변수 값) 간격은 <code>t<sub>i+1</sub> = t<sub>i</sub> + |P<sub>i+1</sub> − P<sub>i</sub>|<sup>α</sup></code>로 정함.</p>
     <ul>
-      <li><b>α = 0 (uniform)</b>: 점 간격을 무시함. 가까운 점과 먼 점이 섞이면 <b>고리, 첨점, 과도한 overshoot</b>가 생김.</li>
+      <li><b>α = 0 (uniform)</b>: 점 간격을 무시. 가까운 점과 먼 점이 섞이면 <b>고리, 첨점, 과도한 overshoot</b>가 생김.</li>
       <li><b>α = 0.5 (centripetal)</b>: 구간 내부에 고리와 첨점이 생기지 않음(Yuksel 외, 2011 증명). 제어점에 더 붙어 감.</li>
-      <li><b>α = 1 (chordal)</b>: 더 둥글고 크게 돎.</li>
+      <li><b>α = 1 (chordal)</b>: 더 둥글고 크게 돎</li>
     </ul>
     <p><b>Bézier</b>(전체 점을 하나의 제어 다각형으로 씀)와 <b>균일 3차 B-spline</b>은 <b>근사</b> 곡선. 점을 통과하지 않지만 더 매끄러움(B-spline은 C² 연속).</p>
     <p>흰 점은 각 구간에서 같은 <code>t</code> 간격으로 찍은 위치. 간격이 고르지 않음("등속 이동" 샘플 참고).</p>`,
@@ -37,18 +37,18 @@ GTL.register({
     <text x="4" y="194" class="t-small t-dim">${L('짧은 구간에 긴 t 폭을 주면 접선이 구간보다 길어져 곡선이 고리를 그림', 'A short segment with a wide t range gets tangents longer than itself, so the curve loops')}</text>
   </svg>`,
   look: [
-    '기본 배치에서 왼쪽 위의 가까운 두 점 근처를 보면 A는 작은 고리나 뾰족한 꺾임이 생기고 B는 매끈하게 지나감.',
-    '점 하나를 다른 점 바로 옆으로 끌면 uniform은 크게 튀어나가고 centripetal은 차분함.',
-    'α를 1(chordal)까지 올리면 곡선이 더 넓게 돎.',
-    '곡선 종류를 B-spline으로 바꾸면 점을 통과하지 않지만 가장 매끄러운 곡선이 됨.',
-    '"닫힌 곡선"을 켜면 레이싱 트랙이나 순찰 경로 같은 루프 경로가 됨.',
+    '기본 배치에서 왼쪽 위의 가까운 두 점 근처를 보면 A는 작은 고리나 뾰족한 꺾임이 생기고 B는 매끈하게 지나감',
+    '점 하나를 다른 점 바로 옆으로 끌면 uniform은 크게 튀어나가고 centripetal은 차분함',
+    'α를 1(chordal)까지 올리면 곡선이 더 넓게 돎',
+    '곡선 종류를 B-spline으로 바꾸면 점을 통과하지 않지만 가장 매끄러운 곡선이 됨',
+    '"닫힌 곡선"을 켜면 레이싱 트랙이나 순찰 경로 같은 루프 경로가 됨',
   ],
   refs: [
     { type: 'paper', title: 'Parameterization and Applications of Catmull-Rom Curves (Yuksel, Schaefer, Keyser)', year: 2011, note: 'Computer-Aided Design 43(7). centripetal(α=0.5)은 구간 안에 첨점(cusp)과 자기 교차가 없음을 증명.' },
     { type: 'paper', title: 'A Class of Local Interpolating Splines (Catmull & Rom)', year: 1974, note: 'Computer Aided Geometric Design (Academic Press).' },
-    { type: 'article', title: 'Centripetal Catmull-Rom spline (Wikipedia)', url: 'https://en.wikipedia.org/wiki/Centripetal_Catmull%E2%80%93Rom_spline', note: 'Barry-Goldman 피라미드 형식 수식.' },
+    { type: 'article', title: 'Centripetal Catmull-Rom spline (Wikipedia)', url: 'https://en.wikipedia.org/wiki/Centripetal_Catmull%E2%80%93Rom_spline', note: 'Barry-Goldman 피라미드 형식 수식' },
     { type: 'talk', title: 'The Continuity of Splines (Freya Holmér)', year: 2022, note: 'YouTube. Bézier, Hermite, Catmull-Rom, B-spline 연속성 비교.' },
-    { type: 'engine', title: 'Unity - Splines package', url: 'https://docs.unity3d.com/Packages/com.unity.splines@latest', note: 'Catmull-Rom, Bézier 노트 타입 지원.' },
+    { type: 'engine', title: 'Unity - Splines package', url: 'https://docs.unity3d.com/Packages/com.unity.splines@latest', note: 'Catmull-Rom, Bézier 노트 타입 지원' },
   ],
   params: [
     { key: 'type', label: '곡선 종류', type: 'select', group: '곡선', options: [

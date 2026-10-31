@@ -9,10 +9,10 @@ GTL.register({
     <p><b>다중 대상 프레이밍(Multi-Target Framing)</b>: 여러 대상이 모두 화면에 들어오게 카메라 위치와 줌을 정하는 방법.
     로컬 대전 게임(대난투 스매시브라더스 시리즈 등)이나 협동 게임에서 씀.</p>
     <ol>
-      <li>대상들의 경계 상자(AABB)를 구함.</li>
+      <li>대상들의 경계 상자(AABB)를 구함</li>
       <li>상자에 여백(padding)을 더함. 가장자리에 붙은 대상도 주변 상황이 보이게 함.</li>
-      <li>상자가 화면에 들어가는 줌을 고름: <code>zoom = min(화면 너비 / 상자 너비, 화면 높이 / 상자 높이)</code>.</li>
-      <li>줌을 최소, 최대 범위로 제한함. 너무 가까우면 답답하고, 너무 멀면 캐릭터가 점처럼 작아짐.</li>
+      <li>상자가 화면에 들어가는 줌을 고름: <code>zoom = min(화면 너비 / 상자 너비, 화면 높이 / 상자 높이)</code></li>
+      <li>줌을 최소, 최대 범위로 제한. 너무 가까우면 답답하고, 너무 멀면 캐릭터가 점처럼 작아짐.</li>
       <li>중심과 줌을 감쇠로 부드럽게 옮김. 줌은 로그 공간에서 보간하면 확대, 축소 속도가 고르게 느껴짐.</li>
     </ol>
     <p>줌 아웃은 빠르게 해야 대상이 화면 밖으로 나가지 않음. 줌 인은 천천히 해야 화면이 출렁이지 않음.
@@ -35,14 +35,14 @@ GTL.register({
     <text x="270" y="189" text-anchor="middle" class="t-small t-dim">${L('줌 아웃은 빠르게, 줌 인은 천천히 감쇠', 'Damp zoom out fast and zoom in slowly')}</text>
   </svg>`,
   look: [
-    '대상들이 흩어지는 구간에서 A는 "화면 밖 대상"이 1~2로 올라감. B는 줌 아웃으로 대부분 0을 유지함.',
-    '약 7초마다 대상 하나가 가운데로 부활함. B의 방식을 "경계 상자 맞춤 (감쇠 없음)"으로 바꾸면 그 순간 화면이 튀고 "프레임당 최대 화면 변화"가 몇 배로 커짐.',
+    '대상들이 흩어지는 구간에서 A는 "화면 밖 대상"이 1~2로 올라감. B는 줌 아웃으로 대부분 0을 유지.',
+    '약 7초마다 대상 하나가 가운데로 부활. B의 방식을 "경계 상자 맞춤 (감쇠 없음)"으로 바꾸면 그 순간 화면이 튀고 "프레임당 최대 화면 변화"가 몇 배로 커짐.',
     'B의 "최대 보이는 너비"를 900으로 낮추면 크게 흩어질 때 B도 대상을 놓침. 가장자리 화살표가 위치를 알려 줌.',
-    '여백을 0으로 줄이면 대상이 화면 테두리에 딱 붙어 다음 움직임이 보이지 않음.',
+    '여백을 0으로 줄이면 대상이 화면 테두리에 딱 붙어 다음 움직임이 보이지 않음',
   ],
   refs: [
     { type: 'game', title: 'Super Smash Bros. 시리즈 (Nintendo, HAL Laboratory, Sora Ltd.)', note: '모든 파이터를 담도록 자동으로 줌 인, 줌 아웃하는 카메라. 화면 밖 파이터는 가장자리 표시로 보여 줌.' },
-    { type: 'engine', title: 'Unity Cinemachine - Target Group Camera (CinemachineTargetGroup, Group Framing)', note: '여러 대상의 경계를 화면 비율에 맞추는 프레이밍.' },
+    { type: 'engine', title: 'Unity Cinemachine - Target Group Camera (CinemachineTargetGroup, Group Framing)', note: '여러 대상의 경계를 화면 비율에 맞추는 프레이밍' },
     { type: 'talk', title: 'Math for Game Programmers: Juicing Your Cameras With Math (Squirrel Eiserloh)', year: 2016, note: 'GDC 2016. 카메라 감쇠, 보간 수학.' },
   ],
   params: [

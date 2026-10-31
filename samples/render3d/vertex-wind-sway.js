@@ -13,9 +13,9 @@ GTL.register({
       <li><b>높이 가중치</b>: 오프셋에 (정점 높이)<sup>k</sup>를 곱함. 뿌리는 땅에 붙고 끝만 휨. 가중치가 없으면 풀잎 전체가 미끄러짐.</li>
       <li><b>위치 기반 위상</b>: 사인의 위상에 월드 위치를 넣음. 그래서 파도처럼 바람이 지나감.</li>
       <li><b>노이즈 돌풍(gust)</b>: 바람 방향으로 흘러가는 저주파 노이즈로 세기를 바꿈. 들판에 바람 자국이 생김.</li>
-      <li><b>무작위 위상</b>: 풀잎마다 위상을 조금씩 다르게 줘서 같은 박자로 움직이지 않게 함.</li>
+      <li><b>무작위 위상</b>: 풀잎마다 위상을 조금씩 다르게 줘서 같은 박자로 움직이지 않게 함</li>
     </ul>
-    <p>단점: 정점만 옮기므로 길이가 늘어나 보일 수 있음. 여기서는 휜 만큼 높이를 낮춰 길이를 대략 유지함. 충돌, 밟힘 같은 상호작용은 따로 처리해야 함.</p>`,
+    <p>단점: 정점만 옮기므로 길이가 늘어나 보일 수 있음. 여기서는 휜 만큼 높이를 낮춰 길이를 대략 유지. 충돌, 밟힘 같은 상호작용은 따로 처리해야 함.</p>`,
   // 도식: 높이 가중치로 끝만 휘는 풀잎과 위치 기반 위상으로 지나가는 바람 파도
   diagram: (L) => `<svg viewBox="0 0 540 194" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arrB" class="m-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -55,13 +55,13 @@ GTL.register({
     <text x="10" y="186" class="t-small t-a">${L('A는 오프셋 0 (정지)', 'A has zero offset (still)')}</text>
   </svg>`,
   look: [
-    'B에서 들판을 위에서 보면 밝은 돌풍 자국이 바람 방향으로 흘러감.',
-    '흔들림 방식을 "사인만"으로 바꾸고 위상 분산을 0으로 낮추면 모든 풀잎이 같은 박자로 움직임.',
+    'B에서 들판을 위에서 보면 밝은 돌풍 자국이 바람 방향으로 흘러감',
+    '흔들림 방식을 "사인만"으로 바꾸고 위상 분산을 0으로 낮추면 모든 풀잎이 같은 박자로 움직임',
     '"높이 가중치"를 끄면 풀잎 뿌리가 땅 위를 미끄러짐. "가중치 보기"를 켜면 뿌리 0(검정) ~ 끝 1(노랑)이 보임.',
     '가중치 지수를 3으로 올리면 끝부분만 휘어 뻣뻣한 풀처럼 보임. 1이면 막대처럼 기울어짐.',
   ],
   refs: [
-    { type: 'book', title: 'GPU Gems 3, Chapter 16: Vegetation Procedural Animation and Shading in Crysis (Tiago Sousa)', url: 'https://developer.nvidia.com/gpugems/gpugems3/part-iii-rendering/chapter-16-vegetation-procedural-animation-and-shading-crysis', year: 2007, note: '주 굽힘(main bending)과 세부 흔들림을 정점 셰이더로 처리.' },
+    { type: 'book', title: 'GPU Gems 3, Chapter 16: Vegetation Procedural Animation and Shading in Crysis (Tiago Sousa)', url: 'https://developer.nvidia.com/gpugems/gpugems3/part-iii-rendering/chapter-16-vegetation-procedural-animation-and-shading-crysis', year: 2007, note: '주 굽힘(main bending)과 세부 흔들림을 정점 셰이더로 처리' },
     { type: 'book', title: 'GPU Gems, Chapter 7: Rendering Countless Blades of Waving Grass (Kurt Pelzer)', url: 'https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-7-rendering-countless-blades-waving-grass', year: 2004 },
     { type: 'engine', title: 'Unity Manual: Wind Zones', url: 'https://docs.unity3d.com/Manual/class-WindZone.html' },
     { type: 'talk', title: 'Procedural Grass in Ghost of Tsushima (Eric Wohllaib)', year: 2021, note: 'GDC 2021. 풀잎마다 베지어 곡선과 바람 노이즈로 휘게 함.' },

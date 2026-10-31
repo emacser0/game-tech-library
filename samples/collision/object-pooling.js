@@ -4,16 +4,16 @@ GTL.register({
   title: '오브젝트 풀링 & GC 스파이크',
   summary: '총알과 파티클을 매번 new로 만들고 버리면 쓰레기가 쌓임. 그러면 가비지 컬렉터(GC)가 주기적으로 프레임을 멈춤. 미리 만든 객체를 재사용하면 할당이 0이 되어 프레임 시간이 평탄해짐.',
   views: { a: '매번 할당', b: '오브젝트 풀' },
-  controls: '조작 없음. 분수 파티클과 원을 도는 공의 끊김을 비교함.',
+  controls: '조작 없음. 분수 파티클과 원을 도는 공의 끊김 비교.',
   info: `
     <p><b>가비지 컬렉션</b>(GC)은 버려진 객체의 메모리를 자동으로 회수하는 기능. JavaScript, C#, Java 같은 언어에 있음.
     이런 언어에서 <code>new</code> 자체는 쌈. 하지만 할당이 많을수록 GC가 자주, 길게 실행됨. 그 순간 게임이 <b>끊김(hitch)</b>.
     주범은 수명이 짧고 대량으로 생기는 객체. 예: 총알, 파티클, 데미지 숫자.</p>
-    <p><b>오브젝트 풀</b>은 시작할 때 객체를 미리 만들어 둠.</p>
+    <p><b>오브젝트 풀</b>은 시작할 때 객체를 미리 만들어 둠</p>
     <ul>
-      <li>생성 대신 풀에서 꺼냄(<code>acquire</code>).</li>
-      <li>소멸 대신 풀에 돌려줌(<code>release</code>).</li>
-      <li>활성 목록은 swap-remove(지울 칸에 마지막 원소를 옮겨 넣기)로 관리해 배열도 새로 만들지 않음.</li>
+      <li>생성 대신 풀에서 꺼냄(<code>acquire</code>)</li>
+      <li>소멸 대신 풀에 돌려줌(<code>release</code>)</li>
+      <li>활성 목록은 swap-remove(지울 칸에 마지막 원소를 옮겨 넣기)로 관리해 배열도 새로 만들지 않음</li>
       <li>풀이 비면 새로 할당해야 함(풀 미스). 그래서 최대 동시 개수에 맞춰 미리 채워 둠.</li>
     </ul>
     <p>단점: 풀링만으로는 부족할 때가 많음. 다음도 매 프레임 쓰레기를 만듦.</p>
@@ -22,7 +22,7 @@ GTL.register({
       <li><code>filter</code>, <code>map</code></li>
       <li>클로저</li>
     </ul>
-    <p class="dim">※ 브라우저의 실제 GC 시점은 제어할 수 없음. 그래서 이 샘플은 할당 바이트를 세고 정지를 <b>시뮬레이션</b>함.
+    <p class="dim">※ 브라우저의 실제 GC 시점은 제어할 수 없음. 그래서 이 샘플은 할당 바이트를 세고 정지를 <b>시뮬레이션</b>.
     모델: "할당 N MB마다 GC 실행, 정지 시간은 할당량에 비례". 정지하는 동안 시뮬레이션이 실제로 멈춤.</p>`,
   diagram: (L) => {
     const used = [true, true, false, true, false, true, true, false];
@@ -47,14 +47,14 @@ GTL.register({
   look: [
     'A를 보면 원을 도는 공과 파티클이 주기적으로 "툭" 멈춤. 위쪽 프레임 시간 그래프의 스파이크가 그 순간. B는 평탄함.',
     '"숨은 임시 할당"을 켜면 풀을 쓰는 B에도 GC가 생김. 풀링에 더해 매 프레임 생기는 임시 객체도 없애야 함.',
-    'B의 "미리 채울 개수"를 0으로 하고 다시 시작하면 처음 몇 초간 풀 미스(새 할당)가 일어나다가 멈춤.',
-    '방출량을 올리면 A의 GC 빈도가 방출량에 비례해서 늘어남.',
+    'B의 "미리 채울 개수"를 0으로 하고 다시 시작하면 처음 몇 초간 풀 미스(새 할당)가 일어나다가 멈춤',
+    '방출량을 올리면 A의 GC 빈도가 방출량에 비례해서 늘어남',
   ],
   refs: [
     { type: 'book', title: 'Game Programming Patterns, Object Pool (Robert Nystrom)', url: 'https://gameprogrammingpatterns.com/object-pool.html', year: 2014 },
-    { type: 'engine', title: 'Unity, UnityEngine.Pool.ObjectPool<T>', url: 'https://docs.unity3d.com/ScriptReference/Pool.ObjectPool_1.html', note: 'Unity 2021부터 내장된 풀 API.' },
-    { type: 'article', title: 'Trash talk: the Orinoco garbage collector (V8 blog)', url: 'https://v8.dev/blog/trash-talk', year: 2019, note: 'V8의 세대별 GC(scavenger)와 정지 시간.' },
-    { type: 'article', title: 'Static Memory JavaScript with Object Pools (HTML5 Rocks, Colt McAnlis)', year: 2013, note: '웹 게임에서 풀로 GC 스파이크를 없앤 사례.' },
+    { type: 'engine', title: 'Unity, UnityEngine.Pool.ObjectPool<T>', url: 'https://docs.unity3d.com/ScriptReference/Pool.ObjectPool_1.html', note: 'Unity 2021부터 내장된 풀 API' },
+    { type: 'article', title: 'Trash talk: the Orinoco garbage collector (V8 blog)', url: 'https://v8.dev/blog/trash-talk', year: 2019, note: 'V8의 세대별 GC(scavenger)와 정지 시간' },
+    { type: 'article', title: 'Static Memory JavaScript with Object Pools (HTML5 Rocks, Colt McAnlis)', year: 2013, note: '웹 게임에서 풀로 GC 스파이크를 없앤 사례' },
   ],
   params: [
     { key: 'rate', label: '방출량 (개/초)', type: 'int', min: 200, max: 8000, default: 3000, shared: true, group: '장면' },

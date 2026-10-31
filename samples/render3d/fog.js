@@ -7,14 +7,14 @@ GTL.register({
   views: { a: '선형 안개', b: '높이 안개 + 태양 산란' },
   controls: '마우스 드래그: 카메라 회전, 휠: 줌(거리)',
   info: `
-    <p>안개는 픽셀 색을 거리에 따라 안개색과 섞는 효과. 깊이감을 주고, 먼 곳의 팝인과 그리기 거리 한계를 숨기는 데 필요함.</p>
-    <p>안개 계수 <code>f</code>(1 = 보임, 0 = 완전히 안개)로 <code>mix(fogColor, color, f)</code>를 계산함. <code>f</code>를 구하는 방식:</p>
+    <p>안개는 픽셀 색을 거리에 따라 안개색과 섞는 효과. 깊이감을 주고, 먼 곳의 팝인과 그리기 거리 한계를 숨기는 데 필요.</p>
+    <p>안개 계수 <code>f</code>(1 = 보임, 0 = 완전히 안개)로 <code>mix(fogColor, color, f)</code>를 계산. <code>f</code>를 구하는 방식:</p>
     <ul>
       <li><b>선형</b>: <code>(end − d)/(end − start)</code>. 시작과 끝이 분명해 경계가 띠처럼 보이기 쉬움(OpenGL 고정 파이프라인 GL_LINEAR).</li>
       <li><b>지수</b>: <code>exp(−density * d)</code>. 균일한 매질의 투과율(Beer-Lambert 법칙).</li>
       <li><b>지수²</b>: <code>exp(−(density * d)²)</code>. 가까이는 맑고 어느 거리부터 급격히 짙어짐.</li>
     </ul>
-    <p><b>높이 안개</b>: 밀도가 고도에 따라 <code>a * e^(−b * y)</code>로 줄어든다고 봄. 시선을 따라 밀도를 해석적으로 적분함(Quilez). 낮은 골짜기는 짙고, 기둥 꼭대기와 하늘은 맑음. 태양 쪽을 볼 때 안개색을 밝히면 간단한 <b>내산란</b> 효과가 됨.</p>
+    <p><b>높이 안개</b>: 밀도가 고도에 따라 <code>a * e^(−b * y)</code>로 줄어든다고 봄. 시선을 따라 밀도를 해석적으로 적분(Quilez). 낮은 골짜기는 짙고, 기둥 꼭대기와 하늘은 맑음. 태양 쪽을 볼 때 안개색을 밝히면 간단한 <b>내산란</b> 효과가 됨.</p>
     <p>주의: 안개색과 하늘의 수평선 색을 맞춰야 원경이 하늘에 자연스럽게 녹아듦. 오픈월드 게임은 이 원리로 먼 LOD 전환과 그리기 거리 한계를 감춤.</p>`,
   // 도식: 거리별 안개 계수 커브(선형, 지수, 지수²)와 높이 안개의 밀도 분포
   diagram: (L) => `<svg viewBox="0 0 540 168" xmlns="http://www.w3.org/2000/svg">
@@ -36,16 +36,16 @@ GTL.register({
     <text x="520" y="154" text-anchor="end" class="t-small t-dim">${L('밀도', 'density')}</text>
     <text x="390" y="66" class="t-small">${L('높은 곳 맑음', 'clear up high')}</text>
     <text x="440" y="128" class="t-small">${L('골짜기 짙음', 'thick in valleys')}</text>
-    <text x="320" y="160" class="t-small">${L('시선을 따라 밀도를 적분함', 'Integrate density along the view ray')}</text>
+    <text x="320" y="160" class="t-small">${L('시선을 따라 밀도를 적분', 'Integrate density along the view ray')}</text>
   </svg>`,
   look: [
     'A의 선형 안개를 보면 "끝 거리" 너머가 같은 색 벽처럼 보임. 시작과 끝 거리를 바꾸면 띠의 위치가 움직임.',
-    'B를 지수에서 지수²로 바꾸면 가까운 기둥은 선명해지고 먼 곳은 더 급격히 사라짐.',
+    'B를 지수에서 지수²로 바꾸면 가까운 기둥은 선명해지고 먼 곳은 더 급격히 사라짐',
     'B의 높이 안개에서 카메라를 높이 올리면(드래그) 땅 근처에만 안개가 깔린 모습이 보임. "고도 감쇠"를 올리면 안개층이 얇아짐.',
-    '태양 산란을 켜고 태양 쪽(노란 하늘)을 보면 안개가 밝게 빛남.',
+    '태양 산란을 켜고 태양 쪽(노란 하늘)을 보면 안개가 밝게 빛남',
   ],
   refs: [
-    { type: 'article', title: 'Inigo Quilez: Better Fog', url: 'https://iquilezles.org/articles/fog/', note: '높이 안개 해석적 적분, 태양 방향 안개색.' },
+    { type: 'article', title: 'Inigo Quilez: Better Fog', url: 'https://iquilezles.org/articles/fog/', note: '높이 안개 해석적 적분, 태양 방향 안개색' },
     { type: 'talk', title: 'Real-time Atmospheric Effects in Games (Carsten Wenzel, Crytek)', year: 2006, note: 'SIGGRAPH 2006 course. CryEngine 높이 안개.' },
     { type: 'engine', title: 'Unreal Engine: Exponential Height Fog', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/exponential-height-fog-in-unreal-engine' },
     { type: 'engine', title: 'OpenGL 2.1 glFog: GL_LINEAR / GL_EXP / GL_EXP2', url: 'https://registry.khronos.org/OpenGL-Refpages/gl2.1/xhtml/glFog.xml' },

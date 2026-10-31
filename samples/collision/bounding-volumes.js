@@ -4,22 +4,22 @@ GTL.register({
   title: '경계 볼륨: 원, AABB, OBB, 볼록 껍질',
   summary: '경계 볼륨이 실제 모양을 얼마나 꼭 맞게 감싸는지(빈 공간)에 따라 거짓 양성 수가 정해짐. 꼭 맞을수록 검사 비용은 커짐.',
   views: { a: '경계 원', b: 'OBB' },
-  controls: '조작 없음. 도형이 떠다니며 회전함.',
+  controls: '조작 없음. 도형이 떠다니며 회전.',
   info: `
-    <p><b>경계 볼륨</b>(Bounding Volume)은 실제 모양을 감싸는 단순한 도형. 정밀한 충돌 검사는 비싸므로 경계 볼륨끼리 먼저 검사함.</p>
+    <p><b>경계 볼륨</b>(Bounding Volume)은 실제 모양을 감싸는 단순한 도형. 정밀한 충돌 검사는 비싸므로 경계 볼륨끼리 먼저 검사.</p>
     <ul>
-      <li>경계 볼륨이 겹치지 않으면 확실히 충돌이 아님.</li>
-      <li>겹치면 실제 모양을 정밀 검사함.</li>
+      <li>경계 볼륨이 겹치지 않으면 확실히 충돌이 아님</li>
+      <li>겹치면 실제 모양을 정밀 검사</li>
       <li>경계 볼륨은 겹치는데 실제 모양은 안 닿는 경우가 <b>거짓 양성</b>. 그만큼 정밀 검사가 낭비됨.</li>
     </ul>
     <p>종류별 특징:</p>
     <ul>
-      <li><b>원/구</b>: 거리 제곱 비교 한 번으로 검사함. 회전해도 바뀌지 않음. 길쭉한 모양에서는 빈 공간이 큼.</li>
+      <li><b>원/구</b>: 거리 제곱 비교 한 번으로 검사. 회전해도 바뀌지 않음. 길쭉한 모양에서는 빈 공간이 큼.</li>
       <li><b>AABB</b>(축 정렬 경계 상자): 검사가 가장 쌈. 회전할 때마다 다시 계산해야 함. 45° 회전한 막대에서는 크게 부풂.</li>
       <li><b>OBB</b>(방향 경계 상자): 모양과 함께 회전하므로 꼭 맞음. 검사는 SAT 4축(3D는 15축).</li>
-      <li><b>볼록 껍질</b>: 오목한 부분을 빼면 가장 꼭 맞음. 검사 비용은 꼭짓점 수에 비례함.</li>
+      <li><b>볼록 껍질</b>: 오목한 부분을 빼면 가장 꼭 맞음. 검사 비용은 꼭짓점 수에 비례.</li>
     </ul>
-    <p>회색 반투명 영역이 경계 볼륨, 밝은 도형이 실제 모양. 둘의 차이가 빈 공간. 실제 모양은 볼록 조각들의 합으로 만들어 정확히 판정함.</p>`,
+    <p>회색 반투명 영역이 경계 볼륨, 밝은 도형이 실제 모양. 둘의 차이가 빈 공간. 실제 모양은 볼록 조각들의 합으로 만들어 정확히 판정.</p>`,
   diagram: (L) => {
     const stick = (cx) => `<rect x="-55" y="-9" width="110" height="18" transform="translate(${cx} 70) rotate(-45)" class="f-dim"/>`;
     return `<svg viewBox="0 0 540 162" xmlns="http://www.w3.org/2000/svg">
@@ -35,15 +35,15 @@ GTL.register({
   </svg>`;
   },
   look: [
-    '기본 상태(막대 모양)에서 빨간 점선(거짓 양성)을 비교하면 A(원)는 많고 B(OBB)는 거의 없음.',
+    '기본 상태(막대 모양)에서 빨간 점선(거짓 양성)을 비교하면 A(원)는 많고 B(OBB)는 거의 없음',
     'B를 AABB로 바꾸면 막대가 45°일 때 상자가 크게 부풀었다 줄어듦. 회전에 따라 빈 공간 비율이 출렁임.',
     '모양을 "L자"로 바꾸면 OBB와 볼록 껍질도 오목한 안쪽에 빈 공간이 남음. 이럴 때는 여러 볼록 조각(compound)으로 나눔.',
     '경계 볼륨을 원에서 볼록 껍질 쪽으로 바꾸면 "BV 갱신+검사" 비용이 커짐. 빈 공간과 검사 비용의 맞교환(트레이드오프).',
   ],
   refs: [
-    { type: 'book', title: 'Real-Time Collision Detection, Ch.4 Bounding Volumes (Christer Ericson)', year: 2005, note: 'AABB, 구, OBB, k-DOP 비교와 회전 시 갱신.' },
+    { type: 'book', title: 'Real-Time Collision Detection, Ch.4 Bounding Volumes (Christer Ericson)', year: 2005, note: 'AABB, 구, OBB, k-DOP 비교와 회전 시 갱신' },
     { type: 'paper', title: 'OBBTree: A Hierarchical Structure for Rapid Interference Detection (Gottschalk, Lin, Manocha)', year: 1996, note: 'SIGGRAPH 96. OBB 분리축 검사.' },
-    { type: 'article', title: 'Solving Geometric Problems with the Rotating Calipers (Godfried Toussaint)', year: 1983, note: '볼록 다각형을 감싸는 최소 면적 사각형.' },
+    { type: 'article', title: 'Solving Geometric Problems with the Rotating Calipers (Godfried Toussaint)', year: 1983, note: '볼록 다각형을 감싸는 최소 면적 사각형' },
   ],
   params: [
     { key: 'count', label: '도형 개수', type: 'int', min: 4, max: 40, default: 18, shared: true, reset: true, group: '장면' },

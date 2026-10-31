@@ -90,7 +90,7 @@
       <li><b>Blue noise</b>: 잘게 흩어진 성분(고주파)만 가진 노이즈. 여기서는 void-and-cluster 방식으로 만듦. 패턴이 눈에 띄지 않아 가장 자연스러움.</li>
       <li><b>오차 확산 (Floyd-Steinberg, Atkinson)</b>: 픽셀을 차례로 돌며 오차를 오른쪽과 아래 이웃에 나눔. 품질은 좋음. 단점은 병렬로 못 돌리고, 장면이 움직이면 패턴이 프레임마다 요동침.</li>
       </ul>
-      <p>Return of the Obra Dinn은 1비트 화면에 Bayer와 blue noise를 섞어 씀. 카메라가 돌 때 패턴이 "헤엄치는" 문제가 있었음. 개발노트에서 디더 패턴을 화면 대신 구면에 고정해 해결한 과정을 소개함.</p>`,
+      <p>Return of the Obra Dinn은 1비트 화면에 Bayer와 blue noise를 섞어 씀. 카메라가 돌 때 패턴이 "헤엄치는" 문제가 있었음. 개발노트에서 디더 패턴을 화면 대신 구면에 고정해 해결한 과정 소개.</p>`,
     diagram: (L) => `<svg viewBox="0 0 540 172" xmlns="http://www.w3.org/2000/svg">
       <text x="10" y="14">${L('원래 값', 'Original')}</text>
       ${Array.from({ length: 16 }, (_, i) => `<rect x="${10 + i * 10}" y="20" width="10" height="16" class="f-accent" opacity="${(i / 15).toFixed(3)}"/>`).join('')}
@@ -117,18 +117,18 @@
       <text x="360" y="150" class="t-small t-dim">${L('순서대로 처리해서 병렬화가 어려움', 'Sequential, hard to parallelize')}</text>
     </svg>`,
     look: [
-      '비트 수를 1~2로 낮추면 A는 큰 띠로 갈라지고, B는 패턴으로 중간 톤을 표현함.',
+      '비트 수를 1~2로 낮추면 A는 큰 띠로 갈라지고, B는 패턴으로 중간 톤 표현',
       'B 방식을 Floyd-Steinberg로 바꾸고 "장면 움직임"을 켜면 구 주변 패턴이 프레임마다 지글거림. Bayer와 Blue noise는 화면에 고정돼 안정적임.',
-      'White noise와 Blue noise를 같은 비트 수로 비교하면 blue noise가 훨씬 고르게 보임 (큰 얼룩 없음).',
-      '색조를 Obra Dinn이나 Game Boy로 바꾸고 1~2비트 흑백으로 보면 실제 게임 화면 느낌이 남.',
-      '오른쪽 위 작은 상자를 보면 현재 방식의 임계값 패턴이 보임.',
+      'White noise와 Blue noise를 같은 비트 수로 비교하면 blue noise가 훨씬 고르게 보임 (큰 얼룩 없음)',
+      '색조를 Obra Dinn이나 Game Boy로 바꾸고 1~2비트 흑백으로 보면 실제 게임 화면 느낌이 남',
+      '오른쪽 위 작은 상자를 보면 현재 방식의 임계값 패턴이 보임',
     ],
     refs: [
       { type: 'paper', title: 'An optimum method for two-level rendition of continuous-tone pictures (B. E. Bayer)', year: 1973, note: 'IEEE International Conference on Communications. Ordered dither 행렬의 원전.' },
       { type: 'paper', title: 'An adaptive algorithm for spatial greyscale (R. W. Floyd, L. Steinberg)', year: 1976, note: 'Proceedings of the Society for Information Display. 오차 확산 가중치 7/16, 3/16, 5/16, 1/16.' },
       { type: 'paper', title: 'Void-and-cluster method for dither array generation (R. Ulichney)', year: 1993, note: 'SPIE Human Vision, Visual Processing, and Digital Display IV. Blue noise 임계값 행렬 생성법.' },
       { type: 'talk', title: 'Next Generation Post Processing in Call of Duty: Advanced Warfare (Jorge Jimenez)', year: 2014, note: 'SIGGRAPH Advances in Real-Time Rendering. Interleaved Gradient Noise 소개.' },
-      { type: 'game', title: 'Return of the Obra Dinn: 개발노트 (Lucas Pope, TIGSource)', url: 'https://forums.tigsource.com/index.php?topic=40832.0', year: 2017, note: '1비트 디더링과 디더 패턴 안정화 과정.' },
+      { type: 'game', title: 'Return of the Obra Dinn: 개발노트 (Lucas Pope, TIGSource)', url: 'https://forums.tigsource.com/index.php?topic=40832.0', year: 2017, note: '1비트 디더링과 디더 패턴 안정화 과정' },
     ],
     params: [
       { key: 'method', label: '디더링 방식', type: 'select', group: '양자화', options: [

@@ -122,18 +122,18 @@
     views: { a: '최신 스냅샷 그대로', b: '보간 (렌더 지연 버퍼)' },
     controls: '←↑→↓ / WASD: 원격 플레이어(큰 원) 조종. 이 입력은 서버에 바로 들어간다고 가정',
     info: `
-      <p><b>엔티티 보간</b>: 원격 엔티티를 조금 과거 시각에 그리면서, 받은 두 스냅샷 사이를 이어 그리는 기법.</p>
+      <p><b>엔티티 보간</b>: 원격 엔티티를 조금 과거 시각에 그리면서, 받은 두 스냅샷 사이를 이어 그리는 기법</p>
       <p>서버는 스냅샷을 초당 수십 번 이하로만 보냄. 관찰자 클라이언트가 <b>가장 최근 스냅샷 위치</b>를 그대로 그리면 문제가 생김.</p>
       <ul>
-        <li>엔티티가 전송 주기마다 순간이동함.</li>
-        <li>지터나 손실이 있으면 간격까지 들쭉날쭉해짐.</li>
+        <li>엔티티가 전송 주기마다 순간이동</li>
+        <li>지터나 손실이 있으면 간격까지 들쭉날쭉해짐</li>
       </ul>
       <p>동작 원리:</p>
       <ul>
-        <li>렌더 시각을 <code>추정 서버 시각 − 보간 지연</code>으로 둠.</li>
-        <li>렌더 시각을 감싸는 두 스냅샷 사이를 선형 보간함.</li>
-        <li>보간 지연이 전송 간격의 2배 이상이면 스냅샷 하나를 잃어도 다음 스냅샷으로 이어 붙임(Source 엔진 기본 100ms, <code>cl_interp_ratio 2</code>).</li>
-        <li>버퍼에 렌더 시각 이후의 스냅샷이 없으면(언더런) 마지막 위치에서 멈춤(빨간 표시).</li>
+        <li>렌더 시각을 <code>추정 서버 시각 − 보간 지연</code>으로 둠</li>
+        <li>렌더 시각을 감싸는 두 스냅샷 사이를 선형 보간</li>
+        <li>보간 지연이 전송 간격의 2배 이상이면 스냅샷 하나를 잃어도 다음 스냅샷으로 이어 붙임(Source 엔진 기본 100ms, <code>cl_interp_ratio 2</code>)</li>
+        <li>버퍼에 렌더 시각 이후의 스냅샷이 없으면(언더런) 마지막 위치에서 멈춤(빨간 표시)</li>
       </ul>
       <p>단점: <b>원격 엔티티를 항상 과거 모습으로 봄</b>. 이 지연은 랙 보상에서 서버가 되감아 맞춤.</p>`,
     diagram: (L) => `<svg viewBox="0 0 540 180" xmlns="http://www.w3.org/2000/svg">
@@ -157,14 +157,14 @@
     look: [
       '두 뷰의 궤적 점을 비교하면, A는 점이 뭉쳤다 벌어졌다 함(끊김). B는 점 간격이 고름.',
       'B에서 보간 지연을 전송 간격(1000/전송률)보다 작게 내리면 언더런이 늘어 B도 멈칫거림. 손실률을 올리면 더 심해짐.',
-      '"스냅샷 버퍼" 패널에서 노란 선(렌더 시각)을 보면, 흰 막대(받은 스냅샷) 두 개 사이에 있을 때만 움직임이 부드러움.',
-      '서버(녹색 고스트)와 화면 사이 거리를 비교하면, B의 "표시 지연"이 A보다 보간 지연만큼 큼.',
+      '"스냅샷 버퍼" 패널에서 노란 선(렌더 시각)을 보면, 흰 막대(받은 스냅샷) 두 개 사이에 있을 때만 움직임이 부드러움',
+      '서버(녹색 고스트)와 화면 사이 거리를 비교하면, B의 "표시 지연"이 A보다 보간 지연만큼 큼',
     ],
     refs: [
       { type: 'article', title: 'Fast-Paced Multiplayer (Part III): Entity Interpolation', url: 'https://www.gabrielgambetta.com/entity-interpolation.html', note: 'Gabriel Gambetta.' },
       { type: 'article', title: 'Snapshot Interpolation', url: 'https://gafferongames.com/post/snapshot_interpolation/', note: 'Glenn Fiedler. 보간 버퍼 크기와 손실 내성.' },
       { type: 'engine', title: 'Source Multiplayer Networking - Entity interpolation', url: 'https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking', note: 'Valve. cl_interp, cl_interp_ratio, 100ms 기본 보간.' },
-      { type: 'engine', title: 'Interpolation (Valve Developer Wiki)', note: 'Source 엔진 보간 설정 문서.' },
+      { type: 'engine', title: 'Interpolation (Valve Developer Wiki)', note: 'Source 엔진 보간 설정 문서' },
     ],
     params: [
       { key: 'lat', label: '편도 지연 (ms)', type: 'int', min: 0, max: 400, default: 80, shared: true, group: '네트워크' },

@@ -1,4 +1,4 @@
-// 모션 매칭(Motion Matching) 단순화: 상태 머신 + 크로스페이드 vs 포즈 데이터베이스에서 궤적 특징으로 프레임 검색.
+// 모션 매칭(Motion Matching) 단순화: 상태 머신 + 크로스페이드 vs 포즈 데이터베이스에서 궤적 특징으로 프레임 검색
 GTL.register({
   id: 'motion-matching',
   title: '모션 매칭 vs 상태 머신 블렌딩',
@@ -6,15 +6,15 @@ GTL.register({
   views: { a: '상태 머신 + 크로스페이드', b: '모션 매칭' },
   controls: '→ 누르는 동안 달리기, ↑ 걷기, ← 멈춤 (두 뷰 공통). 누르지 않으면 목표 속도가 자동으로 바뀜.',
   info: `
-    <p><b>상태 머신 방식</b>: 상태마다 클립을 정하고 조건(속도 임계값)에 따라 전환하며 크로스페이드함. 이동은 코드가 처리함.
+    <p><b>상태 머신 방식</b>: 상태마다 클립을 정하고 조건(속도 임계값)에 따라 전환하며 크로스페이드. 이동은 코드가 처리.
     클립 속도와 실제 이동 속도가 다르면 발이 미끄러짐. 상태와 전환이 늘수록 그래프 관리가 어려워짐.</p>
     <p><b>모션 매칭</b>(Simon Clavet, Ubisoft, GDC 2016): 긴 동작 캡처 전체를 프레임 단위 데이터베이스로 씀. 일정 간격으로 아래 특징을 모아 질의(query)를 만듦.</p>
     <ul>
       <li>현재 포즈: 엉덩이 기준 두 발의 위치와 속도, 엉덩이 속도</li>
       <li>원하는 궤적: 입력으로 예측한 0.2, 0.4, 0.6초 뒤 위치</li>
     </ul>
-    <p>모든 프레임의 같은 특징과 비교해 가중 거리(특징별 표준편차로 정규화)가 가장 작은 프레임으로 점프함. 점프할 때 포즈 차이는 0.15초 동안 감쇠시킴(관성화, inertialization의 단순형). 이동은 데이터베이스의 루트 모션을 씀.</p>
-    <p>여기서 데이터베이스는 절차적 보행으로 만든 45초 분량 기록. 실제 게임은 수 분 분량의 캡처를 쓰고, KD 트리나 구간 경계 상자(AABB)로 검색을 가속함.</p>
+    <p>모든 프레임의 같은 특징과 비교해 가중 거리(특징별 표준편차로 정규화)가 가장 작은 프레임으로 점프. 점프할 때 포즈 차이는 0.15초 동안 감쇠시킴(관성화, inertialization의 단순형). 이동은 데이터베이스의 루트 모션을 씀.</p>
+    <p>여기서 데이터베이스는 절차적 보행으로 만든 45초 분량 기록. 실제 게임은 수 분 분량의 캡처를 쓰고, KD 트리나 구간 경계 상자(AABB)로 검색을 가속.</p>
     <p>단점: 데이터에 없는 동작은 나오지 않음. 특징 가중치 튜닝이 어렵고, 메모리와 검색 비용이 큼. 원하는 궤적과 실제 이동이 어긋나 반응이 늦을 수 있음.</p>`,
   // 도식: A는 속도 임계값으로 고정 속도 클립 3개를 바꾸고 코드로 이동. B는 질의(포즈 7개 + 궤적 3개 특징)와 가장 가까운 데이터베이스 프레임으로 점프
   diagram: (L) => {
@@ -57,15 +57,15 @@ GTL.register({
   },
   look: [
     'A의 노란 디딤 발 표시를 보면 가속과 감속 중, 그리고 목표 속도가 150px/s일 때 발이 미끄러짐. B는 디딘 자리에 머묾.',
-    '"발 미끄러짐" 값을 비교하면 A는 수십 px/s, B는 몇 px/s (대부분 점프 직후 감쇠 구간에서 생김).',
-    '위쪽 데이터베이스 막대를 보면 B의 재생 위치(흰 선)가 목표 속도가 바뀔 때마다 비슷한 속도 구간으로 점프함.',
-    'B의 "궤적 가중치"를 0으로 내리면 포즈만 이어 가며 입력을 무시함. 3으로 올리면 반응은 빠르지만 점프가 잦아짐.',
-    'A의 "재생 속도 맞춤"을 켜면 미끄러짐이 줄지만 걸음 박자가 어색하게 빨라지거나 느려짐.',
+    '"발 미끄러짐" 값을 비교하면 A는 수십 px/s, B는 몇 px/s (대부분 점프 직후 감쇠 구간에서 생김)',
+    '위쪽 데이터베이스 막대를 보면 B의 재생 위치(흰 선)가 목표 속도가 바뀔 때마다 비슷한 속도 구간으로 점프',
+    'B의 "궤적 가중치"를 0으로 내리면 포즈만 이어 가며 입력을 무시. 3으로 올리면 반응은 빠르지만 점프가 잦아짐.',
+    'A의 "재생 속도 맞춤"을 켜면 미끄러짐이 줄지만 걸음 박자가 어색하게 빨라지거나 느려짐',
   ],
   refs: [
     { type: 'talk', title: 'Motion Matching and The Road to Next-Gen Animation (Simon Clavet)', year: 2016, note: 'GDC 2016, Ubisoft Montreal. For Honor의 모션 매칭.' },
     { type: 'paper', title: 'Learned Motion Matching (Daniel Holden, Oussama Kanoun, Maksym Perepichka, Tiberiu Popa)', year: 2020, note: 'ACM SIGGRAPH 2020 (ACM TOG). 모션 매칭의 특징, 검색, 관성화 설명과 메모리 절감.' },
-    { type: 'engine', title: 'Unreal Engine 5 - Motion Matching (Pose Search plugin)', note: 'Pose Search Database, Schema(특징 채널), Chooser.' },
+    { type: 'engine', title: 'Unreal Engine 5 - Motion Matching (Pose Search plugin)', note: 'Pose Search Database, Schema(특징 채널), Chooser' },
     { type: 'talk', title: 'Inertialization: High-Performance Animation Transitions in Gears of War (David Bollo)', year: 2018, note: 'GDC 2018. 점프 전환의 포즈 차이를 감쇠.' },
   ],
   params: [

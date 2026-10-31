@@ -6,13 +6,13 @@ GTL.register({
   renderer: 'webgl',
   views: { a: 'Clamp (톤 매핑 없음)', b: 'ACES 근사 (Narkowicz)' },
   info: `
-    <p>조명 계산 결과는 실제 빛의 양이라 상한이 없음 (해 = 수십, 실내 = 0.1). 디스플레이는 0~1만 표현함.</p>
-    <p>그래서 세 단계를 거침. <b>노출(Exposure)</b>로 장면 밝기를 맞추고, <b>톤 매핑 곡선</b>으로 압축하고, 마지막에 sRGB로 인코딩함.</p>
+    <p>조명 계산 결과는 실제 빛의 양이라 상한 없음 (해 = 수십, 실내 = 0.1). 디스플레이는 0~1만 표현.</p>
+    <p>그래서 세 단계를 거침. <b>노출(Exposure)</b>로 장면 밝기를 맞추고, <b>톤 매핑 곡선</b>으로 압축하고, 마지막에 sRGB로 인코딩.</p>
     <ul>
     <li><b>Clamp</b>: 1 이상을 잘라냄. 하이라이트 디테일이 사라짐. 채널마다 따로 잘려서 색상이 노랑이나 청록으로 틀어짐.</li>
     <li><b>Reinhard</b> <code>x/(1+x)</code> (2002): 1에 절대 도달하지 않아 화면 전체가 물 빠진 느낌. 확장형은 흰점 L<sub>white</sub>에서 1이 됨.</li>
     <li><b>휘도 Reinhard</b>: 휘도에만 곡선을 적용하고 색 비율은 유지. 색은 지켜지지만, 아주 밝은 색이 흰색으로 "탈색"되지 않아 부자연스러울 수 있음.</li>
-    <li><b>Hable (Uncharted 2 Filmic)</b>: 필름 특성처럼 어두운 영역에 토(toe), 밝은 영역에 숄더(shoulder)가 있는 S자 곡선.</li>
+    <li><b>Hable (Uncharted 2 Filmic)</b>: 필름 특성처럼 어두운 영역에 토(toe), 밝은 영역에 숄더(shoulder)가 있는 S자 곡선</li>
     <li><b>ACES 근사</b> (Narkowicz): ACES RRT+ODT를 유리함수 하나로 피팅한 곡선. 대비가 강하고 밝은 색은 자연스럽게 흰색으로 탈색.</li>
     </ul>
     <p>오른쪽 아래 그래프는 현재 곡선 (입력 0~8, 노출 적용 후). 점선은 Clamp.</p>`,
@@ -34,14 +34,14 @@ GTL.register({
     <text x="350" y="164" class="t-small t-dim">${L('곡선이 0~무한을 0~1로 압축', 'The curve squeezes 0~inf into 0~1')}</text>
   </svg>`,
   look: [
-    'A와 B의 해, 가로등 주변, 위쪽 HDR 램프 오른쪽 절반을 비교하면 A는 평평한 흰색 덩어리이고 B는 단계가 살아 있음.',
+    'A와 B의 해, 가로등 주변, 위쪽 HDR 램프 오른쪽 절반을 비교하면 A는 평평한 흰색 덩어리이고 B는 단계가 살아 있음',
     '아래쪽 컬러 램프(파랑, 빨강, 초록, 오른쪽으로 갈수록 2배씩 밝아짐)를 보면 Clamp는 색이 그대로 포화됨. ACES와 Hable은 점점 흰색으로 탈색됨 (실제 카메라나 눈과 비슷).',
     'B를 Reinhard로 바꾸면 하이라이트는 남지만 전체가 회색빛으로 뜸. 확장형으로 바꾸고 흰점(Lwhite)을 조정하면 차이가 보임.',
-    '노출을 ±2EV 움직이면 각 곡선이 어두운 장면과 밝은 장면에서 얼마나 견디는지 보임.',
+    '노출을 ±2EV 움직이면 각 곡선이 어두운 장면과 밝은 장면에서 얼마나 견디는지 보임',
   ],
   refs: [
     { type: 'paper', title: 'Photographic Tone Reproduction for Digital Images (Reinhard, Stark, Shirley, Ferwerda)', url: 'https://dl.acm.org/doi/10.1145/566654.566575', year: 2002, note: 'SIGGRAPH 2002. x/(1+x)와 흰점 확장식.' },
-    { type: 'article', title: 'ACES Filmic Tone Mapping Curve (Krzysztof Narkowicz)', url: 'https://knarkowicz.wordpress.com/2016/01/06/aces-filmic-tone-mapping-curve/', year: 2016, note: '유리함수 근사 a=2.51, b=0.03, c=2.43, d=0.59, e=0.14.' },
+    { type: 'article', title: 'ACES Filmic Tone Mapping Curve (Krzysztof Narkowicz)', url: 'https://knarkowicz.wordpress.com/2016/01/06/aces-filmic-tone-mapping-curve/', year: 2016, note: '유리함수 근사 a=2.51, b=0.03, c=2.43, d=0.59, e=0.14' },
     { type: 'talk', title: 'Uncharted 2: HDR Lighting (John Hable)', year: 2010, note: 'GDC 2010. Filmic 곡선 A=0.15 B=0.50 C=0.10 D=0.20 E=0.02 F=0.30, W=11.2.' },
     { type: 'engine', title: 'Unreal Engine: Color Grading and the Filmic Tonemapper', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/color-grading-and-the-filmic-tonemapper-in-unreal-engine' },
   ],

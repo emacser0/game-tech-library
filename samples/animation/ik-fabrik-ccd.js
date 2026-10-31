@@ -6,17 +6,17 @@ GTL.register({
   views: { a: 'CCD', b: 'FABRIK' },
   controls: '마우스를 뷰 안에 두면 목표가 마우스를 따라감. 밖에 두면 목표가 자동으로 움직임.',
   info: `
-    <p><b>CCD (Cyclic Coordinate Descent)</b>: 끝 관절부터 루트까지 차례로 관절을 회전함. "관절에서 끝점을 보는 방향"을 "관절에서 목표를 보는 방향"으로 맞춤.</p>
+    <p><b>CCD (Cyclic Coordinate Descent)</b>: 끝 관절부터 루트까지 차례로 관절을 회전. "관절에서 끝점을 보는 방향"을 "관절에서 목표를 보는 방향"으로 맞춤.</p>
     <ul>
       <li>장점: 구현이 쉬움. 관절별 각도 제약을 바로 걸 수 있음.</li>
-      <li>단점: 끝쪽 관절이 먼저 크게 꺾여 <b>말려 들어가는(curl) 자세</b>가 되기 쉬움. 반복이 많이 필요함.</li>
+      <li>단점: 끝쪽 관절이 먼저 크게 꺾여 <b>말려 들어가는(curl) 자세</b>가 되기 쉬움. 반복이 많이 필요.</li>
     </ul>
-    <p><b>FABRIK (Forward And Backward Reaching IK)</b>: 점과 뼈 길이만으로 자세를 맞춤.</p>
+    <p><b>FABRIK (Forward And Backward Reaching IK)</b>: 점과 뼈 길이만으로 자세를 맞춤</p>
     <ul>
-      <li>backward: 끝점을 목표에 놓고, 뼈 길이를 유지하며 루트 쪽으로 당김.</li>
-      <li>forward: 루트를 원래 위치에 놓고, 다시 끝 쪽으로 당김.</li>
+      <li>backward: 끝점을 목표에 놓고, 뼈 길이를 유지하며 루트 쪽으로 당김</li>
+      <li>forward: 루트를 원래 위치에 놓고, 다시 끝 쪽으로 당김</li>
       <li>장점: 각도와 삼각함수가 없어 빠름. 회전이 체인 전체에 <b>고르게 나뉨</b>. 적은 반복으로도 자연스러움.</li>
-      <li>제약: forward 단계에서 부모 뼈 방향 기준으로 방향을 잘라 적용함.</li>
+      <li>제약: forward 단계에서 부모 뼈 방향 기준으로 방향을 잘라 적용</li>
     </ul>
     <p>체인은 이전 프레임의 자세에서 시작함(warm start). "매 프레임 초기 자세에서"를 켜면 반복 횟수당 수렴 속도를 공정하게 비교할 수 있음.</p>`,
   diagram: (L) => {
@@ -48,13 +48,13 @@ GTL.register({
     '반복 횟수를 1~3으로 낮추고 "매 프레임 초기 자세에서"를 켜면 FABRIK은 1~2회에도 거의 닿음. CCD는 끝부분만 꺾인 채 멀리 떨어짐.',
     '"반복 과정 표시"를 켜면 반복마다 중간 자세가 흐리게 보임. CCD는 끝에서부터 말리고 FABRIK은 전체가 함께 휨.',
     '관절 각도 제한을 30° 정도로 걸면 두 방식 모두 도달 범위가 줄어듦. CCD는 관절별 클램프로 제약을 자연스럽게 다룸. FABRIK은 forward 단계에서 잘라낸 만큼 오차가 남기 쉬움.',
-    '목표를 도달 거리(점선 원) 밖으로 보내면 두 방식 모두 목표를 향해 일자로 뻗음.',
+    '목표를 도달 거리(점선 원) 밖으로 보내면 두 방식 모두 목표를 향해 일자로 뻗음',
   ],
   refs: [
     { type: 'paper', title: 'FABRIK: A fast, iterative solver for the Inverse Kinematics problem (Aristidou & Lasenby)', year: 2011, note: 'Graphical Models 73(5).' },
     { type: 'paper', title: 'A Combined Optimization Method for Solving the Inverse Kinematics Problem of Mechanical Manipulators (Wang & Chen)', year: 1991, note: 'IEEE Trans. Robotics and Automation 7(4). CCD의 원전.' },
     { type: 'paper', title: 'Inverse Kinematics and Geometric Constraints for Articulated Figure Manipulation (Chris Welman)', year: 1993, note: 'Simon Fraser University 석사 논문. CCD와 Jacobian 방식을 게임, 애니메이션 관점에서 정리.' },
-    { type: 'engine', title: 'Unreal Engine - FABRIK / CCDIK Animation Blueprint 노드', note: '엔진에 두 솔버가 모두 내장.' },
+    { type: 'engine', title: 'Unreal Engine - FABRIK / CCDIK Animation Blueprint 노드', note: '엔진에 두 솔버가 모두 내장' },
   ],
   params: [
     { key: 'solver', label: '솔버', type: 'select', group: 'IK', options: [

@@ -2,17 +2,17 @@
 GTL.register({
   id: 'cellular-caves',
   title: '셀룰러 오토마타 동굴',
-  summary: '무작위로 채운 벽에 "이웃 벽이 많으면 벽, 적으면 빈칸" 규칙을 몇 번 반복하면 자연스러운 동굴이 됨. 반복 횟수와 출생/생존 임계값이 모양을 결정함.',
-  views: { a: '무작위 채움 (반복 0)', b: 'CA 5회 반복' },
-  controls: '조작 없음. "다시 생성"을 누르면 새 시드로 만듦.',
+  summary: '무작위로 채운 벽에 "이웃 벽이 많으면 벽, 적으면 빈칸" 규칙을 몇 번 반복하면 자연스러운 동굴이 됨. 반복 횟수와 출생/생존 임계값이 모양을 결정',
+  single: true,
+  controls: '조작 없음. "다시 생성"을 누르면 새 시드로 생성.',
   info: `
-    <p><b>셀룰러 오토마타(CA)</b>: 칸마다 이웃 상태를 보고 다음 상태를 정하는 규칙을 반복하는 방식.</p>
+    <p><b>셀룰러 오토마타(CA)</b>: 칸마다 이웃 상태를 보고 다음 상태를 정하는 규칙을 반복하는 방식</p>
     <p>먼저 각 칸을 확률 <code>p</code>로 벽으로 채움. 세대마다 주변 8칸의 벽 개수 <code>n</code>을 셈.</p>
     <ul>
-      <li><b>빈칸</b>: n ≥ 출생값이면 벽이 됨.</li>
-      <li><b>벽</b>: n ≥ 생존값이면 벽으로 남음.</li>
+      <li><b>빈칸</b>: n ≥ 출생값이면 벽이 됨</li>
+      <li><b>벽</b>: n ≥ 생존값이면 벽으로 남음</li>
     </ul>
-    <p>대표 규칙은 "4-5 규칙"(출생 5, 생존 4). 다수결 필터처럼 작동함. 고립된 점은 사라지고 경계는 매끄러워짐.</p>
+    <p>대표 규칙은 "4-5 규칙"(출생 5, 생존 4). 다수결 필터처럼 작동. 고립된 점은 사라지고 경계는 매끄러워짐.</p>
     <p>단점: CA만으로는 <b>모든 빈칸이 이어진다는 보장이 없음.</b> 실전에서는 플러드 필로 영역을 찾음.
     그다음 가장 큰 영역만 남기거나 작은 영역을 터널로 이음.
     이 샘플은 영역마다 다른 색을 칠함. "가장 큰 영역만 남기기"로 후처리 결과를 보여줌.</p>`,
@@ -54,29 +54,29 @@ GTL.register({
     ${nb(94, [2, 8], true)}
     <text x="76" y="108" class="t-small t-mono">n = 2</text>
     <text x="76" y="124" class="t-small">${L('벽 → 빈칸 (n < 4)', 'wall → empty (n < 4)')}</text>
-    <text x="10" y="168" class="t-small t-dim">${L('다수결 필터처럼 작동함', 'Works like a majority vote')}</text>
+    <text x="10" y="168" class="t-small t-dim">${L('다수결 필터처럼 작동', 'Works like a majority vote')}</text>
     <text x="262" y="28" class="t-a t-small">${L('무작위 채움 (반복 0)', 'random fill (step 0)')}</text>
     <text x="408" y="28" class="t-b t-small">${L('5회 반복 후', 'after 5 steps')}</text>
     ${draw(g0, 262, 'f-a')}${draw(g, 408, 'f-b')}
     <text x="397" y="82" text-anchor="middle" class="t-dim">→</text>
     <text x="262" y="142" class="t-small">${L('고립된 점은 사라지고 경계는 매끄러워짐', 'Lone cells vanish and edges smooth out')}</text>
-    <text x="10" y="190" class="t-small t-dim">${L('CA만으로는 모든 빈칸의 연결이 보장되지 않음. 플러드 필로 영역을 찾아 정리함', 'CA alone does not guarantee that all open cells connect. Flood fill finds regions to clean up')}</text>
+    <text x="10" y="190" class="t-small t-dim">${L('CA만으로는 모든 빈칸의 연결이 보장되지 않음. 플러드 필로 영역을 찾아 정리', 'CA alone does not guarantee that all open cells connect. Flood fill finds regions to clean up')}</text>
   </svg>`;
   },
   look: [
-    'A의 반복을 1→2→3으로 올리면 잡음 같은 점이 뭉쳐 B 같은 둥근 동굴이 됨.',
+    '반복 횟수를 0→1→2→3으로 올리면 잡음 같은 점이 뭉쳐 둥근 동굴이 됨',
     '채움 비율을 40% 이하로 낮추면 벽이 사라져 탁 트인 공간이 됨. 52% 이상이면 작은 방으로 쪼개지고 영역 수가 늘어남.',
     '출생 임계값을 4로 내리면 벽이 계속 자라 동굴이 막힘. 6으로 올리면 벽이 녹아 사라짐.',
     '"영역 색칠"을 켜면 서로 도달할 수 없는 영역이 다른 색으로 보임. "가장 큰 영역만 남기기"를 켜면 플레이어가 갇힐 곳이 사라짐.',
   ],
   refs: [
     { type: 'paper', title: 'Cellular automata for real-time generation of infinite cave levels (Johnson, Yannakakis, Togelius, PCGames 2010)', year: 2010 },
-    { type: 'article', title: 'RogueBasin: Cellular Automata Method for Generating Random Cave-Like Levels', url: 'https://www.roguebasin.com/index.php/Cellular_Automata_Method_for_Generating_Random_Cave-Like_Levels', note: '4-5 규칙과 연결성 후처리.' },
+    { type: 'article', title: 'RogueBasin: Cellular Automata Method for Generating Random Cave-Like Levels', url: 'https://www.roguebasin.com/index.php/Cellular_Automata_Method_for_Generating_Random_Cave-Like_Levels', note: '4-5 규칙과 연결성 후처리' },
     { type: 'book', title: 'Procedural Content Generation in Games (Shaker, Togelius, Nelson)', url: 'https://www.pcgbook.com/', year: 2016, note: '3장 Fractals, noise and agents. CA 동굴.' },
-    { type: 'game', title: 'Brogue / Caves of Qud', note: '로그라이크 동굴 생성에 CA 계열 기법 사용.' },
+    { type: 'game', title: 'Brogue / Caves of Qud', note: '로그라이크 동굴 생성에 CA 계열 기법 사용' },
   ],
   params: [
-    { key: 'iterations', label: '반복 횟수', type: 'int', min: 0, max: 12, a: 0, b: 5, group: '규칙' },
+    { key: 'iterations', label: '반복 횟수', type: 'int', min: 0, max: 12, default: 5, group: '규칙' },
     { key: 'birth', label: '출생 임계값 (빈칸→벽)', type: 'int', min: 1, max: 8, default: 5 },
     { key: 'survive', label: '생존 임계값 (벽 유지)', type: 'int', min: 1, max: 8, default: 4 },
     { key: 'fill', label: '초기 벽 비율 (%)', type: 'range', min: 25, max: 70, step: 1, default: 46, shared: true, group: '장면' },
@@ -91,7 +91,6 @@ GTL.register({
   en: {
     title: 'Cellular Automata Caves',
     summary: 'Start with randomly filled walls. Repeat a rule a few times: "many wall neighbors means wall, few means empty". You get natural caves. The number of passes and the birth and survival thresholds decide the shape.',
-    views: { a: 'Random fill (0 passes)', b: '5 CA passes' },
     controls: 'No input. Press "Regenerate" to build with a new seed.',
     info: `
     <p><b>Cellular automata (CA)</b> repeat a rule that sets each cell\'s next state from its neighbors.</p>
@@ -105,7 +104,7 @@ GTL.register({
     Then you keep only the largest region or join small regions with tunnels.
     This sample paints each region a different color. "Keep largest region only" shows the cleaned-up result.</p>`,
     look: [
-      'Raise A\'s passes from 1 to 2 to 3. Noisy dots clump into round caves like B.',
+      'Raise the passes from 0 to 1, 2, 3. Noisy dots clump into round caves.',
       'Lower the fill ratio to 40% or less. Walls disappear and the space opens up. At 52% or more, it splits into small rooms and the region count rises.',
       'Lower the birth threshold to 4. Walls keep growing and close the caves. Raise it to 6 and walls melt away.',
       'Turn on "Color regions". Regions you cannot reach from each other show in different colors. Turn on "Keep largest region only" and the places where a player could get stuck disappear.',

@@ -8,12 +8,12 @@ GTL.register({
   info: `
     <p>AABB(축 정렬 박스) 충돌은 정확하지만 냉정함. 플레이어 눈에는 틈을 통과한 점프여도, 박스 모서리가 천장 끝과 몇 픽셀 겹치면
     상승 속도가 0이 되어 떨어짐(<b>bonk</b>).</p>
-    <p><b>코너 보정</b>: 상승 중 천장과 겹치면 좌우로 1..N 픽셀씩 옮겨 봄. 비어 있는 위치가 있으면 그곳으로 밀고 상승을 유지함.</p>
+    <p><b>코너 보정</b>: 상승 중 천장과 겹치면 좌우로 1..N 픽셀씩 옮겨 봄. 비어 있는 위치가 있으면 그곳으로 밀고 상승을 유지.</p>
     <pre>if (vy &lt; 0 &amp;&amp; hitCeiling)
   for (i = 1..N) for (s of [-1, +1])
     if (free(x + s*i, y)) { x += s*i; return; }   // 통과
 vy = 0;                                            // 진짜 부딪힘</pre>
-    <p><b>가장자리(ledge) 보정</b>: 공중에서 수평으로 벽에 막혔을 때 적용함. 벽 윗면이 발보다 N픽셀 이내로 아래에 있으면 캐릭터를 위로 올려 발판에 세움.
+    <p><b>가장자리(ledge) 보정</b>: 공중에서 수평으로 벽에 막혔을 때 적용. 벽 윗면이 발보다 N픽셀 이내로 아래에 있으면 캐릭터를 위로 올려 발판에 세움.
     Celeste는 상승 코너 보정 4px과 대시 중 가장자리 보정을 함께 씀(320×180 해상도 기준).</p>
     <p>색 띠는 보정이 일어나는 "용서 구간". 이 구간 안에서 스치면 밀려서 통과하고, 밖이면 부딪힘.
     단점: 범위가 너무 크면 벽을 뚫고 순간이동하는 것처럼 보임.</p>`,
@@ -43,14 +43,14 @@ vy = 0;                                            // 진짜 부딪힘</pre>
     <text x="290" y="154" class="t-small t-dim">${L('발이 턱보다 N px 이내로 아래', 'Feet within N px below the top')}</text>
   </svg>`,
   look: [
-    '자동 데모를 켜 두면 세 틈에서 머리가 모서리에 각각 3 / 6 / 11px 걸리게 점프함. 마지막에는 낮은 턱에 발이 몇 px 걸리게 뜀.',
+    '자동 데모를 켜 두면 세 틈에서 머리가 모서리에 각각 3 / 6 / 11px 걸리게 점프. 마지막에는 낮은 턱에 발이 몇 px 걸리게 뜀.',
     'A를 보면 모두 "쿵"(✗) 하고 떨어짐. B는 3px, 6px에서 화살표 방향으로 밀려 통과하고, 11px은 보정 범위(8px) 밖이라 여전히 부딪힘.',
-    'B의 보정 픽셀을 16으로 올리면 셋 다 통과함. 너무 크면 벽 속으로 순간이동하는 것처럼 보여서 보통 캐릭터 폭의 1/4 정도를 씀.',
-    '"가장자리 보정"만 끄면 마지막 턱에서 캐릭터가 벽에 붙은 채 미끄러져 떨어짐.',
+    'B의 보정 픽셀을 16으로 올리면 셋 다 통과. 너무 크면 벽 속으로 순간이동하는 것처럼 보여서 보통 캐릭터 폭의 1/4 정도를 씀.',
+    '"가장자리 보정"만 끄면 마지막 턱에서 캐릭터가 벽에 붙은 채 미끄러져 떨어짐',
   ],
   refs: [
-    { type: 'code', title: 'Celeste - Player.cs (UpwardCornerCorrection, DashCornerCorrection)', url: 'https://github.com/NoelFB/Celeste', year: 2018, note: 'OnCollideV/OnCollideH에서 1..4px 옮겨 보고 비어 있으면 통과시킴.' },
-    { type: 'article', title: 'Celeste & Forgiveness (Maddy Thorson)', year: 2020, note: '코너 보정을 포함한 "보이지 않는 도움" 목록.' },
+    { type: 'code', title: 'Celeste - Player.cs (UpwardCornerCorrection, DashCornerCorrection)', url: 'https://github.com/NoelFB/Celeste', year: 2018, note: 'OnCollideV/OnCollideH에서 1..4px 옮겨 보고 비어 있으면 통과시킴' },
+    { type: 'article', title: 'Celeste & Forgiveness (Maddy Thorson)', year: 2020, note: '코너 보정을 포함한 "보이지 않는 도움" 목록' },
     { type: 'talk', title: 'Why Does Celeste Feel So Good to Play? (Game Maker\'s Toolkit)', year: 2019 },
   ],
   params: [

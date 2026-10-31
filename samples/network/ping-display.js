@@ -137,11 +137,11 @@
       <p>왜 필요한가: 패킷마다 지연이 다름(지터). 표본 하나를 그대로 보여주면 숫자가 계속 튀어서 읽을 수 없음.
       스파이크 하나에 "랙 걸림" 경고가 뜨기도 함.</p>
       <ul>
-        <li><b>순간 RTT</b>: 마지막 표본을 그대로 표시.</li>
+        <li><b>순간 RTT</b>: 마지막 표본을 그대로 표시</li>
         <li><b>지수 평균(EWMA)</b>: <code>SRTT += α × (표본 − SRTT)</code>. TCP 재전송 타이머(RFC 6298)와 같은 식. α = 1/8이 표준값.</li>
-        <li><b>지수 평균 + 지터</b>: 편차도 평균함. <code>RTTVAR += β × (|SRTT − 표본| − RTTVAR)</code>, β = 2α. 핑 옆에 ± 지터와 손실률을 표시함.</li>
+        <li><b>지수 평균 + 지터</b>: 편차도 평균. <code>RTTVAR += β × (|SRTT − 표본| − RTTVAR)</code>, β = 2α. 핑 옆에 ± 지터와 손실률 표시.</li>
       </ul>
-      <p>단점: α가 작으면 숫자는 안정되지만 실제 지연 변화(경로 변경)를 늦게 따라감.</p>`,
+      <p>단점: α가 작으면 숫자는 안정되지만 실제 지연 변화(경로 변경)를 늦게 따라감</p>`,
     diagram: (L) => `<svg viewBox="0 0 540 170" xmlns="http://www.w3.org/2000/svg">
       <defs><marker id="arrB" class="m-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
       <text x="4" y="16" class="t-small t-dim">${L('스파이크 표본 하나가 들어왔을 때 (RTT, ms)', 'One spike sample arrives (RTT, ms)')}</text>
@@ -163,16 +163,16 @@
     </svg>`,
     look: [
       '두 뷰의 큰 숫자를 비교하면, A는 매 핑마다 수십 ms씩 바뀌고 스파이크 때 빨간색으로 튐. B는 거의 일정함.',
-      '"표시값 흔들림" 측정값을 비교하면 A가 B보다 몇 배 큼.',
-      '자동 입력이 켜져 있으면 4초마다 기본 지연이 바뀜. 그래프에서 B의 선이 A보다 조금 늦게 새 값에 도달함.',
-      'B의 평활 계수(α)를 0.02로 낮추면 숫자는 더 안정되지만 지연 변화를 1~2초 늦게 따라감.',
+      '"표시값 흔들림" 측정값을 비교하면 A가 B보다 몇 배 큼',
+      '자동 입력이 켜져 있으면 4초마다 기본 지연이 바뀜. 그래프에서 B의 선이 A보다 조금 늦게 새 값에 도달.',
+      'B의 평활 계수(α)를 0.02로 낮추면 숫자는 더 안정되지만 지연 변화를 1~2초 늦게 따라감',
       '지터를 0으로 낮추면 세 방식의 차이가 거의 사라짐. 차이의 원인은 지터임.',
     ],
     refs: [
-      { type: 'paper', title: 'RFC 6298 - Computing TCP\'s Retransmission Timer', url: 'https://www.rfc-editor.org/rfc/rfc6298', year: 2011, note: 'SRTT, RTTVAR 지수 평균식과 α = 1/8, β = 1/4.' },
+      { type: 'paper', title: 'RFC 6298 - Computing TCP\'s Retransmission Timer', url: 'https://www.rfc-editor.org/rfc/rfc6298', year: 2011, note: 'SRTT, RTTVAR 지수 평균식과 α = 1/8, β = 1/4' },
       { type: 'paper', title: 'Congestion Avoidance and Control', year: 1988, note: 'Van Jacobson, SIGCOMM 88. RTT 평균과 편차 추정의 출발점.' },
-      { type: 'paper', title: 'RFC 3550 - RTP: A Transport Protocol for Real-Time Applications', url: 'https://www.rfc-editor.org/rfc/rfc3550', year: 2003, note: '도착 간격 지터를 1/16 계수로 평균함.' },
-      { type: 'article', title: 'Reliability and Congestion Avoidance over UDP', url: 'https://gafferongames.com/post/reliability_ordering_and_congestion_avoidance_over_udp/', note: 'Glenn Fiedler. 게임 프로토콜에서 RTT를 지수 평균으로 추적함.' },
+      { type: 'paper', title: 'RFC 3550 - RTP: A Transport Protocol for Real-Time Applications', url: 'https://www.rfc-editor.org/rfc/rfc3550', year: 2003, note: '도착 간격 지터를 1/16 계수로 평균' },
+      { type: 'article', title: 'Reliability and Congestion Avoidance over UDP', url: 'https://gafferongames.com/post/reliability_ordering_and_congestion_avoidance_over_udp/', note: 'Glenn Fiedler. 게임 프로토콜에서 RTT를 지수 평균으로 추적.' },
     ],
     params: [
       { key: 'lat', label: '편도 지연 (ms)', type: 'int', min: 0, max: 300, default: 40, shared: true, group: '네트워크' },

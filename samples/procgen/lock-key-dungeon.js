@@ -9,12 +9,12 @@ GTL.register({
     <p><b>열쇠-자물쇠 구조</b>: 젤다 던전처럼 문을 열려면 다른 곳의 열쇠가 필요한 구조. 탐험 순서를 디자이너가 조절하는 핵심 장치.</p>
     <p><b>무작위 배치</b>: 방 배치를 만든 뒤 자물쇠 문과 열쇠를 아무 데나 둠. 두 가지 문제가 생김.</p>
     <ul>
-      <li>열쇠가 자기 자물쇠 뒤에 있으면 풀 수 없음(소프트락).</li>
-      <li>자물쇠가 목표와 상관없는 곁가지에 있으면 의미 없는 문이 됨.</li>
+      <li>열쇠가 자기 자물쇠 뒤에 있으면 풀 수 없음(소프트락)</li>
+      <li>자물쇠가 목표와 상관없는 곁가지에 있으면 의미 없는 문이 됨</li>
     </ul>
     <p><b>미션 우선 배치</b>(Dormans 2010): 먼저 "열쇠1 → 문1 → 열쇠2 → 문2 → 목표" 같은 진행 순서를 정함. 그다음 공간에 옮김.</p>
     <ol>
-      <li>시작(S)에서 목표(G)까지 경로 중, 끊으면 G에 못 가는 통로(다리)를 골라 자물쇠를 순서대로 둠.</li>
+      <li>시작(S)에서 목표(G)까지 경로 중, 끊으면 G에 못 가는 통로(다리)를 골라 자물쇠를 순서대로 둠</li>
       <li>열쇠 i는 "자물쇠 1~i-1만 열린 상태에서 갈 수 있는 영역"에 둠. 그중 문에서 먼 막다른 방을 고름.</li>
     </ol>
     <p><b>순환 생성</b>(Unexplored): 트리 대신 고리(cycle)를 기본 구조로 씀. 열쇠를 얻은 뒤 왔던 길이 아닌 다른 길로 돌아올 수 있어 되돌아가기가 줄어듦.
@@ -43,17 +43,17 @@ GTL.register({
   },
   look: [
     'A의 "풀 수 있는 던전 비율 (300개 시드)"은 70~80%. 4~5개 중 하나는 소프트락. B는 항상 100%.',
-    'A에서 "다시 생성"을 몇 번 누르면 빨간 원(도달할 수 없는 열쇠)이 있는 던전이 나옴.',
+    'A에서 "다시 생성"을 몇 번 누르면 빨간 원(도달할 수 없는 열쇠)이 있는 던전이 나옴',
     '"평균 목표를 막는 자물쇠"를 비교하면 A는 3개 중 1개 미만. 나머지는 곁가지에 있어 열지 않아도 됨. 그래서 A는 풀 수 있어도 이동 칸 수가 최단 경로와 거의 같음.',
-    'A의 자물쇠 수를 5로 올리면 풀 수 있는 비율이 더 떨어짐.',
+    'A의 자물쇠 수를 5로 올리면 풀 수 있는 비율이 더 떨어짐',
     'B의 순환 수를 2~3으로 올리면 "되돌아간 이동 비율"이 줄어듦. 대신 배치 가능한 자물쇠가 줄어들 수 있음.',
   ],
   refs: [
     { type: 'paper', title: 'J. Dormans: Adventures in level design: generating missions and spaces for action adventure games', year: 2010, note: 'PCG Workshop 2010. 미션 그래프를 먼저 만들고 공간으로 변환하는 방법.' },
     { type: 'paper', title: 'J. Dormans, S. Bakkes: Generating Missions and Spaces for Adaptable Play Experiences', year: 2011, note: 'IEEE Transactions on Computational Intelligence and AI in Games.' },
-    { type: 'game', title: 'Unexplored (Ludomotion, 2017)', year: 2017, note: '고리(cycle) 단위로 던전을 만드는 순환 생성(cyclic generation).' },
-    { type: 'article', title: 'Boris the Brave: Dungeon Generation in Unexplored', note: 'Unexplored의 순환 생성 해설.' },
-    { type: 'talk', title: "Mark Brown: Boss Keys (Game Maker's Toolkit 영상 시리즈)", note: '젤다 던전의 열쇠-자물쇠 구조 분석.' },
+    { type: 'game', title: 'Unexplored (Ludomotion, 2017)', year: 2017, note: '고리(cycle) 단위로 던전을 만드는 순환 생성(cyclic generation)' },
+    { type: 'article', title: 'Boris the Brave: Dungeon Generation in Unexplored', note: 'Unexplored의 순환 생성 해설' },
+    { type: 'talk', title: "Mark Brown: Boss Keys (Game Maker's Toolkit 영상 시리즈)", note: '젤다 던전의 열쇠-자물쇠 구조 분석' },
   ],
   params: [
     { key: 'placement', label: '열쇠, 자물쇠 배치', type: 'select', group: '생성', options: [

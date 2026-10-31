@@ -4,16 +4,16 @@ GTL.register({
   title: '점프 파라미터 설계 (높이, 정점 시간 역산)',
   summary: '중력과 초기 속도를 직접 고르면 하나만 바꿔도 점프 높이가 바뀜. 높이 H와 정점 시간 T를 정하고 g = 2H/T², v0 = 2H/T로 역산하면 느낌(속도)을 바꿔도 높이가 그대로임.',
   views: { a: 'g, v0 직접 지정', b: 'H, T에서 역산' },
-  controls: '조작 없음. 캐릭터가 자동으로 점프를 반복함.',
+  controls: '조작 없음. 캐릭터가 자동으로 점프를 반복.',
   info: `
-    <p><b>점프 파라미터 역산</b>은 디자이너가 원하는 결과(높이, 시간)를 먼저 정하고 물리 값(중력, 초기 속도)을 계산하는 방법.</p>
-    <p>중력 <code>g</code>와 초기 속도 <code>v0</code>를 직접 고르면 결과가 두 값에 함께 묶임.</p>
+    <p><b>점프 파라미터 역산</b>은 디자이너가 원하는 결과(높이, 시간)를 먼저 정하고 물리 값(중력, 초기 속도)을 계산하는 방법</p>
+    <p>중력 <code>g</code>와 초기 속도 <code>v0</code>를 직접 고르면 결과가 두 값에 함께 묶임</p>
     <ul>
       <li>최고 높이 <code>H = v0² / (2g)</code></li>
       <li>정점 도달 시간 <code>T = v0 / g</code></li>
     </ul>
     <p>그래서 "점프를 더 빠르게" 하려고 중력을 올리면 높이도 같이 줄어듦. 레벨의 발판 높이와 맞추려면 두 값을 번갈아 다시 맞춰야 함.</p>
-    <p>역산 방식은 위 식을 뒤집음.</p>
+    <p>역산 방식은 위 식을 뒤집음</p>
     <ul>
       <li><code>g = 2H / T²</code></li>
       <li><code>v0 = 2H / T</code></li>
@@ -50,11 +50,11 @@ GTL.register({
     '시작하면 A는 최고 높이 127px로 초록 목표선(150px)에 못 닿음. B는 170px로 넘음.',
     'A의 중력을 3000으로 올려 점프를 빠르게 하면 최고 높이가 101px로 더 줄어듦. 민감도 곡선 3개의 높이도 제각각임.',
     'B의 정점 시간을 0.25초로 줄이면 점프가 빨라지지만 높이는 170px 그대로임. 민감도 곡선 3개가 같은 높이에서 꺾임.',
-    '목표 높이를 바꾸고 B의 높이 H만 그 값보다 조금 크게 맞추면 바로 통과함. A는 g와 v0를 함께 다시 찾아야 함.',
+    '목표 높이를 바꾸고 B의 높이 H만 그 값보다 조금 크게 맞추면 바로 통과. A는 g와 v0를 함께 다시 찾아야 함.',
   ],
   refs: [
-    { type: 'talk', title: 'Math for Game Programmers: Building a Better Jump (Kyle Pittman, GDC 2016)', year: 2016, note: '높이와 수평 거리에서 v0와 g를 역산하는 식.' },
-    { type: 'article', title: 'Integration Basics (Glenn Fiedler)', url: 'https://gafferongames.com/post/integration_basics/', year: 2004, note: '적분 방식에 따른 오차.' },
+    { type: 'talk', title: 'Math for Game Programmers: Building a Better Jump (Kyle Pittman, GDC 2016)', year: 2016, note: '높이와 수평 거리에서 v0와 g를 역산하는 식' },
+    { type: 'article', title: 'Integration Basics (Glenn Fiedler)', url: 'https://gafferongames.com/post/integration_basics/', year: 2004, note: '적분 방식에 따른 오차' },
     { type: 'book', title: 'Game Programming Patterns - Game Loop (Robert Nystrom)', url: 'https://gameprogrammingpatterns.com/game-loop.html', year: 2014 },
   ],
   params: [

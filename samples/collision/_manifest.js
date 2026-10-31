@@ -1,4 +1,4 @@
-// 카테고리 매니페스트. 샘플을 추가하면 samples 배열에 한 줄 추가함.
+// 카테고리 매니페스트. 샘플을 추가하면 samples 배열에 한 줄 추가.
 // { id, level(1 입문, 2 초급, 3 중급, 4 고급), title, tags: [...], added: 'YYYY-MM-DD' }  (파일: samples/collision/<id>.js)
 GTL.category({
   id: 'collision',

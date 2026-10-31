@@ -8,9 +8,9 @@ GTL.register({
   info: `
     <p>보이드(Boids)는 새 떼 같은 무리 움직임을 흉내 내는 모델(Craig Reynolds, 1987). 개체마다 <b>인지 반경</b>과 <b>시야각</b> 안의 이웃만 보고 세 힘을 더함.</p>
     <ul>
-      <li><b>분리 (Separation)</b>: 너무 가까운 이웃에게서 멀어짐(거리에 반비례).</li>
-      <li><b>정렬 (Alignment)</b>: 이웃의 평균 진행 방향에 맞춤.</li>
-      <li><b>응집 (Cohesion)</b>: 이웃의 무게중심으로 향함.</li>
+      <li><b>분리 (Separation)</b>: 너무 가까운 이웃에게서 멀어짐(거리에 반비례)</li>
+      <li><b>정렬 (Alignment)</b>: 이웃의 평균 진행 방향에 맞춤</li>
+      <li><b>응집 (Cohesion)</b>: 이웃의 무게중심으로 향함</li>
     </ul>
     <p>보이드 색은 진행 방향(색상환). 같은 색이 넓게 퍼져 있으면 정렬된 무리임.</p>
     <p>"극성(polarization)"은 모든 개체의 진행 방향 평균의 크기. 1이면 모두 같은 방향, 0이면 무질서.</p>
@@ -52,13 +52,13 @@ GTL.register({
   look: [
     '기본 상태로 실행하면 A(정렬 0)는 덩어리로 뭉치지만 방향이 제각각이라 색이 뒤섞임. B는 같은 색 무리가 함께 흐름. "극성"이 B 쪽이 높음.',
     '분리를 0으로 하면 한 점으로 뭉쳐 버림. 응집을 0으로 하면 무리가 쉽게 흩어짐.',
-    '시야각을 360°에서 120°로 줄이면 뒤를 못 보게 되어 길게 늘어진 행렬이 생김.',
-    '개체 수를 800으로 올리고 이웃 탐색을 "단순 반복"에서 "균일 격자"로 바꾸면 "거리 검사 / 프레임"이 크게 줄어듦.',
+    '시야각을 360°에서 120°로 줄이면 뒤를 못 보게 되어 길게 늘어진 행렬이 생김',
+    '개체 수를 800으로 올리고 이웃 탐색을 "단순 반복"에서 "균일 격자"로 바꾸면 "거리 검사 / 프레임"이 크게 줄어듦',
   ],
   refs: [
     { type: 'paper', title: 'Flocks, Herds, and Schools: A Distributed Behavioral Model', year: 1987, note: 'Craig W. Reynolds. SIGGRAPH 87.', url: 'https://doi.org/10.1145/37402.37406' },
-    { type: 'article', title: 'Boids (Craig Reynolds)', url: 'https://www.red3d.com/cwr/boids/', note: '저자의 보이드 소개 페이지와 응용 사례.' },
-    { type: 'game', title: 'Half-Life (Valve, 1998)', note: '새, 물고기 무리에 보이드 계열 기법을 쓴 사례로 자주 인용됨.' },
+    { type: 'article', title: 'Boids (Craig Reynolds)', url: 'https://www.red3d.com/cwr/boids/', note: '저자의 보이드 소개 페이지와 응용 사례' },
+    { type: 'game', title: 'Half-Life (Valve, 1998)', note: '새, 물고기 무리에 보이드 계열 기법을 쓴 사례로 자주 인용됨' },
     { type: 'paper', title: 'Novel Type of Phase Transition in a System of Self-Driven Particles', year: 1995, note: 'Vicsek et al. PRL 75. 정렬 규칙과 극성(order parameter) 개념.', url: 'https://doi.org/10.1103/PhysRevLett.75.1226' },
   ],
   params: [

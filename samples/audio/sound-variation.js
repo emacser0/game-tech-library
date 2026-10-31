@@ -7,13 +7,13 @@ GTL.register({
   controls: '조작 없음. 캐릭터가 일정 간격으로 발소리를 냄. Space를 누르면 한 번 더 냄.',
   info: `
     <p>같은 샘플이 짧은 간격으로 반복되면 귀가 금방 패턴을 알아챔. 이것을 <b>반복 피로(Repetition Fatigue)</b> 또는 "머신건 효과"라고 부름.</p>
-    <p>흔히 쓰는 처방은 세 가지.</p>
+    <p>흔히 쓰는 처방은 세 가지</p>
     <ul>
       <li><b>피치 랜덤화</b>: 재생 속도를 ±1~2반음 안에서 흔듦. 비용이 거의 없음.</li>
       <li><b>볼륨 랜덤화</b>: ±1~3dB. 너무 크면 소리가 튀어 보임.</li>
       <li><b>변형 풀</b>: 같은 이벤트에 녹음 여러 개를 두고 고름. 완전 무작위는 같은 것이 연달아 나올 수 있음. <b>셔플</b>(한 바퀴 다 돌기 전에는 중복 없음)이나 "직전 것 제외"가 흔한 규칙.</li>
     </ul>
-    <p>FMOD의 Multi Instrument, Wwise의 Random Container가 이 기능을 제공함. 순차(라운드 로빈)는 중복은 없지만 주기가 들림.</p>
+    <p>FMOD의 Multi Instrument, Wwise의 Random Container가 이 기능을 제공. 순차(라운드 로빈)는 중복은 없지만 주기가 들림.</p>
     <p>이 샘플의 변형은 코드로 만든 노이즈 버스트(필터, 길이, 저음 성분이 다름). 위쪽 줄은 각 변형의 파형.</p>`,
   diagram: (L) => {
     const row = (y, seq, cls, dy, bad) => seq.map((v, i) => {
@@ -38,15 +38,15 @@ GTL.register({
   },
   look: [
     '아래 타임라인을 보면 A는 모든 막대가 같은 높이, 같은 색. B는 높이(볼륨), 위치(피치), 색(변형)이 매번 다름.',
-    'B의 고르기 방식을 "완전 무작위"로 바꾸면 "직전과 같은 변형" 수가 올라감. 셔플은 0을 유지함.',
+    'B의 고르기 방식을 "완전 무작위"로 바꾸면 "직전과 같은 변형" 수가 올라감. 셔플은 0 유지.',
     '"순차 (라운드 로빈)"는 중복은 없지만 색이 일정한 주기로 반복됨. 간격을 짧게 하면 리듬처럼 들림.',
-    '피치 범위를 4반음 이상으로 올리면 서로 다른 소리처럼 들리기 시작함. 1~2반음이 보통 적당함.',
+    '피치 범위를 4반음 이상으로 올리면 서로 다른 소리처럼 들리기 시작. 1~2반음이 보통 적당함.',
   ],
   refs: [
-    { type: 'engine', title: 'Wwise - Random Container', note: 'Shuffle 모드, "Avoid repeating last x played" 옵션.' },
+    { type: 'engine', title: 'Wwise - Random Container', note: 'Shuffle 모드, "Avoid repeating last x played" 옵션' },
     { type: 'engine', title: 'FMOD Studio - Multi Instrument (Playlist)', note: '재생 목록 무작위, 순차 선택. 이벤트 속성의 Pitch, Volume 랜덤화(Modulator).' },
-    { type: 'engine', title: 'MDN - AudioBufferSourceNode.playbackRate', url: 'https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/playbackRate', note: '재생 속도로 피치를 바꿈.' },
-    { type: 'book', title: 'Game Audio Programming: Principles and Practices (Guy Somberg 편)', year: 2016, note: '변형 선택, 랜덤화 등 사운드 엔진 실무 기법 모음.' },
+    { type: 'engine', title: 'MDN - AudioBufferSourceNode.playbackRate', url: 'https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/playbackRate', note: '재생 속도로 피치를 바꿈' },
+    { type: 'book', title: 'Game Audio Programming: Principles and Practices (Guy Somberg 편)', year: 2016, note: '변형 선택, 랜덤화 등 사운드 엔진 실무 기법 모음' },
   ],
   params: [
     { key: 'variants', label: '변형 수', type: 'int', min: 1, max: 6, a: 1, b: 4, group: '변형' },

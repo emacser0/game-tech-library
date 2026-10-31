@@ -9,10 +9,10 @@ GTL.register({
     <p>격자 길찾기는 <b>그래프 탐색</b>의 한 종류. 칸 하나가 노드(node), 이웃 칸으로 가는 이동이 간선(edge)임.</p>
     <p>네 알고리즘의 차이는 한 가지뿐임. <b>열린 목록(frontier, 다음에 살필 후보 칸)에서 어떤 칸을 먼저 꺼내는지</b>가 다름.</p>
     <ul>
-      <li><b>BFS</b>: 먼저 들어온 칸부터 꺼냄(FIFO). 이동 비용을 무시함. 그래서 진흙(비용 5)을 그대로 지나는 "칸 수 최소" 경로가 나옴.</li>
+      <li><b>BFS</b>: 먼저 들어온 칸부터 꺼냄(FIFO). 이동 비용을 무시. 그래서 진흙(비용 5)을 그대로 지나는 "칸 수 최소" 경로가 나옴.</li>
       <li><b>Dijkstra</b>: 누적 비용 <code>g</code>가 가장 작은 칸부터 꺼냄. 항상 최소 비용 경로를 찾음. 단, 목표 방향을 모르므로 원형으로 퍼짐.</li>
       <li><b>Greedy Best-First</b>: 휴리스틱 <code>h</code>(목표까지 추정 거리)만 봄. 탐색량은 가장 적음. 단, 장애물 뒤 함정에 빠지고 최적 경로를 보장하지 못함.</li>
-      <li><b>A*</b>: <code>f = g + h</code>로 고름. h가 실제 비용보다 크지 않으면(admissible) 최적 경로를 보장함. 탐색도 목표 쪽으로 몰림.</li>
+      <li><b>A*</b>: <code>f = g + h</code>로 고름. h가 실제 비용보다 크지 않으면(admissible) 최적 경로를 보장. 탐색도 목표 쪽으로 몰림.</li>
     </ul>
     <p>색 읽는 법:</p>
     <ul>
@@ -45,13 +45,13 @@ GTL.register({
     '기본 맵을 그대로 실행하면 A(Dijkstra)는 원형으로 퍼지고 B(A*)는 목표 쪽으로 좁게 뻗음. 두 경로의 비용은 같음.',
     'B를 Greedy로 바꾸면 확장 노드 수는 더 줄어듦. 대신 U자 함정 안에 먼저 들어갔다 돌아 나오고, 경로 비용이 커짐.',
     'A를 BFS로 바꾸면 진흙(갈색)을 가로지르는 경로가 나옴. "경로 비용"이 Dijkstra보다 커짐.',
-    '미러 입력을 켜고 마우스로 벽을 그리면 두 뷰가 동시에 다시 탐색함. 속도를 "즉시"로 두면 결과만 바로 보임.',
+    '미러 입력을 켜고 마우스로 벽을 그리면 두 뷰가 동시에 다시 탐색. 속도를 "즉시"로 두면 결과만 바로 보임.',
   ],
   refs: [
     { type: 'paper', title: 'A Formal Basis for the Heuristic Determination of Minimum Cost Paths', year: 1968, note: 'Hart, Nilsson, Raphael. IEEE Trans. on Systems Science and Cybernetics. A* 원논문.', url: 'https://doi.org/10.1109/TSSC.1968.300136' },
     { type: 'paper', title: 'A Note on Two Problems in Connexion with Graphs', year: 1959, note: 'E. W. Dijkstra. Numerische Mathematik 1.', url: 'https://doi.org/10.1007/BF01386390' },
     { type: 'article', title: 'Introduction to the A* Algorithm (Red Blob Games)', url: 'https://www.redblobgames.com/pathfinding/a-star/introduction.html', year: 2014, note: 'Amit Patel. BFS, Dijkstra, Greedy, A*를 같은 방식으로 시각화한 글.' },
-    { type: 'article', title: "Amit's A* Pages", url: 'http://theory.stanford.edu/~amitp/GameProgramming/', note: '게임용 A* 휴리스틱과 구현 팁 모음.' },
+    { type: 'article', title: "Amit's A* Pages", url: 'http://theory.stanford.edu/~amitp/GameProgramming/', note: '게임용 A* 휴리스틱과 구현 팁 모음' },
   ],
   params: [
     { key: 'algo', label: '알고리즘', type: 'select', group: '탐색', options: [

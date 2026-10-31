@@ -48,16 +48,16 @@ GTL.register({
     <text x="380" y="199" class="t-small t-dim">${L('결과: 모든 방이 연결됨', 'so every room is connected')}</text>
   </svg>`,
   look: [
-    'A의 빨간 테두리(거절된 방)와 "거절된 시도" 수치를 방 수와 비교하면 랜덤 배치의 낭비가 보임.',
-    'A의 연결을 MST로 바꾸면 방을 관통하던 긴 복도가 사라지고 복도 총 길이가 크게 줄어듦.',
-    'B에서 "분할선 표시"를 켜고 최대 깊이를 2→6으로 올리면 트리가 깊어지고 방이 작고 많아짐.',
+    'A의 빨간 테두리(거절된 방)와 "거절된 시도" 수치를 방 수와 비교하면 랜덤 배치의 낭비가 보임',
+    'A의 연결을 MST로 바꾸면 방을 관통하던 긴 복도가 사라지고 복도 총 길이가 크게 줄어듦',
+    'B에서 "분할선 표시"를 켜고 최대 깊이를 2→6으로 올리면 트리가 깊어지고 방이 작고 많아짐',
     'MST에서 루프 비율을 올리면 순환로가 생김. 0%면 트리로만 이어져 되돌아가는 길이 길어짐.',
   ],
   refs: [
     { type: 'article', title: 'RogueBasin: Basic BSP Dungeon generation', url: 'https://www.roguebasin.com/index.php/Basic_BSP_Dungeon_generation' },
-    { type: 'book', title: 'Procedural Content Generation in Games (Shaker, Togelius, Nelson), 3장 Constructive generation of dungeons', url: 'https://www.pcgbook.com/', year: 2016, note: 'BSP 던전과 에이전트 기반 던전 비교.' },
-    { type: 'article', title: 'Bob Nystrom: Rooms and Mazes: A Procedural Dungeon Generator', url: 'https://journal.stuffwithstuff.com/2014/12/21/rooms-and-mazes/', year: 2014, note: '랜덤 방 거절 배치, 연결, 추가 루프.' },
-    { type: 'book', title: 'Spelunky (Derek Yu, Boss Fight Books 2016)', year: 2016, note: '격자 방 배치에 보장된 경로와 무작위성을 섞은 설계.' },
+    { type: 'book', title: 'Procedural Content Generation in Games (Shaker, Togelius, Nelson), 3장 Constructive generation of dungeons', url: 'https://www.pcgbook.com/', year: 2016, note: 'BSP 던전과 에이전트 기반 던전 비교' },
+    { type: 'article', title: 'Bob Nystrom: Rooms and Mazes: A Procedural Dungeon Generator', url: 'https://journal.stuffwithstuff.com/2014/12/21/rooms-and-mazes/', year: 2014, note: '랜덤 방 거절 배치, 연결, 추가 루프' },
+    { type: 'book', title: 'Spelunky (Derek Yu, Boss Fight Books 2016)', year: 2016, note: '격자 방 배치에 보장된 경로와 무작위성을 섞은 설계' },
   ],
   params: [
     { key: 'method', label: '방 배치', type: 'select', group: '방', options: [

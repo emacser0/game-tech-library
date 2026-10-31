@@ -2,26 +2,26 @@
 GTL.register({
   id: 'pd-joint-drive',
   title: 'PD 관절 드라이브 (Physical Animation, Slerp Drive)',
-  summary: '키네마틱 팔은 애니메이션 포즈를 매 프레임 그대로 덮어써서 맞아도 반응이 없음. PD 드라이브는 목표 포즈와의 각도 오차로 토크를 만들어 팔을 끌고 감. 맞으면 밀려났다가 스스로 포즈로 돌아옴.',
+  summary: '키네마틱 팔은 애니메이션 포즈를 매 프레임 그대로 덮어써서 맞아도 반응 없음. PD 드라이브는 목표 포즈와의 각도 오차로 토크를 만들어 팔을 끌고 감. 맞으면 밀려났다가 스스로 포즈로 돌아옴.',
   views: { a: '키네마틱 (포즈 그대로)', b: 'PD 드라이브' },
   controls: '"타격" 버튼: 팔 끝에 공 던지기. "주기적 타격"이 켜져 있으면 2.5초마다 자동으로 맞음.',
   info: `
     <p><b>PD 관절 드라이브</b>는 관절에 토크를 줘서 물리 바디를 애니메이션 포즈 쪽으로 끌고 가는 방법. 물리 애니메이션(Physical Animation)의 기본 부품.</p>
     <p>키네마틱 방식은 매 프레임 관절 각도를 애니메이션 값으로 덮어씀. 그래서 두 가지 한계가 있음.</p>
     <ul>
-      <li>총알, 주먹, 벽에 맞아도 팔이 전혀 밀리지 않음.</li>
-      <li>반응을 넣으려면 피격 애니메이션을 따로 만들어야 함.</li>
+      <li>총알, 주먹, 벽에 맞아도 팔이 전혀 밀리지 않음</li>
+      <li>반응을 넣으려면 피격 애니메이션을 따로 만들어야 함</li>
     </ul>
-    <p>PD 드라이브는 관절마다 스프링과 댐퍼를 둠.</p>
+    <p>PD 드라이브는 관절마다 스프링과 댐퍼를 둠</p>
     <ul>
       <li>오차 <code>e = θ목표 - θ</code></li>
       <li>토크 <code>τ = kp * e - kd * ω</code> (kp: 강성, kd: 감쇠, ω: 관절 각속도)</li>
-      <li>물리 엔진이 <code>I * α = τ + 외부 토크</code>로 적분함. <code>I</code>는 관성(질량에 비례)</li>
+      <li>물리 엔진이 <code>I * α = τ + 외부 토크</code>로 적분. <code>I</code>는 관성(질량에 비례)</li>
     </ul>
     <p>엔진 기능:</p>
     <ul>
-      <li><b>Unreal</b> Physical Animation Component: 프로필의 Orientation Strength, Angular Velocity Strength, Position Strength, Velocity Strength.</li>
-      <li><b>Unity</b> ConfigurableJoint의 Slerp Drive: <code>positionSpring</code>(kp), <code>positionDamper</code>(kd), <code>maximumForce</code>.</li>
+      <li><b>Unreal</b> Physical Animation Component: 프로필의 Orientation Strength, Angular Velocity Strength, Position Strength, Velocity Strength</li>
+      <li><b>Unity</b> ConfigurableJoint의 Slerp Drive: <code>positionSpring</code>(kp), <code>positionDamper</code>(kd), <code>maximumForce</code></li>
     </ul>
     <p>감쇠비 <code>ζ = kd / (2√(kp I))</code>가 1이면 출렁임 없이 가장 빨리 포즈로 돌아옴. 1보다 작으면 흔들리고, 크면 느림.</p>
     <p>단점: 목표 속도를 0으로 두는 PD는 움직이는 포즈를 늘 조금 늦게 따라감. 중력도 일정한 오차(처짐)를 남김. 강성을 올리면 줄지만 맞아도 덜 밀림. 그래서 게임은 피격 순간 강성을 잠시 낮췄다가 다시 올리기도 함.</p>
@@ -62,11 +62,11 @@ GTL.register({
   look: [
     '"타격"을 누르면 A의 팔은 공에 맞아도 그대로 움직임. B의 팔은 밀려났다가 몇 번 흔들린 뒤 목표 포즈로 돌아옴.',
     'B의 감쇠 kd를 2 이하로 낮추면 맞은 뒤 오래 출렁임. 30 이상으로 올리면 출렁임 없이 천천히 돌아옴. 감쇠비 ζ가 1 근처일 때 가장 빨리 안정됨.',
-    'B의 강성 kp를 30 이하로 낮추면 중력 때문에 팔이 목표보다 처지고, 움직이는 포즈를 크게 늦게 따라감(오차 그래프가 커짐).',
+    'B의 강성 kp를 30 이하로 낮추면 중력 때문에 팔이 목표보다 처지고, 움직이는 포즈를 크게 늦게 따라감(오차 그래프가 커짐)',
     'B의 질량을 4로 올리면 같은 kp, kd에서 관성이 커져 느리게 반응하고 더 많이 처짐. 질량에 맞춰 kp도 올려야 같은 느낌이 남.',
   ],
   refs: [
-    { type: 'engine', title: 'Unreal Engine - Physical Animation Component, Physical Animation Profile', note: 'Orientation, Position, Velocity, Angular Velocity Strength로 바디를 애니메이션 포즈 쪽으로 끔.' },
+    { type: 'engine', title: 'Unreal Engine - Physical Animation Component, Physical Animation Profile', note: 'Orientation, Position, Velocity, Angular Velocity Strength로 바디를 애니메이션 포즈 쪽으로 끔' },
     { type: 'engine', title: 'Unity - Configurable Joint (Slerp Drive)', url: 'https://docs.unity3d.com/Manual/class-ConfigurableJoint.html', note: 'Target Rotation, Position Spring, Position Damper, Maximum Force.' },
     { type: 'engine', title: 'Unity - ConfigurableJoint.slerpDrive', url: 'https://docs.unity3d.com/ScriptReference/ConfigurableJoint-slerpDrive.html' },
     { type: 'talk', title: "Physics Animation in 'Uncharted 4: A Thief's End' (Michal Mach)", year: 2017, note: 'GDC 2017. 애니메이션 포즈를 따라가는 물리 캐릭터와 피격 반응.' },

@@ -7,13 +7,13 @@ GTL.register({
   views: { a: '알파 페이드', b: '노이즈 디졸브 + 발광 경계' },
   info: `
     <p><b>디졸브(Dissolve)</b>는 오브젝트가 사라지거나 나타날 때 쓰는 셰이더 효과. 적 사망, 순간이동, 아이템 획득에 자주 씀.</p>
-    <p>동작은 비교 한 번임.</p>
+    <p>동작은 비교 한 번임</p>
     <ol>
-    <li>노이즈 텍스처에서 값 n(0~1)을 읽음.</li>
+    <li>노이즈 텍스처에서 값 n(0~1)을 읽음</li>
     <li>진행도 p로 임계값 <code>thr = mix(-w, 1, p)</code>를 만듦. w는 경계 띠 폭.</li>
     <li><code>n &lt; thr</code>이면 <code>discard</code>. <code>n</code>이 <code>thr + w</code> 안쪽이면 발광 색을 섞음.</li>
     </ol>
-    <p>임계값을 <code>-w</code>에서 시작해야 p = 0일 때 발광 띠가 보이지 않음.</p>
+    <p>임계값을 <code>-w</code>에서 시작해야 p = 0일 때 발광 띠가 보이지 않음</p>
     <p>노이즈 분포가 중요함. fBm(여러 옥타브 합) 값은 0.5 근처에 몰려 있음. 그대로 쓰면 처음엔 아무 일도 없다가 중간에 한꺼번에 사라짐. 값을 순위로 바꾸는 <b>히스토그램 평탄화</b>를 하면 남은 면적이 p에 정비례함.</p>
     <p>알파 페이드는 블렌딩이 필요해서 정렬 문제가 생기고, 반투명한 동안 뒤 배경과 겹쳐 보임. 디졸브는 픽셀을 남기거나 버리기만 해서 불투명 패스에 그대로 둘 수 있음.</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 176" xmlns="http://www.w3.org/2000/svg">
@@ -33,18 +33,18 @@ GTL.register({
     <rect x="380" y="112" width="150" height="14" class="f-a" opacity="0.45"/>
     <text x="380" y="40" class="t-small">${L('모든 픽셀이 같은 알파', 'All pixels share one alpha')}</text>
     <text x="380" y="56" class="t-small">${L('전체가 함께 반투명해짐', 'All of it turns see-through')}</text>
-    <text x="380" y="72" class="t-small t-dim">${L('블렌딩과 정렬이 필요함', 'Needs blending and sorting')}</text>
+    <text x="380" y="72" class="t-small t-dim">${L('블렌딩과 정렬 필요', 'Needs blending and sorting')}</text>
   </svg>`,
   look: [
     'A와 B를 비교하면 A는 문양 전체가 함께 옅어지며 체커 무늬가 비침. B는 남은 부분이 끝까지 불투명함.',
-    'B의 "노이즈 분포 평탄화"를 끄면 "남은 면적"이 진행도 0.3까지 거의 100%에 머물다가 갑자기 줄어듦.',
-    'B의 노이즈를 "화이트 노이즈"로 바꾸면 덩어리 없이 모래처럼 흩어지며 사라짐.',
+    'B의 "노이즈 분포 평탄화"를 끄면 "남은 면적"이 진행도 0.3까지 거의 100%에 머물다가 갑자기 줄어듦',
+    'B의 노이즈를 "화이트 노이즈"로 바꾸면 덩어리 없이 모래처럼 흩어지며 사라짐',
     '"아래에서 위로"를 고르면 불타 올라가는 방향성이 생김. "경계 폭"을 0으로 내리면 발광 띠가 없어짐.',
   ],
   refs: [
-    { type: 'article', title: 'Dissolve using Unity Shader Graph (Brackeys)', year: 2018, note: '노이즈 + Alpha Clip Threshold + 경계 발광을 노드로 구성하는 영상 튜토리얼.' },
-    { type: 'engine', title: 'Unreal Engine: Opacity Mask (Masked 블렌드 모드)', note: '디졸브를 반투명 대신 마스크(알파 테스트)로 구현하는 이유와 같음.' },
-    { type: 'book', title: 'Texturing and Modeling: A Procedural Approach (Ebert, Musgrave, Peachey, Perlin, Worley)', year: 2002, note: 'fBm 노이즈와 그 분포 특성.' },
+    { type: 'article', title: 'Dissolve using Unity Shader Graph (Brackeys)', year: 2018, note: '노이즈 + Alpha Clip Threshold + 경계 발광을 노드로 구성하는 영상 튜토리얼' },
+    { type: 'engine', title: 'Unreal Engine: Opacity Mask (Masked 블렌드 모드)', note: '디졸브를 반투명 대신 마스크(알파 테스트)로 구현하는 이유와 같음' },
+    { type: 'book', title: 'Texturing and Modeling: A Procedural Approach (Ebert, Musgrave, Peachey, Perlin, Worley)', year: 2002, note: 'fBm 노이즈와 그 분포 특성' },
   ],
   params: [
     { key: 'method', label: '방식', type: 'select', group: '전환 효과', options: [

@@ -10,13 +10,13 @@ GTL.register({
     <p><b>세이프 에어리어</b>(safe area)는 노치, 둥근 모서리, 홈 표시줄에 가리지 않는 영역. 휴대폰 OS가 화면마다 알려 줌.</p>
     <p>고정 좌표 방식의 문제:</p>
     <ul>
-      <li>1280×720 기준 좌표에 배율만 곱하면 4:3에서 오른쪽 요소가 화면 밖으로 나감.</li>
-      <li>21:9에서는 오른쪽 요소가 가운데 쪽에 떠 있음.</li>
-      <li>노치가 있는 휴대폰에서 체력바와 버튼이 노치에 가려짐.</li>
+      <li>1280×720 기준 좌표에 배율만 곱하면 4:3에서 오른쪽 요소가 화면 밖으로 나감</li>
+      <li>21:9에서는 오른쪽 요소가 가운데 쪽에 떠 있음</li>
+      <li>노치가 있는 휴대폰에서 체력바와 버튼이 노치에 가려짐</li>
     </ul>
     <p>앵커 방식: 요소 위치 = 기준 사각형의 앵커 지점 + 오프셋 × 배율. 기준 사각형은 화면 전체 대신 세이프 에어리어를 씀.
     배경과 게임 화면은 화면 전체에 그리고, 조작 UI만 세이프 에어리어 안에 둠.</p>
-    <p>단점: 요소마다 앵커를 정해야 함. 아주 넓거나 좁은 비율에서는 요소끼리 겹칠 수 있어서 비율별 레이아웃이나 최소 간격 검사가 따로 필요함.</p>`,
+    <p>단점: 요소마다 앵커를 정해야 함. 아주 넓거나 좁은 비율에서는 요소끼리 겹칠 수 있어서 비율별 레이아웃이나 최소 간격 검사가 따로 필요.</p>`,
   // 도식: 16:9 기준 좌표를 배율만 곱해 21:9 화면에 놓은 위치(A) vs 세이프 에어리어 앵커 위치(B)
   diagram: (L) => `<svg viewBox="0 0 540 180" xmlns="http://www.w3.org/2000/svg">
     <text x="95" y="24" text-anchor="middle">${L('기준 화면 16:9', 'Reference 16:9')}</text>
@@ -50,8 +50,8 @@ GTL.register({
     { type: 'engine', title: 'Unity UI - Basic Layout (Rect Transform, Anchors)', url: 'https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/UIBasicLayout.html' },
     { type: 'engine', title: 'Unity Scripting API - Screen.safeArea', url: 'https://docs.unity3d.com/ScriptReference/Screen-safeArea.html' },
     { type: 'engine', title: 'Godot - Size and anchors', url: 'https://docs.godotengine.org/en/stable/tutorials/ui/size_and_anchors.html' },
-    { type: 'article', title: 'Apple Human Interface Guidelines - Layout', url: 'https://developer.apple.com/design/human-interface-guidelines/layout', note: '세이프 에어리어와 노치 주변 배치 기준.' },
-    { type: 'article', title: 'MDN - env() (safe-area-inset-*)', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS/env', note: '웹에서 세이프 에어리어 여백을 읽는 방법.' },
+    { type: 'article', title: 'Apple Human Interface Guidelines - Layout', url: 'https://developer.apple.com/design/human-interface-guidelines/layout', note: '세이프 에어리어와 노치 주변 배치 기준' },
+    { type: 'article', title: 'MDN - env() (safe-area-inset-*)', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS/env', note: '웹에서 세이프 에어리어 여백을 읽는 방법' },
   ],
   params: [
     { key: 'aspect', label: '화면 비율', type: 'select', group: '화면', shared: true, options: [

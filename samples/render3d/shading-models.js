@@ -2,16 +2,16 @@
 GTL.register({
   id: 'shading-models',
   title: '셰이딩 모델 (Flat, Gouraud, Phong, Blinn-Phong)',
-  summary: '조명을 면, 정점, 픽셀 중 어디서 계산하는지 비교함. 계산 위치에 따라 하이라이트 모양과 메시의 각짐이 크게 달라짐.',
+  summary: '조명을 면, 정점, 픽셀 중 어디서 계산하는지 비교. 계산 위치에 따라 하이라이트 모양과 메시의 각짐이 크게 달라짐.',
   renderer: 'webgl',
   views: { a: 'Gouraud (정점 조명)', b: 'Blinn-Phong (픽셀 조명)' },
   controls: '마우스 드래그: 카메라 회전, 휠: 줌',
   info: `
-    <p>셰이딩 모델은 조명을 어디서 계산할지 정하는 방식.</p>
+    <p>셰이딩 모델은 조명을 어디서 계산할지 정하는 방식</p>
     <ul>
       <li><b>Flat</b>: 면마다 법선 하나를 씀. 다각형이 그대로 드러남.</li>
-      <li><b>Gouraud</b>(1971): 정점에서 조명을 계산하고 색을 보간함. 계산이 쌈. 단점: 하이라이트가 정점 사이에 오면 <b>사라지거나 별 모양으로 번짐</b>. 정점이 적은 바닥에 점광원을 비추면 특히 심함.</li>
-      <li><b>Phong 셰이딩</b>(1975): 법선을 보간해 픽셀마다 조명을 계산함. 원래 Phong 반사 모델은 반사 벡터 <code>dot(R, V)</code>를 씀. 시선이 스치는 각도에서 하이라이트가 잘림.</li>
+      <li><b>Gouraud</b>(1971): 정점에서 조명을 계산하고 색을 보간. 계산이 쌈. 단점: 하이라이트가 정점 사이에 오면 <b>사라지거나 별 모양으로 번짐</b>. 정점이 적은 바닥에 점광원을 비추면 특히 심함.</li>
+      <li><b>Phong 셰이딩</b>(1975): 법선을 보간해 픽셀마다 조명을 계산. 원래 Phong 반사 모델은 반사 벡터 <code>dot(R, V)</code>를 씀. 시선이 스치는 각도에서 하이라이트가 잘림.</li>
       <li><b>Blinn-Phong</b>(1977): 반벡터 <code>H = normalize(L+V)</code>와 <code>dot(N, H)</code>를 씀. 더 자연스럽고 계산도 쌈. 같은 하이라이트 크기를 얻으려면 지수를 Phong의 약 4배로 잡아야 함.</li>
     </ul>
     <p>OpenGL 고정 파이프라인(glLight)은 Gouraud + Blinn-Phong 조합이었음. 이 샘플의 Flat과 Gouraud도 Blinn 하이라이트를 씀.</p>`,
@@ -38,9 +38,9 @@ GTL.register({
   </svg>`,
   look: [
     '메시 해상도를 6~8로 낮추면 A(Gouraud)의 하이라이트가 정점마다 튀고 다각형 윤곽이 보임. B는 하이라이트가 둥글게 유지됨.',
-    '바닥의 점광원 하이라이트를 보면 Gouraud에서는 정점이 적어 거의 안 보임.',
+    '바닥의 점광원 하이라이트를 보면 Gouraud에서는 정점이 적어 거의 안 보임',
     'B를 Phong으로 바꾸고 카메라를 낮춰 스치는 각도로 보면 하이라이트가 잘림. Blinn-Phong은 길게 늘어짐.',
-    '"와이어프레임"을 켜면 Gouraud 하이라이트가 삼각형 경계를 따라 각지는 모습이 보임.',
+    '"와이어프레임"을 켜면 Gouraud 하이라이트가 삼각형 경계를 따라 각지는 모습이 보임',
   ],
   refs: [
     { type: 'paper', title: 'Illumination for Computer Generated Pictures (Bui Tuong Phong)', url: 'https://dl.acm.org/doi/10.1145/360825.360839', year: 1975, note: 'Communications of the ACM. 법선 보간 + Phong 반사 모델.' },

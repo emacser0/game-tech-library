@@ -4,7 +4,7 @@ GTL.register({
   title: '목록 가상화: 1만 개 항목 스크롤',
   summary: '인벤토리나 친구 목록의 항목 1만 개를 전부 배치하고 그리면 프레임 비용이 항목 수에 비례해서 늘어남. 가상화는 화면에 보이는 십여 개만 그려서 목록 길이와 관계없이 비용이 일정함.',
   views: { a: '전체 그리기', b: '가상화' },
-  controls: '마우스 휠로 스크롤. 오른쪽 스크롤바를 드래그해도 됨. 자동 스크롤은 무작위 위치로 점프함.',
+  controls: '마우스 휠로 스크롤. 오른쪽 스크롤바를 드래그해도 됨. 자동 스크롤은 무작위 위치로 점프.',
   info: `
     <p><b>목록 가상화</b>(list virtualization)는 긴 목록에서 화면에 보이는 항목만 만들고 그리는 방법. 화면 밖 항목은 위치만 계산하고 건너뜀.</p>
     <p>필요한 이유: 항목 하나에 배경, 아이콘, 글자 두 줄, 게이지가 있으면 그리기 호출이 7번. 1만 개면 7만 번. 대부분은 화면 밖이라 보이지도 않음.</p>
@@ -13,7 +13,7 @@ GTL.register({
       <li>높이가 모두 같으면 첫 항목 = <code>floor(스크롤 / 항목 높이)</code>. 계산 한 번으로 끝남.</li>
       <li>높이가 다르면 시작 위치의 누적합 배열을 미리 만들고 이분 탐색으로 첫 항목을 찾음. 비교는 약 log2(n)번.</li>
       <li>화면 아래 끝을 넘을 때까지 이어서 그림. 위아래로 몇 개 더 그려 두면(overscan) 빠른 스크롤에서 빈칸이 덜 보임.</li>
-      <li>엔진 UI에서는 화면에 보이는 수만큼만 항목 위젯을 만들고, 스크롤할 때 내용만 바꿔 재사용함.</li>
+      <li>엔진 UI에서는 화면에 보이는 수만큼만 항목 위젯을 만들고, 스크롤할 때 내용만 바꿔 재사용</li>
     </ul>
     <p>단점: 항목 높이를 미리 알아야 함. 내용에 따라 높이가 바뀌면 누적합을 다시 계산해야 함. 화면 밖 항목에 포커스나 애니메이션 상태를 두기 어려움.</p>`,
   // 도식: 긴 목록과 화면 창, 보이는 항목 + overscan만 그림. 누적합 배열 이분 탐색으로 첫 항목을 찾음
@@ -51,14 +51,14 @@ GTL.register({
   },
   look: [
     'A의 프레임 비용(⏱)과 "목록 처리 시간"이 B보다 훨씬 큼. B의 "그린 항목 수"는 십여 개에서 변하지 않음.',
-    '"항목 수"를 1000에서 20000으로 바꾸면 A의 비용은 함께 커지고 B는 거의 그대로.',
+    '"항목 수"를 1000에서 20000으로 바꾸면 A의 비용은 함께 커지고 B는 거의 그대로',
     '"가변 높이"를 켜면 B의 "첫 항목 찾기 비교 횟수"가 약 14번(log2 10000)이 됨. A는 매 프레임 1만 개의 위치를 더함.',
     'B의 overscan을 0으로 하면 그린 항목 수가 최소가 됨. 실제 엔진에서는 빠른 스크롤 중 빈칸을 줄이려고 2~3개를 더 둠.',
   ],
   refs: [
-    { type: 'engine', title: 'Unity UI Toolkit - ListView', url: 'https://docs.unity3d.com/Manual/UIE-uxml-element-ListView.html', note: '보이는 항목만 만들고 makeItem, bindItem으로 재사용.' },
+    { type: 'engine', title: 'Unity UI Toolkit - ListView', url: 'https://docs.unity3d.com/Manual/UIE-uxml-element-ListView.html', note: '보이는 항목만 만들고 makeItem, bindItem으로 재사용' },
     { type: 'engine', title: 'Android Developers - Create dynamic lists with RecyclerView', url: 'https://developer.android.com/develop/ui/views/layout/recyclerview' },
-    { type: 'code', title: 'react-window (Brian Vaughn)', url: 'https://github.com/bvaughn/react-window', note: '고정 높이와 가변 높이 목록 가상화 라이브러리.' },
+    { type: 'code', title: 'react-window (Brian Vaughn)', url: 'https://github.com/bvaughn/react-window', note: '고정 높이와 가변 높이 목록 가상화 라이브러리' },
   ],
   params: [
     { key: 'count', label: '항목 수', type: 'int', min: 1000, max: 20000, step: 1000, default: 10000, shared: true, reset: true, group: '목록' },

@@ -2,7 +2,7 @@
 GTL.register({
   id: 'event-queue',
   title: '이벤트 큐: 즉시 호출 vs 지연 처리',
-  summary: '폭발 이벤트를 받자마자 처리기를 호출하면 연쇄 폭발이 재귀 호출이 되어 한 프레임에 몰리고 호출 깊이가 폭주함. 이벤트를 큐에 넣고 프레임마다 정해진 만큼 처리하면 깊이는 항상 1이고 부하가 여러 프레임에 퍼짐.',
+  summary: '폭발 이벤트를 받자마자 처리기를 호출하면 연쇄 폭발이 재귀 호출이 되어 한 프레임에 몰리고 호출 깊이가 폭주. 이벤트를 큐에 넣고 프레임마다 정해진 만큼 처리하면 깊이는 항상 1이고 부하가 여러 프레임에 퍼짐.',
   views: { a: '즉시 호출', b: '이벤트 큐' },
   controls: '드럼통을 클릭하면 불이 붙음. 자동 데모가 연쇄가 끝날 때마다 새 판을 만들고 불을 붙임.',
   info: `
@@ -15,11 +15,11 @@ GTL.register({
     </ul>
     <p>큐 방식의 동작:</p>
     <ul>
-      <li><code>emit</code>은 큐 끝에 이벤트를 넣고 바로 반환함.</li>
-      <li>프레임마다 그 시점에 쌓인 이벤트만 꺼내 처리함. 처리 중에 새로 들어온 이벤트는 다음 프레임으로 넘어감.</li>
-      <li>프레임당 처리 수(예산)를 정해 두면 부하가 프레임마다 고르게 퍼짐.</li>
+      <li><code>emit</code>은 큐 끝에 이벤트를 넣고 바로 반환</li>
+      <li>프레임마다 그 시점에 쌓인 이벤트만 꺼내 처리. 처리 중에 새로 들어온 이벤트는 다음 프레임으로 넘어감.</li>
+      <li>프레임당 처리 수(예산)를 정해 두면 부하가 프레임마다 고르게 퍼짐</li>
     </ul>
-    <p>단점: 이벤트가 처리될 때까지 지연이 생김. 보낸 시점의 상태가 처리 시점에 바뀌어 있을 수 있음. 큐가 계속 쌓이면 지연이 끝없이 늘어나므로 크기 제한이 필요함.</p>`,
+    <p>단점: 이벤트가 처리될 때까지 지연이 생김. 보낸 시점의 상태가 처리 시점에 바뀌어 있을 수 있음. 큐가 계속 쌓이면 지연이 끝없이 늘어나므로 크기 제한 필요.</p>`,
   // 도식: 즉시 호출은 연쇄가 재귀 호출 스택이 됨 vs 큐는 프레임마다 쌓인 이벤트만 꺼냄
   diagram: (L) => {
     const stack = [0, 1, 2, 3].map((i) => `<rect x="${20 + i * 26}" y="${30 + i * 16}" width="96" height="14" rx="2" class="d-a"/><text x="${26 + i * 26}" y="${41 + i * 16}" class="t-small t-mono">explode(${i + 1})</text>`).join('');
@@ -52,9 +52,9 @@ GTL.register({
     'B의 "프레임당 처리 예산"을 1로 낮추면 연쇄가 느려지고 "연쇄에 걸린 프레임"이 늘어남. 지연과 부하 분산은 서로 맞바꾸는 관계.',
   ],
   refs: [
-    { type: 'book', title: 'Game Programming Patterns - Event Queue (Robert Nystrom)', url: 'https://gameprogrammingpatterns.com/event-queue.html', year: 2014, note: '오디오 요청을 큐로 묶는 예제와 재진입, 피드백 루프 주의점.' },
-    { type: 'book', title: 'Game Programming Patterns - Observer (Robert Nystrom)', url: 'https://gameprogrammingpatterns.com/observer.html', year: 2014, note: '즉시 호출 방식의 관찰자 패턴.' },
-    { type: 'engine', title: 'Godot - Object.call_deferred', url: 'https://docs.godotengine.org/en/stable/classes/class_object.html', note: '호출을 현재 프레임 끝(유휴 시간)으로 미루는 내장 기능.' },
+    { type: 'book', title: 'Game Programming Patterns - Event Queue (Robert Nystrom)', url: 'https://gameprogrammingpatterns.com/event-queue.html', year: 2014, note: '오디오 요청을 큐로 묶는 예제와 재진입, 피드백 루프 주의점' },
+    { type: 'book', title: 'Game Programming Patterns - Observer (Robert Nystrom)', url: 'https://gameprogrammingpatterns.com/observer.html', year: 2014, note: '즉시 호출 방식의 관찰자 패턴' },
+    { type: 'engine', title: 'Godot - Object.call_deferred', url: 'https://docs.godotengine.org/en/stable/classes/class_object.html', note: '호출을 현재 프레임 끝(유휴 시간)으로 미루는 내장 기능' },
   ],
   params: [
     { key: 'mode', label: '전달 방식', type: 'select', group: '이벤트', options: [

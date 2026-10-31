@@ -1,4 +1,4 @@
-// GTL.util: 모든 샘플이 공유하는 수학, 난수, 노이즈, 그리기, WebGL 헬퍼.
+// GTL.util: 모든 샘플이 공유하는 수학, 난수, 노이즈, 그리기, WebGL 헬퍼
 // 샘플에서 이 파일을 수정하지 않음. 필요한 기능이 없으면 샘플 파일 안에 구현.
 (function (root) {
   const GTL = (root.GTL = root.GTL || {});

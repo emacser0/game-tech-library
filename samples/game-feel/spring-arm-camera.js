@@ -56,11 +56,11 @@ GTL.register({
     '"프로브 반지름"을 2로 낮추면 카메라가 벽에 거의 붙어 B의 "카메라 벽 속 비율"이 다시 올라감. 프로브가 카메라(근평면)보다 작으면 벽을 뚫는다는 뜻.',
   ],
   refs: [
-    { type: 'engine', title: 'Unreal Engine - Using Spring Arm Components', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/using-spring-arm-components-in-unreal-engine', note: '암 길이, 충돌 검사, 카메라 랙 설정 방법.' },
+    { type: 'engine', title: 'Unreal Engine - Using Spring Arm Components', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/using-spring-arm-components-in-unreal-engine', note: '암 길이, 충돌 검사, 카메라 랙 설정 방법' },
     { type: 'engine', title: 'Unreal Engine API - USpringArmComponent', note: 'TargetArmLength, ProbeSize, ProbeChannel, bDoCollisionTest, bEnableCameraLag, CameraLagSpeed.' },
     { type: 'engine', title: 'Unity Cinemachine - Cinemachine Deoccluder', url: 'https://docs.unity3d.com/Packages/com.unity.cinemachine@3.1/manual/CinemachineDeoccluder.html', note: 'Cinemachine 3에서 Collider가 이름을 바꾼 확장. Camera Radius, Damping, Damping When Occluded.' },
-    { type: 'engine', title: 'Unity Cinemachine - Third Person Follow (Camera Collisions)', note: 'Damping Into Collision, Damping From Collision으로 당김과 복귀 속도를 따로 정함.' },
-    { type: 'engine', title: 'Unity - Physics.SphereCast', url: 'https://docs.unity3d.com/ScriptReference/Physics.SphereCast.html', note: '직접 구현할 때 쓰는 구체 스윕 API.' },
+    { type: 'engine', title: 'Unity Cinemachine - Third Person Follow (Camera Collisions)', note: 'Damping Into Collision, Damping From Collision으로 당김과 복귀 속도를 따로 정함' },
+    { type: 'engine', title: 'Unity - Physics.SphereCast', url: 'https://docs.unity3d.com/ScriptReference/Physics.SphereCast.html', note: '직접 구현할 때 쓰는 구체 스윕 API' },
   ],
   params: [
     { key: 'mode', label: '암 방식', type: 'select', group: '기법', options: [

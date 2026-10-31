@@ -7,15 +7,15 @@ GTL.register({
   controls: '←→: 흰 테두리 봇 조종, ↑ 또는 Space: 점프 (나머지 봇은 자동)',
   info: `
     <p>타일맵 플랫포머에서 가장 흔한 실수는 <b>동시 이동 + 최소 침투</b> 방식. 위치에 속도를 한 번에 더하고, 겹친 타일마다 <b>침투가 작은 축</b>으로 밀어냄.</p>
-    <p>이 방식은 <b>모서리 걸림</b>(corner snagging)을 일으킴.</p>
+    <p>이 방식은 <b>모서리 걸림</b>(corner snagging)을 일으킴</p>
     <ul>
-      <li>봇이 떨어지며 옆으로 이동해 두 바닥 타일에 걸쳐 착지함.</li>
-      <li>새로 들어간 타일과는 X 겹침이 Y 겹침보다 작을 수 있음.</li>
+      <li>봇이 떨어지며 옆으로 이동해 두 바닥 타일에 걸쳐 착지</li>
+      <li>새로 들어간 타일과는 X 겹침이 Y 겹침보다 작을 수 있음</li>
       <li>그래서 봇이 <b>옆으로 밀려남</b>. 평평한 바닥인데 벽에 부딪힌 것처럼 멈춤.</li>
     </ul>
     <p>결과가 <b>타일을 순회하는 순서</b>에 따라 달라지는 것도 문제. 이 샘플에서는 왼쪽으로 달릴 때 더 자주 걸림.</p>
-    <p><b>축 분리</b>: X만 움직이고 X 충돌을 해결함(이동 반대 방향으로 밀기). 그다음 Y만 움직이고 해결함. 이음매 문제가 사라짐.
-    단, 한 프레임에 벽 두께 이상 움직이면 여전히 관통함.</p>
+    <p><b>축 분리</b>: X만 움직이고 X 충돌을 해결(이동 반대 방향으로 밀기). 그다음 Y만 움직이고 해결. 이음매 문제가 사라짐.
+    단, 한 프레임에 벽 두께 이상 움직이면 여전히 관통.</p>
     <p><b>축별 스윕</b>: 이동할 구간의 타일 열이나 행을 앞에서부터 검사해 첫 벽에서 멈춤. 속도와 관계없이 관통하지 않음.
     많은 2D 엔진의 타일 충돌이 이 계열. 예: Celeste와 TowerFall의 픽셀 단위 이동, Flixel과 Phaser의 축 분리.</p>`,
   diagram: (L) => {
@@ -46,14 +46,14 @@ GTL.register({
   </svg>`;
   },
   look: [
-    'A에서 노란 ×를 보면 "걸림"이 보임. 평평한 바닥에서 봇이 갑자기 방향을 바꾸는 순간. B는 0을 유지함.',
+    'A에서 노란 ×를 보면 "걸림"이 보임. 평평한 바닥에서 봇이 갑자기 방향을 바꾸는 순간. B는 0을 유지.',
     '달리기 속도를 60 이상으로 올리면 A가 얇은 기둥을 뚫음(빨간 원). B를 "축 분리 (스윕 없음)"로 바꾸고 110 이상으로 올리면 B도 뚫음.',
     '두 뷰의 "프레임당 검사 타일"을 비교하면 스윕 방식이 이동 거리만큼 타일을 더 많이 봄. 정확성의 비용.',
-    '흰 테두리 봇을 ←로 달리며 점프와 착지를 반복하면 걸림을 직접 느낄 수 있음.',
+    '흰 테두리 봇을 ←로 달리며 점프와 착지를 반복하면 걸림을 직접 느낄 수 있음',
   ],
   refs: [
-    { type: 'article', title: 'The guide to implementing 2D platformers (Rodrigo Monteiro)', url: 'http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/', year: 2012, note: '타일 기반 충돌, 축 분리 이동, 경사로.' },
-    { type: 'article', title: 'Celeste & TowerFall Physics (Maddy Thorson)', url: 'https://maddythorson.medium.com/celeste-and-towerfall-physics-d24bd2ae0fc5', year: 2019, note: '정수 픽셀 단위로 축마다 한 칸씩 이동하며 충돌 검사.' },
+    { type: 'article', title: 'The guide to implementing 2D platformers (Rodrigo Monteiro)', url: 'http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/', year: 2012, note: '타일 기반 충돌, 축 분리 이동, 경사로' },
+    { type: 'article', title: 'Celeste & TowerFall Physics (Maddy Thorson)', url: 'https://maddythorson.medium.com/celeste-and-towerfall-physics-d24bd2ae0fc5', year: 2019, note: '정수 픽셀 단위로 축마다 한 칸씩 이동하며 충돌 검사' },
     { type: 'book', title: 'Real-Time Collision Detection, 5.5 Intersection of Moving Objects (Christer Ericson)', year: 2005 },
   ],
   params: [

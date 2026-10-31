@@ -6,7 +6,7 @@ GTL.register({
   views: { a: '전부 그리기', b: '그리드 컬링' },
   controls: 'WASD 또는 방향키: 카메라 이동 (입력이 없으면 자동 순회)',
   info: `
-    <p><b>뷰 컬링</b>은 카메라 사각형(3D에서는 뷰 프러스텀)과 경계 상자가 겹치지 않는 오브젝트를 그리기 전에 버리는 기법.</p>
+    <p><b>뷰 컬링</b>은 카메라 사각형(3D에서는 뷰 프러스텀)과 경계 상자가 겹치지 않는 오브젝트를 그리기 전에 버리는 기법</p>
     <p>캔버스와 GPU도 화면 밖 도형을 결국 잘라냄(클리핑). 하지만 그 전에 이미 다음 비용을 냄.</p>
     <ul>
       <li>그리기 명령 생성</li>
@@ -14,7 +14,7 @@ GTL.register({
       <li>좌표 변환</li>
     </ul>
     <p>오브젝트마다 AABB 검사를 하면 그리기는 줄어듦. 하지만 <b>검사 수는 여전히 전체 개수만큼</b>(O(n)).</p>
-    <p><b>공간 그리드 컬링</b>은 월드를 셀로 나누고 각 셀에 오브젝트를 미리 등록해 둠(정적 오브젝트). 카메라가 걸친 셀만 훑으므로 비용이 <b>화면에 보이는 양</b>에 비례함.
+    <p><b>공간 그리드 컬링</b>은 월드를 셀로 나누고 각 셀에 오브젝트를 미리 등록해 둠(정적 오브젝트). 카메라가 걸친 셀만 훑으므로 비용이 <b>화면에 보이는 양</b>에 비례.
     3D 엔진은 같은 목적으로 BVH, 옥트리, 포털, 오클루전 컬링을 씀.</p>
     <p>"컬링 영역 축소"는 디버그 기능. 컬링 사각형을 화면보다 작게 만들어서 경계 밖 오브젝트가 사라지는 모습을 보여줌.</p>`,
   diagram: (L) => {
@@ -37,19 +37,19 @@ GTL.register({
     <text x="410" y="45" text-anchor="middle" class="t-small">${L('카메라', 'camera')}</text>
     <text x="15" y="160" class="t-small t-dim">${L('화면 밖 오브젝트도 그리기 명령을 만듦', 'Offscreen objects still issue draw calls')}</text>
     <text x="285" y="160" class="t-small t-dim">${L('카메라가 걸친 셀(파랑)만 훑음', 'Scans only the cells under the camera (blue)')}</text>
-    <text x="270" y="180" text-anchor="middle" class="t-small">${L('검사 비용이 월드 크기가 아니라 화면 크기에 비례함', 'Check cost scales with screen size, not world size')}</text>
+    <text x="270" y="180" text-anchor="middle" class="t-small">${L('검사 비용이 월드 크기가 아니라 화면 크기에 비례', 'Check cost scales with screen size, not world size')}</text>
   </svg>`;
   },
   look: [
-    '기본 상태에서 오른쪽 위 렌더 ms를 비교하면 A는 매 프레임 전체(수만 개)를 그리고, B는 화면 안의 수백 개만 그림.',
+    '기본 상태에서 오른쪽 위 렌더 ms를 비교하면 A는 매 프레임 전체(수만 개)를 그리고, B는 화면 안의 수백 개만 그림',
     'B의 점선 사각형 밖을 보면 그리지 않은 영역이 보임(디버그 축소). 축소를 0으로 하면 컬링 영역이 화면과 같아짐.',
-    'B를 "오브젝트별 AABB 검사"로 바꾸면 그린 오브젝트 수는 같지만 "컬링 검사 수"가 전체 개수만큼 늘어남.',
+    'B를 "오브젝트별 AABB 검사"로 바꾸면 그린 오브젝트 수는 같지만 "컬링 검사 수"가 전체 개수만큼 늘어남',
     '그리드 셀 크기를 바꾸면 미니맵의 노란 칸(실제로 훑은 셀)이 달라짐. "방문 셀"과 "컬링 검사 수"가 서로 반대로 움직임.',
   ],
   refs: [
-    { type: 'book', title: 'Real-Time Rendering, 4th ed., Ch.19 Acceleration Algorithms (Akenine-Möller, Haines, Hoffman et al.)', year: 2018, note: '뷰 프러스텀 컬링, BVH, 포털, 오클루전 컬링.' },
+    { type: 'book', title: 'Real-Time Rendering, 4th ed., Ch.19 Acceleration Algorithms (Akenine-Möller, Haines, Hoffman et al.)', year: 2018, note: '뷰 프러스텀 컬링, BVH, 포털, 오클루전 컬링' },
     { type: 'engine', title: 'Unity, Occlusion culling / Frustum culling', url: 'https://docs.unity3d.com/Manual/OcclusionCulling.html' },
-    { type: 'engine', title: 'Godot, VisibleOnScreenNotifier2D', url: 'https://docs.godotengine.org/en/stable/classes/class_visibleonscreennotifier2d.html', note: '화면 밖 2D 노드의 처리와 렌더를 멈춤.' },
+    { type: 'engine', title: 'Godot, VisibleOnScreenNotifier2D', url: 'https://docs.godotengine.org/en/stable/classes/class_visibleonscreennotifier2d.html', note: '화면 밖 2D 노드의 처리와 렌더를 멈춤' },
   ],
   params: [
     { key: 'count', label: '오브젝트 수', type: 'int', min: 2000, max: 40000, default: 20000, shared: true, reset: true, group: '장면' },

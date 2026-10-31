@@ -58,7 +58,7 @@ GTL.register({
     <text x="8" y="201" class="t-small t-dim">${L('예측 위치 = LKP + 마지막 속도 × 예측 시간', 'Predicted position = LKP + last velocity × prediction time')}</text>
   </svg>`,
   look: [
-    '자동 모드로 두면 A는 플레이어가 기둥 뒤로 숨는 순간 "포기"함. B는 물음표(LKP)로 가서 모퉁이 너머를 다시 봄. "다시 찾은 횟수"와 "잡은 횟수"가 B 쪽이 큼.',
+    '자동 모드로 두면 A는 플레이어가 기둥 뒤로 숨는 순간 "포기". B는 물음표(LKP)로 가서 모퉁이 너머를 다시 봄. "다시 찾은 횟수"와 "잡은 횟수"가 B 쪽이 큼.',
     'B를 "예측 위치"로 바꾸면 수색 지점(점선 원)이 도망간 방향으로 앞섬. 예측 시간을 크게 하면 엉뚱한 곳을 수색하기도 함.',
     'B의 "수색 시간"을 0.5초로 줄여도 "다시 찾은 횟수"는 조금만 줄어듦. 대부분 LKP로 가는 도중에 모퉁이 너머를 보고 다시 찾음. 수색 시간보다 기억한 위치가 더 중요함.',
     '마우스로 직접 숨어 보면 A는 기둥 하나로 따돌릴 수 있음. B는 숨은 뒤 다른 쪽으로 빠져나가야 함.',
@@ -67,7 +67,7 @@ GTL.register({
     { type: 'paper', title: 'Object Persistence for Synthetic Creatures', year: 2002, note: 'Damian Isla, Bruce Blumberg. AAMAS 2002. 보이지 않는 대상의 위치를 믿음으로 유지하고 예측.' },
     { type: 'book', title: 'Probabilistic Target Tracking and Search Using Occupancy Maps', year: 2006, note: 'Damian Isla. AI Game Programming Wisdom 3. 놓친 대상의 위치를 확률 지도로 추적.' },
     { type: 'talk', title: 'Modeling AI Perception and Awareness in Splinter Cell: Blacklist', year: 2014, note: 'Martin Walsh, GDC 2014. 마지막으로 본 위치와 수색 행동.' },
-    { type: 'engine', title: 'Unreal Engine - AI Perception', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/ai-perception-in-unreal-engine', note: '자극(stimulus)의 Max Age로 감각 기억 유지 시간 지정.' },
+    { type: 'engine', title: 'Unreal Engine - AI Perception', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/ai-perception-in-unreal-engine', note: '자극(stimulus)의 Max Age로 감각 기억 유지 시간 지정' },
   ],
   params: [
     { key: 'memory', label: '감각 기억', type: 'select', group: '경비병', options: [

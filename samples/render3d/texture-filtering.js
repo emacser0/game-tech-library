@@ -1,9 +1,9 @@
 // 텍스처 필터링: Nearest / Bilinear / Mipmap(Trilinear) / Anisotropic
-// 참조 샘플(WebGL): 셰이더, 버퍼, 카메라 구성은 이 파일을 따름.
+// 참조 샘플(WebGL): 셰이더, 버퍼, 카메라 구성은 이 파일을 따름
 GTL.register({
   id: 'texture-filtering',
   title: '텍스처 필터링 & 밉맵',
-  summary: '먼 바닥에서 생기는 앨리어싱(모아레, 반짝임)을 비교함. 밉맵과 비등방성 필터링을 함께 쓰면 먼 곳도 깨끗하고 선명함.',
+  summary: '먼 바닥에서 생기는 앨리어싱(모아레, 반짝임)을 비교. 밉맵과 비등방성 필터링을 함께 쓰면 먼 곳도 깨끗하고 선명함.',
   renderer: 'webgl',
   views: { a: 'Nearest, 밉맵 없음', b: 'Trilinear + 비등방성' },
   controls: '마우스 드래그: 카메라 회전, 휠: 카메라 높이',
@@ -60,13 +60,13 @@ GTL.register({
     <text x="380" y="174" class="t-small t-b">${L('B: 작은 밉에서 5번 샘플', 'B: 5 taps on a finer mip')}</text>
   </svg>`,
   look: [
-    'A 뷰에서 카메라를 천천히 돌리면 먼 바닥에 모아레 무늬와 반짝임이 보임.',
+    'A 뷰에서 카메라를 천천히 돌리면 먼 바닥에 모아레 무늬와 반짝임이 보임',
     'B에서 비등방성을 1로 낮추면 먼 곳이 회색으로 뭉개짐. 16으로 올리면 선이 다시 살아남.',
-    '"밉맵 레벨 시각화"를 켜면 거리마다 선택된 밉 레벨이 색으로 보임.',
+    '"밉맵 레벨 시각화"를 켜면 거리마다 선택된 밉 레벨이 색으로 보임',
     'LOD bias를 +로 올리면 더 흐린 레벨이 쓰임. -로 내리면 더 선명하지만 앨리어싱이 돌아옴.',
   ],
   refs: [
-    { type: 'paper', title: 'Pyramidal Parametrics (Lance Williams)', url: 'https://dl.acm.org/doi/10.1145/964967.801126', year: 1983, note: '밉맵(MIP = multum in parvo)을 처음 제안한 SIGGRAPH 논문.' },
+    { type: 'paper', title: 'Pyramidal Parametrics (Lance Williams)', url: 'https://dl.acm.org/doi/10.1145/964967.801126', year: 1983, note: '밉맵(MIP = multum in parvo)을 처음 제안한 SIGGRAPH 논문' },
     { type: 'engine', title: 'Unity: Texture Import: Aniso Level / Mip Maps', url: 'https://docs.unity3d.com/Manual/class-TextureImporter.html' },
     { type: 'engine', title: 'Unreal Engine: Texture Streaming & Mip Bias', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/texture-streaming-overview-for-unreal-engine' },
     { type: 'article', title: 'EXT_texture_filter_anisotropic (Khronos)', url: 'https://registry.khronos.org/webgl/extensions/EXT_texture_filter_anisotropic/' },

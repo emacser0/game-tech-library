@@ -4,13 +4,13 @@ GTL.register({
   title: '강 생성: 흐름 누적 vs 노이즈 강',
   summary: '노이즈 강 vs 흐름 누적 강 비교. 노이즈 값이 0 근처인 곳을 강으로 그리면 산을 넘고 중간에 끊김. 빗물이 낮은 쪽으로 흐르는 양을 누적하면 강이 합류하며 굵어지고 모두 해안까지 이어짐.',
   views: { a: '노이즈 강', b: '흐름 누적 + 웅덩이 채우기' },
-  controls: '마우스를 올리면 그 칸에 떨어진 빗물이 흘러가는 길을 표시함.',
+  controls: '마우스를 올리면 그 칸에 떨어진 빗물이 흘러가는 길 표시',
   info: `
     <p><b>노이즈 강</b>: 두 번째 노이즈의 절댓값이 작은 칸(0을 지나는 선)을 강으로 칠함. 구불구불한 선이 쉽게 나옴.
     하지만 지형 높이와 상관이 없음. 강이 산등성이를 넘고, 바다에 닿지 않은 채 끝나거나 고리 모양이 됨.</p>
     <p><b>흐름 누적(Flow Accumulation)</b>:</p>
     <ol>
-      <li>칸마다 이웃 8칸 중 가장 낮은 칸으로 흐름 방향을 정함(D8).</li>
+      <li>칸마다 이웃 8칸 중 가장 낮은 칸으로 흐름 방향을 정함(D8)</li>
       <li>모든 칸에 빗물 1을 떨어뜨림. 높은 칸부터 차례로 자기 물을 아래 칸에 넘김.</li>
       <li>받은 물이 기준보다 많은 칸이 강. 물이 많을수록 굵게 그림.</li>
     </ol>
@@ -59,15 +59,15 @@ GTL.register({
   look: [
     'A와 B의 "물이 강을 따라 흐르는 칸"을 비교하면 A는 60% 안팎, B는 100%. A의 강은 지형의 경사와 상관없이 그려짐.',
     'B의 웅덩이 채우기를 끄면 "바다에 닿은 강 줄기 비율"이 떨어짐. 강이 내륙 구덩이(빨간 점)에서 끝남.',
-    'A에서 산 위에 마우스를 올리면 실제 빗물 길(흰 선)이 노이즈 강을 무시하고 다른 쪽으로 흐름.',
+    'A에서 산 위에 마우스를 올리면 실제 빗물 길(흰 선)이 노이즈 강을 무시하고 다른 쪽으로 흐름',
     'B의 강 기준을 낮추면 지류가 늘어나 나뭇가지 모양이 됨. 높이면 큰 강 몇 개만 남음.',
     '"흐름 누적 보기"를 켜면 모든 칸의 물 양이 보임. 골짜기를 따라 밝은 선이 모여듦.',
   ],
   refs: [
     { type: 'paper', title: "J. F. O'Callaghan, D. M. Mark: The extraction of drainage networks from digital elevation data", year: 1984, note: 'Computer Vision, Graphics, and Image Processing. D8 흐름 방향과 흐름 누적.' },
     { type: 'paper', title: 'R. Barnes, C. Lehman, D. Mulla: Priority-flood: An optimal depression-filling and watershed-labeling algorithm for digital elevation models', year: 2014, note: 'Computers & Geosciences. 우선순위 큐로 웅덩이를 채우는 방법(ε 기울기 포함).' },
-    { type: 'article', title: 'Amit Patel: Polygonal Map Generation for Games', url: 'http://www-cs-students.stanford.edu/~amitp/game-programming/polygon-map-generation/', year: 2010, note: '고도를 따라 내려가는 강과 강 굵기 누적.' },
-    { type: 'article', title: 'Red Blob Games: Mapgen4', url: 'https://www.redblobgames.com/maps/mapgen4/', note: '강을 흐름 누적으로 만드는 지도 생성기.' },
+    { type: 'article', title: 'Amit Patel: Polygonal Map Generation for Games', url: 'http://www-cs-students.stanford.edu/~amitp/game-programming/polygon-map-generation/', year: 2010, note: '고도를 따라 내려가는 강과 강 굵기 누적' },
+    { type: 'article', title: 'Red Blob Games: Mapgen4', url: 'https://www.redblobgames.com/maps/mapgen4/', note: '강을 흐름 누적으로 만드는 지도 생성기' },
   ],
   params: [
     { key: 'method', label: '강 생성 방식', type: 'select', group: '강', options: [

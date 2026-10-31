@@ -46,7 +46,7 @@ GTL.register({
   refs: [
     { type: 'paper', title: 'A Generalization of Algebraic Surface Drawing (James F. Blinn)', year: 1982, note: 'ACM Transactions on Graphics 1(3). 가우시안 영향 함수로 만든 blobby 모델.' },
     { type: 'paper', title: 'Data Structure for Soft Objects (Geoff Wyvill, Craig McPheeters, Brian Wyvill)', year: 1986, note: 'The Visual Computer 2(4). 반경 밖에서 0이 되는 다항식 영향 함수와 공간 분할.' },
-    { type: 'article', title: 'Metaballs and Marching Squares (Jamie Wong)', year: 2014, url: 'http://jamie-wong.com/2014/08/19/metaballs-and-marching-squares/', note: '2D 메타볼 필드와 등고선 추출을 단계별로 설명함.' },
+    { type: 'article', title: 'Metaballs and Marching Squares (Jamie Wong)', year: 2014, url: 'http://jamie-wong.com/2014/08/19/metaballs-and-marching-squares/', note: '2D 메타볼 필드와 등고선 추출을 단계별로 설명' },
   ],
   params: [
     { key: 'method', label: '영향 함수', type: 'select', group: '필드', options: [

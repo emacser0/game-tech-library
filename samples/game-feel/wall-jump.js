@@ -6,16 +6,16 @@ GTL.register({
   views: { a: '미끄러짐 없음, 입력 잠금 없음', b: '벽 미끄러짐 + 입력 잠금 150ms' },
   controls: '←→ / A D 이동, Space / Z / ↑ / W 점프, 벽에 붙은 채 점프하면 벽 점프 (키를 누르면 자동 데모가 잠시 멈춤)',
   info: `
-    <p><b>벽 점프(Wall Jump)</b>: 공중에서 벽에 닿은 채 점프하면 벽 반대쪽 위로 튕겨 나감.</p>
+    <p><b>벽 점프(Wall Jump)</b>: 공중에서 벽에 닿은 채 점프하면 벽 반대쪽 위로 튕겨 나감</p>
     <ul>
-      <li><b>벽 미끄러짐(Wall Slide)</b>: 벽 쪽으로 방향키를 누르고 있으면 낙하 속도를 낮게 제한함.
+      <li><b>벽 미끄러짐(Wall Slide)</b>: 벽 쪽으로 방향키를 누르고 있으면 낙하 속도를 낮게 제한.
       플레이어가 다음 점프를 판단할 시간이 생기고, 벽에 붙었다는 사실이 눈에 보임.</li>
       <li><b>입력 잠금(Input Lock, Force Move)</b>: 벽 점프 직후 짧은 시간 동안 방향 입력을 무시하고 벽 반대 방향으로 밀어 줌.
       플레이어는 벽 점프 순간에도 손가락이 아직 벽 쪽 방향키에 있음. 잠금이 없으면 그 입력이 공중 가속을 바로 상쇄해 벽에서 거의 떨어지지 못함.</li>
     </ul>
-    <p>Celeste는 벽 점프 뒤 0.16초 동안 수평 이동을 고정함(<code>WallJumpForceTime</code>).
+    <p>Celeste는 벽 점프 뒤 0.16초 동안 수평 이동을 고정(<code>WallJumpForceTime</code>).
     단점: 잠금이 길면 공중에서 조작이 안 되는 답답함이 생김. 0.1~0.2초가 흔한 값.</p>
-    <p>뷰 색 궤적은 벽 점프 뒤 잠금 구간, 회색은 자유 이동, 초록은 벽 미끄러짐 구간.</p>`,
+    <p>뷰 색 궤적은 벽 점프 뒤 잠금 구간, 회색은 자유 이동, 초록은 벽 미끄러짐 구간</p>`,
   // 도식: 입력 잠금 없이 벽 쪽 입력이 남을 때와 미끄러짐 + 잠금이 있을 때의 벽 점프 궤적
   diagram: (L) => `<svg viewBox="0 0 540 204" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arr-wj" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -41,9 +41,9 @@ GTL.register({
     '"데모: 방향 전환 지연"을 0으로 내리면 사람이 바로 반대 방향을 누른 경우가 됨. 이때는 잠금이 없어도 잘 올라감.',
   ],
   refs: [
-    { type: 'code', title: 'Celeste - Player.cs (WallJumpForceTime = 0.16f, WallSlideStartMax)', url: 'https://github.com/NoelFB/Celeste', year: 2018, note: '벽 점프 뒤 forceMoveX 타이머, 벽 미끄러짐 낙하 속도 제한.' },
-    { type: 'game', title: 'Super Meat Boy (Team Meat)', year: 2010, note: '벽 미끄러짐과 벽 점프를 중심으로 만든 플랫포머.' },
-    { type: 'game', title: 'Mega Man X (Capcom)', year: 1993, note: '벽 미끄러짐과 벽 차기 점프의 초기 사례.' },
+    { type: 'code', title: 'Celeste - Player.cs (WallJumpForceTime = 0.16f, WallSlideStartMax)', url: 'https://github.com/NoelFB/Celeste', year: 2018, note: '벽 점프 뒤 forceMoveX 타이머, 벽 미끄러짐 낙하 속도 제한' },
+    { type: 'game', title: 'Super Meat Boy (Team Meat)', year: 2010, note: '벽 미끄러짐과 벽 점프를 중심으로 만든 플랫포머' },
+    { type: 'game', title: 'Mega Man X (Capcom)', year: 1993, note: '벽 미끄러짐과 벽 차기 점프의 초기 사례' },
     { type: 'book', title: 'Game Feel: A Game Designer\'s Guide to Virtual Sensation (Steve Swink)', year: 2008 },
   ],
   params: [

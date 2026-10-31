@@ -10,11 +10,11 @@ GTL.register({
     <p>걷기 클립은 평지 기준으로 만듦. 캡슐(루트)은 발밑 한 점의 높이만 따라가므로 계단 위에서 한 발은 공중에 뜨고 다른 발은 계단에 묻힘.</p>
     <p>동작 순서:</p>
     <ul>
-      <li>발마다 위에서 아래로 트레이스(레이캐스트)해 지면 높이와 법선을 얻음.</li>
+      <li>발마다 위에서 아래로 트레이스(레이캐스트)해 지면 높이와 법선을 얻음</li>
       <li>발 오프셋 = 지면 높이 - 애니메이션 발 높이. 값이 튀지 않게 보간 속도로 따라감.</li>
       <li>골반을 두 오프셋 중 더 낮은 쪽만큼 내림. 낮은 발까지 다리가 닿게 하려는 것. 골반을 내리지 않으면 다리 길이가 모자라 발이 뜸.</li>
-      <li>엉덩이에서 발 목표까지 투 본 IK로 무릎 위치를 구함.</li>
-      <li>발을 지면 법선에 맞춰 회전함. 경사에서 발끝이 묻히거나 뜨지 않음.</li>
+      <li>엉덩이에서 발 목표까지 투 본 IK로 무릎 위치를 구함</li>
+      <li>발을 지면 법선에 맞춰 회전. 경사에서 발끝이 묻히거나 뜨지 않음.</li>
     </ul>
     <p>단점: 트레이스 비용이 발 수만큼 듦. 계단 모서리에서 목표가 갑자기 바뀌므로 보간 속도를 적당히 골라야 함. 너무 느리면 발이 늦게 붙고, 너무 빠르면 떨림.</p>`,
   // 도식: 계단 위의 트레이스, 발 목표, 골반 오프셋
@@ -53,10 +53,10 @@ GTL.register({
     '"보간 속도"를 2 근처로 낮추면 계단 모서리에서 발이 늦게 붙음. 30 근처로 올리면 모서리마다 골반이 툭 떨어짐.',
   ],
   refs: [
-    { type: 'engine', title: 'Unreal Engine - Control Rig', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/control-rig-in-unreal-engine', note: '트레이스와 Basic IK, Full Body IK 노드로 발 IK와 골반 보정을 구성.' },
-    { type: 'engine', title: 'Unreal Engine - Leg IK, Two Bone IK animation nodes', note: 'Animation Blueprint의 스켈레탈 컨트롤 노드.' },
-    { type: 'engine', title: 'Unity Animation Rigging - Two Bone IK Constraint', url: 'https://docs.unity3d.com/Packages/com.unity.animation.rigging@1.3/manual/constraints/TwoBoneIKConstraint.html', note: 'Root, Mid, Tip 본과 Target, Hint로 다리 IK를 만듦.' },
-    { type: 'engine', title: 'Unity Manual - Inverse Kinematics (OnAnimatorIK, SetIKPosition)', url: 'https://docs.unity3d.com/Manual/InverseKinematics.html', note: 'Humanoid 리그의 내장 발 IK.' },
+    { type: 'engine', title: 'Unreal Engine - Control Rig', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/control-rig-in-unreal-engine', note: '트레이스와 Basic IK, Full Body IK 노드로 발 IK와 골반 보정을 구성' },
+    { type: 'engine', title: 'Unreal Engine - Leg IK, Two Bone IK animation nodes', note: 'Animation Blueprint의 스켈레탈 컨트롤 노드' },
+    { type: 'engine', title: 'Unity Animation Rigging - Two Bone IK Constraint', url: 'https://docs.unity3d.com/Packages/com.unity.animation.rigging@1.3/manual/constraints/TwoBoneIKConstraint.html', note: 'Root, Mid, Tip 본과 Target, Hint로 다리 IK를 만듦' },
+    { type: 'engine', title: 'Unity Manual - Inverse Kinematics (OnAnimatorIK, SetIKPosition)', url: 'https://docs.unity3d.com/Manual/InverseKinematics.html', note: 'Humanoid 리그의 내장 발 IK' },
   ],
   params: [
     { key: 'ik', label: '발 IK', type: 'bool', group: '발 IK', a: false, b: true, default: false, help: '발마다 트레이스해 지면에 맞춤' },

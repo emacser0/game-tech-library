@@ -2,7 +2,7 @@
 GTL.register({
   id: 'distance-attenuation',
   title: '거리 감쇠 곡선 (Rolloff)',
-  summary: '음원이 멀어질 때 음량을 줄이는 곡선을 비교함. 선형은 가까이서 덜 줄고 멀리서 너무 큼. 역거리 곡선은 자연스럽지만 최대 거리에서 0이 되지 않아 끊김이 생김. 끝을 0으로 페이드하는 커스텀 곡선이 둘의 장점을 합침.',
+  summary: '음원이 멀어질 때 음량을 줄이는 곡선 비교. 선형은 가까이서 덜 줄고 멀리서 너무 큼. 역거리 곡선은 자연스럽지만 최대 거리에서 0이 되지 않아 끊김이 생김. 끝을 0으로 페이드하는 커스텀 곡선이 둘의 장점을 합침.',
   views: { a: '선형', b: '커스텀 (역거리 + 끝 페이드)' },
   controls: '위쪽 장면을 누른 채 끌면 음원 위치를 직접 정함. 놓으면 자동 이동.',
   info: `
@@ -37,14 +37,14 @@ GTL.register({
   look: [
     'A(선형)와 B(커스텀)의 곡선을 비교하면 같은 거리 10m에서 A의 dB가 훨씬 높음. 선형은 멀리서도 크게 들림.',
     'A의 곡선을 "역거리"로 바꾸면 음원이 최대 거리를 넘는 순간 이득 기록에 계단이 생김. 보이스 컬링 때문에 생기는 끊김.',
-    '"최대 거리 밖 보이스 정지"를 끄면 역거리 곡선은 max 밖에서도 일정한 음량을 유지함 (Unity, FMOD의 기본 동작).',
+    '"최대 거리 밖 보이스 정지"를 끄면 역거리 곡선은 max 밖에서도 일정한 음량 유지 (Unity, FMOD의 기본 동작)',
     '"dB 축"을 켜면 선형 곡선이 max 근처에서 급하게 떨어지는 모양이 보임. 귀가 느끼는 변화는 이쪽에 가까움.',
   ],
   refs: [
-    { type: 'engine', title: 'MDN - PannerNode.distanceModel', url: 'https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/distanceModel', note: "linear, inverse, exponential 식이 정리됨." },
-    { type: 'engine', title: 'Web Audio API 명세 - Distance Effects', url: 'https://www.w3.org/TR/webaudio/', note: 'refDistance, maxDistance, rolloffFactor의 정확한 정의.' },
+    { type: 'engine', title: 'MDN - PannerNode.distanceModel', url: 'https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/distanceModel', note: "linear, inverse, exponential 식이 정리됨" },
+    { type: 'engine', title: 'Web Audio API 명세 - Distance Effects', url: 'https://www.w3.org/TR/webaudio/', note: 'refDistance, maxDistance, rolloffFactor의 정확한 정의' },
     { type: 'engine', title: 'Unity Manual - Audio Source (Volume Rolloff)', url: 'https://docs.unity3d.com/Manual/class-AudioSource.html', note: 'Logarithmic, Linear, Custom Rolloff. 커스텀 커브를 직접 그릴 수 있음.' },
-    { type: 'engine', title: 'FMOD Studio - Spatializer (Distance Attenuation)', note: 'Min/Max distance와 Linear, Inverse, Linear Squared 등 롤오프 종류.' },
+    { type: 'engine', title: 'FMOD Studio - Spatializer (Distance Attenuation)', note: 'Min/Max distance와 Linear, Inverse, Linear Squared 등 롤오프 종류' },
   ],
   params: [
     { key: 'curve', label: '감쇠 곡선', type: 'select', group: '감쇠', options: [

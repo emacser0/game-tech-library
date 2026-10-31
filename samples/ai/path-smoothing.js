@@ -6,14 +6,14 @@ GTL.register({
   views: { a: '8방향 격자 경로', b: 'Theta*' },
   controls: '드래그: 벽 칠하기/지우기, S/G 원 드래그: 시작/목표 이동, 우클릭 드래그: 지우기',
   info: `
-    <p>격자 A*의 경로는 칸 중심에서 이웃 칸 중심으로만 이동함. 그래서 비용이 최적이어도 <b>꺾임이 많고 방향이 45° 단위</b>임.
+    <p>격자 A*의 경로는 칸 중심에서 이웃 칸 중심으로만 이동. 그래서 비용이 최적이어도 <b>꺾임이 많고 방향이 45° 단위</b>임.
     캐릭터가 이 경로를 그대로 따라가면 로봇처럼 움직임.</p>
     <ul>
       <li><b>String Pulling (LOS 후처리)</b>: 경로의 현재 점에서 <b>직선으로 보이는(line of sight, LOS) 가장 먼 점</b>까지 건너뜀. 싸고 간단함. 단, 원래 격자 경로가 고른 길을 벗어나지 못해 최단이 아닐 수 있음.</li>
       <li><b>Theta*</b>: A* 확장 중 이웃 n을 열 때, 현재 노드의 <b>부모에서 n이 보이면 그 부모를 n의 부모로</b> 삼음. 탐색 자체가 임의 각도(any-angle) 경로를 만듦. 후처리보다 짧은 경로가 나올 때가 많음. 단점은 LOS 검사 비용.</li>
       <li><b>4방향</b>: 비교용. 계단식 경로가 가장 심함.</li>
     </ul>
-    <p>LOS 검사는 칸 중심 사이 선분이 지나는 모든 칸(supercover)을 확인함. 캐릭터(점)가 경로를 따라 이동하며 누적 회전량을 잼.</p>`,
+    <p>LOS 검사는 칸 중심 사이 선분이 지나는 모든 칸(supercover)을 확인. 캐릭터(점)가 경로를 따라 이동하며 누적 회전량을 잼.</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 184" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="psB" class="m-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
     <text x="10" y="18">${L('같은 장애물을 도는 세 경로', 'Three paths around one obstacle')}</text>
@@ -42,9 +42,9 @@ GTL.register({
   </svg>`,
   look: [
     '"총 회전각"을 보면 격자 경로는 지그재그 때문에 회전이 큼. Theta*와 String pulling은 장애물 모서리에서만 꺾임.',
-    'A를 "8방향 + String pulling"으로 바꾸고 B(Theta*)와 "경로 길이"를 비교하면 대부분 Theta*가 같거나 짧음.',
-    '"LOS 검사" 수와 "계산 시간"을 보면 매끄러운 경로일수록 LOS 비용이 큼.',
-    '벽을 그려 좁은 통로를 만들면 두 방식 모두 통로 모서리를 스치듯 지나감(에이전트 반지름 0).',
+    'A를 "8방향 + String pulling"으로 바꾸고 B(Theta*)와 "경로 길이"를 비교하면 대부분 Theta*가 같거나 짧음',
+    '"LOS 검사" 수와 "계산 시간"을 보면 매끄러운 경로일수록 LOS 비용이 큼',
+    '벽을 그려 좁은 통로를 만들면 두 방식 모두 통로 모서리를 스치듯 지나감(에이전트 반지름 0)',
   ],
   refs: [
     { type: 'paper', title: 'Theta*: Any-Angle Path Planning on Grids', year: 2007, note: 'Nash, Daniel, Koenig, Felner. AAAI-07.', url: 'https://cdn.aaai.org/AAAI/2007/AAAI07-187.pdf' },

@@ -6,18 +6,18 @@ GTL.register({
   views: { a: '판정만', b: '밀어내기' },
   controls: '마우스: 목표 지점 이동 (뷰 밖이면 목표가 천천히 돎)',
   info: `
-    <p>원 두 개는 <b>중심 사이 거리가 반지름 합보다 작으면</b> 겹침. 제곱 거리로 비교하면 제곱근 없이 판정함.</p>
+    <p>원 두 개는 <b>중심 사이 거리가 반지름 합보다 작으면</b> 겹침. 제곱 거리로 비교하면 제곱근 없이 판정.</p>
     <p>판정만 하면 아무 일도 일어나지 않음. 유닛이 같은 목표로 가면 모두 한 점에 겹침.</p>
-    <p><b>밀어내기</b>(겹침 해소)는 이렇게 동작함.</p>
+    <p><b>밀어내기</b>(겹침 해소)는 이렇게 동작</p>
     <ul>
-      <li>침투 깊이 = 반지름 합 - 중심 거리.</li>
-      <li>두 원을 중심선 방향으로 깊이의 절반씩 반대로 옮김.</li>
-      <li>한 원을 밀면 다른 원과 새로 겹칠 수 있음. 그래서 전체 검사를 몇 번 반복함(반복 해소).</li>
+      <li>침투 깊이 = 반지름 합 - 중심 거리</li>
+      <li>두 원을 중심선 방향으로 깊이의 절반씩 반대로 옮김</li>
+      <li>한 원을 밀면 다른 원과 새로 겹칠 수 있음. 그래서 전체 검사를 몇 번 반복(반복 해소).</li>
     </ul>
     <p>단점:</p>
     <ul>
       <li>반복이 적으면 빽빽한 곳에서 겹침이 남음. 반복이 많으면 비용이 늘어남.</li>
-      <li>보정 비율이 1보다 작으면 떨림은 줄지만 겹침이 천천히 풀림.</li>
+      <li>보정 비율이 1보다 작으면 떨림은 줄지만 겹침이 천천히 풀림</li>
       <li>중심이 정확히 같으면 방향을 정할 수 없음. 임의 방향을 하나 정해서 밀어야 함.</li>
     </ul>`,
   diagram: (L) => `<svg viewBox="0 0 540 178" xmlns="http://www.w3.org/2000/svg">
@@ -38,18 +38,18 @@ GTL.register({
     <path d="M378,80 L362,80" class="d-b" marker-end="url(#arr)"/><path d="M422,80 L438,80" class="d-b" marker-end="url(#arr)"/>
     <path d="M378,120 L378,126 L422,126 L422,120" class="d-dim"/><text x="400" y="138" text-anchor="middle" class="t-small t-mono">d</text>
     <text x="400" y="152" text-anchor="middle" class="t-small t-dim">${L('중심선 방향으로 깊이/2씩 반대로 이동', 'Each moves depth/2 along the center line')}</text>
-    <text x="4" y="172" class="t-small t-dim">${L('제곱 거리로 비교하면 제곱근이 필요 없음. 점선은 밀어낸 뒤 위치', 'Compare squared distances to skip the square root. Dashed circles show the result')}</text>
+    <text x="4" y="172" class="t-small t-dim">${L('제곱 거리로 비교하면 제곱근 필요 없음. 점선은 밀어낸 뒤 위치.', 'Compare squared distances to skip the square root. Dashed circles show the result')}</text>
   </svg>`,
   look: [
     '기본 상태에서 A는 유닛이 목표 지점 한곳에 모두 겹침(빨간 원). B는 유닛이 둥근 무리를 이룸.',
-    'B의 "해소 반복 횟수"를 1로 낮추면 무리 중심부에 겹침이 남고 "최대 침투" 값이 커짐.',
-    'B의 "보정 비율"을 0.2로 낮추면 무리가 물렁하게 출렁이고 겹침이 천천히 풀림.',
+    'B의 "해소 반복 횟수"를 1로 낮추면 무리 중심부에 겹침이 남고 "최대 침투" 값이 커짐',
+    'B의 "보정 비율"을 0.2로 낮추면 무리가 물렁하게 출렁이고 겹침이 천천히 풀림',
     '유닛 수를 400으로 올리면 두 뷰 모두 쌍 검사 수가 늘어남. B는 반복 횟수만큼 비용이 곱해짐.',
   ],
   refs: [
-    { type: 'book', title: 'Real-Time Collision Detection, 4.3 Spheres (Christer Ericson)', year: 2005, note: '구 대 구 판정과 제곱 거리 비교.' },
+    { type: 'book', title: 'Real-Time Collision Detection, 4.3 Spheres (Christer Ericson)', year: 2005, note: '구 대 구 판정과 제곱 거리 비교' },
     { type: 'paper', title: 'Position Based Dynamics (Müller, Heidelberger, Hennix, Ratcliff)', year: 2007, note: 'Journal of Visual Communication and Image Representation 18(2). 위치 보정을 반복하는 방식의 기반.' },
-    { type: 'article', title: 'Steering Behaviors For Autonomous Characters (Craig Reynolds)', url: 'https://www.red3d.com/cwr/steer/', year: 1999, note: '목표 추적과 분리(separation) 행동.' },
+    { type: 'article', title: 'Steering Behaviors For Autonomous Characters (Craig Reynolds)', url: 'https://www.red3d.com/cwr/steer/', year: 1999, note: '목표 추적과 분리(separation) 행동' },
   ],
   params: [
     { key: 'count', label: '유닛 수', type: 'int', min: 10, max: 400, default: 160, shared: true, reset: true, group: '장면' },

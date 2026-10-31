@@ -7,17 +7,17 @@ GTL.register({
   views: { a: 'Lambert, 외곽선 없음', b: '툰 + 인버티드 헐' },
   controls: '마우스 드래그: 카메라 회전, 휠: 줌',
   info: `
-    <p><b>툰 셰이딩(toon shading)</b>은 명암을 몇 단계로 끊어 애니메이션 채색처럼 보이게 하는 방식.</p>
+    <p><b>툰 셰이딩(toon shading)</b>은 명암을 몇 단계로 끊어 애니메이션 채색처럼 보이게 하는 방식</p>
     <ul>
-      <li>하프 램버트(<code>dot(N,L) * 0.5 + 0.5</code>)를 임계값 몇 개로 끊어 명암 단계를 만듦.</li>
-      <li>그림자색은 검정이 아니라 <b>푸르거나 보랏빛 색을 곱해서</b> 씀.</li>
-      <li>하이라이트와 림 라이트도 <code>step</code>으로 딱 끊음.</li>
-      <li>경계 부드러움(smoothstep 폭)은 앨리어싱을 줄이는 용도.</li>
+      <li>하프 램버트(<code>dot(N,L) * 0.5 + 0.5</code>)를 임계값 몇 개로 끊어 명암 단계를 만듦</li>
+      <li>그림자색은 검정이 아니라 <b>푸르거나 보랏빛 색을 곱해서</b> 씀</li>
+      <li>하이라이트와 림 라이트도 <code>step</code>으로 딱 끊음</li>
+      <li>경계 부드러움(smoothstep 폭)은 앨리어싱을 줄이는 용도</li>
     </ul>
     <p><b>인버티드 헐(inverted hull)</b>은 같은 메시를 법선 방향으로 조금 부풀려 뒷면만 단색으로 그림(<b>앞면 컬링</b>). 원래 메시가 가운데를 덮어 실루엣에만 테두리가 남음.</p>
     <ul>
-      <li><i>화면 공간</i> 폭: 거리와 관계없이 픽셀 두께가 일정함.</li>
-      <li><i>월드 공간</i> 폭: 멀어질수록 얇아짐.</li>
+      <li><i>화면 공간</i> 폭: 거리와 관계없이 픽셀 두께가 일정함</li>
+      <li><i>월드 공간</i> 폭: 멀어질수록 얇아짐</li>
     </ul>
     <p>단점: 큐브처럼 모서리에서 법선이 갈라진 메시는 부풀릴 때 면이 따로 벌어짐. 그래서 <b>외곽선에 틈</b>이 생김. 같은 위치 정점의 법선을 평균한 <b>아웃라인 전용 법선</b>을 쓰면 해결됨. Guilty Gear Xrd 등은 이런 법선과 정점 컬러로 선 두께까지 아티스트가 제어했음.</p>`,
   // 도식: 툰 셰이딩의 명암 단계와 인버티드 헐로 외곽선이 남는 원리
@@ -40,15 +40,15 @@ GTL.register({
   </svg>`,
   look: [
     'B를 보면 명암이 2단으로 끊기고 그림자가 보랏빛으로 칠해짐. "명암 단계"를 3~4로 올리면 단계가 늘어남.',
-    '모양을 "큐브"로 바꾸고 "헐에 평균 법선"을 끄면 모서리마다 외곽선이 갈라짐.',
-    '휠로 멀리 줌아웃하면 화면 공간 폭은 그대로, 월드 공간 폭은 얇아짐.',
-    '"경계 부드러움"을 0으로 하면 명암 경계에 계단(앨리어싱)이 보임.',
+    '모양을 "큐브"로 바꾸고 "헐에 평균 법선"을 끄면 모서리마다 외곽선이 갈라짐',
+    '휠로 멀리 줌아웃하면 화면 공간 폭은 그대로, 월드 공간 폭은 얇아짐',
+    '"경계 부드러움"을 0으로 하면 명암 경계에 계단(앨리어싱)이 보임',
   ],
   refs: [
     { type: 'talk', title: 'GuiltyGearXrd\'s Art Style: The X Factor Between 2D and 3D (Junya C. Motomura, Arc System Works)', url: 'https://www.gdcvault.com/play/1022031/GuiltyGearXrd-s-Art-Style-The', year: 2015, note: 'GDC 2015. 인버티드 헐 외곽선, 정점 컬러로 두께 제어, 그림자 임계값 조정.' },
     { type: 'paper', title: 'Stylized Rendering Techniques for Scalable Real-Time 3D Animation (Lake, Marshall, Harris, Blackstein)', year: 2000, note: 'NPAR 2000. 하드웨어 툰 셰이딩.' },
     { type: 'paper', title: 'A Non-Photorealistic Lighting Model for Automatic Technical Illustration (Gooch et al.)', year: 1998, note: 'SIGGRAPH 98. 따뜻한 색과 차가운 색 셰이딩.' },
-    { type: 'game', title: 'Jet Set Radio (Sega)', year: 2000, note: '셀 셰이딩을 대중화한 게임.' },
+    { type: 'game', title: 'Jet Set Radio (Sega)', year: 2000, note: '셀 셰이딩을 대중화한 게임' },
   ],
   params: [
     { key: 'shading', label: '셰이딩', type: 'select', group: '셰이딩', options: [

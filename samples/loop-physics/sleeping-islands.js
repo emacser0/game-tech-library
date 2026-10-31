@@ -13,10 +13,10 @@ GTL.register({
       <li>솔버</li>
       <li>바디 쌍 충돌 검사</li>
     </ul>
-    <p>바디 하나씩 재우지 않는 이유: 더미의 맨 아래만 잠들면 위 물체를 받쳐 줄 반응이 사라지기 때문.</p>
+    <p>바디 하나씩 재우지 않는 이유: 더미의 맨 아래만 잠들면 위 물체를 받쳐 줄 반응이 사라지기 때문</p>
     <p>깨어 있는 바디가 잠든 바디에 닿으면 그 <b>아일랜드 전체가 깨어남</b>. 칸막이로 나뉜 통은 서로 다른 아일랜드라서 공이 떨어진 통만 깨어남.</p>
     <p>단점: 지터(떨림)가 큰 솔버는 속도가 임계값 아래로 내려가지 않아 영영 잠들지 못함. 그래서 슬립 효과는 솔버 품질에 달려 있음.</p>
-    <p>색: 깨어 있음 = 뷰 강조색, 잠듦 = 어두운 색(아일랜드별 테두리 색).</p>`,
+    <p>색: 깨어 있음 = 뷰 강조색, 잠듦 = 어두운 색(아일랜드별 테두리 색)</p>`,
   // 도식: 칸막이로 나뉜 두 아일랜드(하나는 잠듦, 하나는 공이 닿아 깨어남)와 슬립 타이머
   diagram: (L) => {
     const pile = (x0, cls) => [[0, 0], [1, 0], [2, 0], [3, 0], [0.5, 1], [1.5, 1], [2.5, 1], [1, 2], [2, 2]]
@@ -45,15 +45,15 @@ GTL.register({
   },
   look: [
     'B에서 공이 쌓이고 1~2초 지나면 통 단위로 어두워짐(잠듦). "깨어 있는 바디"와 "충돌 검사 쌍"이 A보다 크게 줄어듦.',
-    '3초마다 공이 한 통에 떨어지면 B에서는 그 통의 아일랜드만 깨어났다가 다시 잠듦.',
-    '클릭으로 폭발을 일으키면 주변 아일랜드가 깨어나 튐. 잠든 상태에서도 정확히 반응함.',
+    '3초마다 공이 한 통에 떨어지면 B에서는 그 통의 아일랜드만 깨어났다가 다시 잠듦',
+    '클릭으로 폭발을 일으키면 주변 아일랜드가 깨어나 튐. 잠든 상태에서도 정확히 반응.',
     '"아일랜드 단위로 재우기"를 끄면 바디가 하나씩 잠들었다가 깨어 있는 이웃 때문에 바로 다시 깨어남. 더미 전체가 거의 잠들지 못함.',
     '솔버 반복 횟수를 1~2로 낮추면 더미가 잘게 떨려(지터) 잠들기까지 오래 걸림. 슬립 임계 속도를 크게 올리면 움직이던 공이 너무 일찍 멈춤.',
   ],
   refs: [
-    { type: 'article', title: 'Simulation Islands (Erin Catto)', url: 'https://box2d.org/posts/2023/10/simulation-islands/', year: 2023, note: 'Box2D v3의 영속적 아일랜드 관리와 슬립.' },
-    { type: 'engine', title: 'Box2D - b2_timeToSleep / linearSleepTolerance', url: 'https://box2d.org/documentation/', note: '바디가 잠들기까지 0.5초, 속도 허용치.' },
-    { type: 'engine', title: 'Unity - Rigidbody.sleepThreshold / Rigidbody.Sleep', url: 'https://docs.unity3d.com/ScriptReference/Rigidbody-sleepThreshold.html', note: 'PhysX는 질량으로 나눈 운동 에너지가 기준.' },
+    { type: 'article', title: 'Simulation Islands (Erin Catto)', url: 'https://box2d.org/posts/2023/10/simulation-islands/', year: 2023, note: 'Box2D v3의 영속적 아일랜드 관리와 슬립' },
+    { type: 'engine', title: 'Box2D - b2_timeToSleep / linearSleepTolerance', url: 'https://box2d.org/documentation/', note: '바디가 잠들기까지 0.5초, 속도 허용치' },
+    { type: 'engine', title: 'Unity - Rigidbody.sleepThreshold / Rigidbody.Sleep', url: 'https://docs.unity3d.com/ScriptReference/Rigidbody-sleepThreshold.html', note: 'PhysX는 질량으로 나눈 운동 에너지가 기준' },
     { type: 'engine', title: 'Godot - RigidBody2D.can_sleep / sleeping', url: 'https://docs.godotengine.org/en/stable/classes/class_rigidbody2d.html' },
   ],
   params: [

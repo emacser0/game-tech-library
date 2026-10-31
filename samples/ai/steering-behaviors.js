@@ -2,21 +2,21 @@
 GTL.register({
   id: 'steering-behaviors',
   title: '조향 행동: Seek, Arrive, Pursue, Wander',
-  summary: 'Reynolds의 조향 행동은 "원하는 속도 − 현재 속도"를 힘으로 쓰는 단순한 규칙. 목표로 곧장 달려드는 Seek는 목표를 지나쳐 진동함. Arrive는 감속 반경 안에서 부드럽게 멈춤.',
+  summary: 'Reynolds의 조향 행동은 "원하는 속도 − 현재 속도"를 힘으로 쓰는 단순한 규칙. 목표로 곧장 달려드는 Seek는 목표를 지나쳐 진동. Arrive는 감속 반경 안에서 부드럽게 멈춤.',
   views: { a: 'Seek', b: 'Arrive' },
   controls: '목표가 "마우스"이면 마우스 위치를 따라감',
   info: `
     <p>조향 행동(steering behavior)은 캐릭터가 목표를 향해 스스로 움직이게 하는 규칙. 모든 행동이 같은 틀을 씀.</p>
     <ul>
-      <li><code>steering = desired_velocity − velocity</code>를 계산함.</li>
-      <li>이 값을 <b>최대 힘</b>으로 자름.</li>
-      <li>질량으로 나눠 가속도로 씀.</li>
+      <li><code>steering = desired_velocity − velocity</code>를 계산</li>
+      <li>이 값을 <b>최대 힘</b>으로 자름</li>
+      <li>질량으로 나눠 가속도로 씀</li>
     </ul>
     <p>차량(움직이는 캐릭터)은 최대 속도와 최대 힘 제한 때문에 방향을 즉시 바꾸지 못함. 그래서 자연스러운 곡선을 그림.</p>
     <ul>
-      <li><b>Seek</b>: desired = 목표 방향 × 최대 속도. 목표에 도착해도 감속하지 않음. 그래서 <b>지나치고 되돌아오기</b>를 반복함.</li>
-      <li><b>Arrive</b>: 감속 반경 안에서 desired 속도를 거리에 비례해 줄임.</li>
-      <li><b>Flee</b>: Seek의 반대 방향.</li>
+      <li><b>Seek</b>: desired = 목표 방향 × 최대 속도. 목표에 도착해도 감속하지 않음. 그래서 <b>지나치고 되돌아오기</b>를 반복.</li>
+      <li><b>Arrive</b>: 감속 반경 안에서 desired 속도를 거리에 비례해 줄임</li>
+      <li><b>Flee</b>: Seek의 반대 방향</li>
       <li><b>Pursue / Evade</b>: 목표의 현재 위치 대신 <b>예측 위치</b>(위치 + 속도 × T)로 Seek/Flee를 함. T는 거리/속도에 비례.</li>
       <li><b>Wander</b>: 앞쪽 원 위의 점을 매 프레임 조금씩 무작위로 옮기고, 그 점으로 Seek를 함. 결과는 부드러운 배회.</li>
     </ul>
@@ -26,7 +26,7 @@ GTL.register({
       <li>초록: 원하는 속도</li>
       <li>빨강: 조향력</li>
     </ul>
-    <p>맵 가장자리에서는 경계 유지(containment) 힘이 더해짐.</p>`,
+    <p>맵 가장자리에서는 경계 유지(containment) 힘이 더해짐</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 200" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="sb-n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
     <text x="10" y="18">${L('조향력 = 원하는 속도 − 현재 속도', 'steering = desired − velocity')}</text>
@@ -59,11 +59,11 @@ GTL.register({
     '기본 상태(목표가 4초마다 이동)로 실행하면 A(Seek)는 목표를 지나쳐 빙빙 돌고, B(Arrive)는 감속 원 안에서 미끄러지듯 멈춤. "정착 시간"이 B 쪽이 짧음.',
     '목표를 "원 궤도로 이동"으로, A를 Seek, B를 Pursue로 두면 Pursue가 예측점(노란 점)을 향해 가로질러 더 빨리 따라잡음. "평균 거리"가 B 쪽이 작음.',
     '최대 힘을 낮추면 회전 반경이 커지고 Seek의 진동이 심해짐. 최대 힘을 아주 높이면 Seek도 거의 직선으로 붙음.',
-    'Wander의 지터(jitter)와 원 반경을 바꾸면 배회 성격이 바뀜(초조함 vs 느긋함).',
+    'Wander의 지터(jitter)와 원 반경을 바꾸면 배회 성격이 바뀜(초조함 vs 느긋함)',
   ],
   refs: [
     { type: 'paper', title: 'Steering Behaviors For Autonomous Characters', year: 1999, note: 'Craig W. Reynolds, GDC 1999. Seek/Flee/Pursue/Evade/Arrive/Wander 정의.', url: 'https://www.red3d.com/cwr/steer/gdc99/' },
-    { type: 'article', title: 'Steering Behaviors (Craig Reynolds 홈페이지)', url: 'https://www.red3d.com/cwr/steer/', note: '각 행동의 자바 애플릿 데모 모음.' },
+    { type: 'article', title: 'Steering Behaviors (Craig Reynolds 홈페이지)', url: 'https://www.red3d.com/cwr/steer/', note: '각 행동의 자바 애플릿 데모 모음' },
     { type: 'book', title: 'Programming Game AI by Example', year: 2004, note: 'Mat Buckland. 3장 "How to Create Autonomous Moving Game Agents".' },
     { type: 'book', title: 'The Nature of Code - Autonomous Agents', url: 'https://natureofcode.com/autonomous-agents/', note: 'Daniel Shiffman. 조향 행동 입문.' },
   ],

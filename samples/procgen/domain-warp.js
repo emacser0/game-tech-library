@@ -8,7 +8,7 @@ GTL.register({
   info: `
     <p><b>도메인 워핑</b>: 노이즈 <code>f(p)</code> 대신 좌표를 비튼 <code>f(p + h(p))</code>를 계산하는 기법.
     비트는 양 <code>h(p)</code>도 노이즈로 만듦.</p>
-    <p>쓰임: 같은 fBm에서 전혀 다른 형태를 얻음.</p>
+    <p>쓰임: 같은 fBm에서 전혀 다른 형태를 얻음</p>
     <ul>
       <li>지형: 침식된 듯한 능선, 휘어진 지층</li>
       <li>텍스처: 대리석, 연기, 행성 표면</li>
@@ -20,7 +20,7 @@ GTL.register({
       <li><code>f = fbm(p + 4r)</code></li>
     </ul>
     <p>색은 최종 값에 중간 벡터 <code>|q|</code>, <code>r.x</code>를 섞어 정함. 그래서 층 구조가 강조됨.</p>
-    <p>단점: 단계가 늘면 비용도 늘어남. 픽셀당 fBm 호출이 1회, 3회, 5회로 증가함.</p>`,
+    <p>단점: 단계가 늘면 비용도 늘어남. 픽셀당 fBm 호출이 1회, 3회, 5회로 증가.</p>`,
   // 도식: 샘플 위치를 노이즈만큼 옮기는 원리. 가까운 점은 비슷하게 밀려 패턴이 휘어짐
   diagram: (L) => {
     let left = '', right = '';
@@ -44,15 +44,15 @@ GTL.register({
   </svg>`;
   },
   look: [
-    'A와 B를 비교하면 A는 둥근 얼룩뿐이고, B는 같은 fBm인데 길게 늘어진 소용돌이와 층이 보임.',
+    'A와 B를 비교하면 A는 둥근 얼룩뿐이고, B는 같은 fBm인데 길게 늘어진 소용돌이와 층이 보임',
     'A의 워핑 단계를 1로 바꾸면 중간 형태가 보임. 강도를 1→8로 올리면 왜곡이 강해지다가 결국 잘게 부서짐.',
-    '"변위 벡터 표시"를 켜면 각 점의 좌표가 끌려가는 방향(q × 강도)이 화살표로 보임.',
-    '워핑 단계를 올리면 ⏱ 프레임 시간이 단계 수에 비례해 늘어남. 실제 게임은 셰이더나 오프라인 베이크로 처리함.',
+    '"변위 벡터 표시"를 켜면 각 점의 좌표가 끌려가는 방향(q × 강도)이 화살표로 보임',
+    '워핑 단계를 올리면 ⏱ 프레임 시간이 단계 수에 비례해 늘어남. 실제 게임은 셰이더나 오프라인 베이크로 처리.',
   ],
   refs: [
-    { type: 'article', title: 'Inigo Quilez: Domain Warping', url: 'https://iquilezles.org/articles/warp/', year: 2002, note: '이 샘플 공식의 원전.' },
-    { type: 'book', title: 'Texturing & Modeling: A Procedural Approach', year: 2002, note: 'Perlin의 turbulence로 좌표를 비트는 대리석 텍스처 기법.' },
-    { type: 'article', title: 'The Book of Shaders: Fractal Brownian Motion (Patricio Gonzalez Vivo & Jen Lowe)', url: 'https://thebookofshaders.com/13/', note: '도메인 워핑 예제 포함.' },
+    { type: 'article', title: 'Inigo Quilez: Domain Warping', url: 'https://iquilezles.org/articles/warp/', year: 2002, note: '이 샘플 공식의 원전' },
+    { type: 'book', title: 'Texturing & Modeling: A Procedural Approach', year: 2002, note: 'Perlin의 turbulence로 좌표를 비트는 대리석 텍스처 기법' },
+    { type: 'article', title: 'The Book of Shaders: Fractal Brownian Motion (Patricio Gonzalez Vivo & Jen Lowe)', url: 'https://thebookofshaders.com/13/', note: '도메인 워핑 예제 포함' },
   ],
   params: [
     { key: 'levels', label: '워핑 단계', type: 'select', group: '워핑', options: [

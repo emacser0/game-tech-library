@@ -11,11 +11,11 @@ GTL.register({
     격투 게임과 액션 게임에서 거의 표준. 강한 공격일수록 길게 줌(예: 약공격 3~5프레임, 강공격 8~12프레임).</p>
     <ul>
       <li><b>공격자도 정지</b>: 손이 대상에 "박힌" 느낌을 줌. 피격자만 멈추면 공격자는 계속 움직여 가볍게 느껴짐.</li>
-      <li><b>피격자 진동</b>: 정지 중 피격자 스프라이트만 좌우로 떨게 해 충격을 전달함(스매시브라더스 등).</li>
+      <li><b>피격자 진동</b>: 정지 중 피격자 스프라이트만 좌우로 떨게 해 충격을 전달(스매시브라더스 등)</li>
       <li><b>히트 플래시</b>: 피격자를 1~2프레임 흰색으로 그림. 명중 여부를 바로 읽을 수 있음.</li>
       <li>정지가 끝나면 넉백이 시작됨. "멈춤 → 폭발적 이동"의 대비가 핵심.</li>
     </ul>
-    <p>시뮬레이션은 60Hz 고정 프레임. 하단 타임라인의 한 칸이 1프레임이고, 정지 프레임은 뷰 색으로 표시함.
+    <p>시뮬레이션은 60Hz 고정 프레임. 하단 타임라인의 한 칸이 1프레임이고, 정지 프레임은 뷰 색으로 표시.
     단점: 정지가 너무 길면 템포가 끊김.</p>`,
   // 도식: 60Hz 프레임 타임라인. A는 명중 직후 넉백, B는 정지 프레임 뒤 넉백
   diagram: (L) => `<svg viewBox="0 0 540 152" xmlns="http://www.w3.org/2000/svg">
@@ -35,8 +35,8 @@ GTL.register({
     <text x="4" y="146" class="t-small t-dim">${L('1칸 = 1프레임. 멈춤 뒤 폭발적 이동의 대비가 타격을 묵직하게 만듦', '1 cell = 1 frame. A stop, then a burst of motion, makes the hit feel heavy')}</text>
   </svg>`,
   look: [
-    '자동 데모의 약-약-강 콤보를 비교하면 A는 샌드백이 툭 밀릴 뿐이고, B는 강공격에서 화면이 "쿵" 하고 멈춤.',
-    'B에서 "공격자도 정지"를 끄면 주먹이 대상을 관통해 지나가는 느낌이 됨.',
+    '자동 데모의 약-약-강 콤보를 비교하면 A는 샌드백이 툭 밀릴 뿐이고, B는 강공격에서 화면이 "쿵" 하고 멈춤',
+    'B에서 "공격자도 정지"를 끄면 주먹이 대상을 관통해 지나가는 느낌이 됨',
     '히트스톱을 250ms로 키우면 동작이 끊겨 템포가 나빠짐. 강공격 배율로 약공격과 강공격의 차이를 조절해 볼 것.',
     '플래시와 진동만 켜고 히트스톱을 0으로 하면 효과가 일부 남지만 무게감은 사라짐. 무게감은 정지가 만듦.',
   ],
@@ -44,7 +44,7 @@ GTL.register({
     { type: 'talk', title: 'Masahiro Sakurai on Creating Games (YouTube 채널)', year: 2022, note: '사쿠라이 마사히로. 히트스톱(hitstop)과 피격자 진동을 다룬 에피소드 있음.' },
     { type: 'talk', title: 'The Art of Screenshake (Jan Willem Nijman, Vlambeer)', year: 2013, note: 'INDIGO 2013. "sleep" (짧은 정지)를 타격감 기법으로 소개.' },
     { type: 'book', title: 'Game Feel: A Game Designer\'s Guide to Virtual Sensation (Steve Swink)', year: 2008 },
-    { type: 'talk', title: 'Juice it or lose it (Martin Jonasson & Petri Purho)', year: 2012, note: '게임에 주스를 단계적으로 추가하는 시연 발표.' },
+    { type: 'talk', title: 'Juice it or lose it (Martin Jonasson & Petri Purho)', year: 2012, note: '게임에 주스를 단계적으로 추가하는 시연 발표' },
   ],
   params: [
     { key: 'hitstop', label: '히트스톱', type: 'bool', a: false, b: true, group: '기법' },

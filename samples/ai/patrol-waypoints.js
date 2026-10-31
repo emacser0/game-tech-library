@@ -6,7 +6,7 @@ GTL.register({
   views: { a: '무작위 이동', b: '웨이포인트 순찰 + 대기' },
   controls: '마우스 클릭: 클릭한 곳에 웨이포인트 추가 (웨이포인트 방식), 지우기 버튼으로 초기화',
   info: `
-    <p><b>순찰</b>: 적이 없을 때 경비병이 하는 기본 행동. 플레이어가 경비병을 처음 만나는 상태라서 게임의 인상을 크게 좌우함.</p>
+    <p><b>순찰</b>: 적이 없을 때 경비병이 하는 기본 행동. 플레이어가 경비병을 처음 만나는 상태라서 게임의 인상을 크게 좌우.</p>
     <ul>
       <li><b>무작위 방향</b>: 몇 초마다 방향을 새로 고름. 구현은 가장 쉬움. 같은 곳을 맴돌거나 구석을 오래 비워 둠.</li>
       <li><b>무작위 지점</b>: 마당 안의 아무 지점을 골라 걸어감. 가운데를 자주 지나고 가장자리는 덜 감.</li>
@@ -36,11 +36,11 @@ GTL.register({
   look: [
     '1분 정도 두면 A의 바닥 일부가 짙은 빨강으로 남음. B는 모든 칸이 일정 시간 안에 다시 밝아짐. "최대 방치 시간" 숫자가 크게 다름.',
     'B의 "둘러보기"를 끄면 대기 중 시야가 한 방향에 고정됨. 웨이포인트 사이 측면이 덜 보여 "평균 방치 시간"이 늘어남.',
-    'A를 "무작위 지점"으로 바꾸면 가운데는 자주 보지만 네 구석이 계속 붉게 남음.',
+    'A를 "무작위 지점"으로 바꾸면 가운데는 자주 보지만 네 구석이 계속 붉게 남음',
     'B 뷰를 클릭해 웨이포인트를 한쪽에만 몰아 찍으면 반대쪽이 방치됨. 웨이포인트 배치가 순찰 품질을 정함.',
   ],
   refs: [
-    { type: 'engine', title: 'Unity Manual - Making an Agent Patrol Between a Set of Points', url: 'https://docs.unity3d.com/Manual/nav-AgentPatrol.html', note: 'NavMeshAgent로 웨이포인트를 차례로 도는 예제.' },
+    { type: 'engine', title: 'Unity Manual - Making an Agent Patrol Between a Set of Points', url: 'https://docs.unity3d.com/Manual/nav-AgentPatrol.html', note: 'NavMeshAgent로 웨이포인트를 차례로 도는 예제' },
     { type: 'paper', title: 'Steering Behaviors For Autonomous Characters', url: 'https://www.red3d.com/cwr/steer/gdc99/', year: 1999, note: 'Craig Reynolds, GDC 1999. Wander 행동.' },
     { type: 'book', title: 'Artificial Intelligence for Games (3rd ed.)', year: 2019, note: 'Ian Millington. 이동과 의사결정 기초.' },
   ],

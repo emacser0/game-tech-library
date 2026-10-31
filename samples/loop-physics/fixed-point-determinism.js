@@ -4,9 +4,9 @@ GTL.register({
   title: '결정론: 부동소수점 vs 고정소수점',
   summary: '락스텝 멀티플레이와 리플레이는 모든 머신이 비트 단위로 같은 시뮬레이션을 해야 함. 부동소수점은 덧셈 순서나 정밀도가 조금만 달라도 결과가 갈라짐. 혼돈계(당구 브레이크)는 그 차이를 눈에 보이는 크기로 키움. 정수(고정소수점)는 결합 법칙이 성립해 갈라지지 않음.',
   views: { a: '부동소수점 (float64)', b: '고정소수점 (Q16 정수)' },
-  controls: '조작 없음. 14초마다 같은 초기 조건으로 다시 브레이크함.',
+  controls: '조작 없음. 14초마다 같은 초기 조건으로 다시 브레이크.',
   info: `
-    <p><b>결정론</b>(determinism)은 같은 입력이면 어느 머신에서든 비트까지 같은 결과가 나오는 성질. 락스텝 멀티플레이와 리플레이에 필요함.</p>
+    <p><b>결정론</b>(determinism)은 같은 입력이면 어느 머신에서든 비트까지 같은 결과가 나오는 성질. 락스텝 멀티플레이와 리플레이에 필요.</p>
     <p>각 뷰 안에서 <b>머신 1</b>(채운 공)과 <b>머신 2</b>(흰 테두리)가 <b>완전히 같은 초기 조건</b>으로 같은 물리를 돌림.
     다른 점은 머신 2가 힘을 <b>반대 순서로 더하는</b> 것 하나뿐. 실제로 이런 차이가 흔히 생기는 곳:</p>
     <ul>
@@ -16,9 +16,9 @@ GTL.register({
     </ul>
     <p>부동소수점 덧셈은 결합 법칙이 성립하지 않음. 그래서 <code>(a+b)+c ≠ a+(b+c)</code>일 수 있음. 차이는 처음엔 1 ULP(≈10⁻¹⁶)지만
     공끼리 부딪칠 때마다 커져서(혼돈) 몇 초 안에 <b>전혀 다른 결과</b>가 됨. 락스텝 게임에서는 이것이 곧 <b>디싱크</b>(desync, 머신 간 상태 불일치).</p>
-    <p><b>고정소수점</b>은 위치를 <code>px × 65536</code> 정수로 저장하고, 모든 연산을 정수 곱셈과 나눗셈(버림)으로 처리함. 정수 덧셈은 순서와 관계없이 정확함.
+    <p><b>고정소수점</b>은 위치를 <code>px × 65536</code> 정수로 저장하고, 모든 연산을 정수 곱셈과 나눗셈(버림)으로 처리. 정수 덧셈은 순서와 관계없이 정확함.
     그래서 두 머신의 상태 해시가 끝까지 같음.</p>
-    <p>단점: 정밀도와 범위를 직접 관리해야 함. sqrt와 삼각함수도 정수 버전이 필요함.</p>
+    <p>단점: 정밀도와 범위를 직접 관리해야 함. sqrt와 삼각함수도 정수 버전 필요.</p>
     <p>"차이 없음"을 고르면 부동소수점도 <b>같은 코드, 같은 순서, 같은 플랫폼</b>에서는 완벽히 결정론적임을 확인할 수 있음. 문제는 "같은 연산"을 보장하기 어렵다는 점.</p>`,
   // 도식: 부동소수점 덧셈은 순서에 따라 결과가 다름. 그 차이가 충돌마다 커짐. 정수는 순서와 관계없이 같음
   diagram: (L) => `<svg viewBox="0 0 540 186" xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +29,7 @@ GTL.register({
     <text x="10" y="102" class="t-b">${L('B: Q16 정수 (값 × 65536)', 'B: Q16 integer (value × 65536)')}</text>
     <text x="10" y="122" class="t-small t-mono">6554 + 13107 + 19661</text>
     <text x="10" y="138" class="t-small t-mono">${L('어느 순서든 = 39322', 'any order = 39322')}</text>
-    <text x="10" y="154" class="t-small t-dim">${L('정수 덧셈은 결합 법칙이 성립함', 'Integer addition is associative')}</text>
+    <text x="10" y="154" class="t-small t-dim">${L('정수 덧셈은 결합 법칙 성립', 'Integer addition is associative')}</text>
     <line x1="320" y1="160" x2="530" y2="160" class="d-line"/><line x1="320" y1="160" x2="320" y2="22" class="d-line"/>
     <text x="324" y="18" class="t-small">${L('머신 1, 2의 위치 차이 (로그)', 'Gap between machine 1 and 2 (log)')}</text>
     <text x="530" y="176" text-anchor="end" class="t-small">${L('시간', 'time')}</text>
@@ -44,12 +44,12 @@ GTL.register({
   </svg>`,
   look: [
     'A를 보면 브레이크 직후(약 0.15초)에 이미 "첫 비트 차이"가 기록됨. 이때 위치 차는 10⁻⁶px 수준. 충돌이 거듭되며 커져 5초쯤부터 채운 공과 흰 테두리가 갈라짐(빨간 선). B는 해시가 끝까지 같음.',
-    'A의 "머신 2 차이"를 "float32 정밀도"로 바꾸면 첫 프레임부터 갈라짐(x87 80비트 vs SSE 64비트 차이와 같은 종류의 문제).',
+    'A의 "머신 2 차이"를 "float32 정밀도"로 바꾸면 첫 프레임부터 갈라짐(x87 80비트 vs SSE 64비트 차이와 같은 종류의 문제)',
     '"차이 없음"을 고르면 A도 해시가 같음. 부동소수점 자체가 무작위인 것은 아님.',
     '큐 속도를 낮추면 충돌이 적어 차이가 천천히 커짐. 비트는 달라도 화면상 차이는 끝까지 안 보일 수 있음. 그래도 해시가 다르므로 락스텝에서는 디싱크.',
   ],
   refs: [
-    { type: 'article', title: 'Floating Point Determinism (Glenn Fiedler)', url: 'https://gafferongames.com/post/floating_point_determinism/', year: 2010, note: '컴파일러, CPU별 부동소수점 결과 차이와 락스텝.' },
+    { type: 'article', title: 'Floating Point Determinism (Glenn Fiedler)', url: 'https://gafferongames.com/post/floating_point_determinism/', year: 2010, note: '컴파일러, CPU별 부동소수점 결과 차이와 락스텝' },
     { type: 'talk', title: '1500 Archers on a 28.8: Network Programming in Age of Empires and Beyond (Bettner, Terrano)', year: 2001, note: 'GDC 2001. 결정론적 락스텝과 out-of-sync 디버깅.' },
     { type: 'article', title: 'Floating-Point Determinism (Bruce Dawson)', year: 2013, note: 'Random ASCII 블로그. FMA, x87, 연산 순서 문제 정리.' },
     { type: 'article', title: 'What Every Computer Scientist Should Know About Floating-Point Arithmetic (David Goldberg)', year: 1991, note: 'ACM Computing Surveys. 결합 법칙 비성립, 반올림 오차.' },

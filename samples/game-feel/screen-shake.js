@@ -8,15 +8,15 @@ GTL.register({
   info: `
     <p>가장 흔한 구현은 흔들림 시간 동안 매 프레임 <code>offset = random(-1,1) × 강도</code>를 더하는 방식. 문제는 세 가지.</p>
     <ul>
-      <li>값이 프레임마다 따로 놀아 <b>고주파 지글거림</b>이 생김.</li>
-      <li>60fps와 144fps에서 체감이 다름.</li>
-      <li>강도가 일정해 강약이 없음.</li>
+      <li>값이 프레임마다 따로 놀아 <b>고주파 지글거림</b>이 생김</li>
+      <li>60fps와 144fps에서 체감이 다름</li>
+      <li>강도가 일정해 강약 없음</li>
     </ul>
     <p>Squirrel Eiserloh(GDC 2016)의 방식:</p>
     <ul>
       <li><b>트라우마</b> <code>t ∈ [0,1]</code>: 충격마다 더함(최대 1). 초당 일정량씩 선형으로 줄어듦.</li>
       <li><b>흔들림 = t² (또는 t³)</b>: 작은 충격은 거의 안 흔들리고 큰 충격은 확 흔들림. 감쇠 끝부분은 부드럽게 사라짐.</li>
-      <li><b>펄린 노이즈</b>로 오프셋을 샘플링: <code>x = maxOffset × shake × perlin(seed, time × freq)</code>. 시간에 따라 연속이라 부드럽고 프레임레이트와 무관함.</li>
+      <li><b>펄린 노이즈</b>로 오프셋을 샘플링: <code>x = maxOffset × shake × perlin(seed, time × freq)</code>. 시간에 따라 연속이라 부드럽고 프레임레이트와 무관.</li>
       <li><b>회전 흔들림</b>: 2D에서는 작은 각도의 회전이 이동보다 강렬하게 느껴짐. 이동 흔들림은 화면 가장자리를 드러내므로 최대값을 작게 둠.</li>
     </ul>
     <p>UI(HUD)는 흔들림 바깥에서 그려야 읽기 쉬움. 아래 그래프는 카메라 X 오프셋의 시간 변화.</p>`,
@@ -61,7 +61,7 @@ GTL.register({
   refs: [
     { type: 'talk', title: 'Math for Game Programmers: Juicing Your Cameras With Math (Squirrel Eiserloh)', year: 2016, note: 'GDC 2016. 트라우마, shake = trauma², 펄린 노이즈 기반 흔들림, 회전 흔들림.' },
     { type: 'talk', title: 'The Art of Screenshake (Jan Willem Nijman, Vlambeer)', year: 2013, note: 'INDIGO 2013. 화면 흔들림을 포함한 30가지 타격감 기법.' },
-    { type: 'talk', title: 'Juice it or lose it (Martin Jonasson & Petri Purho)', year: 2012, note: '게임에 주스를 단계적으로 추가하는 시연 발표.' },
+    { type: 'talk', title: 'Juice it or lose it (Martin Jonasson & Petri Purho)', year: 2012, note: '게임에 주스를 단계적으로 추가하는 시연 발표' },
   ],
   params: [
     { key: 'mode', label: '흔들림 방식', type: 'select', group: '흔들림', options: [

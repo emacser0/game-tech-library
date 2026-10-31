@@ -122,20 +122,20 @@
   GTL.register({
     id: 'reliability-ack',
     title: '신뢰성 계층 (Ack 비트필드 + 재전송)',
-    summary: 'UDP 패킷마다 순번과 "최근 받은 32개 패킷" 비트필드를 실어 보냄. 보내는 쪽은 확인되지 않은 메시지만 다시 보냄. 손실이 있어도 중요한 메시지가 모두 도착함.',
+    summary: 'UDP 패킷마다 순번과 "최근 받은 32개 패킷" 비트필드를 실어 보냄. 보내는 쪽은 확인되지 않은 메시지만 다시 보냄. 손실이 있어도 중요한 메시지가 모두 도착.',
     views: { a: '신뢰성 없음', b: 'Ack 비트필드 + 재전송' },
     controls: 'Space: 메시지 1개 추가 (두 뷰 동시)',
     info: `
-      <p><b>신뢰성 계층</b>: UDP 위에 직접 만드는 "필요한 메시지만 확실히 보내는" 층. 위치 같은 상태는 그대로 비신뢰 전송, 아이템 사용 같은 사건만 신뢰 전송함.</p>
+      <p><b>신뢰성 계층</b>: UDP 위에 직접 만드는 "필요한 메시지만 확실히 보내는" 층. 위치 같은 상태는 그대로 비신뢰 전송, 아이템 사용 같은 사건만 신뢰 전송.</p>
       <p>왜 TCP를 쓰지 않는가: TCP는 패킷 하나가 손실되면 뒤의 모든 데이터가 재전송을 기다림(Head-of-line blocking). 실시간 게임에는 지연이 너무 커짐.</p>
       <ul>
         <li>양쪽 모두 일정한 주기로 패킷을 보냄. 헤더는 <code>seq</code>(내 순번), <code>ack</code>(받은 가장 최근 순번), <code>ack_bits</code>(그 이전 32개를 받았는지 비트).</li>
         <li>ack 정보가 매 패킷마다 중복으로 실림. 응답 패킷 몇 개가 손실돼도 확인 정보는 거의 잃지 않음.</li>
-        <li>보내는 쪽은 패킷 순번별로 어떤 메시지를 담았는지 기억함. 그 패킷이 확인되면 메시지도 확인됨.</li>
-        <li>확인되지 않은 메시지는 재전송 대기 시간이 지나면 다음 패킷에 다시 실음.</li>
-        <li>순서 보장을 켜면 받는 쪽이 빠진 번호를 기다렸다가 순서대로 넘김.</li>
+        <li>보내는 쪽은 패킷 순번별로 어떤 메시지를 담았는지 기억. 그 패킷이 확인되면 메시지도 확인됨.</li>
+        <li>확인되지 않은 메시지는 재전송 대기 시간이 지나면 다음 패킷에 다시 실음</li>
+        <li>순서 보장을 켜면 받는 쪽이 빠진 번호를 기다렸다가 순서대로 넘김</li>
       </ul>
-      <p>단점: 헤더가 패킷마다 6바이트 늘어남. 재전송된 메시지는 RTT 이상 늦게 도착함. 순서 보장은 앞 메시지가 늦으면 뒤 메시지까지 늦춤.</p>`,
+      <p>단점: 헤더가 패킷마다 6바이트 늘어남. 재전송된 메시지는 RTT 이상 늦게 도착. 순서 보장은 앞 메시지가 늦으면 뒤 메시지까지 늦춤.</p>`,
     diagram: (L) => `<svg viewBox="0 0 540 178" xmlns="http://www.w3.org/2000/svg">
       <defs><marker id="arrB" class="m-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
       <text x="4" y="14" class="t-small t-dim">${L('받는 쪽이 보내는 패킷 헤더', 'Packet header from the receiver')}</text>
@@ -156,7 +156,7 @@
     look: [
       '가운데 "받는 쪽" 격자를 비교하면, A에는 빨간 칸(영영 도착하지 않은 메시지)이 손실률만큼 생김. B는 모두 채워짐.',
       'B의 "평균 전달 지연"이 A보다 큼. 재전송된 메시지가 평균을 올림.',
-      'B에서 "순서 보장"을 켜고 손실률을 0.3으로 올리면 노란 칸(앞 번호를 기다리는 메시지)이 늘고 전달 지연이 커짐.',
+      'B에서 "순서 보장"을 켜고 손실률을 0.3으로 올리면 노란 칸(앞 번호를 기다리는 메시지)이 늘고 전달 지연이 커짐',
       'B의 재전송 대기 시간을 RTT보다 짧게(30ms) 줄이면 "중복 수신"이 크게 늘어남. 확인이 오기 전에 다시 보내기 때문임.',
       '오른쪽 비트필드에서 빈 칸은 받는 쪽이 받지 못한 패킷 순번. 그 패킷에 실린 메시지가 재전송 대상이 됨.',
     ],
@@ -350,7 +350,7 @@
             if (m.sends > 1) return C.warn;
             return m.sends ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.08)';
           });
-          const legend = P.reliable ? [GTL.L('회색: 보냄, 확인 대기', 'Gray: sent, waiting for ack'), GTL.L('노랑: 재전송함', 'Yellow: resent'), GTL.L('초록: 확인됨(ack)', 'Green: acked')] : [GTL.L('회색: 한 번 보냄', 'Gray: sent once'), GTL.L('확인 정보 없음', 'No ack info')];
+          const legend = P.reliable ? [GTL.L('회색: 보냄, 확인 대기', 'Gray: sent, waiting for ack'), GTL.L('노랑: 재전송', 'Yellow: resent'), GTL.L('초록: 확인됨(ack)', 'Green: acked')] : [GTL.L('회색: 한 번 보냄', 'Gray: sent once'), GTL.L('확인 정보 없음', 'No ack info')];
           legend.forEach((s, i) => D.text(g, s, p0.x + 6, y + i * 13, { size: 10, color: C.dim }));
 
           y = cellGrid(g, p1, GTL.L('받는 쪽: 앱에 전달된 메시지', 'Receiver: messages passed to the app'), col, (m) => {

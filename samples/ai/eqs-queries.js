@@ -6,7 +6,7 @@ GTL.register({
   views: { a: '단순 규칙', b: 'EQS 쿼리' },
   controls: '드래그로 플레이어(초록) 이동. 놓고 3초 지나면 자동으로 움직임. B의 점 위에 마우스를 올리면 테스트별 점수 표시.',
   info: `
-    <p><b>EQS(Environment Query System)</b>: Unreal의 위치 선택 도구. "어디로 갈까"를 코드 대신 쿼리 자산으로 정의함.</p>
+    <p><b>EQS(Environment Query System)</b>: Unreal의 위치 선택 도구. "어디로 갈까"를 코드 대신 쿼리 자산으로 정의.</p>
     <p>단순 규칙(가장 가까운 엄폐 지점, 플레이어에게 가장 가까운 점)은 조건 하나만 봄. 그래서 플레이어가 안 보이는 자리, 너무 가까운 자리, 멀리 돌아가야 하는 자리를 고르기 쉬움.</p>
     <p>쿼리 실행 순서:</p>
     <ul>
@@ -15,8 +15,8 @@ GTL.register({
       <li><b>점수 테스트</b>: 남은 점마다 값을 재고 0~1로 정규화. 예: 기준 거리와의 차이(Distance), 경로 길이(Pathfinding), 바라보는 방향(Dot).</li>
       <li>테스트 점수 × 가중치를 더해 최종 점수. <b>Single Best Item</b> 모드면 최고 점수 하나를 고름.</li>
     </ul>
-    <p>이 샘플의 "좋은 사격 자리": 플레이어가 보이고, 플레이어와 거리가 100~340인 자리.</p>
-    <p>비싼 테스트(경로, 트레이스)는 뒤에 두고 싼 필터를 먼저 돌려 후보를 줄임. Unreal도 테스트 비용 순으로 실행 순서를 정리함.</p>
+    <p>이 샘플의 "좋은 사격 자리": 플레이어가 보이고, 플레이어와 거리가 100~340인 자리</p>
+    <p>비싼 테스트(경로, 트레이스)는 뒤에 두고 싼 필터를 먼저 돌려 후보를 줄임. Unreal도 테스트 비용 순으로 실행 순서를 정리.</p>
     <p>단점: 후보 수 × 테스트 수만큼 비용이 듦. 격자가 촘촘하면 쿼리가 비쌈. 점수가 비슷한 점 사이에서 목표가 흔들릴 수 있음.</p>`,
   // 도식: 생성기 → 필터(제거) → 점수 테스트(정규화) → 가중합 → 최고 점수 선택
   diagram: (L) => `<svg viewBox="0 0 540 200" xmlns="http://www.w3.org/2000/svg">
@@ -48,16 +48,16 @@ GTL.register({
     <text x="110" y="186" class="t-small">${L('필터로 불가능한 점을 버리고, 남은 점을 여러 기준으로 비교', 'Filters drop bad items, then several scores compare the rest')}</text>
   </svg>`,
   look: [
-    'A는 플레이어와 가장 가까운 엄폐 지점(네모)으로 감. 플레이어 바로 옆이라 너무 가까움. "좋은 사격 자리 비율"이 10% 아래로 낮음. B는 가려진 점(회색 X)과 너무 가까운 점을 버리고 거리 점수가 좋은 점을 골라 70% 넘게 유지함.',
+    'A는 플레이어와 가장 가까운 엄폐 지점(네모)으로 감. 플레이어 바로 옆이라 너무 가까움. "좋은 사격 자리 비율"이 10% 아래로 낮음. B는 가려진 점(회색 X)과 너무 가까운 점을 버리고 거리 점수가 좋은 점을 골라 70% 넘게 유지.',
     'B의 점 위에 마우스를 올리면 왼쪽 위에 테스트별 원래 값, 정규화 점수, 가중치가 나옴. 필터에서 빠진 점은 빠진 이유가 나옴.',
     '"기준 거리"를 100으로 낮추면 초록 점이 플레이어 가까이 모임. 320으로 올리면 멀리서 보는 자리를 고름.',
     '"경로 길이 가중치"를 2로 올리면 지금 위치에서 가까운 점이 이기고 "이동 거리"가 줄어듦. 0으로 내리면 멀어도 거리 점수가 좋은 점까지 걸어가서 "이동 거리"가 두 배 넘게 늘어남.',
-    '플레이어를 엄폐물 뒤로 끌어다 놓으면 B의 회색 점(가시선 없음) 영역이 엄폐물 그림자 모양으로 바뀜.',
+    '플레이어를 엄폐물 뒤로 끌어다 놓으면 B의 회색 점(가시선 없음) 영역이 엄폐물 그림자 모양으로 바뀜',
   ],
   refs: [
-    { type: 'engine', title: 'Unreal Engine - Environment Query System Overview', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/environment-query-system-overview-in-unreal-engine', note: '생성기, 컨텍스트, 테스트, 점수 매기기 구조.' },
+    { type: 'engine', title: 'Unreal Engine - Environment Query System Overview', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/environment-query-system-overview-in-unreal-engine', note: '생성기, 컨텍스트, 테스트, 점수 매기기 구조' },
     { type: 'engine', title: 'Unreal Engine - EQS Node Reference: Tests', note: 'Distance, Trace, Pathfinding, Dot 테스트. Filter Only, Score Only, Filter and Score 목적과 점수 식(Scoring Equation).' },
-    { type: 'engine', title: 'Unreal Engine - EQS Node Reference: Generators', note: 'Points: Grid, Points: Circle, Actors Of Class 등 후보 생성기.' },
+    { type: 'engine', title: 'Unreal Engine - EQS Node Reference: Generators', note: 'Points: Grid, Points: Circle, Actors Of Class 등 후보 생성기' },
     { type: 'book', title: 'Tactical Position Selection: An Architecture and Query Language', year: 2013, note: 'Matthew Jack. Game AI Pro. Crytek의 위치 선택 쿼리 언어. 생성, 조건, 가중치 구조가 EQS와 같음.' },
   ],
   params: [

@@ -2,21 +2,21 @@
 GTL.register({
   id: 'raycast-dda',
   title: '그리드 레이캐스트: DDA vs 고정 간격 샘플링',
-  summary: '광선을 일정 간격으로 샘플링하면 벽 모서리를 건너뛰어 관통함. DDA(Amanatides & Woo)는 광선이 지나는 셀을 빠짐없이 순서대로 방문함. 그래서 벽을 놓치지 않고, 샘플 수도 지나는 셀 수만큼임.',
+  summary: '광선을 일정 간격으로 샘플링하면 벽 모서리를 건너뛰어 관통. DDA(Amanatides & Woo)는 광선이 지나는 셀을 빠짐없이 순서대로 방문. 그래서 벽을 놓치지 않고, 샘플 수도 지나는 셀 수만큼임.',
   views: { a: '고정 간격 마칭', b: 'DDA (Amanatides & Woo)' },
   controls: '마우스: 광원 위치 (마우스가 밖에 있으면 자동 이동)',
   info: `
-    <p>타일맵에서 시야, 총알, 빛을 계산하려면 광선이 처음 만나는 벽을 찾아야 함.</p>
-    <p>가장 쉬운 방법은 <b>고정 간격 마칭</b>. 광선을 따라 <code>step</code>마다 점을 찍고, 그 점이 벽 타일 안인지 확인함.
+    <p>타일맵에서 시야, 총알, 빛을 계산하려면 광선이 처음 만나는 벽을 찾아야 함</p>
+    <p>가장 쉬운 방법은 <b>고정 간격 마칭</b>. 광선을 따라 <code>step</code>마다 점을 찍고, 그 점이 벽 타일 안인지 확인.
     문제는 광선이 타일의 <b>모서리만 살짝 스칠 때</b>. 두 샘플 사이에 그 타일이 끼어서 광선이 <b>관통</b>함.
     간격을 줄이면 정확해지지만 샘플이 늘어남. 그래도 관통을 완전히 없앨 수는 없음.</p>
-    <p><b>DDA</b>(Amanatides &amp; Woo, 1987)는 셀 경계를 기준으로 한 칸씩 이동함.</p>
+    <p><b>DDA</b>(Amanatides &amp; Woo, 1987)는 셀 경계를 기준으로 한 칸씩 이동</p>
     <ul>
-      <li>다음 세로 경계까지의 거리 <code>tMaxX</code>와 다음 가로 경계까지의 거리 <code>tMaxY</code>를 유지함.</li>
-      <li>더 가까운 쪽 경계를 넘어 다음 셀로 이동함.</li>
-      <li>덧셈과 비교만으로 <b>지나는 모든 셀을 정확한 순서로</b> 방문함.</li>
+      <li>다음 세로 경계까지의 거리 <code>tMaxX</code>와 다음 가로 경계까지의 거리 <code>tMaxY</code>를 유지</li>
+      <li>더 가까운 쪽 경계를 넘어 다음 셀로 이동</li>
+      <li>덧셈과 비교만으로 <b>지나는 모든 셀을 정확한 순서로</b> 방문</li>
     </ul>
-    <p>울펜슈타인 3D식 레이캐스팅 엔진, 복셀 렌더러, 그리드 기반 가시성 검사의 기본 기법.</p>`,
+    <p>울펜슈타인 3D식 레이캐스팅 엔진, 복셀 렌더러, 그리드 기반 가시성 검사의 기본 기법</p>`,
   diagram: (L) => {
     const grid = (ox) => [0, 1, 2, 3, 4, 5, 6].map((c) => `<line x1="${ox + c * 36}" y1="10" x2="${ox + c * 36}" y2="154" class="d-dim"/>`).join('')
       + [0, 1, 2, 3, 4].map((r) => `<line x1="${ox}" y1="${10 + r * 36}" x2="${ox + 216}" y2="${10 + r * 36}" class="d-dim"/>`).join('');
@@ -40,13 +40,13 @@ GTL.register({
   look: [
     'A의 빨간 표시를 보면 고정 간격 샘플이 놓친 벽(관통)이 보임. 대각선으로 놓인 벽 모서리 근처에서 특히 많음.',
     'A의 샘플 간격을 0.1까지 줄이면 놓침은 줄지만 "광선당 평균 샘플"이 크게 늘어남. 그래도 0이 되지는 않음.',
-    'B를 보면 방문한 셀(파란 칸)만 검사하고, 놓친 벽이 항상 0임.',
-    '광선 수를 늘리면 두 방식의 "레이캐스트" 비용(ms) 차이가 커짐.',
+    'B를 보면 방문한 셀(파란 칸)만 검사하고, 놓친 벽이 항상 0임',
+    '광선 수를 늘리면 두 방식의 "레이캐스트" 비용(ms) 차이가 커짐',
   ],
   refs: [
     { type: 'paper', title: 'A Fast Voxel Traversal Algorithm for Ray Tracing (John Amanatides, Andrew Woo)', year: 1987, note: 'Eurographics 87. tMax/tDelta 기반 그리드 순회.' },
-    { type: 'article', title: 'Raycasting, Lode\'s Computer Graphics Tutorial', url: 'https://lodev.org/cgtutor/raycasting.html', note: 'Wolfenstein 3D식 DDA 레이캐스터 해설.' },
-    { type: 'game', title: 'Wolfenstein 3D (id Software)', year: 1992, note: '그리드 DDA 레이캐스팅으로 벽을 그린 대표 사례.' },
+    { type: 'article', title: 'Raycasting, Lode\'s Computer Graphics Tutorial', url: 'https://lodev.org/cgtutor/raycasting.html', note: 'Wolfenstein 3D식 DDA 레이캐스터 해설' },
+    { type: 'game', title: 'Wolfenstein 3D (id Software)', year: 1992, note: '그리드 DDA 레이캐스팅으로 벽을 그린 대표 사례' },
     { type: 'book', title: 'Real-Time Collision Detection, 7.4.2 Uniform Grid Traversal (Christer Ericson)', year: 2005 },
   ],
   params: [

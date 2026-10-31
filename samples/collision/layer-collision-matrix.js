@@ -4,17 +4,17 @@ GTL.register({
   title: '레이어 충돌 매트릭스 (Unity Layer Collision Matrix, Unreal 콜리전 채널)',
   summary: '모든 오브젝트 쌍을 검사하면 검사 수가 많고 총알이 같은 편을 맞힘. 레이어 매트릭스로 쌍을 거르면 검사 수가 줄고 원하는 충돌만 남음.',
   views: { a: '모든 쌍 검사', b: '레이어 매트릭스' },
-  controls: 'B 뷰 오른쪽 위 매트릭스 칸 클릭: 무시, 겹침, 막힘 순서로 바뀜.',
+  controls: 'B 뷰 오른쪽 위 매트릭스 칸 클릭: 무시, 겹침, 막힘 순서로 바뀜',
   info: `
-    <p><b>레이어 충돌 매트릭스</b>는 오브젝트에 레이어(종류)를 붙이고, 레이어 쌍마다 충돌 여부를 표로 정하는 방식.</p>
-    <p>필터가 없으면 모든 쌍을 검사함. 그래서 검사 수가 <code>n(n-1)/2</code>로 늘고, 적 총알이 쏜 적을 바로 맞히는 문제가 생김.</p>
+    <p><b>레이어 충돌 매트릭스</b>는 오브젝트에 레이어(종류)를 붙이고, 레이어 쌍마다 충돌 여부를 표로 정하는 방식</p>
+    <p>필터가 없으면 모든 쌍을 검사. 그래서 검사 수가 <code>n(n-1)/2</code>로 늘고, 적 총알이 쏜 적을 바로 맞히는 문제가 생김.</p>
     <p>동작 원리:</p>
     <ul>
       <li>레이어 쌍마다 반응을 하나 정함. Unreal 용어로 무시(Ignore), 겹침(Overlap), 막힘(Block).</li>
       <li>무시인 쌍은 검사 자체를 건너뜀. 검사 수가 줄어듦.</li>
       <li>겹침은 이벤트만 보냄(피격, 아이템 획득). 막힘은 서로 밀어냄.</li>
     </ul>
-    <p>Unity는 Physics 설정의 Layer Collision Matrix, Unreal은 오브젝트 채널과 채널별 반응(Collision Response)으로 같은 일을 함.</p>
+    <p>Unity는 Physics 설정의 Layer Collision Matrix, Unreal은 오브젝트 채널과 채널별 반응(Collision Response)으로 같은 일을 함</p>
     <p>단점: 레이어 수가 제한됨(Unity 32개). 표가 커지면 의도하지 않은 설정을 찾기 어려움.</p>`,
   // 도식: 삼각형 매트릭스 한 칸이 레이어 쌍 하나, 무시 칸은 검사하지 않음
   diagram: (L) => {
@@ -44,16 +44,16 @@ GTL.register({
   </svg>`;
   },
   look: [
-    '기본 상태에서 "쌍 검사 수"의 비율을 비교함. A는 전체 쌍의 100 %를 검사함. B는 총알이 더 많이 살아 있어도 10 % 안팎만 검사함.',
+    '기본 상태에서 "쌍 검사 수"의 비율 비교. A는 전체 쌍의 100 %를 검사. B는 총알이 더 많이 살아 있어도 10 % 안팎만 검사.',
     'A에서 "같은 편 피격" 수가 계속 늘어남. 총알이 쏜 쪽과 같은 편 총알에 바로 부딪혀 사라짐. B는 0.',
     'B 매트릭스에서 "적" 행 "적 총알" 칸(E, EB)을 겹침으로 바꾸면 B에서도 같은 편 피격이 생김. 쌍 검사 수도 늘어남.',
     '"적 수"를 늘리면 A의 검사 수는 제곱으로 늘어남. B는 필요한 레이어 쌍만큼만 늘어남.',
   ],
   refs: [
-    { type: 'engine', title: 'Unity Manual - Layer-based collision detection', url: 'https://docs.unity3d.com/Manual/LayerBasedCollision.html', note: 'Physics 설정의 Layer Collision Matrix.' },
-    { type: 'engine', title: 'Unity Scripting API - Physics.IgnoreLayerCollision', url: 'https://docs.unity3d.com/ScriptReference/Physics.IgnoreLayerCollision.html', note: '코드에서 레이어 쌍 충돌을 끄고 켬.' },
-    { type: 'engine', title: 'Unreal Engine - Collision Overview (Collision Responses, Trace and Object Channels)', note: 'Ignore, Overlap, Block 세 가지 반응과 오브젝트 채널.' },
-    { type: 'code', title: 'Box2D - b2Filter (categoryBits, maskBits, groupIndex)', note: '비트 마스크로 같은 일을 하는 방식.' },
+    { type: 'engine', title: 'Unity Manual - Layer-based collision detection', url: 'https://docs.unity3d.com/Manual/LayerBasedCollision.html', note: 'Physics 설정의 Layer Collision Matrix' },
+    { type: 'engine', title: 'Unity Scripting API - Physics.IgnoreLayerCollision', url: 'https://docs.unity3d.com/ScriptReference/Physics.IgnoreLayerCollision.html', note: '코드에서 레이어 쌍 충돌을 끄고 켬' },
+    { type: 'engine', title: 'Unreal Engine - Collision Overview (Collision Responses, Trace and Object Channels)', note: 'Ignore, Overlap, Block 세 가지 반응과 오브젝트 채널' },
+    { type: 'code', title: 'Box2D - b2Filter (categoryBits, maskBits, groupIndex)', note: '비트 마스크로 같은 일을 하는 방식' },
   ],
   params: [
     { key: 'enemies', label: '적 수', type: 'int', min: 5, max: 120, default: 40, shared: true, reset: true, group: '장면' },

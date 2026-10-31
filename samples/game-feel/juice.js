@@ -11,10 +11,10 @@ GTL.register({
     피드백만 하나씩 더해 "살아 있는" 게임으로 바꾸는 과정을 보여 줌.
     이 샘플의 주스 요소도 모두 렌더링 전용. 그래서 두 뷰의 시뮬레이션(공 위치, 벽돌, 점수)은 프레임 단위로 같음.</p>
     <ul>
-      <li><b>트윈 등장</b>: 벽돌이 이징(outBounce)으로 차례로 등장함.</li>
+      <li><b>트윈 등장</b>: 벽돌이 이징(outBounce)으로 차례로 등장</li>
       <li><b>스쿼시 & 스트레치</b>: 공은 속도 방향으로 늘어나고 충돌 순간 찌그러짐. 패들은 스프링으로 출렁임.</li>
       <li><b>파괴 연출 & 파편</b>: 벽돌이 바로 사라지지 않고 회전하며 떨어짐. 파편도 튐.</li>
-      <li><b>화면 흔들림, 플래시, 꼬리, 색</b>.</li>
+      <li><b>화면 흔들림, 플래시, 꼬리, 색</b></li>
       <li><b>패들의 눈</b>: 공을 쳐다보는 눈. 발표의 명장면.</li>
     </ul>
     <p>단점: 과하면 정보가 가려지고 눈이 피로해짐. 요소를 하나씩 껐다 켜며 무엇이 가장 효과적인지 비교해 볼 것.</p>`,
@@ -49,10 +49,10 @@ GTL.register({
     'A에서 "색"만 켜도 생각보다 차이가 큼. 가장 싸게 얻는 주스.',
   ],
   refs: [
-    { type: 'talk', title: 'Juice it or lose it (Martin Jonasson & Petri Purho)', url: 'https://www.youtube.com/watch?v=Fy0aCDmgnxg', year: 2012, note: '벽돌깨기에 주스를 단계적으로 추가.' },
+    { type: 'talk', title: 'Juice it or lose it (Martin Jonasson & Petri Purho)', url: 'https://www.youtube.com/watch?v=Fy0aCDmgnxg', year: 2012, note: '벽돌깨기에 주스를 단계적으로 추가' },
     { type: 'talk', title: 'The art of screenshake (Jan Willem Nijman, Vlambeer)', year: 2013, note: 'INDIGO 2013. 30여 가지 작은 피드백으로 슈터를 바꾸는 시연.' },
-    { type: 'book', title: 'Game Feel: A Game Designer\'s Guide to Virtual Sensation (Steve Swink)', year: 2008, note: '"polish": 시뮬레이션과 별개인 감각 피드백 층.' },
-    { type: 'article', title: 'Robert Penner\'s Easing Functions', url: 'http://robertpenner.com/easing/', note: '트윈 이징 함수의 표준 레퍼런스.' },
+    { type: 'book', title: 'Game Feel: A Game Designer\'s Guide to Virtual Sensation (Steve Swink)', year: 2008, note: '"polish": 시뮬레이션과 별개인 감각 피드백 층' },
+    { type: 'article', title: 'Robert Penner\'s Easing Functions', url: 'http://robertpenner.com/easing/', note: '트윈 이징 함수의 표준 레퍼런스' },
   ],
   params: [
     { key: 'tween', label: '트윈 등장', type: 'bool', a: false, b: true, group: '주스 요소' },

@@ -4,30 +4,30 @@ GTL.register({
   title: '웨이브 펑션 콜랩스 (Tiled WFC)',
   summary: '무작위 칸 선택 vs 최소 엔트로피 선택 비교. 어떤 칸부터 확정하느냐에 따라 모순 빈도가 크게 달라짐. 최소 엔트로피 선택이 모순이 훨씬 적음.',
   views: { a: '무작위 칸 선택', b: '최소 엔트로피 선택' },
-  controls: '조작 없음. "반복"이 켜져 있으면 완성 후 새 시드로 계속 생성하며 통계를 누적함.',
+  controls: '조작 없음. "반복"이 켜져 있으면 완성 후 새 시드로 계속 생성하며 통계 누적.',
   info: `
-    <p><b>웨이브 펑션 콜랩스(WFC)</b>: 모든 칸이 "놓을 수 있는 타일 후보"를 전부 들고 시작함.
+    <p><b>웨이브 펑션 콜랩스(WFC)</b>: 모든 칸이 "놓을 수 있는 타일 후보"를 전부 들고 시작.
     칸을 하나씩 타일 하나로 확정(collapse)하고, 이웃 칸의 후보를 규칙에 맞게 줄여 나가는 방식.</p>
     <p>타일 규칙:</p>
     <ul>
-      <li>타일은 네 변의 종류(풀, 도로, 강)로 정의함.</li>
-      <li><b>맞닿은 두 변의 종류가 같아야</b> 이웃할 수 있음.</li>
-      <li>20종: 풀, 도로(직선, 곡선, T, 십자), 강(직선, 곡선), 다리.</li>
+      <li>타일은 네 변의 종류(풀, 도로, 강)로 정의</li>
+      <li><b>맞닿은 두 변의 종류가 같아야</b> 이웃할 수 있음</li>
+      <li>20종: 풀, 도로(직선, 곡선, T, 십자), 강(직선, 곡선), 다리</li>
       <li>강은 갈라지거나 끊기지 않음. 도로에는 막다른 길이 없음.</li>
     </ul>
     <p>그래서 "여기서 시작한 강은 어딘가로 빠져나가야 함" 같은 <b>장거리 제약</b>이 생김.
     이웃만 보는 전파로는 이를 미리 알 수 없음. 그 결과 모순이 생길 수 있음.</p>
     <p>WFC 루프:</p>
     <ol>
-      <li>미확정 칸 하나를 고름.</li>
-      <li>가중치에 비례해 타일 하나로 확정함.</li>
-      <li>바뀐 칸에서 이웃으로 <b>제약 전파</b>(AC-3)를 함. 이웃 후보 중 호환되는 것만 남김.</li>
-      <li>후보가 0개인 칸이 생기면 <b>모순(contradiction)</b>.</li>
+      <li>미확정 칸 하나를 고름</li>
+      <li>가중치에 비례해 타일 하나로 확정</li>
+      <li>바뀐 칸에서 이웃으로 <b>제약 전파</b>(AC-3). 이웃 후보 중 호환되는 것만 남김.</li>
+      <li>후보가 0개인 칸이 생기면 <b>모순(contradiction)</b></li>
     </ol>
     <p>1단계에서 <b>후보가 가장 적은(엔트로피 최소) 칸</b>을 고르면 제약이 강한 곳부터 정하게 됨.
     그래서 모순이 크게 줄고, 확정된 영역이 한 덩어리로 자라남.
     <b>무작위 선택</b>은 서로 떨어진 곳을 따로 정함. 그러다 사이를 메울 수 없는 상황이 자주 생김.</p>
-    <p>이 샘플은 모순이 나면 <b>국소 재시작</b>(주변 반경을 지우고 다시 전파) 또는 전체 재시작으로 복구함.</p>`,
+    <p>이 샘플은 모순이 나면 <b>국소 재시작</b>(주변 반경을 지우고 다시 전파) 또는 전체 재시작으로 복구</p>`,
   // 도식: 후보 개수 격자에서 칸 고르기 (A 무작위 vs B 최소 엔트로피)와 WFC 루프
   diagram: (L) => `<svg viewBox="0 0 540 176" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arr-wfc" class="m-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -56,17 +56,17 @@ GTL.register({
   </svg>`,
   look: [
     'A와 B를 비교하면 A(무작위 선택)는 여기저기 조각을 확정하며 빨갛게 번쩍이는 모순이 자주 남. B는 한 덩어리가 퍼지듯 자라고 모순이 드묾.',
-    '"반복"을 켠 채 수십 회 돌린 뒤 "회당 평균 모순"을 비교하면 휴리스틱만 바꿨는데도 차이가 큼.',
+    '"반복"을 켠 채 수십 회 돌린 뒤 "회당 평균 모순"을 비교하면 휴리스틱만 바꿨는데도 차이가 큼',
     'A의 선택을 "스캔라인"으로 바꿔도 모순이 거의 없음. 핵심은 엔트로피 계산보다 "확정된 영역의 경계에서 이어 붙이는 것"임.',
-    '"막다른 길 타일 허용"을 켜면 도로가 아무 데서나 끝날 수 있어 무작위 선택에서도 모순이 줄어듦. 타일셋 설계가 모순 빈도를 좌우함.',
-    '풀밭 가중치를 낮추고 도로, 강 가중치를 올리면 맵이 빽빽해지고 무작위 선택의 모순이 더 늘어남.',
+    '"막다른 길 타일 허용"을 켜면 도로가 아무 데서나 끝날 수 있어 무작위 선택에서도 모순이 줄어듦. 타일셋 설계가 모순 빈도를 좌우.',
+    '풀밭 가중치를 낮추고 도로, 강 가중치를 올리면 맵이 빽빽해지고 무작위 선택의 모순이 더 늘어남',
   ],
   refs: [
     { type: 'code', title: 'mxgmn/WaveFunctionCollapse (Maxim Gumin)', url: 'https://github.com/mxgmn/WaveFunctionCollapse', year: 2016, note: '원본 구현. Simple Tiled Model, Overlapping Model, 최소 엔트로피 휴리스틱.' },
-    { type: 'paper', title: 'WaveFunctionCollapse is Constraint Solving in the Wild (Karth & Smith, FDG 2017)', year: 2017, note: 'WFC를 제약 충족 문제로 분석하고 휴리스틱을 비교.' },
+    { type: 'paper', title: 'WaveFunctionCollapse is Constraint Solving in the Wild (Karth & Smith, FDG 2017)', year: 2017, note: 'WFC를 제약 충족 문제로 분석하고 휴리스틱을 비교' },
     { type: 'game', title: 'Bad North (Plausible Concept, 2018)', note: 'Oskar Stålberg. 섬 생성에 WFC 사용.' },
-    { type: 'game', title: 'Townscaper (Oskar Stålberg, 2021)', note: '불규칙 격자 위에서 WFC로 건물 모듈 선택.' },
-    { type: 'game', title: 'Caves of Qud (Freehold Games)', note: '마을, 건물 생성에 WFC를 쓴 것으로 알려짐.' },
+    { type: 'game', title: 'Townscaper (Oskar Stålberg, 2021)', note: '불규칙 격자 위에서 WFC로 건물 모듈 선택' },
+    { type: 'game', title: 'Caves of Qud (Freehold Games)', note: '마을, 건물 생성에 WFC를 쓴 것으로 알려짐' },
   ],
   params: [
     { key: 'heuristic', label: '칸 선택 휴리스틱', type: 'select', group: 'WFC', options: [
@@ -142,7 +142,7 @@ GTL.register({
   setup(ctx) {
     const U = GTL.util, D = U.draw, C = U.colors, P = ctx.params;
     // 타일 = 네 변의 종류 [오른쪽, 아래, 왼쪽, 위], 0=풀 1=도로 2=강. 이웃과 맞닿은 변의 종류가 같아야 함.
-    // 강은 끊기거나 갈라지지 않고(직선, 곡선만), 도로는 기본으로 막다른 길이 없음 → 장거리 제약이 생겨 모순이 생길 수 있음.
+    // 강은 끊기거나 갈라지지 않고(직선, 곡선만), 도로는 기본으로 막다른 길이 없음 → 장거리 제약이 생겨 모순이 생길 수 있음
     const base = ['0000', '1010', '1100', '1110', '1111', '2020', '2200', '1212'];
     if (P.deadEnds) base.push('1000');
     const rot = (t) => t[3] + t[0] + t[1] + t[2];

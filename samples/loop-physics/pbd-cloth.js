@@ -9,13 +9,13 @@ GTL.register({
     <p><b>PBD</b>(Position Based Dynamics)는 힘 대신 위치를 직접 고쳐 제약을 맞추는 시뮬레이션 방법. Hitman(2000)에서 소개된 Jakobsen 방식이 출발점.</p>
     <p>동작 원리:</p>
     <ul>
-      <li>속도 대신 <b>이전 위치</b>를 저장하는 Verlet 적분으로 입자를 옮김(<code>x' = x + (x - x_prev) + g*dt²</code>).</li>
-      <li>각 거리 제약을 <b>위치를 직접 옮겨</b> 맞춤.</li>
-      <li>한 제약을 맞추면 이웃 제약이 깨짐. 그래서 전체를 여러 번 반복함(Gauss-Seidel).</li>
+      <li>속도 대신 <b>이전 위치</b>를 저장하는 Verlet 적분으로 입자를 옮김(<code>x' = x + (x - x_prev) + g*dt²</code>)</li>
+      <li>각 거리 제약을 <b>위치를 직접 옮겨</b> 맞춤</li>
+      <li>한 제약을 맞추면 이웃 제약이 깨짐. 그래서 전체를 여러 번 반복(Gauss-Seidel).</li>
     </ul>
     <p>단점: 반복이 부족하면 오차가 다 풀리지 않아 천이 <b>늘어지고</b> 출렁임. PBD의 강성은 재질 값이 아니라 <b>반복 횟수와 dt에 따라 달라짐</b>. XPBD는 compliance(유연도) 값으로 이 문제를 고침.</p>
-    <p>같은 계산량이면 반복 대신 <b>서브스텝</b>을 늘리는 편이 더 단단한 경우가 많음(Macklin 2019 "Small Steps").</p>
-    <p>선 색은 늘어남 비율(초록 = 원래 길이, 빨강 = 많이 늘어남).</p>`,
+    <p>같은 계산량이면 반복 대신 <b>서브스텝</b>을 늘리는 편이 더 단단한 경우가 많음(Macklin 2019 "Small Steps")</p>
+    <p>선 색은 늘어남 비율(초록 = 원래 길이, 빨강 = 많이 늘어남)</p>`,
   // 도식: 거리 제약 투영 한 번과, 반복 횟수에 따라 남는 늘어남
   diagram: (L) => `<svg viewBox="0 0 540 186" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arr-pc" class="m-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -27,7 +27,7 @@ GTL.register({
     <path d="M40,100 L220,100" class="d-dim"/><text x="130" y="114" text-anchor="middle" class="t-small t-mono">${L('현재 길이 d', 'current length d')}</text>
     <path d="M85,126 L175,126" class="d-good"/><text x="130" y="140" text-anchor="middle" class="t-small t-mono">${L('원래 길이 L', 'rest length L')}</text>
     <text x="10" y="164" class="t-small t-dim">${L('한 제약을 맞추면 이웃 제약이 다시 깨짐', 'Fixing one constraint breaks its neighbors')}</text>
-    <text x="10" y="178" class="t-small t-dim">${L('그래서 전체를 여러 번 반복함', 'So the solver repeats over all of them')}</text>
+    <text x="10" y="178" class="t-small t-dim">${L('그래서 전체를 여러 번 반복', 'So the solver repeats over all of them')}</text>
     <line x1="300" y1="24" x2="500" y2="24" class="d-line"/>
     <path d="M340,24 L340,46 L340,70 L340,96 L340,124 L340,156" class="d-a"/>
     ${[24, 46, 70, 96, 124, 156].map((y) => `<circle cx="340" cy="${y}" r="4" class="f-a"/>`).join('')}
@@ -40,9 +40,9 @@ GTL.register({
   </svg>`,
   look: [
     'A(반복 2회)와 B(20회)의 "평균 늘어남"을 비교하면 A의 천이 아래로 크게 늘어지고 빨갛게 보임. B는 거의 원래 크기 유지.',
-    'A를 반복 1, 서브스텝 8로 바꾸면 프레임당 제약 풀이 수가 B의 절반도 안 되는데 B보다 더 단단함.',
+    'A를 반복 1, 서브스텝 8로 바꾸면 프레임당 제약 풀이 수가 B의 절반도 안 되는데 B보다 더 단단함',
     '"찢어짐"을 켜고 마우스로 세게 당기면 천이 찢어짐. 반복이 적은 쪽은 많이 늘어나서 더 쉽게 찢어짐.',
-    '"바람"을 끄면 정지 상태의 처짐만 남아 반복 횟수에 따른 차이가 더 분명해짐.',
+    '"바람"을 끄면 정지 상태의 처짐만 남아 반복 횟수에 따른 차이가 더 분명해짐',
   ],
   refs: [
     { type: 'talk', title: 'Advanced Character Physics (Thomas Jakobsen)', year: 2001, note: 'GDC 2001. Hitman: Codename 47의 Verlet 적분과 제약 투영.' },

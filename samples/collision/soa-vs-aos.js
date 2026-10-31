@@ -8,13 +8,13 @@ GTL.register({
   info: `
     <p><b>AoS</b>(Array of Structures, 구조체 배열): <code>particles[i] = { x, y, vx, vy, life, ... }</code>. 사람이 읽기 쉬움. 하지만 JS에서는 단점이 있음.</p>
     <ul>
-      <li>각 객체가 힙 곳곳에 흩어짐.</li>
-      <li>숫자 필드가 박싱(별도 객체로 감싸기)되기도 함.</li>
-      <li>업데이트에 필요 없는 필드까지 캐시 라인을 차지함. 예: 색상, 이름 같은 <b>차가운 데이터</b>.</li>
+      <li>각 객체가 힙 곳곳에 흩어짐</li>
+      <li>숫자 필드가 박싱(별도 객체로 감싸기)되기도 함</li>
+      <li>업데이트에 필요 없는 필드까지 캐시 라인을 차지. 예: 색상, 이름 같은 <b>차가운 데이터</b>.</li>
     </ul>
     <p><b>SoA</b>(Structure of Arrays, 배열 구조체): <code>x = Float32Array(n)</code>, <code>y = Float32Array(n)</code>처럼 필드마다 연속 배열을 둠.
     업데이트 루프가 필요한 배열만 앞에서부터 순서대로 읽음. 그래서 하드웨어 프리페처(미리 읽기)가 잘 동작하고, 차가운 필드는 아예 읽지 않음.</p>
-    <p>중간 형태인 <b>인터리브 TypedArray</b>(<code>Float32Array(n × stride)</code>)는 박싱과 흩어짐이 없음. 하지만 차가운 필드가 stride를 늘려서 대역폭을 낭비함.</p>
+    <p>중간 형태인 <b>인터리브 TypedArray</b>(<code>Float32Array(n × stride)</code>)는 박싱과 흩어짐 없음. 하지만 차가운 필드가 stride를 늘려서 대역폭을 낭비.</p>
     <p>"생성 순서 섞기"는 객체를 무작위 순서로 만듦. 그러면 배열 순서와 메모리 순서가 어긋남. 오래 돌아간 게임의 단편화된 힙과 비슷한 상태.</p>
     <p class="dim">※ 측정값은 브라우저와 CPU에 따라 다름. 업데이트 루프만 측정하고 그리기 비용은 뺌.</p>`,
   diagram: (L) => {
@@ -35,10 +35,10 @@ GTL.register({
   </svg>`;
   },
   look: [
-    '기본 상태에서 그래프 높이를 비교하면 B(SoA)의 "업데이트" ms가 A보다 작음(그래프 최대값은 고정).',
+    '기본 상태에서 그래프 높이를 비교하면 B(SoA)의 "업데이트" ms가 A보다 작음(그래프 최대값은 고정)',
     '"차가운 필드 수"를 0으로 하고 다시 시작하면 AoS와의 차이가 줄어듦. 16으로 올리면 AoS가 더 느려짐. 인터리브도 stride가 커지는 만큼 느려지고, SoA는 그대로임.',
     'A를 "AoS + 생성 순서 섞기"로 바꾸면 같은 객체 배열인데도 더 느려짐. 메모리 지역성의 효과.',
-    '입자 수를 늘리면 데이터가 CPU 캐시를 넘어서는 지점부터 격차가 커짐.',
+    '입자 수를 늘리면 데이터가 CPU 캐시를 넘어서는 지점부터 격차가 커짐',
   ],
   refs: [
     { type: 'talk', title: 'Data-Oriented Design and C++ (Mike Acton, CppCon 2014)', url: 'https://www.youtube.com/watch?v=rX0ItVEVjHc', year: 2014 },

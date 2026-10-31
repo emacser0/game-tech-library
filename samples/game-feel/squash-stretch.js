@@ -6,14 +6,14 @@ GTL.register({
   views: { a: '변형 없음', b: '스쿼시 & 스트레치' },
   controls: '←→ / A D 이동, Space / Z / ↑ / W 점프 (길게 누르면 높이 뜀), 키를 누르면 자동 데모가 잠시 멈춤',
   info: `
-    <p><b>스쿼시 & 스트레치</b>: 디즈니 애니메이션 12원칙의 첫 번째. 물체를 찌그러뜨리고 늘려서 질량감과 탄성을 표현함.
+    <p><b>스쿼시 & 스트레치</b>: 디즈니 애니메이션 12원칙의 첫 번째. 물체를 찌그러뜨리고 늘려서 질량감과 탄성을 표현.
     게임에서는 물리 판정(충돌 박스)은 그대로 두고 <b>그리는 스케일만</b> 바꿈.</p>
     <ul>
-      <li><b>도약 스트레치</b>: 점프 순간 세로로 늘림(속도 방향을 강조).</li>
-      <li><b>착지 스쿼시</b>: 착지 충격 속도에 비례해 납작하게 만듦.</li>
-      <li><b>속도 스트레치</b>: 공중에서 |속도|에 비례해 이동 방향으로 늘림(공은 속도 방향으로 축을 회전).</li>
+      <li><b>도약 스트레치</b>: 점프 순간 세로로 늘림(속도 방향을 강조)</li>
+      <li><b>착지 스쿼시</b>: 착지 충격 속도에 비례해 납작하게 만듦</li>
+      <li><b>속도 스트레치</b>: 공중에서 |속도|에 비례해 이동 방향으로 늘림(공은 속도 방향으로 축을 회전)</li>
       <li><b>부피 보존</b>: <code>scaleX = 1 / scaleY</code>. 없으면 단순히 커졌다 작아지는 것처럼 보임.</li>
-      <li><b>감쇠 스프링</b>: <code>d'' = -k(d - target) - 2ζ√k × d'</code> 로 원래 모양으로 복원함. ζ(감쇠비)가 작으면 젤리처럼 출렁임.</li>
+      <li><b>감쇠 스프링</b>: <code>d'' = -k(d - target) - 2ζ√k × d'</code> 로 원래 모양으로 복원. ζ(감쇠비)가 작으면 젤리처럼 출렁임.</li>
       <li><b>예비 동작(anticipation)</b>: 점프 전에 웅크리기. 표현력은 좋지만 입력 지연이 생겨서 게임에서는 짧게(0~50ms) 씀.</li>
     </ul>
     <p>피벗은 발밑(하단 중앙). 그래서 찌그러져도 발이 땅에 붙어 있음. 반투명 잔상은 최근 형태.</p>`,
@@ -50,14 +50,14 @@ GTL.register({
   </svg>`,
   look: [
     'A와 B의 같은 점프를 비교하면 충돌과 궤적은 완전히 같음. 그런데 B만 무게와 탄성이 느껴짐.',
-    '"부피 보존"을 끄면 착지 시 캐릭터가 작아지기만 해서 어색함.',
+    '"부피 보존"을 끄면 착지 시 캐릭터가 작아지기만 해서 어색함',
     '감쇠비(ζ)를 0.1로 낮추면 젤리처럼 출렁임. 1.0이면 출렁임 없이 바로 복원됨.',
     '세기를 2로 키우면 과장된 카툰 느낌이 남. 하단 그래프는 플레이어의 세로 스케일.',
     '"예비 동작"을 120ms로 주면 점프가 눈에 띄게 늦게 나감. 표현력과 반응성 사이의 트레이드오프.',
   ],
   refs: [
-    { type: 'book', title: 'The Illusion of Life: Disney Animation (Frank Thomas & Ollie Johnston)', year: 1981, note: '애니메이션 12원칙: Squash and Stretch, Anticipation 등.' },
-    { type: 'talk', title: 'Juice it or lose it (Martin Jonasson & Petri Purho)', year: 2012, note: '브레이크아웃 데모에서 스트레치와 트윈 적용.' },
+    { type: 'book', title: 'The Illusion of Life: Disney Animation (Frank Thomas & Ollie Johnston)', year: 1981, note: '애니메이션 12원칙: Squash and Stretch, Anticipation 등' },
+    { type: 'talk', title: 'Juice it or lose it (Martin Jonasson & Petri Purho)', year: 2012, note: '브레이크아웃 데모에서 스트레치와 트윈 적용' },
     { type: 'book', title: 'Game Feel: A Game Designer\'s Guide to Virtual Sensation (Steve Swink)', year: 2008 },
   ],
   params: [

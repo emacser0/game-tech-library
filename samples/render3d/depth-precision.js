@@ -7,17 +7,17 @@ GTL.register({
   views: { a: '표준 깊이, 24bit', b: 'Reversed-Z, float32' },
   controls: '마우스 드래그: 시선 회전, 휠: 시야각',
   info: `
-    <p><b>Z-파이팅(z-fighting)</b>: 깊이 버퍼가 가까운 두 면을 구분하지 못해 화면이 얼룩지고 깜빡이는 현상.</p>
+    <p><b>Z-파이팅(z-fighting)</b>: 깊이 버퍼가 가까운 두 면을 구분하지 못해 화면이 얼룩지고 깜빡이는 현상</p>
     <p>원인: 표준 투영의 깊이값 <code>d = f/(f−n) − f*n/((f−n)*w)</code>는 <b>1/w에 선형</b>. 그래서 깊이 값의 절반 이상이 near~2*near 사이에 쓰임.</p>
     <ul>
-      <li>멀리서는 깊이 한 칸(quantum)이 덮는 거리 <code>Δw ≈ w²/(n * 2^bits)</code>가 폭발적으로 커짐.</li>
-      <li>두 면의 간격이 Δw보다 작으면 래스터화마다 앞에 그려지는 면이 바뀜.</li>
-      <li>가장 효과적인 대책은 <b>near 평면을 멀리</b> 두기. far는 거의 영향이 없음.</li>
+      <li>멀리서는 깊이 한 칸(quantum)이 덮는 거리 <code>Δw ≈ w²/(n * 2^bits)</code>가 폭발적으로 커짐</li>
+      <li>두 면의 간격이 Δw보다 작으면 래스터화마다 앞에 그려지는 면이 바뀜</li>
+      <li>가장 효과적인 대책은 <b>near 평면을 멀리</b> 두기. far는 거의 영향 없음.</li>
     </ul>
-    <p><b>Reversed-Z</b>: near→1, far→0으로 뒤집어 저장함. 0 근처에 촘촘한 <b>부동소수점</b> 분포가 1/w 분포를 상쇄함. 그래서 거의 일정한 상대 정밀도를 얻음.</p>
-    <p>단점: 고정소수점(24bit)에서는 이득이 없어 <b>float 깊이 버퍼</b>가 필요함. WebGL에는 clip control이 없어 이 샘플은 <code>gl_FragDepth = near / w</code>로 직접 씀.</p>
+    <p><b>Reversed-Z</b>: near→1, far→0으로 뒤집어 저장. 0 근처에 촘촘한 <b>부동소수점</b> 분포가 1/w 분포를 상쇄. 그래서 거의 일정한 상대 정밀도를 얻음.</p>
+    <p>단점: 고정소수점(24bit)에서는 이득이 없어 <b>float 깊이 버퍼</b> 필요. WebGL에는 clip control이 없어 이 샘플은 <code>gl_FragDepth = near / w</code>로 직접 씀.</p>
     <p><b>로그 깊이</b>: <code>log2(1+w)/log2(1+far)</code>를 씀. 어떤 포맷에서도 넓은 범위를 다룸. 단점: gl_FragDepth를 쓰면 early-Z가 꺼지는 비용이 생김.</p>
-    <p>"정밀도 히트맵"은 픽셀마다 깊이 한 칸의 거리 Δw를 두 면 간격과 비교함. 초록(안전) → 빨강(Z-파이팅)으로 표시.</p>`,
+    <p>"정밀도 히트맵"은 픽셀마다 깊이 한 칸의 거리 Δw를 두 면 간격과 비교. 초록(안전) → 빨강(Z-파이팅)으로 표시.</p>`,
   // 도식: 거리별 깊이 정밀도. Δw가 면 간격을 넘는 지점부터 Z-파이팅
   diagram: (L) => `<svg viewBox="0 0 540 170" xmlns="http://www.w3.org/2000/svg">
     <text x="40" y="16" class="t-small t-dim">${L('깊이 한 칸이 덮는 거리 Δw', 'Distance covered by one depth step Δw')}</text>
@@ -48,7 +48,7 @@ GTL.register({
     { type: 'article', title: 'Depth Precision Visualized (Nathan Reed)', url: 'https://developer.nvidia.com/content/depth-precision-visualized', year: 2015, note: 'NVIDIA Developer Blog. Reversed-Z와 float 깊이의 조합.' },
     { type: 'article', title: 'Logarithmic Depth Buffer (Outerra blog)', url: 'https://outerra.blogspot.com/2009/08/logarithmic-z-buffer.html', year: 2009 },
     { type: 'article', title: 'Learning to Love your Z-buffer (Steve Baker)', url: 'https://www.sjbaker.org/steve/omniv/love_your_z_buffer.html' },
-    { type: 'article', title: 'Reversed-Z in OpenGL (Nicolas Guillemot)', url: 'https://nlguillemot.wordpress.com/2016/12/07/reversed-z-in-opengl/', year: 2016, note: 'glClipControl이 필요한 이유.' },
+    { type: 'article', title: 'Reversed-Z in OpenGL (Nicolas Guillemot)', url: 'https://nlguillemot.wordpress.com/2016/12/07/reversed-z-in-opengl/', year: 2016, note: 'glClipControl이 필요한 이유' },
   ],
   params: [
     { key: 'mode', label: '깊이 방식', type: 'select', group: '깊이', options: [

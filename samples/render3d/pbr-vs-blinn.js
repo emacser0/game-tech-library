@@ -2,25 +2,25 @@
 GTL.register({
   id: 'pbr-vs-blinn',
   title: 'PBR (Cook-Torrance GGX) vs Blinn-Phong',
-  summary: '같은 거칠기와 금속성 값을 두 BRDF에 넣어 비교함. Blinn-Phong은 거친 면이 너무 밝고 매끈한 면은 흐림. GGX는 전 범위에서 일관됨.',
+  summary: '같은 거칠기와 금속성 값을 두 BRDF에 넣어 비교. Blinn-Phong은 거친 면이 너무 밝고 매끈한 면은 흐림. GGX는 전 범위에서 일관됨.',
   renderer: 'webgl',
   views: { a: 'Blinn-Phong (비정규화)', b: 'Cook-Torrance GGX' },
   controls: '마우스 드래그: 카메라 회전, 휠: 줌',
   info: `
     <p><b>BRDF</b>는 빛이 표면에서 어느 방향으로 얼마나 반사되는지 정하는 함수. 구 격자의 가로축은 <b>거칠기(roughness)</b> 0→1, 세로축은 <b>금속성(metallic)</b> 0(아래)→1(위). 두 뷰 모두 같은 F0(유전체 0.04, 금속은 albedo)와 같은 광원을 씀.</p>
-    <p><b>Cook-Torrance</b> 미세면 BRDF: <code>D * G * F / (4 * dot(N,L) * dot(N,V))</code>.</p>
+    <p><b>Cook-Torrance</b> 미세면 BRDF: <code>D * G * F / (4 * dot(N,L) * dot(N,V))</code></p>
     <ul>
       <li><b>D</b>(GGX/Trowbridge-Reitz): 미세면 법선 분포. 꼬리가 길어 하이라이트 주변이 은은하게 번짐.</li>
-      <li><b>G</b>(Smith-Schlick): 미세면끼리 서로 가리는 정도.</li>
+      <li><b>G</b>(Smith-Schlick): 미세면끼리 서로 가리는 정도</li>
       <li><b>F</b>(Schlick 근사): 프레넬. 스치는 각도에서 반사가 강해짐.</li>
     </ul>
     <p>D는 정규화되어 있음. 그래서 거칠수록 하이라이트가 넓어지는 만큼 <b>어두워짐</b>(에너지 보존).</p>
     <p>전통적 Blinn-Phong은 <code>pow(dot(N,H), s)</code>에 고정 계수만 곱함. 그래서 지수가 커지면 하이라이트가 작아지고 <b>총 반사량도 줄어듦</b>. 정규화 계수 <code>(s+8)/(8π)</code>를 곱하면 에너지 보존에 가까워짐. 단, 프레넬과 가림 항은 여전히 없음.</p>
     <p>구현 메모:</p>
     <ul>
-      <li>거칠기→지수 변환: <code>s = 2/α² − 2</code> (α = roughness²).</li>
-      <li>환경광: 절차적 하늘을 거칠기에 따라 흐리게 한 근사.</li>
-      <li>GGX 쪽 스펙큘러 환경광: Karis의 모바일용 EnvBRDF 근사(split-sum의 해석적 피팅)로 가중함.</li>
+      <li>거칠기→지수 변환: <code>s = 2/α² − 2</code> (α = roughness²)</li>
+      <li>환경광: 절차적 하늘을 거칠기에 따라 흐리게 한 근사</li>
+      <li>GGX 쪽 스펙큘러 환경광: Karis의 모바일용 EnvBRDF 근사(split-sum의 해석적 피팅)로 가중</li>
     </ul>`,
   // 도식: 거칠기별 하이라이트 로브. 비정규화 Blinn-Phong과 정규화된 GGX의 에너지 차이
   diagram: (L) => `<svg viewBox="0 0 540 188" xmlns="http://www.w3.org/2000/svg">
@@ -44,8 +44,8 @@ GTL.register({
   look: [
     'A의 오른쪽 위(거친 금속) 구를 보면 하이라이트가 구 전체로 퍼진 채 너무 밝음. 왼쪽(매끈한) 구의 하이라이트는 작고 흐림.',
     'B의 같은 줄을 보면 매끈할수록 작고 강렬함. 거칠수록 퍼지면서 어두워짐.',
-    '카메라를 낮춰 구의 가장자리를 보면 B만 프레넬로 테두리가 밝아짐.',
-    'A에서 "Blinn 정규화"를 켜면 왼쪽(매끈한) 구의 하이라이트가 훨씬 밝아져 B에 가까워짐.',
+    '카메라를 낮춰 구의 가장자리를 보면 B만 프레넬로 테두리가 밝아짐',
+    'A에서 "Blinn 정규화"를 켜면 왼쪽(매끈한) 구의 하이라이트가 훨씬 밝아져 B에 가까워짐',
     '"환경광"을 끄면 금속 구(위쪽 줄)가 거의 검게 됨. 금속은 디퓨즈가 없어 반사로만 보이기 때문.',
   ],
   refs: [
@@ -53,7 +53,7 @@ GTL.register({
     { type: 'paper', title: 'Microfacet Models for Refraction through Rough Surfaces (Walter, Marschner, Li, Torrance)', year: 2007, note: 'EGSR 2007. GGX 분포 도입.' },
     { type: 'talk', title: 'Real Shading in Unreal Engine 4 (Brian Karis)', url: 'https://blog.selfshadow.com/publications/s2013-shading-course/', year: 2013, note: 'SIGGRAPH 2013 Physically Based Shading course. roughness², Schlick-GGX k, split-sum.' },
     { type: 'talk', title: 'Physically-Based Shading at Disney (Brent Burley)', url: 'https://blog.selfshadow.com/publications/s2012-shading-course/', year: 2012, note: 'SIGGRAPH 2012 course. baseColor/metallic/roughness 파라미터화.' },
-    { type: 'article', title: 'Physically Based Shading on Mobile (Brian Karis, Epic Games)', url: 'https://www.unrealengine.com/en-US/blog/physically-based-shading-on-mobile', year: 2014, note: 'EnvBRDFApprox 근사식.' },
+    { type: 'article', title: 'Physically Based Shading on Mobile (Brian Karis, Epic Games)', url: 'https://www.unrealengine.com/en-US/blog/physically-based-shading-on-mobile', year: 2014, note: 'EnvBRDFApprox 근사식' },
     { type: 'paper', title: 'An Inexpensive BRDF Model for Physically-based Rendering (Christophe Schlick)', year: 1994, note: 'Computer Graphics Forum. 프레넬 근사.' },
     { type: 'article', title: 'LearnOpenGL: PBR Theory', url: 'https://learnopengl.com/PBR/Theory' },
   ],

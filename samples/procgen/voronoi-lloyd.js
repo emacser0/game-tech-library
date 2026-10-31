@@ -10,14 +10,14 @@ GTL.register({
     맵 영역, 지역 분할의 기본 도구.
     거리 함수를 바꾸면 셀 모양이 바뀜. 맨해튼은 마름모, 체비셰프는 사각형.
     이 샘플은 저해상도 래스터에서 공간 버킷으로 가장 가까운 사이트를 찾음.</p>
-    <p><b>로이드 완화</b>: 아래 두 단계를 반복함.</p>
+    <p><b>로이드 완화</b>: 아래 두 단계를 반복</p>
     <ol>
-      <li>보로노이 셀을 계산함.</li>
-      <li>각 사이트를 자기 셀의 무게중심으로 옮김.</li>
+      <li>보로노이 셀 계산</li>
+      <li>각 사이트를 자기 셀의 무게중심으로 옮김</li>
     </ol>
-    <p>몇 번만 반복해도 셀 크기 편차가 크게 줄어듦. 결국 중심 보로노이 분할(CVT)에 수렴함.</p>
+    <p>몇 번만 반복해도 셀 크기 편차가 크게 줄어듦. 결국 중심 보로노이 분할(CVT)에 수렴.</p>
     <p>단점: 너무 많이 반복하면 거의 규칙적인 벌집이 되어 자연스러운 무작위성이 사라짐. 그래서 실전에서는 1~3회만 쓰기도 함.</p>
-    <p>사례: Red Blob Games의 폴리곤 맵 생성은 무작위 점에 로이드 완화를 적용함. 그 보로노이 셀을 섬, 바이옴의 단위 지역으로 씀.</p>`,
+    <p>사례: Red Blob Games의 폴리곤 맵 생성은 무작위 점에 로이드 완화를 적용. 그 보로노이 셀을 섬, 바이옴의 단위 지역으로 씀.</p>`,
   // 도식: 사이트를 셀 무게중심으로 옮기는 로이드 한 단계와 반복에 따른 셀 넓이 편차 감소
   diagram: (L) => `<svg viewBox="0 0 540 176" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arr-lloyd" class="m-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -39,14 +39,14 @@ GTL.register({
   look: [
     'A와 B의 셀 크기를 비교하면 A는 아주 작은 셀과 큰 셀이 섞여 있고 B는 비슷한 크기의 육각형에 가까움. "셀 면적 변동계수"에서도 차이가 보임.',
     '"무게중심 화살표"를 켜면 A에서 각 점이 끌려갈 방향이 보임. 큰 셀일수록 화살표가 김.',
-    'A의 반복 횟수를 1, 2, 3으로 올리면 처음 1~2회에 개선이 대부분 일어남. 이후 "평균 이동량"이 급감함(수렴).',
-    '거리 함수를 맨해튼이나 체비셰프로 바꾸면 셀 경계가 마름모, 사각형 모양이 됨. 완화 결과도 다른 격자 패턴으로 수렴함.',
+    'A의 반복 횟수를 1, 2, 3으로 올리면 처음 1~2회에 개선이 대부분 일어남. 이후 "평균 이동량"이 급감(수렴).',
+    '거리 함수를 맨해튼이나 체비셰프로 바꾸면 셀 경계가 마름모, 사각형 모양이 됨. 완화 결과도 다른 격자 패턴으로 수렴.',
   ],
   refs: [
-    { type: 'paper', title: 'Least Squares Quantization in PCM (Stuart P. Lloyd, IEEE Trans. Information Theory 1982)', year: 1982, note: '로이드 알고리즘 원 논문 (1957년 벨 연구소 보고서).' },
+    { type: 'paper', title: 'Least Squares Quantization in PCM (Stuart P. Lloyd, IEEE Trans. Information Theory 1982)', year: 1982, note: '로이드 알고리즘 원 논문 (1957년 벨 연구소 보고서)' },
     { type: 'paper', title: 'Centroidal Voronoi Tessellations: Applications and Algorithms (Du, Faber, Gunzburger, SIAM Review 1999)', year: 1999 },
     { type: 'article', title: 'Red Blob Games: Polygonal Map Generation for Games', url: 'http://www-cs-students.stanford.edu/~amitp/game-programming/polygon-map-generation/', year: 2010, note: 'Amit Patel. 로이드 완화와 보로노이 기반 섬 생성.' },
-    { type: 'article', title: 'Inigo Quilez: Voronoi edges', url: 'https://iquilezles.org/articles/voronoilines/', note: '셰이더에서 보로노이 경계를 계산하는 방법.' },
+    { type: 'article', title: 'Inigo Quilez: Voronoi edges', url: 'https://iquilezles.org/articles/voronoilines/', note: '셰이더에서 보로노이 경계를 계산하는 방법' },
   ],
   params: [
     { key: 'iters', label: '로이드 반복 횟수', type: 'int', min: 0, max: 30, a: 0, b: 8, group: '완화' },

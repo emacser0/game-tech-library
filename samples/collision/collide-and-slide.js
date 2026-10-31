@@ -2,22 +2,22 @@
 GTL.register({
   id: 'collide-and-slide',
   title: '원 vs 선분 이동: 충돌 시 멈춤 vs 미끄러짐 (collide and slide)',
-  summary: '원을 이동 경로로 스윕해 처음 닿는 벽에서 멈추면 비스듬한 벽에 붙어 움직이지 못함. 남은 이동에서 벽 법선 성분을 빼고 다시 스윕하면 벽을 따라 미끄러져 목표에 도착함.',
+  summary: '원을 이동 경로로 스윕해 처음 닿는 벽에서 멈추면 비스듬한 벽에 붙어 움직이지 못함. 남은 이동에서 벽 법선 성분을 빼고 다시 스윕하면 벽을 따라 미끄러져 목표에 도착.',
   views: { a: '충돌 시 멈춤', b: '미끄러짐 (collide and slide)' },
   controls: '←→↑↓ 또는 WASD: 흰 테두리 원 조종 (나머지 원은 오른쪽 목표로 자동 이동)',
   info: `
-    <p>캐릭터 이동은 보통 <b>스윕</b>으로 처리함. 원이 이번 프레임 이동 경로를 따라 움직일 때 벽에 처음 닿는 시각 t(0~1)를 구함.</p>
+    <p>캐릭터 이동은 보통 <b>스윕</b>으로 처리. 원이 이번 프레임 이동 경로를 따라 움직일 때 벽에 처음 닿는 시각 t(0~1)를 구함.</p>
     <ul>
-      <li>원 vs 선분 스윕 = 반지름만큼 두꺼워진 선분(캡슐)과 중심점 반직선의 교차.</li>
-      <li>평평한 면: 반지름만큼 밀어낸 직선과 교차.</li>
-      <li>끝점: 끝점을 중심으로 한 원과 교차.</li>
+      <li>원 vs 선분 스윕 = 반지름만큼 두꺼워진 선분(캡슐)과 중심점 반직선의 교차</li>
+      <li>평평한 면: 반지름만큼 밀어낸 직선과 교차</li>
+      <li>끝점: 끝점을 중심으로 한 원과 교차</li>
     </ul>
     <p><b>충돌 시 멈춤</b>: 닿는 지점까지만 이동하고 남은 이동을 버림. 벽과 거의 평행하게 움직여도 멈춤. 그래서 비스듬한 벽에 한번 닿으면 붙어서 못 움직임.</p>
     <p><b>미끄러짐</b>(collide and slide):</p>
     <ol>
-      <li>닿는 지점 바로 앞까지 이동함.</li>
+      <li>닿는 지점 바로 앞까지 이동</li>
       <li>남은 이동에서 벽 법선 방향 성분을 뺌. 벽과 평행한 성분만 남음.</li>
-      <li>남은 이동으로 다시 스윕함. 구석에서는 여러 벽에 차례로 닿으므로 몇 번 반복함.</li>
+      <li>남은 이동으로 다시 스윕. 구석에서는 여러 벽에 차례로 닿으므로 몇 번 반복.</li>
     </ol>
     <p>단점: 반복 상한이 작으면 구석에서 남은 이동을 버림. 오목한 구석에서는 미끄러져도 갇힘. 이 샘플은 원끼리 충돌하지 않음.</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
@@ -44,19 +44,19 @@ GTL.register({
     <text x="380" y="88" class="t-b">${L('B: 벽을 따라 미끄러짐', 'B: slides along wall')}</text>
     <text x="380" y="102" class="t-small t-dim">${L('남은 이동에서 법선 성분 제거', 'removes the normal part')}</text>
     <text x="380" y="118" class="t-small t-mono">slide = r - (r.n) n</text>
-    <text x="380" y="134" class="t-small t-dim">${L('구석에서는 몇 번 반복함', 'repeats at corners')}</text>
+    <text x="380" y="134" class="t-small t-dim">${L('구석에서는 몇 번 반복', 'repeats at corners')}</text>
   </svg>`,
   look: [
-    '기본 상태에서 A는 원들이 비스듬한 벽에 붙어 멈춤(빨간 원). B는 벽을 따라 미끄러져 오른쪽 목표에 도착함. "도착 수"를 비교.',
+    '기본 상태에서 A는 원들이 비스듬한 벽에 붙어 멈춤(빨간 원). B는 벽을 따라 미끄러져 오른쪽 목표에 도착. "도착 수"를 비교.',
     'B의 "최대 반복 횟수"를 1로 낮추면 미끄러짐 없이 A와 같아짐. 2로 올리면 대부분의 경우가 해결됨.',
-    '흰 테두리 원을 ↗ 방향으로 벽에 비스듬히 밀면 A는 멈추고 B는 벽을 따라 움직임.',
+    '흰 테두리 원을 ↗ 방향으로 벽에 비스듬히 밀면 A는 멈추고 B는 벽을 따라 움직임',
     '"이동 효율"은 실제 이동 거리를 원하는 이동 거리로 나눈 값. B는 벽을 따라가며 속도가 줄 뿐 0이 되지 않음.',
   ],
   refs: [
     { type: 'paper', title: 'Improved Collision detection and Response (Kasper Fauerby)', year: 2003, note: '타원체 스윕과 재귀 미끄러짐 응답. 반복 상한 5.' },
-    { type: 'paper', title: 'Generic Collision Detection for Games Using Ellipsoids (Paul Nettle)', year: 2000, note: '스윕 구 충돌과 슬라이딩 평면의 초기 정리.' },
-    { type: 'book', title: 'Real-Time Collision Detection, 5.5 Intersection of Moving Objects (Christer Ericson)', year: 2005, note: '움직이는 구 vs 평면, 선분 스윕.' },
-    { type: 'engine', title: 'Godot CharacterBody2D.move_and_slide', url: 'https://docs.godotengine.org/en/stable/classes/class_characterbody2d.html', note: 'max_slides(기본 4)로 반복 상한을 정함.' },
+    { type: 'paper', title: 'Generic Collision Detection for Games Using Ellipsoids (Paul Nettle)', year: 2000, note: '스윕 구 충돌과 슬라이딩 평면의 초기 정리' },
+    { type: 'book', title: 'Real-Time Collision Detection, 5.5 Intersection of Moving Objects (Christer Ericson)', year: 2005, note: '움직이는 구 vs 평면, 선분 스윕' },
+    { type: 'engine', title: 'Godot CharacterBody2D.move_and_slide', url: 'https://docs.godotengine.org/en/stable/classes/class_characterbody2d.html', note: 'max_slides(기본 4)로 반복 상한을 정함' },
   ],
   params: [
     { key: 'bots', label: '원 개수', type: 'int', min: 1, max: 60, default: 24, shared: true, reset: true, group: '장면' },

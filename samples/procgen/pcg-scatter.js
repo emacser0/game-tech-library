@@ -4,24 +4,24 @@ GTL.register({
   title: 'PCG 포인트 파이프라인 (Unreal PCG Framework): 나무와 바위 배치',
   summary: '균등 랜덤 배치 vs PCG 노드 파이프라인 비교. 균등 랜덤은 오브젝트가 겹치고 도로 위에도 놓임. PCG 파이프라인은 점을 만든 뒤 밀도, 도로 제외, 겹침 제거를 차례로 거쳐 숲 덩어리와 빈 도로를 만듦.',
   views: { a: '균등 랜덤', b: 'PCG 파이프라인' },
-  controls: '조작 없음. B의 단계를 하나씩 끄고 켜며 결과를 비교함. "다시 생성"을 누르면 새 시드로 만듦.',
+  controls: '조작 없음. B의 단계를 하나씩 끄고 켜며 결과 비교. "다시 생성"을 누르면 새 시드로 만듦.',
   info: `
     <p><b>PCG 프레임워크</b>(Procedural Content Generation): Unreal Engine 5의 절차적 배치 도구.
     그래프의 노드가 <b>점 데이터</b>(위치, 밀도, 크기, 회전)를 받아 고친 뒤 다음 노드로 넘김. 마지막에 점마다 메시를 놓음.</p>
     <p>점을 균등 랜덤으로 한 번에 뿌리면 문제가 생김:</p>
     <ul>
-      <li>나무끼리 겹침.</li>
-      <li>도로 위에도 나무가 놓임.</li>
-      <li>숲과 빈터 구분 없이 고르게 흩어져 자연스럽지 않음.</li>
+      <li>나무끼리 겹침</li>
+      <li>도로 위에도 나무가 놓임</li>
+      <li>숲과 빈터 구분 없이 고르게 흩어져 자연스럽지 않음</li>
     </ul>
     <p>이 샘플의 파이프라인(노드 순서대로):</p>
     <ul>
-      <li><b>Surface Sampler</b>: 지면에 격자 칸마다 점 하나를 흔들어 놓음(Looseness).</li>
-      <li><b>Density Noise</b>: 점마다 노이즈 값을 밀도(0~1)로 넣음.</li>
+      <li><b>Surface Sampler</b>: 지면에 격자 칸마다 점 하나를 흔들어 놓음(Looseness)</li>
+      <li><b>Density Noise</b>: 점마다 노이즈 값을 밀도(0~1)로 넣음</li>
       <li><b>Density Filter</b>: 밀도가 임계값보다 낮은 점을 버림. 숲 덩어리와 빈터가 생김.</li>
-      <li><b>Difference</b>: 도로 스플라인 근처 점을 뺌(차집합).</li>
-      <li><b>Self Pruning</b>: 점의 경계(Bounds)가 겹치면 큰 점부터 남기고 작은 점을 버림.</li>
-      <li><b>Transform Points</b>: 남은 점에 무작위 크기와 회전을 줌.</li>
+      <li><b>Difference</b>: 도로 스플라인 근처 점을 뺌(차집합)</li>
+      <li><b>Self Pruning</b>: 점의 경계(Bounds)가 겹치면 큰 점부터 남기고 작은 점을 버림</li>
+      <li><b>Transform Points</b>: 남은 점에 무작위 크기와 회전을 줌</li>
     </ul>
     <p>단점: 노드 순서가 결과를 바꿈. Transform Points가 크기를 키우면 Pruning 뒤에 다시 겹칠 수 있음.
     그래서 최대 배율을 1 이하로 두거나 크기를 먼저 정한 뒤 Pruning을 함.</p>`,
@@ -58,14 +58,14 @@ GTL.register({
   look: [
     'A와 B를 비교하면 A는 도로 위에 나무가 있고 빨간 테두리(겹침)가 많음. B는 도로가 비고 겹침 쌍이 0개.',
     'B에서 "Density Filter"를 끄면 숲 덩어리가 사라지고 지면 전체가 고르게 채워짐. "남은 점" 수치가 크게 늘어남.',
-    'B에서 "Self Pruning"을 끄고 나무 크기를 키우면 겹침 쌍 수치가 다시 올라감.',
+    'B에서 "Self Pruning"을 끄고 나무 크기를 키우면 겹침 쌍 수치가 다시 올라감',
     'B에서 Transform 최대 배율을 1.5로 올리면 Pruning 뒤에 커진 나무끼리 다시 겹침. 노드 순서의 영향이 보임.',
-    '밀도 임계값을 올리면 숲이 작은 섬으로 쪼개지고, 내리면 빈터가 줄어듦.',
+    '밀도 임계값을 올리면 숲이 작은 섬으로 쪼개지고, 내리면 빈터가 줄어듦',
   ],
   refs: [
-    { type: 'engine', title: 'Unreal Engine: Procedural Content Generation Overview', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/procedural-content-generation-overview', note: 'PCG 그래프, 점 데이터, 노드 실행 흐름 소개.' },
-    { type: 'engine', title: 'Unreal Engine: Procedural Content Generation Framework Node Reference', note: 'Surface Sampler, Density Filter, Difference, Self Pruning, Transform Points 노드 설명.' },
-    { type: 'talk', title: 'Electric Dreams Environment (Unreal Engine 5.2 PCG 시연, GDC 2023 State of Unreal)', year: 2023, note: '큰 숲 환경을 PCG 그래프로 배치한 Epic 시연.' },
+    { type: 'engine', title: 'Unreal Engine: Procedural Content Generation Overview', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/procedural-content-generation-overview', note: 'PCG 그래프, 점 데이터, 노드 실행 흐름 소개' },
+    { type: 'engine', title: 'Unreal Engine: Procedural Content Generation Framework Node Reference', note: 'Surface Sampler, Density Filter, Difference, Self Pruning, Transform Points 노드 설명' },
+    { type: 'talk', title: 'Electric Dreams Environment (Unreal Engine 5.2 PCG 시연, GDC 2023 State of Unreal)', year: 2023, note: '큰 숲 환경을 PCG 그래프로 배치한 Epic 시연' },
     { type: 'paper', title: 'Fast Poisson Disk Sampling in Arbitrary Dimensions (Robert Bridson, SIGGRAPH 2007 sketches)', url: 'https://www.cs.ubc.ca/~rbridson/docs/bridson-siggraph07-poissondisk.pdf', year: 2007, note: '최소 거리 배치의 다른 방법. Self Pruning과 목적이 같음.' },
   ],
   params: [

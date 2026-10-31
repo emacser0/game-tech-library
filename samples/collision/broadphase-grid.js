@@ -2,24 +2,24 @@
 GTL.register({
   id: 'broadphase-grid',
   title: '브로드페이즈: 전수 검사 vs 균일 그리드 / 공간 해시',
-  summary: '모든 쌍을 검사하면 n(n-1)/2번 검사함. 공간을 셀로 나누고 이웃 셀만 보면 검사 수가 거의 선형으로 줄어듦. 단, 셀 크기를 잘못 고르면 이득이 사라짐.',
+  summary: '모든 쌍을 검사하면 n(n-1)/2번 검사. 공간을 셀로 나누고 이웃 셀만 보면 검사 수가 거의 선형으로 줄어듦. 단, 셀 크기를 잘못 고르면 이득이 사라짐.',
   views: { a: '전수 검사 O(n²)', b: '균일 그리드' },
-  controls: '마우스를 원 위에 올리면 그 원의 검사 후보(선)와 질의 셀(사각형)이 보임.',
+  controls: '마우스를 원 위에 올리면 그 원의 검사 후보(선)와 질의 셀(사각형)이 보임',
   info: `
-    <p>충돌 판정은 보통 두 단계로 나눔.</p>
+    <p>충돌 판정은 보통 두 단계로 나눔</p>
     <ul>
-      <li><b>브로드페이즈</b>: 겹칠 수 있는 쌍을 싸게 추려냄.</li>
-      <li><b>내로우페이즈</b>: 추려낸 쌍만 정밀하게 검사함.</li>
+      <li><b>브로드페이즈</b>: 겹칠 수 있는 쌍을 싸게 추려냄</li>
+      <li><b>내로우페이즈</b>: 추려낸 쌍만 정밀 검사</li>
     </ul>
-    <p>전수 검사는 원이 2000개면 약 200만 쌍을 검사함. 원이 늘수록 검사 수가 제곱으로 늘어남.</p>
-    <p><b>균일 그리드</b>는 원의 중심을 셀 하나에 넣음. 원들은 카운팅 정렬로 연속 배열에 배치함.
+    <p>전수 검사는 원이 2000개면 약 200만 쌍 검사. 원이 늘수록 검사 수가 제곱으로 늘어남.</p>
+    <p><b>균일 그리드</b>는 원의 중심을 셀 하나에 넣음. 원들은 카운팅 정렬로 연속 배열에 배치.
     질의할 때는 "자기 반지름 + 최대 반지름" 범위에 걸친 셀만 훑음.
     보통 셀 크기는 <b>가장 흔한 오브젝트 지름의 1~2배</b>가 알맞음.</p>
     <p><b>공간 해시</b>는 셀 좌표를 해시해서 고정 크기 버킷 테이블에 넣음. 월드가 무한해도 메모리는 버킷 수로 고정됨.</p>
     <p>단점:</p>
     <ul>
-      <li>셀이 너무 작으면 방문할 셀 수가 폭증함.</li>
-      <li>셀이 너무 크면 한 셀에 원이 몰려 다시 O(n²)에 가까워짐.</li>
+      <li>셀이 너무 작으면 방문할 셀 수가 폭증</li>
+      <li>셀이 너무 크면 한 셀에 원이 몰려 다시 O(n²)에 가까워짐</li>
       <li>공간 해시는 서로 다른 셀이 같은 버킷에 들어감(<b>해시 충돌</b>). 그만큼 쓸데없는 검사가 늘어남.</li>
     </ul>`,
   diagram: (L) => {
@@ -42,15 +42,15 @@ GTL.register({
   </svg>`;
   },
   look: [
-    '기본 상태에서 오른쪽 위 ms 그래프를 비교하면 A는 수십만~수백만 쌍, B는 수천 쌍을 검사함.',
-    'B의 셀 크기를 4px로 낮추면 "방문 셀"이 폭증함. 160px로 올리면 셀마다 원이 몰려 검사 수가 다시 늘어남(U자 곡선).',
+    '기본 상태에서 오른쪽 위 ms 그래프를 비교하면 A는 수십만~수백만 쌍, B는 수천 쌍 검사',
+    'B의 셀 크기를 4px로 낮추면 "방문 셀"이 폭증. 160px로 올리면 셀마다 원이 몰려 검사 수가 다시 늘어남(U자 곡선).',
     '"큰 원 비율"을 올리면 질의 범위가 최대 반지름에 맞춰 커져서 그리드 효율이 떨어짐. 크기가 제각각일 때 쿼드트리나 BVH가 유리한 이유.',
-    'B를 공간 해시로 바꾸고 버킷 수를 16~64로 줄이면 "해시 충돌 낭비 검사"가 늘어남.',
+    'B를 공간 해시로 바꾸고 버킷 수를 16~64로 줄이면 "해시 충돌 낭비 검사"가 늘어남',
   ],
   refs: [
-    { type: 'book', title: 'Real-Time Collision Detection, Ch.7 Spatial Partitioning (Christer Ericson)', year: 2005, note: '균일 그리드, 해시 그리드, 셀 크기 선택.' },
+    { type: 'book', title: 'Real-Time Collision Detection, Ch.7 Spatial Partitioning (Christer Ericson)', year: 2005, note: '균일 그리드, 해시 그리드, 셀 크기 선택' },
     { type: 'paper', title: 'Optimized Spatial Hashing for Collision Detection of Deformable Objects (Teschner et al.)', year: 2003, note: 'VMV 2003. 해시 함수 (x*73856093 XOR y*19349663 XOR z*83492791) mod n의 출처.' },
-    { type: 'article', title: 'Spatial hashing, Ten Minute Physics (Matthias Müller)', url: 'https://matthias-research.github.io/pages/tenMinutePhysics/', note: '카운팅 정렬 기반 밀집(dense) 해시 구현 해설.' },
+    { type: 'article', title: 'Spatial hashing, Ten Minute Physics (Matthias Müller)', url: 'https://matthias-research.github.io/pages/tenMinutePhysics/', note: '카운팅 정렬 기반 밀집(dense) 해시 구현 해설' },
   ],
   params: [
     { key: 'count', label: '원 개수', type: 'int', min: 100, max: 3000, default: 1600, shared: true, reset: true, group: '장면' },

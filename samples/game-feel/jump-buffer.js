@@ -6,14 +6,14 @@ GTL.register({
   views: { a: '버퍼 없음 (0ms)', b: '점프 버퍼 120ms' },
   controls: '←→ / A D 이동, Space / Z / ↑ / W 점프 (키를 누르면 자동 데모가 잠시 멈춤)',
   info: `
-    <p><b>점프 버퍼</b>(Jump Buffering): 착지 직전에 누른 점프 입력을 잠깐 기억했다가 착지 순간 실행하는 기법.</p>
+    <p><b>점프 버퍼</b>(Jump Buffering): 착지 직전에 누른 점프 입력을 잠깐 기억했다가 착지 순간 실행하는 기법</p>
     <p>왜 필요한가: 가시가 연달아 놓인 바닥에서는 착지하자마자 다시 점프해야 함. 플레이어는 착지 <b>직전</b>에 버튼을 누르기 쉬움.</p>
     <ul>
-      <li>"지면에 있을 때만 점프" 규칙이면 공중에서 누른 입력은 버려짐.</li>
-      <li>착지한 뒤에는 버튼이 이미 눌린 상태라 새 입력이 없음.</li>
-      <li>결과는 "분명히 눌렀는데 점프가 안 된" 억울한 죽음.</li>
+      <li>"지면에 있을 때만 점프" 규칙이면 공중에서 누른 입력은 버려짐</li>
+      <li>착지한 뒤에는 버튼이 이미 눌린 상태라 새 입력 없음</li>
+      <li>결과는 "분명히 눌렀는데 점프가 안 된" 억울한 죽음</li>
     </ul>
-    <p>동작 원리: 점프를 누르면 타이머(<code>bufferTimer</code>)를 채움. 타이머가 남아 있는 동안 착지하면 점프를 실행함.</p>
+    <p>동작 원리: 점프를 누르면 타이머(<code>bufferTimer</code>)를 채움. 타이머가 남아 있는 동안 착지하면 점프를 실행.</p>
     <pre>if (jumpPressed) bufferTimer = BUFFER;
 else bufferTimer -= dt;
 if (grounded && bufferTimer > 0) { vy = -JUMP; bufferTimer = 0; }</pre>
@@ -42,15 +42,15 @@ if (grounded && bufferTimer > 0) { vy = -JUMP; bufferTimer = 0; }</pre>
     <text x="4" y="174" class="t-small t-dim">${L('입력 시각부터 버퍼 시간 안에 착지하면 점프가 실행됨', 'If you land within the buffer time after the press, the jump runs')}</text>
   </svg>`,
   look: [
-    '자동 데모를 켜 두면 착지 80ms 전에 점프를 누름. A는 입력이 무시되어(✗) 다음 가시에 걸리고, B는 착지 순간 버퍼에서 점프함(✓).',
+    '자동 데모를 켜 두면 착지 80ms 전에 점프를 누름. A는 입력이 무시되어(✗) 다음 가시에 걸리고, B는 착지 순간 버퍼에서 점프(✓).',
     'B의 점선을 따라가면 "누른 지점 → 실제로 점프한 지점"이 이어짐. 두 지점은 버퍼가 기억한 시간만큼 떨어져 있음.',
-    '"데모: 착지 전 입력"을 버퍼보다 크게(예: 180ms) 올리면 B도 실패함. 0으로 내리면 A도 성공함.',
-    'B의 버퍼를 300ms로 키우고 높은 곳에서 떨어지는 중 점프를 누르면 착지 후 원치 않는 점프가 나옴.',
+    '"데모: 착지 전 입력"을 버퍼보다 크게(예: 180ms) 올리면 B도 실패. 0으로 내리면 A도 성공.',
+    'B의 버퍼를 300ms로 키우고 높은 곳에서 떨어지는 중 점프를 누르면 착지 후 원치 않는 점프가 나옴',
   ],
   refs: [
-    { type: 'code', title: 'Celeste - Player.cs (점프 입력 버퍼)', url: 'https://github.com/NoelFB/Celeste', year: 2018, note: 'Input.Jump 버튼에 0.08초 버퍼(BufferTime)를 둠.' },
-    { type: 'article', title: 'Celeste & Forgiveness (Maddy Thorson)', year: 2020, note: '점프 버퍼링, 코요테 타임 등 관대한 입력 처리.' },
-    { type: 'talk', title: 'Platformer Toolkit (Game Maker\'s Toolkit)', url: 'https://gmtk.itch.io/platformer-toolkit', year: 2022, note: '점프 버퍼, 코요테 타임을 직접 조절해 보는 인터랙티브 도구.' },
+    { type: 'code', title: 'Celeste - Player.cs (점프 입력 버퍼)', url: 'https://github.com/NoelFB/Celeste', year: 2018, note: 'Input.Jump 버튼에 0.08초 버퍼(BufferTime)를 둠' },
+    { type: 'article', title: 'Celeste & Forgiveness (Maddy Thorson)', year: 2020, note: '점프 버퍼링, 코요테 타임 등 관대한 입력 처리' },
+    { type: 'talk', title: 'Platformer Toolkit (Game Maker\'s Toolkit)', url: 'https://gmtk.itch.io/platformer-toolkit', year: 2022, note: '점프 버퍼, 코요테 타임을 직접 조절해 보는 인터랙티브 도구' },
     { type: 'book', title: 'Game Feel: A Game Designer\'s Guide to Virtual Sensation (Steve Swink)', year: 2008 },
   ],
   params: [

@@ -6,21 +6,21 @@ GTL.register({
   views: { a: '값 직접 바꾸기', b: '기본값에서 다시 집계' },
   controls: '버튼으로 버프와 디버프를 넣고 지움. 자동 진행을 켜 두면 같은 순서의 효과가 두 뷰에 들어감.',
   info: `
-    <p><b>능력치 수정자</b>(attribute modifier)는 버프, 디버프, 장비가 공격력 같은 능력치를 바꾸는 규칙. Unreal의 Gameplay Ability System(GAS)은 이를 Gameplay Effect의 Modifier로 표현함.</p>
+    <p><b>능력치 수정자</b>(attribute modifier)는 버프, 디버프, 장비가 공격력 같은 능력치를 바꾸는 규칙. Unreal의 Gameplay Ability System(GAS)은 이를 Gameplay Effect의 Modifier로 표현.</p>
     <p>값을 직접 바꾸는 방식의 문제:</p>
     <ul>
-      <li><b>순서 의존</b>: +10 다음 +20%와, +20% 다음 +10은 결과가 다름.</li>
-      <li><b>잘못된 제거</b>: +10을 지울 때 10을 빼면, 그 사이 곱해진 배율만큼의 차이가 남음.</li>
+      <li><b>순서 의존</b>: +10 다음 +20%와, +20% 다음 +10은 결과가 다름</li>
+      <li><b>잘못된 제거</b>: +10을 지울 때 10을 빼면, 그 사이 곱해진 배율만큼의 차이가 남음</li>
       <li><b>오차 누적</b>: 정수로 저장하면 곱하고 나눌 때마다 반올림 오차가 쌓임. 모든 효과를 지워도 기본값으로 돌아오지 않음.</li>
-      <li>고정(Override) 효과를 지우면 이전 값을 알 수 없음.</li>
+      <li>고정(Override) 효과를 지우면 이전 값을 알 수 없음</li>
     </ul>
-    <p>GAS의 방식: 능력치가 <b>기본값</b>(BaseValue)과 <b>현재 값</b>(CurrentValue)을 따로 가짐.</p>
+    <p>GAS의 방식: 능력치가 <b>기본값</b>(BaseValue)과 <b>현재 값</b>(CurrentValue)을 따로 가짐</p>
     <ul>
-      <li>영구 변화(레벨 업, 즉시 효과)는 기본값을 바꿈.</li>
-      <li>지속 효과는 기본값을 바꾸지 않고 수정자 목록에만 들어감.</li>
-      <li>목록이 바뀔 때마다 집계기(aggregator)가 현재 값을 다시 계산함: <code>(기본값 + 더하기 합) × (1 + 배율 보너스 합) ÷ (1 + 나누기 보너스 합)</code>. 고정 효과가 있으면 마지막 고정 값이 이김.</li>
+      <li>영구 변화(레벨 업, 즉시 효과)는 기본값을 바꿈</li>
+      <li>지속 효과는 기본값을 바꾸지 않고 수정자 목록에만 들어감</li>
+      <li>목록이 바뀔 때마다 집계기(aggregator)가 현재 값을 다시 계산: <code>(기본값 + 더하기 합) × (1 + 배율 보너스 합) ÷ (1 + 나누기 보너스 합)</code>. 고정 효과가 있으면 마지막 고정 값이 이김.</li>
       <li>배율은 서로 곱하지 않고 보너스를 더함. +20%와 -50%는 1 + 0.2 - 0.5 = 0.7배.</li>
-      <li>같은 효과를 다시 받으면 스택(stacking) 규칙에 따라 중첩 수만 늘리거나 시간을 갱신함.</li>
+      <li>같은 효과를 다시 받으면 스택(stacking) 규칙에 따라 중첩 수만 늘리거나 시간을 갱신</li>
     </ul>
     <p>단점: 값을 읽을 때마다 계산하면 비싸서, 목록이 바뀔 때만 다시 계산하고 저장해 둠. 배율끼리 곱하는 방식을 원하면 따로 규칙을 정해야 함.</p>`,
   // 도식: 집계 공식 파이프라인 + 직접 바꾸기의 같은 예시
@@ -59,12 +59,12 @@ GTL.register({
     '"모든 효과 제거"를 누르면 B는 정확히 기본값으로 돌아옴. A는 기본값과 다른 값에 머묾.',
     '"+10 공격력", "+20% 공격력"을 넣고 "가장 오래된 효과 제거"를 누르면 A는 132에서 10만 뺀 122가 됨. B는 120으로 정확히 돌아옴.',
     '"50으로 고정"을 넣었다가 지우면 A는 기본값으로 초기화되어 다른 버프가 사라짐. B는 남은 버프가 그대로 적용됨.',
-    'A의 "정수로 저장"을 끄면 반올림 오차는 사라지지만 순서 문제와 잘못된 제거는 그대로 남음.',
+    'A의 "정수로 저장"을 끄면 반올림 오차는 사라지지만 순서 문제와 잘못된 제거는 그대로 남음',
     '"레벨 업"은 기본값을 바꿈. B에서는 레벨 업으로 오른 5에도 배율이 적용됨.',
   ],
   refs: [
-    { type: 'engine', title: 'Unreal Engine - Gameplay Attributes and Attribute Sets', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/gameplay-attributes-and-attribute-sets-for-the-gameplay-ability-system-in-unreal-engine', note: '능력치는 기본값(BaseValue)과 현재 값(CurrentValue)을 따로 가짐.' },
-    { type: 'engine', title: 'Unreal Engine - Gameplay Effects', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/gameplay-effects-for-the-gameplay-ability-system-in-unreal-engine', note: 'Modifier와 Stacking 규칙.' },
+    { type: 'engine', title: 'Unreal Engine - Gameplay Attributes and Attribute Sets', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/gameplay-attributes-and-attribute-sets-for-the-gameplay-ability-system-in-unreal-engine', note: '능력치는 기본값(BaseValue)과 현재 값(CurrentValue)을 따로 가짐' },
+    { type: 'engine', title: 'Unreal Engine - Gameplay Effects', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/gameplay-effects-for-the-gameplay-ability-system-in-unreal-engine', note: 'Modifier와 Stacking 규칙' },
     { type: 'code', title: 'Unreal Engine source - GameplayEffectAggregator.h (FAggregatorModChannel::EvaluateWithBase)', note: '((Base + Additive) × Multiplicative) ÷ Division, Override는 마지막 값. 소스 접근은 Epic 계정 연결 필요.' },
   ],
   params: [

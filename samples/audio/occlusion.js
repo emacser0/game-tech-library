@@ -10,14 +10,14 @@ GTL.register({
     벽은 고음을 더 많이 막기 때문에 <b>볼륨 감소 + 로우패스 필터</b>로 흉내 냄.</p>
     <p>동작 방식:</p>
     <ul>
-      <li>음원에서 청자까지 레이를 쏘아 막는 벽 수를 셈.</li>
-      <li>벽 하나당 몇 dB를 줄이고, 로우패스 차단 주파수를 낮춤.</li>
-      <li><b>단일 레이</b>는 레이가 벽 끝을 넘는 순간 값이 한 번에 바뀌어 "툭" 끊김.</li>
+      <li>음원에서 청자까지 레이를 쏘아 막는 벽 수를 셈</li>
+      <li>벽 하나당 몇 dB를 줄이고, 로우패스 차단 주파수를 낮춤</li>
+      <li><b>단일 레이</b>는 레이가 벽 끝을 넘는 순간 값이 한 번에 바뀌어 "툭" 끊김</li>
       <li><b>다중 레이</b>: 음원 크기만큼 퍼진 점들로 여러 레이를 쏘고 평균함. 벽 모서리를 지날 때 값이 서서히 바뀜.</li>
-      <li>값을 시간에 따라 부드럽게 따라가게(스무딩) 하면 남은 튐도 줄어듦.</li>
+      <li>값을 시간에 따라 부드럽게 따라가게(스무딩) 하면 남은 튐도 줄어듦</li>
     </ul>
     <p>단점: 문을 돌아 들어오는 소리(회절)는 레이캐스트만으로 표현 못함. 그래서 큰 게임은 방과 포털로 경로를 찾는 전파(Propagation) 시스템을 함께 씀.
-    레이 수만큼 비용이 들어 보통 몇 프레임에 한 번, 가까운 음원만 검사함.</p>`,
+    레이 수만큼 비용이 들어 보통 몇 프레임에 한 번, 가까운 음원만 검사.</p>`,
   diagram: (L) => {
     const ends = [[50, 0], [65, 0], [80, 1], [95, 1], [110, 1]];
     return `<svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
@@ -43,15 +43,15 @@ GTL.register({
   },
   look: [
     'A는 청자가 방 밖 벽 뒤에 있어도 이득과 차단 주파수가 그대로. B는 벽 뒤로 가면 아래 그래프의 선이 내려감.',
-    'B의 방식을 "단일 레이"로, 스무딩을 0으로 바꾸면 문 옆을 지날 때 이득 기록에 계단이 생기고 "최근 최대 변화"가 커짐.',
+    'B의 방식을 "단일 레이"로, 스무딩을 0으로 바꾸면 문 옆을 지날 때 이득 기록에 계단이 생기고 "최근 최대 변화"가 커짐',
     '"레이 수"를 3에서 16으로 올리면 계단이 더 잘게 나뉘어 부드러워짐. 대신 검사 수가 늘어남.',
-    '장면을 눌러 청자를 문 앞에 세우면 일부 레이만 막혀 반쯤 막힌 소리가 됨.',
+    '장면을 눌러 청자를 문 앞에 세우면 일부 레이만 막혀 반쯤 막힌 소리가 됨',
   ],
   refs: [
     { type: 'engine', title: 'Wwise - Obstruction and Occlusion', note: '게임이 레이캐스트로 값을 계산해 넘기면 볼륨과 LPF 커브에 매핑. Spatial Audio의 Rooms and Portals로 회절 처리.' },
-    { type: 'engine', title: 'FMOD Studio - Occlusion (Geometry API)', note: 'Core API의 Geometry로 폴리곤을 등록하면 직접음 차폐와 잔향 차폐를 계산함.' },
-    { type: 'engine', title: 'MDN - BiquadFilterNode', url: 'https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode', note: "type 'lowpass'와 frequency로 고음을 깎음." },
-    { type: 'book', title: 'Game Audio Programming 2 (Guy Somberg 편)', year: 2019, note: '차폐, 장애물, 전파 구현 장이 있음.' },
+    { type: 'engine', title: 'FMOD Studio - Occlusion (Geometry API)', note: 'Core API의 Geometry로 폴리곤을 등록하면 직접음 차폐와 잔향 차폐를 계산' },
+    { type: 'engine', title: 'MDN - BiquadFilterNode', url: 'https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode', note: "type 'lowpass'와 frequency로 고음을 깎음" },
+    { type: 'book', title: 'Game Audio Programming 2 (Guy Somberg 편)', year: 2019, note: '차폐, 장애물, 전파 구현 장이 있음' },
   ],
   params: [
     { key: 'mode', label: '차폐 방식', type: 'select', group: '차폐', options: [

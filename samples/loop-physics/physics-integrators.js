@@ -4,14 +4,14 @@ GTL.register({
   title: '수치 적분기 비교 (Euler, Verlet, RK4)',
   summary: '같은 궤도와 스프링을 같은 dt로 적분해도 적분기에 따라 에너지가 새거나(발산) 보존됨. Explicit Euler와 Semi-implicit Euler는 코드 한 줄 차이지만 결과가 완전히 다름.',
   views: { a: 'Explicit Euler', b: 'RK4' },
-  controls: '조작 없음. 위성이 중심 별을 공전함.',
+  controls: '조작 없음. 위성이 중심 별을 공전.',
   info: `
-    <p><b>수치 적분기</b>는 속도와 가속도로 다음 위치를 계산하는 방법. 물리 엔진은 매 스텝 <code>x' = v, v' = a(x)</code>를 적분함.</p>
+    <p><b>수치 적분기</b>는 속도와 가속도로 다음 위치를 계산하는 방법. 물리 엔진은 매 스텝 <code>x' = v, v' = a(x)</code>를 적분.</p>
     <p>적분기마다 정확도, 비용, 에너지 보존 성질이 다름. 잘못 고르면 궤도가 풀리거나 물체가 튀어 나감.</p>
     <ul>
       <li><b>Explicit Euler</b>: 이전 속도로 위치를 옮김(<code>x += v*dt; v += a*dt</code>). 에너지가 매 스텝 조금씩 <b>늘어나</b> 궤도가 바깥으로 풀림.</li>
       <li><b>Semi-implicit Euler</b>(Symplectic Euler): 순서만 바꿈(<code>v += a*dt; x += v*dt</code>). 심플렉틱 적분기(에너지 오차가 쌓이지 않는 적분기)라 오차가 일정 범위에서 오르내리기만 함. Box2D 등 대부분의 게임 물리 엔진이 기본으로 씀.</li>
-      <li><b>Velocity Verlet</b>: 2차 정확도의 심플렉틱 적분기.</li>
+      <li><b>Velocity Verlet</b>: 2차 정확도의 심플렉틱 적분기</li>
       <li><b>RK4</b>: 스텝마다 힘을 4번 계산하는 4차 정확도 적분기. 오차가 아주 작음.</li>
     </ul>
     <p>단점: RK4는 비용이 4배. 심플렉틱이 아니라서 아주 오래 돌리면 에너지가 서서히 줄어듦.</p>
@@ -55,8 +55,8 @@ GTL.register({
   refs: [
     { type: 'article', title: 'Integration Basics', url: 'https://gafferongames.com/post/integration_basics/', year: 2004, note: 'Glenn Fiedler. Euler vs RK4 게임 물리 입문.' },
     { type: 'paper', title: 'Computer "Experiments" on Classical Fluids (L. Verlet)', year: 1967, note: 'Physical Review 159. Verlet 적분의 출발점.' },
-    { type: 'book', title: 'Geometric Numerical Integration (Hairer, Lubich, Wanner)', year: 2006, note: '심플렉틱 적분기가 에너지를 장기적으로 보존하는 이유.' },
-    { type: 'code', title: 'Box2D - b2IntegrateVelocities / b2IntegratePositions', url: 'https://github.com/erincatto/box2d', note: '속도 먼저, 그 속도로 위치를 갱신하는 Semi-implicit Euler.' },
+    { type: 'book', title: 'Geometric Numerical Integration (Hairer, Lubich, Wanner)', year: 2006, note: '심플렉틱 적분기가 에너지를 장기적으로 보존하는 이유' },
+    { type: 'code', title: 'Box2D - b2IntegrateVelocities / b2IntegratePositions', url: 'https://github.com/erincatto/box2d', note: '속도 먼저, 그 속도로 위치를 갱신하는 Semi-implicit Euler' },
   ],
   params: [
     { key: 'integrator', label: '적분기', type: 'select', group: '적분', options: [

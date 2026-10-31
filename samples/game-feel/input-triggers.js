@@ -6,7 +6,7 @@ GTL.register({
   views: { a: '키 직접 검사', b: '트리거 기반 액션' },
   controls: 'Space 탭 또는 홀드, F 누르고 있기, Shift + E, E, WASD 이동 (키를 누르면 자동 데모가 잠시 멈춤)',
   info: `
-    <p><b>입력 액션(Input Action)</b>: "점프", "차지 공격"처럼 게임이 알고 싶은 의도. 키는 매핑(Mapping)으로 액션에 연결함.
+    <p><b>입력 액션(Input Action)</b>: "점프", "차지 공격"처럼 게임이 알고 싶은 의도. 키는 매핑(Mapping)으로 액션에 연결.
     Unreal Enhanced Input에서는 매핑마다 <b>트리거(Trigger)</b>와 <b>모디파이어(Modifier)</b>를 붙임.</p>
     <p>키를 직접 검사하면(A) 누르는 순간 바로 판단해야 함. 그 순간에는 탭인지 홀드인지 아직 모름.
     그래서 탭을 해도 차지 공격이 나가고, 홀드를 해도 점프가 먼저 나감. Shift + E도 E 단독 액션을 함께 부름.</p>
@@ -15,7 +15,7 @@ GTL.register({
       <li><b>None</b>: 조건 미충족. <b>Ongoing</b>: 판단 중(노랑). <b>Triggered</b>: 발동(초록). <b>Canceled</b>: Ongoing에서 발동 없이 끝남(빨강).</li>
       <li><b>Tap</b>: 기준 시간 안에 떼면 발동. 오래 누르면 취소.</li>
       <li><b>Hold</b>: 기준 시간 이상 누르면 발동. 일찍 떼면 취소.</li>
-      <li><b>Pulse</b>: 누르는 동안 일정 간격으로 반복 발동.</li>
+      <li><b>Pulse</b>: 누르는 동안 일정 간격으로 반복 발동</li>
       <li><b>Chorded Action</b>: 다른 액션(Shift)이 발동 중일 때만 발동. 같은 키의 일반 매핑은 코드 블로커(Chord Blocker)로 막음.</li>
     </ul>
     <p>모디파이어는 키 값을 액션 값으로 바꿈. A 키에 Negate(부호 반전), W 키에 Swizzle(축 교환)을 붙이면 키 넷이 2D 이동 벡터 하나가 됨.
@@ -63,9 +63,9 @@ GTL.register({
     'Shift + E에서 A는 Interact와 Special이 같이 나감. B는 Special만 나감. 아래 이동 상자에서 A의 점은 스틱 쏠림으로 저절로 흘러감. B는 Dead Zone이 막음.',
   ],
   refs: [
-    { type: 'engine', title: 'Unreal Engine - Enhanced Input', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/enhanced-input-in-unreal-engine', note: '입력 액션, 매핑 컨텍스트, 트리거, 모디파이어 개념 설명.' },
-    { type: 'engine', title: 'Unreal Engine API - UInputTriggerTap, UInputTriggerHold, UInputTriggerPulse, UInputTriggerChordAction', note: 'Tap 기준 시간, Hold 기준 시간과 One Shot, Pulse 간격, 코드 블로커 동작.' },
-    { type: 'engine', title: 'Unreal Engine API - UInputModifierDeadZone, UInputModifierNegate, UInputModifierSwizzleAxis', note: 'WASD를 2D 이동 벡터로 합치는 표준 구성.' },
+    { type: 'engine', title: 'Unreal Engine - Enhanced Input', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/enhanced-input-in-unreal-engine', note: '입력 액션, 매핑 컨텍스트, 트리거, 모디파이어 개념 설명' },
+    { type: 'engine', title: 'Unreal Engine API - UInputTriggerTap, UInputTriggerHold, UInputTriggerPulse, UInputTriggerChordAction', note: 'Tap 기준 시간, Hold 기준 시간과 One Shot, Pulse 간격, 코드 블로커 동작' },
+    { type: 'engine', title: 'Unreal Engine API - UInputModifierDeadZone, UInputModifierNegate, UInputModifierSwizzleAxis', note: 'WASD를 2D 이동 벡터로 합치는 표준 구성' },
     { type: 'engine', title: 'Unity Input System - Interactions (Tap, Hold, SlowTap, MultiTap)', url: 'https://docs.unity3d.com/Packages/com.unity.inputsystem@1.11/manual/Interactions.html', note: 'Unity에서 같은 역할. started, performed, canceled 단계로 나뉨.' },
   ],
   params: [

@@ -2,21 +2,21 @@
 GTL.register({
   id: 'gjk-minkowski',
   title: '민코프스키 차 & GJK / EPA',
-  summary: '두 볼록 도형이 겹치면 민코프스키 차 A−B가 원점을 포함함(역도 성립). A−B 전체를 만들면 n×m 연산이 듦. GJK는 support 함수 몇 번으로 원점을 감싸는 단체(simplex)를 찾음.',
+  summary: '두 볼록 도형이 겹치면 민코프스키 차 A−B가 원점을 포함(역도 성립). A−B 전체를 만들면 n×m 연산이 듦. GJK는 support 함수 몇 번으로 원점을 감싸는 단체(simplex)를 찾음.',
   views: { a: '민코프스키 차 전부 계산', b: 'GJK + EPA' },
   controls: '마우스: 도형 A 이동 (마우스가 밖에 있으면 자동 이동)',
   info: `
     <p><b>민코프스키 차</b> A−B는 A의 점에서 B의 점을 뺀 모든 점의 집합. 식으로는 { a − b | a∈A, b∈B }.
     A와 B에 공통 점이 있으면 a − b = 0. 즉 <b>원점이 A−B 안에 있음</b>.</p>
     <p>오른쪽 아래 패널이 A−B 공간이고, 십자가 원점. 도형을 움직이면 원점이 들어가고 나가는 순간이 보임.</p>
-    <p>A 뷰는 모든 꼭짓점 쌍의 차(n×m개 점)를 구함. 그 볼록 껍질을 만들어 원점 포함 여부를 검사함. 정확하지만 비쌈.</p>
+    <p>A 뷰는 모든 꼭짓점 쌍의 차(n×m개 점)를 구함. 그 볼록 껍질을 만들어 원점 포함 여부를 검사. 정확하지만 비쌈.</p>
     <p><b>GJK</b>(Gilbert-Johnson-Keerthi)는 A−B를 만들지 않음. 쓰는 것은 support 함수 하나:
     <code>support(d) = (A에서 d 방향으로 가장 먼 점) − (B에서 −d 방향으로 가장 먼 점)</code>.</p>
     <ul>
-      <li>원점 쪽으로 단체를 키움 (점, 선분, 삼각형 순).</li>
-      <li>단체가 원점을 감싸면 충돌로 끝냄.</li>
-      <li>원점을 넘어가지 못하면 분리로 끝냄.</li>
-      <li>보통 3~6회 반복이면 충분함.</li>
+      <li>원점 쪽으로 단체를 키움 (점, 선분, 삼각형 순)</li>
+      <li>단체가 원점을 감싸면 충돌로 끝냄</li>
+      <li>원점을 넘어가지 못하면 분리로 끝냄</li>
+      <li>보통 3~6회 반복이면 충분함</li>
     </ul>
     <p>겹쳤을 때는 <b>EPA</b>(Expanding Polytope Algorithm)를 씀. EPA는 GJK의 마지막 삼각형을 A−B 경계까지 넓혀서 원점에서 가장 가까운 변을 찾음.
     그 거리와 법선이 침투 깊이와 방향(MTV).</p>`,
@@ -45,12 +45,12 @@ GTL.register({
   look: [
     '오른쪽 아래 패널을 비교하면 A는 n×m개의 점 구름과 그 껍질을 그림. B는 GJK가 실제로 계산한 support 점(번호)과 최종 단체만 그림.',
     '꼭짓점 48개 상태에서 "정점 연산"을 보면 A는 차를 2304개 만듦. B는 반복 수 × (n+m) 수준.',
-    'B에서 도형을 겹치면 EPA 다각형(노랑)이 펼쳐지고, 원래 공간에 침투 벡터 화살표가 나타남.',
+    'B에서 도형을 겹치면 EPA 다각형(노랑)이 펼쳐지고, 원래 공간에 침투 벡터 화살표가 나타남',
     '꼭짓점 수를 바꿔도 GJK 반복 수는 거의 그대로임. 원(꼭짓점 많음)이나 캡슐도 support 함수만 있으면 됨.',
   ],
   refs: [
     { type: 'paper', title: 'A Fast Procedure for Computing the Distance Between Complex Objects in Three-Dimensional Space (Gilbert, Johnson, Keerthi)', year: 1988, note: 'IEEE Journal on Robotics and Automation. GJK 원 논문.' },
-    { type: 'talk', title: 'Implementing GJK (Casey Muratori)', url: 'https://caseymuratori.com/blog_0003', year: 2006, note: '원점 방향 단체 갱신을 설명한 유명한 영상.' },
+    { type: 'talk', title: 'Implementing GJK (Casey Muratori)', url: 'https://caseymuratori.com/blog_0003', year: 2006, note: '원점 방향 단체 갱신을 설명한 유명한 영상' },
     { type: 'book', title: 'Collision Detection in Interactive 3D Environments (Gino van den Bergen)', year: 2003, note: 'GJK/EPA 실전 구현. SOLID 라이브러리.' },
     { type: 'article', title: 'GJK & EPA, dyn4j blog (William Bittle)', url: 'https://dyn4j.org/2010/04/gjk-gilbert-johnson-keerthi/', year: 2010 },
   ],

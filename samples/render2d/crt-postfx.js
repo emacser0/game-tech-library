@@ -2,18 +2,18 @@
 GTL.register({
   id: 'crt-postfx',
   title: 'CRT 포스트 프로세스',
-  summary: '저해상도 게임 화면을 그대로 확대하면 각진 픽셀이 보임. 하지만 당시 아트는 CRT의 스캔라인, 형광체 번짐, 마스크를 전제로 그렸음. 풀스크린 셰이더 하나로 이를 재현함.',
+  summary: '저해상도 게임 화면을 그대로 확대하면 각진 픽셀이 보임. 하지만 당시 아트는 CRT의 스캔라인, 형광체 번짐, 마스크를 전제로 그렸음. 풀스크린 셰이더 하나로 이를 재현.',
   renderer: 'webgl',
   views: { a: '원본 (Nearest 확대)', b: 'CRT 셰이더' },
   info: `
-    <p>포스트 프로세스(Post Process)는 장면을 먼저 텍스처로 렌더링하고, 화면 크기 사각형에 프래그먼트 셰이더를 돌려 픽셀마다 효과를 계산하는 방식.</p>
-    <p>이 샘플은 320×180 게임 화면을 매 프레임 텍스처로 올리고 다음 효과를 적용함.</p>
+    <p>포스트 프로세스(Post Process)는 장면을 먼저 텍스처로 렌더링하고, 화면 크기 사각형에 프래그먼트 셰이더를 돌려 픽셀마다 효과를 계산하는 방식</p>
+    <p>이 샘플은 320×180 게임 화면을 매 프레임 텍스처로 올리고 다음 효과 적용</p>
     <ul>
-    <li><b>곡률</b>: UV를 중심에서 바깥으로 휘어 볼록한 브라운관 유리를 흉내 냄.</li>
+    <li><b>곡률</b>: UV를 중심에서 바깥으로 휘어 볼록한 브라운관 유리를 흉내 냄</li>
     <li><b>스캔라인</b>: 원본 한 줄 안에서 세로 위치에 따라 가우시안으로 밝기를 줌. 밝은 줄일수록 빔이 굵어지는 효과도 포함.</li>
-    <li><b>마스크</b>: 화면 픽셀 단위의 R/G/B 세로 줄(아파처 그릴), 엇갈린 점(섀도 마스크), 슬롯 마스크.</li>
-    <li><b>색수차</b>: R, B 채널을 중심 방향으로 약간 어긋나게 샘플링.</li>
-    <li><b>글로우, 비네트, 노이즈</b>: 형광체 번짐, 가장자리 어둡게 하기, 미세한 깜빡임.</li>
+    <li><b>마스크</b>: 화면 픽셀 단위의 R/G/B 세로 줄(아파처 그릴), 엇갈린 점(섀도 마스크), 슬롯 마스크</li>
+    <li><b>색수차</b>: R, B 채널을 중심 방향으로 약간 어긋나게 샘플링</li>
+    <li><b>글로우, 비네트, 노이즈</b>: 형광체 번짐, 가장자리 어둡게 하기, 미세한 깜빡임</li>
     </ul>
     <p>스캔라인과 마스크는 밝기를 깎으므로 보정 게인을 곱함. 연산은 선형 공간(감마 2.2 디코드)에서 함.</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 170" xmlns="http://www.w3.org/2000/svg">
@@ -31,18 +31,18 @@ GTL.register({
     <text x="474" y="96" class="t-small t-b">${L('어두운 줄', 'Dark row')}</text>
     <text x="445" y="124" text-anchor="middle" class="t-small t-dim">${L('줄 안의 세로 위치', 'Vertical position in a row')}</text>
     <text x="10" y="150" class="t-small t-dim">${L('곡률: UV를 중심에서 바깥으로 휨. 색수차: R과 B를 중심 쪽으로 조금 어긋나게 읽음.', 'Curvature bends UV outward. Chromatic aberration reads R and B slightly offset.')}</text>
-    <text x="10" y="164" class="t-small t-dim">${L('스캔라인과 마스크가 깎은 밝기는 게인을 곱해 되돌림.', 'A gain restores the brightness that scanlines and mask remove.')}</text>
+    <text x="10" y="164" class="t-small t-dim">${L('스캔라인과 마스크가 깎은 밝기는 게인을 곱해 되돌림', 'A gain restores the brightness that scanlines and mask remove.')}</text>
   </svg>`,
   look: [
     'B를 가까이 보면 화면 픽셀 단위의 R/G/B 마스크 줄과 원본 줄마다의 스캔라인이 보임. 멀리서 보면 픽셀아트가 부드럽게 "녹음".',
-    '"마스크"를 바꾸면 아파처 그릴(Trinitron), 섀도 마스크, 슬롯 마스크의 질감 차이가 보임.',
-    '"곡률"을 0으로 두고 "색수차"를 크게 하면 효과 하나의 기여만 따로 보임.',
+    '"마스크"를 바꾸면 아파처 그릴(Trinitron), 섀도 마스크, 슬롯 마스크의 질감 차이가 보임',
+    '"곡률"을 0으로 두고 "색수차"를 크게 하면 효과 하나의 기여만 따로 보임',
     '창을 작게 해서 확대 배율을 낮추면 마스크가 모아레(물결무늬)를 만듦. 실제 CRT 셰이더들이 고해상도 디스플레이를 권장하는 이유.',
   ],
   refs: [
     { type: 'code', title: 'libretro slang-shaders (crt-royale, crt-geom, crt-lottes 등)', url: 'https://github.com/libretro/slang-shaders', note: '에뮬레이터용 CRT 셰이더 모음. 마스크, 스캔라인, 곡률 구현 참고.' },
     { type: 'code', title: 'CRT shader (Timothy Lottes)', note: '퍼블릭 도메인 CRT 셰이더. 가우시안 스캔라인, 섀도 마스크, 곡률을 구현. libretro에 crt-lottes로 포함.' },
-    { type: 'game', title: 'Balatro (LocalThunk)', year: 2024, note: '설정에서 조절하는 CRT 포스트 프로세스를 아트 스타일의 일부로 사용.' },
+    { type: 'game', title: 'Balatro (LocalThunk)', year: 2024, note: '설정에서 조절하는 CRT 포스트 프로세스를 아트 스타일의 일부로 사용' },
   ],
   params: [
     { key: 'on', label: 'CRT 효과', type: 'bool', group: '효과', a: false, b: true },

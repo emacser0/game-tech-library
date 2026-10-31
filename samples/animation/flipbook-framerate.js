@@ -7,7 +7,7 @@ GTL.register({
   controls: '조작 없음. 캐릭터가 오른쪽으로 계속 걸음.',
   info: `
     <p><b>애니메이션 프레임레이트</b>는 포즈를 몇 번 바꾸는지를 뜻함. 화면 프레임레이트(60fps)와 따로 정할 수 있음.</p>
-    <p>손그림 애니메이션은 24fps 기준으로 한 포즈를 2프레임 유지함. 이것을 <b>2프레임마다(on twos)</b>라고 부름. 실제 포즈 갱신은 12번/초.
+    <p>손그림 애니메이션은 24fps 기준으로 한 포즈를 2프레임 유지. 이것을 <b>2프레임마다(on twos)</b>라고 부름. 실제 포즈 갱신은 12번/초.
     Guilty Gear Xrd는 3D 모델을 이 방식으로 재생해 2D 애니메이션처럼 보이게 했음.</p>
     <p>구현은 간단함. 재생 시간을 <code>floor(t * fps) / fps</code>로 내림한 뒤 그 시간의 포즈를 씀.</p>
     <p>단점: 위치를 매 프레임 옮기면서 포즈만 유지하면, 땅을 디딘 발이 몸과 함께 앞으로 끌려감. 다음 포즈에서 발이 뒤로 튐.
@@ -37,13 +37,13 @@ GTL.register({
   },
   look: [
     'B의 발끝 표시(점)를 보면 디딘 발이 앞으로 미끄러졌다가 포즈가 바뀔 때 뒤로 튐. "디딘 발 밀림" 값으로 확인됨.',
-    'B의 "위치 갱신"을 "포즈와 함께 끊기"로 바꾸면 발 밀림이 0이 됨. 대신 몸 전체가 덜컥거리며 이동함.',
+    'B의 "위치 갱신"을 "포즈와 함께 끊기"로 바꾸면 발 밀림이 0이 됨. 대신 몸 전체가 덜컥거리며 이동.',
     '포즈 프레임레이트를 8fps(3프레임마다)로 낮추면 리듬이 더 강해짐. 동시에 동작이 뚝뚝 끊겨 읽기 어려워짐.',
     '"잔상 표시"를 켜면 유지된 포즈의 간격이 넓게 보임. A는 잔상이 촘촘히 이어짐.',
   ],
   refs: [
     { type: 'talk', title: 'GuiltyGearXrd\'s Art Style: The X Factor Between 2D and 3D (Junya C. Motomura)', year: 2015, note: 'GDC 2015. 3D 모델을 프레임을 덜어 내며 재생해 2D 애니메이션처럼 보이게 함.' },
-    { type: 'book', title: 'The Animator\'s Survival Kit (Richard Williams)', note: '1프레임마다(ones)와 2프레임마다(twos) 촬영의 차이.' },
+    { type: 'book', title: 'The Animator\'s Survival Kit (Richard Williams)', note: '1프레임마다(ones)와 2프레임마다(twos) 촬영의 차이' },
   ],
   params: [
     { key: 'poseFps', label: '포즈 프레임레이트', type: 'select', group: '재생', options: [

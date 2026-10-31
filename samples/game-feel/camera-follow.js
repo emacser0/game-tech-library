@@ -13,9 +13,9 @@ GTL.register({
       <li><b>SmoothDamp</b>: 임계 감쇠 스프링(Unity <code>Mathf.SmoothDamp</code>, Game Programming Gems 4). 속도를 유지해 출발과 정지가 매끄러움.</li>
       <li><b>데드존 (카메라 창)</b>: 플레이어가 창 안에서 움직이는 동안 카메라는 가만히 있음. 작은 움직임이 화면에 전달되지 않음.</li>
       <li><b>룩어헤드</b>: 목표를 진행 방향으로 앞당겨 앞쪽을 더 보여 줌. 방향을 바꿀 때 오프셋을 부드럽게 옮겨야 함.</li>
-      <li><b>플랫폼 스냅</b>: 세로 위치를 <i>착지한 발판 높이</i>로만 갱신함. 점프 중에는 세로로 움직이지 않음(화면 밖으로 나갈 때만 추적).</li>
+      <li><b>플랫폼 스냅</b>: 세로 위치를 <i>착지한 발판 높이</i>로만 갱신. 점프 중에는 세로로 움직이지 않음(화면 밖으로 나갈 때만 추적).</li>
     </ul>
-    <p>Itay Keren의 "Scroll Back"은 이런 기법을 실제 게임 사례(슈퍼 마리오 월드, 소닉 등)와 함께 분류함.</p>`,
+    <p>Itay Keren의 "Scroll Back"은 이런 기법을 실제 게임 사례(슈퍼 마리오 월드, 소닉 등)와 함께 분류</p>`,
   // 도식: A 하드 락(화면 중심 = 플레이어) vs B 데드존 + 룩어헤드 목표 + 발판 높이 스냅
   diagram: (L) => `<svg viewBox="0 0 540 176" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arr" class="m-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -43,17 +43,17 @@ GTL.register({
     <text x="295" y="162" class="t-small t-dim">${L('작은 움직임은 무시, 앞쪽을 더 보여 줌', 'ignores small moves, shows more ahead')}</text>
   </svg>`,
   look: [
-    '세로 그래프를 비교하면 A는 플레이어 높이(회색)를 그대로 따라 출렁이고, B는 착지한 발판 높이에서만 계단처럼 움직임.',
-    '데모 중간에 플레이어가 멈췄다 잠깐 뒤로 걸을 때 보면, 룩어헤드가 있는 쪽은 시야가 뒤쪽으로 부드럽게 넘어감.',
-    'B의 방식을 "지수 보간"으로 바꾸고 감쇠 시간을 0.6초 이상으로 올리면 플레이어가 화면 가장자리까지 밀려 앞이 안 보임.',
-    '"데드존"만 쓰면 창 경계에 닿는 순간 카메라가 갑자기 움직이기 시작함. 그래서 감쇠와 함께 씀.',
+    '세로 그래프를 비교하면 A는 플레이어 높이(회색)를 그대로 따라 출렁이고, B는 착지한 발판 높이에서만 계단처럼 움직임',
+    '데모 중간에 플레이어가 멈췄다 잠깐 뒤로 걸을 때 보면, 룩어헤드가 있는 쪽은 시야가 뒤쪽으로 부드럽게 넘어감',
+    'B의 방식을 "지수 보간"으로 바꾸고 감쇠 시간을 0.6초 이상으로 올리면 플레이어가 화면 가장자리까지 밀려 앞이 안 보임',
+    '"데드존"만 쓰면 창 경계에 닿는 순간 카메라가 갑자기 움직이기 시작. 그래서 감쇠와 함께 씀.',
   ],
   refs: [
     { type: 'talk', title: 'Scroll Back: The Theory and Practice of Cameras in Side-Scrollers (Itay Keren)', year: 2015, note: 'GDC 2015. 카메라 창, 플랫폼 스냅, 룩어헤드, 큐 존 등 분류.' },
     { type: 'article', title: 'Scroll Back: The Theory and Practice of Cameras in Side-Scrollers (Gamasutra 기사판)', url: 'https://www.gamedeveloper.com/design/scroll-back-the-theory-and-practice-of-cameras-in-side-scrollers', year: 2015 },
     { type: 'talk', title: 'Math for Game Programmers: Juicing Your Cameras With Math (Squirrel Eiserloh)', year: 2016, note: 'GDC 2016. 부드러운 추적, 화면 흔들림.' },
     { type: 'engine', title: 'Unity - Mathf.SmoothDamp', url: 'https://docs.unity3d.com/ScriptReference/Mathf.SmoothDamp.html' },
-    { type: 'engine', title: 'Unity Cinemachine - Position Composer (Dead Zone / Soft Zone / Lookahead)', note: 'Cinemachine의 Dead Zone, Soft Zone, Lookahead Time 설정.' },
+    { type: 'engine', title: 'Unity Cinemachine - Position Composer (Dead Zone / Soft Zone / Lookahead)', note: 'Cinemachine의 Dead Zone, Soft Zone, Lookahead Time 설정' },
     { type: 'book', title: 'Game Programming Gems 4 - Critically Damped Ease-In/Ease-Out Smoothing (Thomas Lowe)', year: 2004 },
   ],
   params: [

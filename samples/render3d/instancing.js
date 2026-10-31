@@ -14,11 +14,11 @@ GTL.register({
       <li>커맨드 버퍼 기록</li>
     </ul>
     <p>작은 메시 수천 개를 따로 그리면 GPU는 놀고 CPU가 병목이 됨. WebGL은 호출마다 브라우저 검증 계층을 거쳐 네이티브보다 더 비쌈.</p>
-    <p><b>인스턴싱(instancing)</b>: 같은 메시를 한 번의 호출로 N개 그리는 기법(<code>ANGLE_instanced_arrays</code>, WebGL2는 기본 기능).</p>
+    <p><b>인스턴싱(instancing)</b>: 같은 메시를 한 번의 호출로 N개 그리는 기법(<code>ANGLE_instanced_arrays</code>, WebGL2는 기본 기능)</p>
     <ul>
-      <li><code>vertexAttribDivisor(loc, 1)</code>로 지정한 속성은 <i>인스턴스마다</i> 한 칸씩 읽힘.</li>
-      <li>위치, 위상, 색을 인스턴스 버퍼에 넣고 <code>drawElementsInstanced</code>를 한 번 호출함.</li>
-      <li>애니메이션은 세 방식 모두 같은 정점 셰이더에서 시간으로 계산함.</li>
+      <li><code>vertexAttribDivisor(loc, 1)</code>로 지정한 속성은 <i>인스턴스마다</i> 한 칸씩 읽힘</li>
+      <li>위치, 위상, 색을 인스턴스 버퍼에 넣고 <code>drawElementsInstanced</code>를 한 번 호출</li>
+      <li>애니메이션은 세 방식 모두 같은 정점 셰이더에서 시간으로 계산</li>
     </ul>
     <p><b>정적 배칭(static batching)</b>: 모든 복사본을 정점 버퍼 하나로 미리 합쳐 드로우 콜을 줄임. 단점: 인스턴스 데이터가 정점마다 복제되어 메모리가 N배로 늘어남. 16비트 인덱스 한계 때문에 여러 덩어리로 나뉨.</p>
     <p>개별 드로우 경로도 같은 셰이더를 씀. 인스턴스 속성을 배열 대신 <code>vertexAttrib4f</code> 상수로 바꿔 가며 그림.</p>`,

@@ -2,10 +2,10 @@
 GTL.register({
   id: 'utility-ai',
   title: '의사결정: 우선순위 FSM vs Utility AI',
-  summary: '같은 주민과 같은 늑대 경로에서 두 가지 두뇌를 비교. 고정 우선순위 규칙은 "늑대가 보이면 무조건 도망"처럼 상황의 정도를 무시해 굶거나 일을 못 함. Utility AI는 행동마다 점수를 응답 곡선으로 계산해 여러 욕구를 저울질함.',
+  summary: '같은 주민과 같은 늑대 경로에서 두 가지 두뇌를 비교. 고정 우선순위 규칙은 "늑대가 보이면 무조건 도망"처럼 상황의 정도를 무시해 굶거나 일을 못 함. Utility AI는 행동마다 점수를 응답 곡선으로 계산해 여러 욕구를 저울질.',
   views: { a: '우선순위 FSM', b: 'Utility AI' },
   info: `
-    <p><b>우선순위 FSM</b>(유한 상태 기계): 규칙을 위에서부터 차례로 검사함.</p>
+    <p><b>우선순위 FSM</b>(유한 상태 기계): 규칙을 위에서부터 차례로 검사</p>
     <ul>
       <li>늑대가 150px 안이면 도망</li>
       <li>아니고 배고픔 &gt; 0.7이면 먹기</li>
@@ -56,14 +56,14 @@ GTL.register({
   look: [
     '늑대가 작업대나 식탁 근처를 지나면 A의 주민은 거리가 꽤 멀어도 모두 일을 버리고 도망감. "총 작업량"이 A 쪽이 적음.',
     '배고픔이 1에 가까울 때 늑대가 식탁 근처를 맴돌면 A는 도망만 치다 굶음("위기 시간" 증가). B는 위협이 크지 않으면 먹으러 감.',
-    'B의 "관성 보너스"를 0으로 하면 점수가 비슷한 순간 행동이 빠르게 바뀜("결정 변경 / 분" 증가).',
+    'B의 "관성 보너스"를 0으로 하면 점수가 비슷한 순간 행동이 빠르게 바뀜("결정 변경 / 분" 증가)',
     'A의 "도망 거리"를 줄이면 작업량은 늘지만 "늑대에게 물린 시간"도 늘어남. 임계값 조정만으로는 한계가 있음.',
   ],
   refs: [
     { type: 'book', title: 'Behavioral Mathematics for Game AI', year: 2009, note: 'Dave Mark. 응답 곡선 기반 효용 이론의 게임 적용.' },
     { type: 'talk', title: 'Improving AI Decision Modeling Through Utility Theory', year: 2010, note: 'Dave Mark & Kevin Dill, GDC 2010 AI Summit.' },
     { type: 'talk', title: 'Building a Better Centaur: AI at Massive Scale', year: 2015, note: 'Dave Mark & Mike Lewis, GDC 2015. Infinite Axis Utility System (Guild Wars 2).' },
-    { type: 'book', title: 'An Introduction to Utility Theory', year: 2013, note: 'David "Rez" Graham, Game AI Pro (CRC Press) 9장.' },
+    { type: 'book', title: 'An Introduction to Utility Theory', year: 2013, note: 'David "Rez" Graham, Game AI Pro (CRC Press) 9장' },
     { type: 'book', title: 'Game Programming Patterns - State', url: 'https://gameprogrammingpatterns.com/state.html', year: 2014, note: 'Robert Nystrom. FSM 패턴.' },
   ],
   params: [

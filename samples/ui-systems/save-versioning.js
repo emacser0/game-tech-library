@@ -6,19 +6,19 @@ GTL.register({
   views: { a: '현재 형식만 읽기', b: '버전 + 마이그레이션' },
   controls: '세이브 슬롯을 클릭하면 오른쪽에 원본 데이터와 불러온 결과가 나옴. 자동 데모가 슬롯을 차례로 보여 줌.',
   info: `
-    <p><b>세이브 데이터 버전 관리</b>는 저장 파일에 형식 버전을 함께 적고, 불러올 때 버전에 맞게 변환하는 방법.</p>
+    <p><b>세이브 데이터 버전 관리</b>는 저장 파일에 형식 버전을 함께 적고, 불러올 때 버전에 맞게 변환하는 방법</p>
     <p>업데이트마다 세이브 형식이 바뀜. 예:</p>
     <ul>
-      <li>v2: <code>hp</code>를 <code>stats.hp</code>로 옮기고 인벤토리 추가.</li>
+      <li>v2: <code>hp</code>를 <code>stats.hp</code>로 옮기고 인벤토리 추가</li>
       <li>v3: 금화를 <code>wallet</code>으로 옮기고 보석 추가. 인벤토리를 개수 묶음으로 바꿈.</li>
-      <li>v4: 이름을 <code>profile</code>로 옮기고 인벤토리를 사전 형태로 바꿈.</li>
+      <li>v4: 이름을 <code>profile</code>로 옮기고 인벤토리를 사전 형태로 바꿈</li>
     </ul>
     <p>현재 형식만 읽으면 구버전 세이브에서 없는 필드를 읽다가 오류가 남(로드 실패). 기본값으로 메우는 방식은 오류는 없지만 옮겨 간 필드를 못 찾아서 금화나 아이템이 조용히 사라짐. 이쪽이 더 위험함.</p>
     <p>마이그레이션 방식:</p>
     <ul>
       <li>저장할 때 항상 <code>version</code>을 적음. 버전 필드가 없으면 v1로 봄.</li>
       <li>변환 함수는 바로 다음 버전으로만 바꿈(v1→v2, v2→v3, ...). 새 버전을 낼 때 함수 하나만 추가하면 됨.</li>
-      <li>불러올 때 현재 버전이 될 때까지 차례로 적용한 뒤, 현재 형식 읽기 코드는 하나만 유지함.</li>
+      <li>불러올 때 현재 버전이 될 때까지 차례로 적용한 뒤, 현재 형식 읽기 코드는 하나만 유지</li>
     </ul>
     <p>단점: 변환 함수를 지우지 않고 계속 유지하고 테스트해야 함. 구버전 세이브 표본을 테스트 데이터로 보관해 두는 것이 좋음. 새 버전 세이브를 구버전 게임이 읽는 경우(하위 호환)는 따로 막아야 함.</p>`,
   // 도식: 버전 사슬 v1→v2→v3→v4. 세이브는 자기 버전에서 시작해 한 단계씩 변환. A는 v1을 현재 형식으로 바로 읽음
@@ -58,12 +58,12 @@ GTL.register({
     '처음 화면에서 A는 현재 버전(v4)이 아닌 슬롯이 모두 "실패"(빨강). B는 모든 슬롯이 "성공"(초록).',
     'A의 읽기 방식을 "기본값으로 메우기"로 바꾸면 실패는 사라지지만 구버전 슬롯이 "손실"(노랑)이 됨. 오른쪽 결과에서 금화, 아이템, 이름이 기본값으로 바뀐 것이 보임.',
     '"현재 게임 버전"을 2로 낮추면 구버전 세이브 종류가 줄어서 A의 실패도 줄어듦. 버전이 오를수록 버전 관리 없이 버티기 어려움.',
-    'B에서 v1 슬롯을 클릭하면 마이그레이션 단계 v1→v2→v3→v4가 차례로 강조됨.',
+    'B에서 v1 슬롯을 클릭하면 마이그레이션 단계 v1→v2→v3→v4가 차례로 강조됨',
   ],
   refs: [
-    { type: 'book', title: 'Designing Data-Intensive Applications, 4장 Encoding and Evolution (Martin Kleppmann)', year: 2017, note: '상위 호환, 하위 호환과 스키마 진화.' },
-    { type: 'article', title: 'Protocol Buffers - Updating A Message Type', url: 'https://protobuf.dev/programming-guides/proto3/#updating', note: '필드 번호를 유지해 형식을 바꾸는 규칙.' },
-    { type: 'engine', title: 'Unreal Engine - Custom Versions (FCustomVersion)', note: '직렬화 코드에서 버전 번호를 확인해 구버전 에셋과 세이브를 읽는 방식.' },
+    { type: 'book', title: 'Designing Data-Intensive Applications, 4장 Encoding and Evolution (Martin Kleppmann)', year: 2017, note: '상위 호환, 하위 호환과 스키마 진화' },
+    { type: 'article', title: 'Protocol Buffers - Updating A Message Type', url: 'https://protobuf.dev/programming-guides/proto3/#updating', note: '필드 번호를 유지해 형식을 바꾸는 규칙' },
+    { type: 'engine', title: 'Unreal Engine - Custom Versions (FCustomVersion)', note: '직렬화 코드에서 버전 번호를 확인해 구버전 에셋과 세이브를 읽는 방식' },
   ],
   params: [
     { key: 'gameVer', label: '현재 게임 버전', type: 'int', min: 2, max: 4, default: 4, shared: true, reset: true, group: '장면' },

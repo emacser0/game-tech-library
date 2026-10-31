@@ -9,13 +9,13 @@ GTL.register({
     <p>시야 다각형(Visibility Polygon)은 관찰자에게 보이는 벽 위의 점들을 각도순으로 이은 다각형. 그림자, 전장의 안개, 시야 기반 은신 게임(Monaco 등)에 쓰임.</p>
     <p><b>단순한 방법</b>은 360°를 N등분해 레이를 쏘는 것. 이 방법에는 문제가 있음.</p>
     <ul>
-    <li>다각형 꼭짓점이 벽 모서리와 맞지 않아 그림자 경계가 흔들림.</li>
-    <li>레이 간격보다 좁은 틈이나 멀리 있는 작은 기둥을 통째로 놓침.</li>
-    <li>N을 키워도 정확해지지 않고 비용만 늘어남.</li>
+    <li>다각형 꼭짓점이 벽 모서리와 맞지 않아 그림자 경계가 흔들림</li>
+    <li>레이 간격보다 좁은 틈이나 멀리 있는 작은 기둥을 통째로 놓침</li>
+    <li>N을 키워도 정확해지지 않고 비용만 늘어남</li>
     </ul>
-    <p><b>끝점 캐스팅</b>은 시야 경계가 반드시 벽 선분의 끝점을 지난다는 점을 이용함. 각 끝점 방향으로 <code>θ−ε, θ, θ+ε</code> 세 레이만 쏨.
+    <p><b>끝점 캐스팅</b>은 시야 경계가 반드시 벽 선분의 끝점을 지난다는 점을 이용. 각 끝점 방향으로 <code>θ−ε, θ, θ+ε</code> 세 레이만 쏨.
     ±ε 레이는 모서리를 스쳐 뒤쪽 벽까지 날아가 그림자 경계를 만듦. 맞은 지점을 각도순으로 정렬하면 정확한 다각형이 됨.</p>
-    <p>Red Blob Games의 글은 한 단계 더 나아가 각도 스윕(Sweep)으로 O(n log n)에 구함.</p>`,
+    <p>Red Blob Games의 글은 한 단계 더 나아가 각도 스윕(Sweep)으로 O(n log n)에 구함</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 196" xmlns="http://www.w3.org/2000/svg">
     <text x="20" y="14" class="t-a">${L('A: 균일 레이 24개', 'A: 24 even rays')}</text>
     <text x="290" y="14" class="t-b">${L('B: 끝점 방향 3개씩', 'B: 3 rays per endpoint')}</text>
@@ -33,13 +33,13 @@ GTL.register({
   look: [
     'A에서 관찰자를 움직이면 그림자 경계가 톱니처럼 흔들리고 벽 모서리가 둥글게 깎임. B는 모서리가 정확함.',
     'A의 레이 수를 늘려도 먼 곳의 경계는 여전히 부정확함. "레이 표시"를 켜면 레이 간격이 보임.',
-    '"보이는 적" 수치를 비교하면 B에서 보이는(빨강) 적을 A가 놓치는 경우가 보임.',
+    '"보이는 적" 수치를 비교하면 B에서 보이는(빨강) 적을 A가 놓치는 경우가 보임',
     '"장애물 수"를 늘리면 B의 레이 수도 늘어남. B의 레이 수는 벽 끝점 수 × 3으로 정해짐.',
   ],
   refs: [
-    { type: 'article', title: '2D Visibility (Red Blob Games, Amit Patel)', url: 'https://www.redblobgames.com/articles/visibility/', year: 2012, note: '각도 스윕 알고리즘과 인터랙티브 해설.' },
-    { type: 'article', title: 'Sight & Light (Nicky Case)', url: 'https://ncase.me/sight-and-light/', year: 2014, note: '끝점 ± 0.00001 rad 레이캐스팅 튜토리얼.' },
-    { type: 'game', title: "Monaco: What's Yours Is Mine (Pocketwatch Games)", year: 2013, note: '시야 다각형 기반 탑다운 은신 게임.' },
+    { type: 'article', title: '2D Visibility (Red Blob Games, Amit Patel)', url: 'https://www.redblobgames.com/articles/visibility/', year: 2012, note: '각도 스윕 알고리즘과 인터랙티브 해설' },
+    { type: 'article', title: 'Sight & Light (Nicky Case)', url: 'https://ncase.me/sight-and-light/', year: 2014, note: '끝점 ± 0.00001 rad 레이캐스팅 튜토리얼' },
+    { type: 'game', title: "Monaco: What's Yours Is Mine (Pocketwatch Games)", year: 2013, note: '시야 다각형 기반 탑다운 은신 게임' },
   ],
   params: [
     { key: 'method', label: '방식', type: 'select', group: '레이캐스팅', options: [

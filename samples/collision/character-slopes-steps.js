@@ -10,8 +10,8 @@ GTL.register({
     Unity CharacterController와 PhysX CCT가 같은 이름의 설정을 둠.</p>
     <ul>
       <li><b>경사 한계</b>(slope limit): 법선과 위쪽 사이 각도가 한계보다 크면 바닥이 아니라 벽으로 다룸. 미끄러질 때 위로 올라가는 성분을 없앰.</li>
-      <li><b>계단 오르기</b>(step offset): 바닥에 서서 벽에 막히면 세 단계로 다시 시도함. 위로 step offset만큼, 앞으로, 아래로. 내려선 면이 걸을 수 있는 바닥이면 받아들임.</li>
-      <li><b>지면 붙이기</b>(ground snapping): 직전 프레임에 바닥에 있었는데 지금 떠 있으면 아래로 짧게 스윕함. 바닥이 가까이 있으면 그 위로 붙임.</li>
+      <li><b>계단 오르기</b>(step offset): 바닥에 서서 벽에 막히면 세 단계로 다시 시도. 위로 step offset만큼, 앞으로, 아래로. 내려선 면이 걸을 수 있는 바닥이면 받아들임.</li>
+      <li><b>지면 붙이기</b>(ground snapping): 직전 프레임에 바닥에 있었는데 지금 떠 있으면 아래로 짧게 스윕. 바닥이 가까이 있으면 그 위로 붙임.</li>
     </ul>
     <p>지면 붙이기가 없으면 내리막에서 한 프레임마다 조금씩 떠서 계단처럼 통통 튀며 내려감. 언덕 꼭대기에서는 날아오름. 그동안 점프 입력도 받지 못함.</p>
     <p>단점과 주의:</p>
@@ -56,14 +56,14 @@ GTL.register({
     <text x="368" y="172" class="t-small t-b">${L('B: 아래로 짧게 스윕해 붙임', 'B: short sweep down, then stick')}</text>
   </svg>`,
   look: [
-    '기본 상태에서 A는 왼쪽 계단에 막혀 되돌아가고, 오른쪽 60° 급경사는 기어올라 고지에 도달함. B는 계단을 올라 왼쪽 고지에 가고, 급경사 앞에서 되돌아옴.',
+    '기본 상태에서 A는 왼쪽 계단에 막혀 되돌아가고, 오른쪽 60° 급경사는 기어올라 고지에 도달. B는 계단을 올라 왼쪽 고지에 가고, 급경사 앞에서 되돌아옴.',
     '내리막(30°)과 언덕 꼭대기에서 A의 궤적에 빨간 점(공중)이 찍힘. "의도치 않은 공중 비율"을 비교.',
     'B의 "지면 붙이기"만 끄면 B도 내리막에서 통통 튐. "계단 오르기 높이"를 4 이하로 낮추면 B도 계단에 막힘. 발이 둥글어서 계단 높이보다 작은 값으로도 모서리를 타고 오름.',
     'B의 "경사 한계"를 65°로 올리면 B도 급경사를 오름. "45° 넘는 경사에 선 시간"이 늘어남.',
   ],
   refs: [
-    { type: 'engine', title: 'Unity Manual: Character Controller component reference', url: 'https://docs.unity3d.com/Manual/class-CharacterController.html', note: 'Slope Limit, Step Offset, Skin Width 설정.' },
-    { type: 'engine', title: 'NVIDIA PhysX SDK Guide: Character Controllers', note: '위, 옆, 아래 3단계 이동(auto stepping), 걸을 수 없는 경사 처리.' },
+    { type: 'engine', title: 'Unity Manual: Character Controller component reference', url: 'https://docs.unity3d.com/Manual/class-CharacterController.html', note: 'Slope Limit, Step Offset, Skin Width 설정' },
+    { type: 'engine', title: 'NVIDIA PhysX SDK Guide: Character Controllers', note: '위, 옆, 아래 3단계 이동(auto stepping), 걸을 수 없는 경사 처리' },
     { type: 'paper', title: 'Improved Collision detection and Response (Kasper Fauerby)', year: 2003, note: '타원체 스윕과 미끄러짐 응답. 컨트롤러의 바탕.' },
     { type: 'engine', title: 'Godot CharacterBody2D (floor_max_angle, floor_snap_length)', url: 'https://docs.godotengine.org/en/stable/classes/class_characterbody2d.html' },
   ],

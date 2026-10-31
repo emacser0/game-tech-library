@@ -4,14 +4,14 @@ GTL.register({
   title: '애니메이션 원칙: 예비 동작, 스쿼시 & 스트레치, 후속 동작',
   summary: '같은 점프를 같은 타이밍으로 재생해도 애니메이션 원칙을 더하면 무게감과 생동감이 생김. 예비 동작(anticipation), 찌그러짐과 늘어남(squash & stretch), 호(arc), 천천히 시작과 끝(slow in/out), 후속 동작(follow-through)과 overshoot를 비교.',
   views: { a: '원칙 미적용', b: '원칙 적용' },
-  controls: '조작 없음. 캐릭터가 두 발판 사이를 반복해서 점프함. 두 뷰의 타이밍은 같음.',
+  controls: '조작 없음. 캐릭터가 두 발판 사이를 반복해서 점프. 두 뷰의 타이밍은 같음.',
   info: `
     <p>디즈니 애니메이터들이 정리한 <b>12가지 원칙</b>은 게임의 캐릭터와 UI 애니메이션에도 그대로 적용됨. 이 샘플은 그중 다섯 가지를 스위치로 하나씩 켜고 끔.</p>
     <ul>
       <li><b>예비 동작 (Anticipation)</b>: 점프 전에 반대 방향으로 웅크림. "곧 움직임"을 알려 줌. 게임에서는 적의 공격 예고(telegraph) 역할도 함.</li>
       <li><b>찌그러짐과 늘어남 (Squash &amp; Stretch)</b>: 빠르게 움직일 때 늘어나고 부딪칠 때 찌그러짐. 핵심은 <b>부피 보존</b>(sx × sy = 1).</li>
-      <li><b>호 (Arcs)</b>: 생물은 직선이 아닌 곡선 궤적으로 움직임.</li>
-      <li><b>천천히 시작과 끝 (Slow In &amp; Slow Out)</b>: 출발과 도착 근처에서 감속함. 정점에서 머무는 시간(hang time)이 생김.</li>
+      <li><b>호 (Arcs)</b>: 생물은 직선이 아닌 곡선 궤적으로 움직임</li>
+      <li><b>천천히 시작과 끝 (Slow In &amp; Slow Out)</b>: 출발과 도착 근처에서 감속. 정점에서 머무는 시간(hang time)이 생김.</li>
       <li><b>후속 동작 (Follow-Through) &amp; Overshoot</b>: 몸이 멈춰도 더듬이 같은 느슨한 부분은 늦게 따라오며 흔들림. 착지 찌그러짐은 목표를 지나쳤다가 돌아옴.</li>
     </ul>
     <p>점열(onion skin)은 같은 시간 간격으로 찍은 위치. 간격은 속도, 모양은 궤적을 나타냄.</p>`,
@@ -51,16 +51,16 @@ GTL.register({
   </svg>`;
   },
   look: [
-    'A를 보면 직선 궤적, 등속, 형태 변화 없음. 미끄러지는 상자처럼 무게가 없음. B는 같은 시간에 같은 거리를 가지만 훨씬 생동감 있음.',
-    'B에서 원칙을 하나씩 끄면 무엇이 "무게감"(스쿼시, 예비 동작)을 만들고 무엇이 "유기적 느낌"(호, 후속 동작)을 만드는지 구분됨.',
-    '과장 정도를 2로 올리면 카툰 느낌, 0.3으로 내리면 사실적인 느낌이 됨.',
-    '후속 동작을 켜면 착지 후에도 더듬이가 잠시 흔들림(오버랩 동작).',
+    'A를 보면 직선 궤적, 등속, 형태 변화 없음. 미끄러지는 상자처럼 무게 없음. B는 같은 시간에 같은 거리를 가지만 훨씬 생동감 있음.',
+    'B에서 원칙을 하나씩 끄면 무엇이 "무게감"(스쿼시, 예비 동작)을 만들고 무엇이 "유기적 느낌"(호, 후속 동작)을 만드는지 구분됨',
+    '과장 정도를 2로 올리면 카툰 느낌, 0.3으로 내리면 사실적인 느낌이 됨',
+    '후속 동작을 켜면 착지 후에도 더듬이가 잠시 흔들림(오버랩 동작)',
   ],
   refs: [
-    { type: 'book', title: 'The Illusion of Life: Disney Animation (Frank Thomas & Ollie Johnston)', year: 1981, note: '12가지 애니메이션 원칙의 원전.' },
+    { type: 'book', title: 'The Illusion of Life: Disney Animation (Frank Thomas & Ollie Johnston)', year: 1981, note: '12가지 애니메이션 원칙의 원전' },
     { type: 'paper', title: 'Principles of Traditional Animation Applied to 3D Computer Animation (John Lasseter)', year: 1987, note: 'SIGGRAPH \'87. 원칙을 CG 애니메이션에 적용.' },
     { type: 'article', title: 'Twelve basic principles of animation (Wikipedia)', url: 'https://en.wikipedia.org/wiki/Twelve_basic_principles_of_animation' },
-    { type: 'talk', title: 'Juice it or lose it (Martin Jonasson & Petri Purho)', year: 2012, note: '스쿼시, 트윈, overshoot 같은 작은 애니메이션이 게임 느낌에 주는 효과.' },
+    { type: 'talk', title: 'Juice it or lose it (Martin Jonasson & Petri Purho)', year: 2012, note: '스쿼시, 트윈, overshoot 같은 작은 애니메이션이 게임 느낌에 주는 효과' },
   ],
   params: [
     { key: 'anticipation', label: '예비 동작', type: 'bool', a: false, b: true, group: '원칙' },

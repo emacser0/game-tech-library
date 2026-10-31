@@ -2,7 +2,7 @@
 GTL.register({
   id: 'gpu-particles',
   title: 'GPU 파티클 시뮬레이션 (Niagara GPU 이미터, VFX Graph)',
-  summary: '같은 이미터 규칙으로 파티클 수만 개를 움직임. A는 JS에서 위치를 계산해 매 프레임 버퍼로 올림. B는 상태를 부동소수점 텍스처에 두고 셰이더로 갱신해 업로드가 없음.',
+  summary: '같은 이미터 규칙으로 파티클 수만 개를 움직임. A는 JS에서 위치를 계산해 매 프레임 버퍼로 올림. B는 상태를 부동소수점 텍스처에 두고 셰이더로 갱신해 업로드 없음.',
   renderer: 'webgl2',
   views: { a: 'CPU 시뮬레이션 + 업로드', b: 'GPU 시뮬레이션 (텍스처 핑퐁)' },
   controls: '조작 없음. 파라미터로 개수와 힘을 바꿈.',
@@ -16,7 +16,7 @@ GTL.register({
       <li>시뮬레이션 패스: 텍스처 A를 읽고 힘을 적용해 텍스처 B에 씀. 다음 프레임에는 A와 B를 바꿈(핑퐁).</li>
       <li>그리기 패스: 정점 셰이더가 <code>gl_VertexID</code>로 텍셀을 읽어 위치를 정함. CPU는 개수만 알려 줌.</li>
     </ul>
-    <p>단점: 부동소수점 렌더 타겟(<code>EXT_color_buffer_float</code>)이 필요함. 파티클끼리의 상호작용, 게임 로직으로 결과를 다시 읽는 일(충돌 이벤트 등)은 어려움.</p>`,
+    <p>단점: 부동소수점 렌더 타겟(<code>EXT_color_buffer_float</code>) 필요. 파티클끼리의 상호작용, 게임 로직으로 결과를 다시 읽는 일(충돌 이벤트 등)은 어려움.</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 204" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <marker id="arrA" class="m-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
@@ -60,8 +60,8 @@ GTL.register({
     '"파티클 수"를 1000으로 낮추면 두 방식의 비용 차이가 거의 사라짐. 개수가 적으면 CPU 방식도 충분함.',
   ],
   refs: [
-    { type: 'engine', title: 'Unreal Engine: Niagara GPU Simulation (GPU Compute Sim target)', note: 'Niagara 이미터의 Sim Target을 GPUCompute Sim으로 바꾸면 상태가 GPU 버퍼에 있음.' },
-    { type: 'engine', title: 'Unity: Choosing your particle system solution', url: 'https://docs.unity3d.com/Manual/ChoosingYourParticleSystem.html', note: 'Built-in Particle System(CPU) vs Visual Effect Graph(GPU) 비교.' },
+    { type: 'engine', title: 'Unreal Engine: Niagara GPU Simulation (GPU Compute Sim target)', note: 'Niagara 이미터의 Sim Target을 GPUCompute Sim으로 바꾸면 상태가 GPU 버퍼에 있음' },
+    { type: 'engine', title: 'Unity: Choosing your particle system solution', url: 'https://docs.unity3d.com/Manual/ChoosingYourParticleSystem.html', note: 'Built-in Particle System(CPU) vs Visual Effect Graph(GPU) 비교' },
     { type: 'talk', title: 'Building a Million-Particle System (Lutz Latta)', year: 2004, note: 'GDC 2004. 부동소수점 텍스처에 상태를 두고 핑퐁으로 갱신하는 방식.' },
     { type: 'talk', title: 'Compute-Based GPU Particle Systems (Gareth Thomas)', year: 2014, note: 'GDC 2014. 컴퓨트 셰이더로 생성, 갱신, 정렬까지 GPU에서 처리.' },
   ],
@@ -416,7 +416,7 @@ void main(){
         gl.disable(gl.BLEND);
 
         if (P.sim === 'gpu' && !gpuOk) {
-          ctx.stat(GTL.L('경고', 'Warning'), GTL.L('EXT_color_buffer_float 미지원. 부동소수점 텍스처에 쓸 수 없어 CPU 방식으로 대체함', 'No EXT_color_buffer_float. Cannot render to float textures, so this view falls back to CPU'));
+          ctx.stat(GTL.L('경고', 'Warning'), GTL.L('EXT_color_buffer_float 미지원. 부동소수점 텍스처에 쓸 수 없어 CPU 방식으로 대체', 'No EXT_color_buffer_float. Cannot render to float textures, so this view falls back to CPU'));
         }
         ctx.stat(GTL.L('파티클 수', 'Particles'), N.toLocaleString('en-US'));
         ctx.stat(GTL.L('시뮬레이션', 'Simulation'), mode === 'gpu' ? GTL.L('GPU (텍스처 ', 'GPU (texture ') + SIDE + 'x' + SIDE + ')' : 'CPU (JS)');

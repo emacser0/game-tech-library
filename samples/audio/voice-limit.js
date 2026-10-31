@@ -10,16 +10,16 @@ GTL.register({
     그래서 엔진은 동시에 처리할 실제 보이스 수에 상한을 둠 (모바일은 수십 개 수준).</p>
     <p>보이스가 많으면 생기는 문제:</p>
     <ul>
-      <li>CPU 비용이 보이스 수에 비례해 늘어남.</li>
-      <li>작은 소리 수십 개가 쌓여 믹스가 탁해지고, 합이 0dBFS를 넘으면 <b>클리핑</b>.</li>
-      <li>중요한 소리(폭발, 대사)가 잡음에 묻힘.</li>
+      <li>CPU 비용이 보이스 수에 비례해 늘어남</li>
+      <li>작은 소리 수십 개가 쌓여 믹스가 탁해지고, 합이 0dBFS를 넘으면 <b>클리핑</b></li>
+      <li>중요한 소리(폭발, 대사)가 잡음에 묻힘</li>
     </ul>
     <p>해결 방법:</p>
     <ul>
-      <li><b>보이스 상한</b>: 단순히 먼저 온 소리만 받으면, 나중에 온 폭발이 버려짐 ("선착순" 모드).</li>
-      <li><b>우선순위 + 들리는 크기</b>: 매 프레임 점수(우선순위 + 거리 감쇠 반영 음량)로 줄을 세워 상위 N개만 실제로 재생.</li>
+      <li><b>보이스 상한</b>: 단순히 먼저 온 소리만 받으면, 나중에 온 폭발이 버려짐 ("선착순" 모드)</li>
+      <li><b>우선순위 + 들리는 크기</b>: 매 프레임 점수(우선순위 + 거리 감쇠 반영 음량)로 줄을 세워 상위 N개만 실제로 재생</li>
       <li><b>가상화(Virtualization)</b>: 밀려난 소리는 끄지 않고 재생 위치만 계속 셈. 다시 상위로 오르면 이어서 재생. FMOD의 Virtual Voice, Wwise의 Virtual Voice 설정.</li>
-      <li><b>종류별 상한</b>: 같은 발소리가 10개씩 쌓이지 않게 종류마다 개수를 제한.</li>
+      <li><b>종류별 상한</b>: 같은 발소리가 10개씩 쌓이지 않게 종류마다 개수를 제한</li>
     </ul>`,
   diagram: (L) => {
     const req = [[L('발소리', 'Step'), 2], [L('발소리', 'Step'), 3], [L('탄피', 'Shell'), 1], [L('총성', 'Shot'), 6], [L('발소리', 'Step'), 4], [L('폭발', 'Boom'), 9]];
@@ -38,7 +38,7 @@ GTL.register({
     ${slot(380, 30, `6 ${req[5][0]} (9)`, 't-b')}${slot(380, 54, `4 ${req[3][0]} (6)`, 't-b')}${slot(380, 78, `5 ${req[4][0]} (4)`, 't-b')}
     <text x="380" y="118" class="t-small t-dim">${L('가상화: 1, 2, 3', 'Virtual: 1, 2, 3')}</text>
     <text x="380" y="132" class="t-small t-dim">${L('재생 위치만 계속 셈', 'only the play position runs')}</text>
-    <text x="4" y="164" class="t-small t-dim">${L('점수 = 우선순위 + 들리는 크기. 매 프레임 다시 정렬해서 상위 N개만 실제로 믹싱함', 'Score = priority + audible level. Re-sort every frame and mix only the top N')}</text>
+    <text x="4" y="164" class="t-small t-dim">${L('점수 = 우선순위 + 들리는 크기. 매 프레임 다시 정렬해서 상위 N개만 실제로 믹싱', 'Score = priority + audible level. Re-sort every frame and mix only the top N')}</text>
     <text x="4" y="182" class="t-small t-a">${L('A (제한 없음): 6개를 모두 믹싱해서 합이 0dBFS를 넘고 클리핑', 'A (no limit): mixes all 6, the sum passes 0dBFS and clips')}</text>
     </svg>`;
   },
@@ -49,10 +49,10 @@ GTL.register({
     '"이벤트 빈도"를 150으로 올리면 A의 보이스가 수십 개까지 늘어남. B의 믹서 비용은 그대로.',
   ],
   refs: [
-    { type: 'engine', title: 'FMOD Engine - Virtual Voice System', url: 'https://www.fmod.com/docs/2.02/api/white-papers-virtual-voices.html', note: '실제 보이스 수 제한, 들리는 크기로 정렬, 가상 보이스로 위치만 추적.' },
-    { type: 'engine', title: 'Wwise - Playback Limit & Priority, Virtual Voices', note: '사운드별 Playback Priority, 거리 기반 우선순위 오프셋, Virtual Voice Behavior.' },
+    { type: 'engine', title: 'FMOD Engine - Virtual Voice System', url: 'https://www.fmod.com/docs/2.02/api/white-papers-virtual-voices.html', note: '실제 보이스 수 제한, 들리는 크기로 정렬, 가상 보이스로 위치만 추적' },
+    { type: 'engine', title: 'Wwise - Playback Limit & Priority, Virtual Voices', note: '사운드별 Playback Priority, 거리 기반 우선순위 오프셋, Virtual Voice Behavior' },
     { type: 'engine', title: 'Unity Manual - Audio Source (Priority), Project Settings Audio (Max Real Voices)', url: 'https://docs.unity3d.com/Manual/class-AudioManager.html', note: 'Max Real Voices, Max Virtual Voices.' },
-    { type: 'book', title: 'Game Audio Programming: Principles and Practices (Guy Somberg 편)', year: 2016, note: '보이스 관리, 우선순위, 가상화 구현.' },
+    { type: 'book', title: 'Game Audio Programming: Principles and Practices (Guy Somberg 편)', year: 2016, note: '보이스 관리, 우선순위, 가상화 구현' },
   ],
   params: [
     { key: 'mode', label: '보이스 관리', type: 'select', group: '보이스', options: [
@@ -156,7 +156,7 @@ GTL.register({
         let n = 0;
         for (const v of live) if (v.state === 'real') { n++; perType.set(v.type, count(v.type) + 1); }
         for (const v of live) {
-          if (v.state === 'virtual') v.state = 'culled';     // 다른 모드에서 바꾼 경우: 선착순에는 가상 보이스가 없음
+          if (v.state === 'virtual') v.state = 'culled';     // 다른 모드에서 바꾼 경우: 선착순에는 가상 보이스 없음
           if (v.state !== 'new') continue;
           if (n < P.maxVoices && count(v.type) < P.perType) { v.state = 'real'; n++; perType.set(v.type, count(v.type) + 1); }
           else v.state = 'culled';

@@ -7,10 +7,10 @@ GTL.register({
   controls: '조작 없음. 캐릭터가 천천히 원을 그리며 이동하고 카메라가 따라감.',
   pixelRatio: 1,
   info: `
-    <p>픽셀 아트 게임은 보통 320×180 같은 저해상도 버퍼에 그린 뒤 정수 배율로 확대함. 텍셀(texel)은 이 버퍼의 픽셀 하나. 그런데 게임 로직의 위치와 카메라 좌표는 실수.</p>
+    <p>픽셀 아트 게임은 보통 320×180 같은 저해상도 버퍼에 그린 뒤 정수 배율로 확대. 텍셀(texel)은 이 버퍼의 픽셀 하나. 그런데 게임 로직의 위치와 카메라 좌표는 실수.</p>
     <ul>
       <li><b>보간 그리기</b>: 실수 좌표에 그대로 그림(이중선형 샘플링). 텍셀이 번지고, 움직일 때마다 <b>흐려졌다 선명해졌다</b> 반짝임.</li>
-      <li><b>정수 스냅</b>: 모든 위치를 반올림함. 선명하지만 카메라가 <b>한 텍셀(배율만큼의 화면 픽셀)</b> 단위로만 움직임. 느린 스크롤이 계단처럼 끊김.
+      <li><b>정수 스냅</b>: 모든 위치를 반올림. 선명하지만 카메라가 <b>한 텍셀(배율만큼의 화면 픽셀)</b> 단위로만 움직임. 느린 스크롤이 계단처럼 끊김.
         또 <code>round(player) − round(camera)</code>와 <code>round(player − camera)</code>는 값이 다름. 그래서 카메라가 부드럽게 따라올 때 캐릭터가 1텍셀씩 <b>떨림</b>.</li>
       <li><b>스냅 + 서브픽셀 오프셋</b>: 버퍼를 1텍셀 여유 있게 만듦. 카메라 정수부 기준으로 정수 좌표에 그림. 확대 출력할 때 카메라 소수부 × 배율만큼 <b>화면 픽셀 단위로 밂</b>.
         텍셀은 선명하고 스크롤은 화면 해상도로 부드러움.</li>
@@ -47,14 +47,14 @@ GTL.register({
   },
   look: [
     '배율 6, 이동 속도 8 정도로 두면 A는 배경이 6px씩 툭툭 끊기며 스크롤됨. B는 같은 선명함으로 부드럽게 흐름.',
-    'A에서 카메라 추종 λ를 낮추면 캐릭터가 배경에 대해 1텍셀씩 앞뒤로 떨림.',
-    '그리기 방식을 "보간 그리기"로 바꾸면 정지 화면은 비슷하지만 움직이는 동안 타일 경계가 번지고 반짝임.',
+    'A에서 카메라 추종 λ를 낮추면 캐릭터가 배경에 대해 1텍셀씩 앞뒤로 떨림',
+    '그리기 방식을 "보간 그리기"로 바꾸면 정지 화면은 비슷하지만 움직이는 동안 타일 경계가 번지고 반짝임',
     '"카메라 프레임 이동량" 값을 보면 스냅은 0 또는 배율의 배수. 서브픽셀 오프셋은 작고 고른 값.',
   ],
   refs: [
-    { type: 'engine', title: 'Unity - 2D Pixel Perfect (Pixel Perfect Camera)', note: 'Upscale Render Texture, Pixel Snapping, Crop Frame 옵션.' },
+    { type: 'engine', title: 'Unity - 2D Pixel Perfect (Pixel Perfect Camera)', note: 'Upscale Render Texture, Pixel Snapping, Crop Frame 옵션' },
     { type: 'engine', title: 'Godot - 2D 스냅 설정 (snap_2d_transforms_to_pixel / snap_2d_vertices_to_pixel)', url: 'https://docs.godotengine.org/en/stable/classes/class_projectsettings.html', note: 'Project Settings → rendering/2d/snap.' },
-    { type: 'game', title: 'Celeste (Maddy Makes Games)', year: 2018, note: '320×180 저해상도 렌더와 정수 배율 확대의 대표 사례.' },
+    { type: 'game', title: 'Celeste (Maddy Makes Games)', year: 2018, note: '320×180 저해상도 렌더와 정수 배율 확대의 대표 사례' },
   ],
   params: [
     { key: 'mode', label: '그리기 방식', type: 'select', group: '스냅', options: [

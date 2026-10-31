@@ -4,9 +4,9 @@ GTL.register({
   title: '계층형 상태 기계 & 상태 스택 vs 평면 FSM',
   summary: '평면 FSM은 공통 전이(점프, 공격, 메뉴 열기)를 상태마다 따로 적어야 해서 전이 수가 빠르게 늘어남. 메뉴를 닫으면 이전 상태를 몰라서 대기 상태로 돌아가고 버그가 생김. 계층형 상태 기계는 공통 전이를 상위 상태에 한 번만 두고, 상태 스택은 메뉴를 닫을 때 원래 상태로 정확히 돌아감.',
   views: { a: '평면 FSM', b: '계층형 + 상태 스택' },
-  controls: '←→ 이동, Shift 달리기, Space 점프, X 공격, M 일시정지 메뉴, I 인벤토리. 자동 데모가 같은 입력을 반복함.',
+  controls: '←→ 이동, Shift 달리기, Space 점프, X 공격, M 일시정지 메뉴, I 인벤토리. 자동 데모가 같은 입력을 반복.',
   info: `
-    <p><b>유한 상태 기계</b>(FSM)는 캐릭터가 한 번에 한 상태(대기, 걷기, 점프 등)에만 있고, 조건이 맞으면 다른 상태로 옮겨 가는 구조.</p>
+    <p><b>유한 상태 기계</b>(FSM)는 캐릭터가 한 번에 한 상태(대기, 걷기, 점프 등)에만 있고, 조건이 맞으면 다른 상태로 옮겨 가는 구조</p>
     <p>평면 FSM의 문제:</p>
     <ul>
       <li>"점프 키를 누르면 점프"를 대기, 걷기, 달리기 상태에 각각 적어야 함. 상태가 늘면 전이 수가 상태 수의 제곱에 가깝게 늘어남.</li>
@@ -15,10 +15,10 @@ GTL.register({
     </ul>
     <p>해결 방법:</p>
     <ul>
-      <li><b>계층형 상태 기계</b>(HFSM): 대기, 걷기, 달리기를 "지상" 상위 상태로 묶음. 하위 상태가 처리하지 않은 입력은 상위 상태가 처리함. 점프, 공격, 낙하 전이를 "지상"에 한 번만 적음.</li>
+      <li><b>계층형 상태 기계</b>(HFSM): 대기, 걷기, 달리기를 "지상" 상위 상태로 묶음. 하위 상태가 처리하지 않은 입력은 상위 상태가 처리. 점프, 공격, 낙하 전이를 "지상"에 한 번만 적음.</li>
       <li><b>푸시다운 오토마타</b>(상태 스택): 메뉴를 열 때 현재 상태를 스택에 넣고(push), 닫을 때 꺼냄(pop). 점프 중이었으면 점프로, 공격 중이었으면 남은 공격 시간 그대로 돌아감.</li>
     </ul>
-    <p>단점: 계층이 깊어지면 어느 단계가 입력을 처리했는지 추적하기 어려움. 스택에 쌓인 상태가 오래 머물면 그동안 바뀐 게임 상태(예: 맞아서 죽음)와 어긋날 수 있어서 복귀할 때 검사가 필요함.</p>`,
+    <p>단점: 계층이 깊어지면 어느 단계가 입력을 처리했는지 추적하기 어려움. 스택에 쌓인 상태가 오래 머물면 그동안 바뀐 게임 상태(예: 맞아서 죽음)와 어긋날 수 있어서 복귀할 때 검사 필요.</p>`,
   // 도식: 평면 FSM은 같은 전이를 상태마다 적음 vs 상위 상태에 한 번. 상태 스택은 메뉴를 닫으면 원래 상태로 pop
   diagram: (L) => {
     const box = (x, y, w, t, cls = 'f-dim') => `<rect x="${x}" y="${y}" width="${w}" height="22" rx="4" class="${cls}"/><text x="${x + w / 2}" y="${y + 15}" text-anchor="middle" class="t-small">${t}</text>`;
@@ -57,12 +57,12 @@ GTL.register({
     '자동 데모에서 점프 중 메뉴를 열고 닫으면 A는 공중에서 대기 상태가 되고, 미리 누른 점프가 한 번 더 나감("공중 점프"가 늘어남). B는 낙하 상태로 돌아가서 정상 착지.',
     '공격 중 인벤토리를 열고 닫으면 A는 공격이 끊기고 대기로 감. B는 공격의 남은 시간부터 이어 감. 아래 상태 기록 띠에서 색 순서로 비교됨.',
     '위쪽 상태도에서 A의 전이 선이 34개로 얽혀 있음. B는 상위 상태 덕분에 17개.',
-    'B의 방식을 "계층형 (스택 없음)"으로 바꾸면 전이 수는 줄지만 메뉴 복귀 버그는 A와 똑같이 생김. 두 기법은 서로 다른 문제를 해결함.',
+    'B의 방식을 "계층형 (스택 없음)"으로 바꾸면 전이 수는 줄지만 메뉴 복귀 버그는 A와 똑같이 생김. 두 기법은 서로 다른 문제를 해결.',
   ],
   refs: [
-    { type: 'book', title: 'Game Programming Patterns - State (Robert Nystrom)', url: 'https://gameprogrammingpatterns.com/state.html', year: 2014, note: '평면 FSM, 계층형 상태 기계, 푸시다운 오토마타를 차례로 설명.' },
+    { type: 'book', title: 'Game Programming Patterns - State (Robert Nystrom)', url: 'https://gameprogrammingpatterns.com/state.html', year: 2014, note: '평면 FSM, 계층형 상태 기계, 푸시다운 오토마타를 차례로 설명' },
     { type: 'paper', title: 'Statecharts: A visual formalism for complex systems (David Harel)', year: 1987, note: 'Science of Computer Programming 8(3). 계층 상태와 히스토리 상태의 원전.' },
-    { type: 'engine', title: 'Unity Manual - Sub-State Machines', url: 'https://docs.unity3d.com/Manual/NestedStateMachines.html', note: 'Animator의 하위 상태 기계로 상태를 묶는 기능.' },
+    { type: 'engine', title: 'Unity Manual - Sub-State Machines', url: 'https://docs.unity3d.com/Manual/NestedStateMachines.html', note: 'Animator의 하위 상태 기계로 상태를 묶는 기능' },
   ],
   params: [
     { key: 'mode', label: '상태 기계 구조', type: 'select', group: '구조', options: [
@@ -244,7 +244,7 @@ GTL.register({
           if (hit && key === 'KeyI') inp.inv = true;
         }
       }
-      // 점프 입력 버퍼: 조금 일찍 누른 점프도 잠시 기억함 (메뉴가 열려 있어도 기억함)
+      // 점프 입력 버퍼: 조금 일찍 누른 점프도 잠시 기억 (메뉴가 열려 있어도 기억)
       if (inp.jumpPressed) jumpBuf = JUMP_BUF; else jumpBuf = Math.max(0, jumpBuf - dt);
       inp.jump = jumpBuf > 0;
       return inp;

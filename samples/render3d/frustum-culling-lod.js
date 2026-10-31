@@ -9,19 +9,19 @@ GTL.register({
   info: `
     <p><b>프러스텀(frustum)</b>은 카메라가 보는 잘린 피라미드 모양의 공간. <b>프러스텀 컬링</b>은 이 공간 밖의 물체를 GPU에 보내지 않는 기법.</p>
     <ul>
-      <li>뷰-투영 행렬에서 평면 6개를 바로 뽑아냄(Gribb & Hartmann).</li>
-      <li>물체의 <b>경계 구</b>가 한 평면의 바깥에 완전히 있으면 버림.</li>
+      <li>뷰-투영 행렬에서 평면 6개를 바로 뽑아냄(Gribb & Hartmann)</li>
+      <li>물체의 <b>경계 구</b>가 한 평면의 바깥에 완전히 있으면 버림</li>
       <li>물체당 CPU 내적 6번이면 됨. 드로우 콜과 정점 처리량이 시야각 비율만큼 줄어듦.</li>
-      <li>실제 엔진은 BVH나 옥트리로 묶어 계층적으로 검사함.</li>
+      <li>실제 엔진은 BVH나 옥트리로 묶어 계층적으로 검사</li>
     </ul>
     <p><b>LOD(Level of Detail)</b>는 멀리 있는 물체를 단순한 메시로 바꾸는 기법. 물체의 화면상 크기(투영 반지름)로 LOD0(2304 삼각형) → LOD1(256) → LOD2(48)를 고름.</p>
     <p>먼 물체에 삼각형 수천 개를 쓰면 삼각형이 픽셀보다 많아져 낭비. GPU의 쿼드 단위 셰이딩 효율도 떨어짐.</p>
     <p>단점: LOD가 바뀌는 순간 모양이 튀는 <b>팝핑(popping)</b>이 생김. 디더 페이드나 지오모핑으로 감춤.</p>
     <p>오른쪽 위 미니맵은 위에서 본 장면:</p>
     <ul>
-      <li>흰 선: 카메라 프러스텀.</li>
-      <li><span style="color:#66d17a">초록/노랑/주황</span>: LOD0/1/2로 그린 물체.</li>
-      <li><span style="color:#ff5370">빨강</span>: 컬링된 물체.</li>
+      <li>흰 선: 카메라 프러스텀</li>
+      <li><span style="color:#66d17a">초록/노랑/주황</span>: LOD0/1/2로 그린 물체</li>
+      <li><span style="color:#ff5370">빨강</span>: 컬링된 물체</li>
     </ul>`,
   // 도식: 위에서 본 프러스텀. 경계 구 검사로 버리는 물체와 거리별 LOD 구간
   diagram: (L) => `<svg viewBox="0 0 540 194" xmlns="http://www.w3.org/2000/svg">
@@ -50,15 +50,15 @@ GTL.register({
     <text x="360" y="142" class="t-small t-dim">${L('멀수록 단순한 메시', 'Farther gets simpler mesh')}</text>
   </svg>`,
   look: [
-    'A와 B의 메인 화면을 비교하면 거의 같지만 B의 드로우 콜과 삼각형 수는 몇 분의 일로 줄어듦.',
-    '휠로 시야각을 넓히면 컬링되는 물체(미니맵의 빨강)가 줄고 드로우 콜이 늘어남.',
-    '"LOD 색 표시"를 켜면 거리별 LOD 단계가 색으로 보임. LOD 바이어스를 낮추면 저폴리곤 구가 각져 보이기 시작함(팝핑).',
-    '물체 수를 늘리면 A의 프레임 비용(⏱)이 B보다 훨씬 빠르게 늘어남.',
+    'A와 B의 메인 화면을 비교하면 거의 같지만 B의 드로우 콜과 삼각형 수는 몇 분의 일로 줄어듦',
+    '휠로 시야각을 넓히면 컬링되는 물체(미니맵의 빨강)가 줄고 드로우 콜이 늘어남',
+    '"LOD 색 표시"를 켜면 거리별 LOD 단계가 색으로 보임. LOD 바이어스를 낮추면 저폴리곤 구가 각져 보이기 시작(팝핑).',
+    '물체 수를 늘리면 A의 프레임 비용(⏱)이 B보다 훨씬 빠르게 늘어남',
   ],
   refs: [
     { type: 'paper', title: 'Fast Extraction of Viewing Frustum Planes from the World-View-Projection Matrix (Gil Gribb, Klaus Hartmann)', year: 2001 },
     { type: 'article', title: 'LearnOpenGL: Frustum Culling', url: 'https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling' },
-    { type: 'engine', title: 'Unity: LOD Group', url: 'https://docs.unity3d.com/Manual/class-LODGroup.html', note: '화면 높이 비율로 LOD 전환, cross-fade.' },
+    { type: 'engine', title: 'Unity: LOD Group', url: 'https://docs.unity3d.com/Manual/class-LODGroup.html', note: '화면 높이 비율로 LOD 전환, cross-fade' },
     { type: 'engine', title: 'Unreal Engine: Visibility and Occlusion Culling', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/visibility-and-occlusion-culling-in-unreal-engine' },
     { type: 'book', title: 'Real-Time Rendering, 4th ed., Ch. 19 Acceleration Algorithms (culling, LOD)', year: 2018 },
   ],

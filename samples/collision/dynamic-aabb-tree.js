@@ -2,24 +2,24 @@
 GTL.register({
   id: 'dynamic-aabb-tree',
   title: '동적 AABB 트리: fat AABB 증분 갱신 vs 매 프레임 재구축',
-  summary: '움직이는 오브젝트가 많은 장면에서 BVH를 매 프레임 새로 만들면 정지한 오브젝트까지 모두 다시 정렬함. 여유를 둔 fat AABB로 감싸고, 실제 AABB가 밖으로 나갈 때만 다시 삽입하면 프레임당 갱신이 수십 개로 줄어듦. 대신 질의 후보가 늘어남.',
+  summary: '움직이는 오브젝트가 많은 장면에서 BVH를 매 프레임 새로 만들면 정지한 오브젝트까지 모두 다시 정렬. 여유를 둔 fat AABB로 감싸고, 실제 AABB가 밖으로 나갈 때만 다시 삽입하면 프레임당 갱신이 수십 개로 줄어듦. 대신 질의 후보가 늘어남.',
   views: { a: '매 프레임 재구축', b: 'fat AABB 증분 갱신' },
   controls: '마우스: 그 위치를 덮는 노드 경로 표시',
   info: `
     <p><b>동적 AABB 트리</b>는 오브젝트의 AABB를 잎으로 두는 이진 BVH. 내부 노드는 두 자식을 감싸는 AABB를 가짐. Box2D의 <code>b2DynamicTree</code>가 대표 구현.</p>
-    <p><b>매 프레임 재구축</b>(하향식): 모든 오브젝트를 중심 기준으로 긴 축을 따라 정렬하고 가운데에서 둘로 나눔. 트리 품질은 좋음. 하지만 정지한 오브젝트까지 매번 다시 정렬함.</p>
-    <p><b>증분 갱신</b>은 이렇게 동작함.</p>
+    <p><b>매 프레임 재구축</b>(하향식): 모든 오브젝트를 중심 기준으로 긴 축을 따라 정렬하고 가운데에서 둘로 나눔. 트리 품질은 좋음. 하지만 정지한 오브젝트까지 매번 다시 정렬.</p>
+    <p><b>증분 갱신</b>은 이렇게 동작</p>
     <ul>
-      <li>잎에는 실제 AABB보다 여유값만큼 큰 <b>fat AABB</b>를 저장함. 이동 방향으로는 변위 × 배율만큼 더 늘림(예측 확장).</li>
-      <li>실제 AABB가 fat AABB 안에 있으면 아무것도 하지 않음.</li>
-      <li>밖으로 나가면 잎을 빼고 다시 삽입함. 삽입 위치는 둘레 증가가 가장 작은 형제를 찾아 내려가며 고름.</li>
-      <li>삽입과 제거 뒤에는 높이 차가 1보다 큰 노드를 회전해 균형을 맞춤(AVL과 같은 원리).</li>
+      <li>잎에는 실제 AABB보다 여유값만큼 큰 <b>fat AABB</b>를 저장. 이동 방향으로는 변위 × 배율만큼 더 늘림(예측 확장).</li>
+      <li>실제 AABB가 fat AABB 안에 있으면 아무것도 하지 않음</li>
+      <li>밖으로 나가면 잎을 빼고 다시 삽입. 삽입 위치는 둘레 증가가 가장 작은 형제를 찾아 내려가며 고름.</li>
+      <li>삽입과 제거 뒤에는 높이 차가 1보다 큰 노드를 회전해 균형을 맞춤(AVL과 같은 원리)</li>
     </ul>
     <p>단점과 튜닝:</p>
     <ul>
       <li>여유값이 크면 재삽입은 줄지만 fat AABB끼리 더 많이 겹침. 그만큼 후보 쌍과 방문 노드가 늘어남.</li>
       <li>회전이 없으면 재삽입을 반복할수록 트리가 한쪽으로 길어짐. 높이가 커지면 질의가 느려짐.</li>
-      <li>후보 쌍은 내로우페이즈에서 실제 AABB로 다시 걸러야 함.</li>
+      <li>후보 쌍은 내로우페이즈에서 실제 AABB로 다시 걸러야 함</li>
     </ul>`,
   diagram: (L) => {
     const objs = [
@@ -46,22 +46,22 @@ GTL.register({
     ${node(320, 120, '1', true)}${node(380, 120, '2', true)}${node(440, 120, '3', true)}${node(500, 120, '4', true)}
     <text x="4" y="164" class="t-small t-dim">${L('채움: 실제 AABB, 점선: fat AABB (여유값 + 이동 방향 예측, 주황 화살표 = 속도)', 'Filled: real AABB. Dashed: fat AABB (margin + predicted motion, orange = velocity)')}</text>
     <text x="4" y="178" class="t-small t-a">${L('A: 매 프레임 모든 잎을 정렬해 트리를 새로 만듦', 'A: sorts every leaf and rebuilds the tree each frame')}</text>
-    <text x="4" y="192" class="t-small t-b">${L('B: 실제 AABB가 fat AABB 밖으로 나간 잎만 빼서 다시 삽입함', 'B: removes and reinserts only leaves whose real AABB leaves the fat AABB')}</text>
+    <text x="4" y="192" class="t-small t-b">${L('B: 실제 AABB가 fat AABB 밖으로 나간 잎만 빼서 다시 삽입', 'B: removes and reinserts only leaves whose real AABB leaves the fat AABB')}</text>
   </svg>`;
   },
   look: [
     '기본 상태에서 "트리 갱신 비용"을 비교하면 A가 몇 배 큼. B의 "재삽입 수"는 전체 오브젝트 수의 몇 %에 그침.',
     'B의 "후보 쌍"은 "실제 겹침 쌍"보다 큼. fat AABB 때문에 생긴 거짓 후보. A는 두 값이 같음.',
     'B의 "여유값"과 "변위 예측 배율"을 모두 0으로 낮추면 움직이는 오브젝트가 매 프레임 모두 재삽입됨. 이때 갱신 비용이 A의 재구축보다 커짐.',
-    'B의 "여유값"을 30으로 올리면 재삽입은 거의 없지만 후보 쌍과 질의 비용이 크게 늘어남.',
+    'B의 "여유값"을 30으로 올리면 재삽입은 거의 없지만 후보 쌍과 질의 비용이 크게 늘어남',
     '"트리 비용"과 "방문 노드"는 A가 더 낮음. 하나씩 삽입해 쌓은 트리는 한 번에 나눈 트리보다 품질이 떨어짐. 그래서 "질의 비용"은 B가 더 큼.',
-    'B의 "회전으로 균형 유지"를 끄고 몇 초 기다리면 "트리 높이"가 계속 커지고 "방문 노드"가 늘어남.',
+    'B의 "회전으로 균형 유지"를 끄고 몇 초 기다리면 "트리 높이"가 계속 커지고 "방문 노드"가 늘어남',
     '"정지 오브젝트 비율"을 0으로 낮추면 증분 갱신의 이득이 줄어듦. 0.95로 올리면 차이가 커짐.',
   ],
   refs: [
     { type: 'code', title: 'Box2D b2DynamicTree (Erin Catto)', url: 'https://github.com/erincatto/box2d', note: 'v2.4의 b2_dynamic_tree.cpp. fat AABB(b2_aabbExtension), 변위 예측(b2_aabbMultiplier), 둘레 기반 형제 선택, Balance 회전.' },
-    { type: 'talk', title: 'Dynamic Bounding Volume Hierarchies (Erin Catto), GDC', year: 2019, note: '삽입 비용 함수와 회전, 증분 갱신의 트리 품질 문제.' },
-    { type: 'book', title: 'Real-Time Collision Detection, 6.2 Building Strategies for Hierarchy Construction (Christer Ericson)', year: 2005, note: '하향식 구축과 증분 삽입.' },
+    { type: 'talk', title: 'Dynamic Bounding Volume Hierarchies (Erin Catto), GDC', year: 2019, note: '삽입 비용 함수와 회전, 증분 갱신의 트리 품질 문제' },
+    { type: 'book', title: 'Real-Time Collision Detection, 6.2 Building Strategies for Hierarchy Construction (Christer Ericson)', year: 2005, note: '하향식 구축과 증분 삽입' },
     { type: 'paper', title: 'Fast, Effective BVH Updates for Animated Scenes (Kopta et al.)', year: 2012, note: 'I3D 2012. 트리 회전으로 갱신된 BVH 품질을 유지.' },
   ],
   params: [

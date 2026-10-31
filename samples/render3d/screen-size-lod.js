@@ -11,12 +11,12 @@ GTL.register({
     <p>가장 단순한 방식은 <b>카메라 거리</b>로 고르는 것. 하지만 같은 거리라도 화면에 보이는 크기는 달라짐:</p>
     <ul>
       <li>저격 조준경처럼 <b>FOV를 좁히면</b> 먼 물체가 화면을 크게 채움. 거리 기준은 여전히 저폴리를 고름.</li>
-      <li>물체 자체가 크면 같은 거리에서도 크게 보임.</li>
+      <li>물체 자체가 크면 같은 거리에서도 크게 보임</li>
     </ul>
-    <p><b>화면 크기 기준</b>은 바운딩 구의 투영 크기를 화면 높이 대비 비율로 계산함. 대략 <code>s = r / (d tan(FOV/2))</code>. 이 값을 LOD별 기준값과 비교함.</p>
+    <p><b>화면 크기 기준</b>은 바운딩 구의 투영 크기를 화면 높이 대비 비율로 계산. 대략 <code>s = r / (d tan(FOV/2))</code>. 이 값을 LOD별 기준값과 비교.</p>
     <ul>
-      <li>Unreal: Static Mesh의 LOD마다 <b>Screen Size</b> 값을 지정함.</li>
-      <li>Unity: LOD Group이 <b>화면 높이 대비 비율(Screen Relative Transition Height)</b>로 전환함.</li>
+      <li>Unreal: Static Mesh의 LOD마다 <b>Screen Size</b> 값을 지정</li>
+      <li>Unity: LOD Group이 <b>화면 높이 대비 비율(Screen Relative Transition Height)</b>로 전환</li>
     </ul>
     <p>비율이라 해상도가 바뀌어도 같은 LOD가 골라짐. 단점: 해상도를 낮춰도 삼각형 수가 그대로임. 그래서 엔진은 품질 설정별 LOD 배율(Unity <code>LOD Bias</code>, Unreal <code>r.StaticMeshLODDistanceScale</code>)을 따로 둠.</p>`,
   // 도식: 같은 거리의 같은 물체를 넓은 FOV와 좁은 FOV로 볼 때 투영 크기
@@ -46,9 +46,9 @@ GTL.register({
     '렌더 해상도를 낮추면 화면이 거칠어지지만 B의 LOD는 바뀌지 않음. 화면 크기를 비율로 재기 때문임.',
   ],
   refs: [
-    { type: 'engine', title: 'Unreal Engine: Setting Up Automatic LOD Generation (Screen Size)', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/setting-up-automatic-lod-generation-in-unreal-engine', note: 'LOD마다 Screen Size 값으로 전환 시점을 정함.' },
-    { type: 'engine', title: 'Unity Manual: LOD Group component reference', url: 'https://docs.unity3d.com/Manual/class-LODGroup.html', note: '화면 높이 대비 비율로 LOD를 전환함. Quality 설정의 LOD Bias가 배율.' },
-    { type: 'book', title: 'Level of Detail for 3D Graphics (Luebke et al.)', year: 2002, note: '거리, 투영 크기, 화면 오차 기반 LOD 선택 기준을 정리한 책.' },
+    { type: 'engine', title: 'Unreal Engine: Setting Up Automatic LOD Generation (Screen Size)', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/setting-up-automatic-lod-generation-in-unreal-engine', note: 'LOD마다 Screen Size 값으로 전환 시점을 정함' },
+    { type: 'engine', title: 'Unity Manual: LOD Group component reference', url: 'https://docs.unity3d.com/Manual/class-LODGroup.html', note: '화면 높이 대비 비율로 LOD를 전환. Quality 설정의 LOD Bias가 배율.' },
+    { type: 'book', title: 'Level of Detail for 3D Graphics (Luebke et al.)', year: 2002, note: '거리, 투영 크기, 화면 오차 기반 LOD 선택 기준을 정리한 책' },
   ],
   params: [
     { key: 'method', label: 'LOD 선택 기준', type: 'select', group: 'LOD', options: [

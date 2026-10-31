@@ -2,7 +2,7 @@
 GTL.register({
   id: 'markov-names',
   title: '마르코프 체인 이름 생성 (n-gram 차수)',
-  summary: '무작위 음절 조합 vs 마르코프 체인 비교. 음절 조합은 발음은 되지만 어느 지역 이름인지 느낌이 없음. 마르코프 체인은 학습한 지명의 글자 흐름을 따라 그럴듯한 새 이름을 만듦. 차수가 너무 높으면 원본을 그대로 복사함.',
+  summary: '무작위 음절 조합 vs 마르코프 체인 비교. 음절 조합은 발음은 되지만 어느 지역 이름인지 느낌이 없음. 마르코프 체인은 학습한 지명의 글자 흐름을 따라 그럴듯한 새 이름을 만듦. 차수가 너무 높으면 원본을 그대로 복사.',
   views: { a: '무작위 음절', b: '마르코프 (2차)' },
   controls: '조작 없음. 새 이름이 계속 위에 추가됨.',
   info: `
@@ -12,9 +12,9 @@ GTL.register({
     생성할 때는 시작 표시 <code>^</code>에서 출발해, 직전 n글자를 보고 다음 글자를 빈도에 비례해 뽑음. 끝 표시 <code>$</code>가 나오면 멈춤.
     n을 <b>차수</b>라고 함.</p>
     <ul>
-      <li>1차: 글자 쌍만 기억함. 짧고 엉뚱한 조합이 많음.</li>
+      <li>1차: 글자 쌍만 기억. 짧고 엉뚱한 조합이 많음.</li>
       <li>2차: 학습 데이터의 말투가 살아남. 새 이름이 대부분.</li>
-      <li>3차 이상: 갈림길이 거의 없어 원본 이름을 그대로 내보내는 비율이 급격히 늘어남.</li>
+      <li>3차 이상: 갈림길이 거의 없어 원본 이름을 그대로 내보내는 비율이 급격히 늘어남</li>
     </ul>
     <p>적절한 차수는 학습 데이터 크기에 따라 다름. 여기처럼 이름이 70개 정도면 2차가 알맞음. 수천 개면 3~4차도 새 이름을 많이 만듦.</p>
     <p>실제 게임에서는 원본과 같은 이름, 너무 짧거나 긴 이름을 걸러냄. 낮은 차수로 되돌아가는 백오프(back-off)로 다양성을 보충하기도 함.</p>`,
@@ -42,13 +42,13 @@ GTL.register({
     'B의 이름은 영국 지명처럼 -ford, -ton, -ster로 끝나는 경우가 많음. A는 학습 데이터와 상관없는 소리가 섞임.',
     '"3글자 조각 일치율"을 비교하면 A는 낮고 B는 100%. B의 모든 3글자 조각이 학습 데이터에 있음.',
     'B의 차수를 3, 4로 올리면 "원본 복제 비율"이 50%, 90%로 늘어남. 흐린 글자가 원본과 같은 이름.',
-    'B의 차수를 1로 내리면 이름이 엉망이 되고 길이도 들쭉날쭉해짐.',
+    'B의 차수를 1로 내리면 이름이 엉망이 되고 길이도 들쭉날쭉해짐',
     '학습 데이터를 일본 지명으로 바꾸면 B는 -ka, -shi, -yama 같은 흐름을 따름. A는 그대로임.',
   ],
   refs: [
-    { type: 'paper', title: 'C. E. Shannon: A Mathematical Theory of Communication', year: 1948, note: '글자 n-gram 근사로 영어처럼 보이는 문자열을 만드는 예시.' },
-    { type: 'article', title: 'RogueBasin: Names from a high order Markov Process and a simplified Katz back-off scheme', note: '로그라이크 이름 생성에 고차 마르코프 체인과 백오프를 쓰는 방법.' },
-    { type: 'game', title: 'Elite (David Braben, Ian Bell, 1984)', year: 1984, note: '두 글자 조각을 이어 붙여 행성 이름을 만든 사례.' },
+    { type: 'paper', title: 'C. E. Shannon: A Mathematical Theory of Communication', year: 1948, note: '글자 n-gram 근사로 영어처럼 보이는 문자열을 만드는 예시' },
+    { type: 'article', title: 'RogueBasin: Names from a high order Markov Process and a simplified Katz back-off scheme', note: '로그라이크 이름 생성에 고차 마르코프 체인과 백오프를 쓰는 방법' },
+    { type: 'game', title: 'Elite (David Braben, Ian Bell, 1984)', year: 1984, note: '두 글자 조각을 이어 붙여 행성 이름을 만든 사례' },
   ],
   params: [
     { key: 'method', label: '생성 방식', type: 'select', group: '생성', options: [

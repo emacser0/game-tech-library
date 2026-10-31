@@ -6,7 +6,7 @@ GTL.register({
   views: { a: 'Unity 기본 (Average/Average)', b: 'Box2D 기본 (√(μ₁μ₂) / max)' },
   controls: '조작 없음. 7초마다 다시 떨어뜨리고 밀어냄.',
   info: `
-    <p><b>결합 모드</b>(Combine Mode)는 두 물체의 재질 계수를 하나로 합치는 규칙. 계수는 <b>물체 하나</b>에 붙지만, 접촉은 <b>두 물체</b> 사이에서 일어나기 때문에 필요함.</p>
+    <p><b>결합 모드</b>(Combine Mode)는 두 물체의 재질 계수를 하나로 합치는 규칙. 계수는 <b>물체 하나</b>에 붙지만, 접촉은 <b>두 물체</b> 사이에서 일어나기 때문에 필요.</p>
     <p>엔진별 기본 규칙:</p>
     <ul>
       <li><b>Unity(PhysX)</b>: <code>PhysicsMaterial.frictionCombine / bounceCombine</code>으로 Average, Minimum, Multiply, Maximum 중 고름. 기본은 Average. 두 재질의 모드가 다르면 Average &lt; Minimum &lt; Multiply &lt; Maximum 순으로 높은 쪽을 씀.</li>
@@ -18,7 +18,7 @@ GTL.register({
       <li>아래: 퍽 5개를 같은 속도로 밀어냄. 마찰 감속은 <code>μ*g</code>, 정지 거리는 <code>v₀² / (2μg)</code>. 끝 벽에서는 반발로 되튐.</li>
     </ul>
     <p>대부분의 엔진은 <b>반발 임계 속도</b>도 둠(Box2D <code>restitutionThreshold</code>, Unity <code>Bounce Threshold</code>). 아주 느린 충돌의 반발을 무시해 공이 바닥에서 끝없이 잘게 튀는 것을 막음.</p>
-    <p>단점: 결합 규칙이 엔진마다 달라서 같은 재질 값을 다른 엔진으로 옮기면 느낌이 달라짐.</p>`,
+    <p>단점: 결합 규칙이 엔진마다 달라서 같은 재질 값을 다른 엔진으로 옮기면 느낌이 달라짐</p>`,
   // 도식: 같은 두 재질 값을 결합 모드별로 합친 결과. 주황은 Unity 기본, 파랑은 Box2D 기본
   diagram: (L) => {
     const bars = (x0, rows) => rows.map(([name, v, cls], i) => {
@@ -38,16 +38,16 @@ GTL.register({
   </svg>`;
   },
   look: [
-    'A와 B의 공 반등 높이를 비교하면 B(max)에서는 탱탱한 재질이 바닥 재질과 관계없이 거의 자기 반발대로 튐.',
+    'A와 B의 공 반등 높이를 비교하면 B(max)에서는 탱탱한 재질이 바닥 재질과 관계없이 거의 자기 반발대로 튐',
     '퍽 정지 위치를 보면 B(기하평균)에서 얼음 퍽이 거의 끝까지 미끄러짐. 바닥 마찰을 0으로 하면 B의 모든 퍽이 감속 없이 벽까지 감(√(μ*0)=0). A(평균)의 고무 퍽은 여전히 멈춤.',
     '결합 모드를 Multiply로 바꾸면 계수가 곱해져 전체적으로 미끄럽고 덜 튐. Maximum은 반대.',
     '반발 임계 속도를 0으로 하면 공이 바닥에서 잘게 오래 떨림. 크게 하면 낮은 반등이 바로 멈춤.',
   ],
   refs: [
     { type: 'engine', title: 'Unity - Physic Material (Friction Combine / Bounce Combine)', url: 'https://docs.unity3d.com/Manual/class-PhysicMaterial.html' },
-    { type: 'engine', title: 'NVIDIA PhysX - PxCombineMode (eAVERAGE, eMIN, eMULTIPLY, eMAX)', note: 'PxMaterial의 friction, restitution 결합 모드.' },
+    { type: 'engine', title: 'NVIDIA PhysX - PxCombineMode (eAVERAGE, eMIN, eMULTIPLY, eMAX)', note: 'PxMaterial의 friction, restitution 결합 모드' },
     { type: 'code', title: 'Box2D - b2MixFriction (sqrt) / b2MixRestitution (max)', url: 'https://github.com/erincatto/box2d' },
-    { type: 'engine', title: 'Godot - PhysicsMaterial (rough / absorbent)', url: 'https://docs.godotengine.org/en/stable/classes/class_physicsmaterial.html', note: 'rough, absorbent 플래그로 결합 방식을 바꿈.' },
+    { type: 'engine', title: 'Godot - PhysicsMaterial (rough / absorbent)', url: 'https://docs.godotengine.org/en/stable/classes/class_physicsmaterial.html', note: 'rough, absorbent 플래그로 결합 방식을 바꿈' },
   ],
   params: [
     { key: 'frictionCombine', label: '마찰 결합', type: 'select', group: '결합 모드', options: [

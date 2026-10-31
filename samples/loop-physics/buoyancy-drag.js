@@ -7,17 +7,17 @@ GTL.register({
   controls: '마우스 클릭: 상자를 잡아 들어 올린 뒤 놓기',
   info: `
     <p><b>부력</b>은 물체가 밀어낸 물의 무게만큼 위로 받는 힘(아르키메데스 원리). <code>F = ρ물 * g * V잠김</code>.</p>
-    <p>흔한 단순 구현: 물체 중심이 수면 아래면 일정한 힘을 줌.</p>
+    <p>흔한 단순 구현: 물체 중심이 수면 아래면 일정한 힘을 줌</p>
     <ul>
       <li>중심이 수면을 지날 때마다 힘이 켜졌다 꺼짐. 출렁임이 멈추지 않음.</li>
-      <li>평형점이 늘 "중심 = 수면"이라 가벼운 나무와 무거운 얼음이 똑같이 절반만 잠김.</li>
+      <li>평형점이 늘 "중심 = 수면"이라 가벼운 나무와 무거운 얼음이 똑같이 절반만 잠김</li>
     </ul>
     <p>잠긴 부피(2D에서는 면적)에 비례시키면 힘이 깊이에 따라 연속으로 변함. 밀도 <code>ρ</code>인 물체는 부피의 <code>ρ / ρ물</code>만 잠기고 평형을 이룸.</p>
-    <p>부력만 있으면 스프링처럼 끝없이 진동함. 물의 저항인 <b>항력(Drag)</b>이 에너지를 빼야 멈춤.</p>
+    <p>부력만 있으면 스프링처럼 끝없이 진동. 물의 저항인 <b>항력(Drag)</b>이 에너지를 빼야 멈춤.</p>
     <ul>
-      <li>선형 항력 <code>F = -c * v</code>: 느린 속도, 점성이 큰 액체.</li>
+      <li>선형 항력 <code>F = -c * v</code>: 느린 속도, 점성이 큰 액체</li>
       <li>이차 항력 <code>F = -½ ρ Cd A v|v|</code>: 빠른 속도의 물, 공기. 빠를수록 크게 막음.</li>
-      <li>둘 다 잠긴 비율을 곱해야 물 밖에서는 항력이 사라짐.</li>
+      <li>둘 다 잠긴 비율을 곱해야 물 밖에서는 항력이 사라짐</li>
     </ul>
     <p>단점: 실제 게임에서는 회전과 잠긴 모양을 계산해야 함. 보통 물체를 여러 점이나 삼각형으로 나눠 각각 부력을 줌.</p>
     <p>상자 안 초록 점선은 이론 수면 위치(밀도 비율). 수면이 이 선에 맞으면 정답.</p>`,
@@ -57,9 +57,9 @@ GTL.register({
     '파도를 켜면 B의 상자가 수면을 따라 부드럽게 오르내림. A는 중심이 수면을 넘나들 때마다 힘이 끊겨 덜컥거림.',
   ],
   refs: [
-    { type: 'book', title: 'Game Physics Engine Development (Ian Millington)', year: 2007, note: '부력 힘 생성기, 항력 힘 생성기 구현.' },
+    { type: 'book', title: 'Game Physics Engine Development (Ian Millington)', year: 2007, note: '부력 힘 생성기, 항력 힘 생성기 구현' },
     { type: 'article', title: 'Water interaction model for boats in video games (Jacques Kerner)', year: 2015, note: 'Gamasutra. 메시를 삼각형으로 나눠 잠긴 부분마다 부력과 항력을 계산.' },
-    { type: 'article', title: 'Drag equation', url: 'https://en.wikipedia.org/wiki/Drag_equation', note: '이차 항력 식 F = ½ρ v² Cd A.' },
+    { type: 'article', title: 'Drag equation', url: 'https://en.wikipedia.org/wiki/Drag_equation', note: '이차 항력 식 F = ½ρ v² Cd A' },
   ],
   params: [
     { key: 'buoy', label: '부력 방식', type: 'select', group: '부력', options: [

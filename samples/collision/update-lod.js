@@ -6,14 +6,14 @@ GTL.register({
   views: { a: '매 프레임 전부', b: '거리 기반 LOD' },
   controls: '마우스: 플레이어(초점) 위치 (마우스가 밖에 있으면 자동 이동)',
   info: `
-    <p>각 에이전트는 두 가지 일을 함.</p>
+    <p>각 에이전트는 두 가지 일을 함</p>
     <ul>
       <li><b>판단(think)</b>: 모든 먹이를 훑어 가장 가까운 것을 목표로 고름. 비용은 O(먹이 수).</li>
       <li><b>이동</b>: 매 프레임 목표 쪽으로 움직임. 비용이 쌈.</li>
     </ul>
-    <p>think를 매 프레임 전부 돌리면 비용은 <b>에이전트 수 × 먹이 수</b>.</p>
+    <p>think를 매 프레임 전부 돌리면 비용은 <b>에이전트 수 × 먹이 수</b></p>
     <p><b>시간 분할</b>(time slicing, round-robin): 프레임마다 전체의 1/k만 think함. 비용은 1/k로 줄어듦. 단점은 모든 에이전트가 똑같이 최대 k프레임 늦게 반응한다는 점.</p>
-    <p><b>업데이트 LOD</b>: 플레이어(초점)와의 거리에 따라 think 간격을 바꿈.</p>
+    <p><b>업데이트 LOD</b>: 플레이어(초점)와의 거리에 따라 think 간격을 바꿈</p>
     <ul>
       <li>가까움: 매 프레임</li>
       <li>중간: 4프레임마다</li>
@@ -51,13 +51,13 @@ GTL.register({
   look: [
     '기본 상태에서 B를 보면 초점 근처만 매 프레임 빛나고, 먼 곳은 드문드문 빛남. "think 비용" ms가 A보다 훨씬 작음.',
     'B의 빨간 선(낡은 목표) 위치를 보면 대부분 먼 곳에 있음. 플레이어가 보지 않는 곳의 품질만 낮춘 결과.',
-    'B를 "시간 분할"로 바꾸고 분할 수를 30으로 올리면 화면 전체에 빨간 선이 늘고 "초당 먹은 먹이"가 줄어듦.',
-    '에이전트 수와 먹이 수를 늘리면 A의 ms가 두 값의 곱에 비례해 늘어남.',
+    'B를 "시간 분할"로 바꾸고 분할 수를 30으로 올리면 화면 전체에 빨간 선이 늘고 "초당 먹은 먹이"가 줄어듦',
+    '에이전트 수와 먹이 수를 늘리면 A의 ms가 두 값의 곱에 비례해 늘어남',
   ],
   refs: [
-    { type: 'book', title: 'AI Game Programming Wisdom, "Level-of-Detail AI" 관련 장들 (Steve Rabin 편)', year: 2002, note: '거리와 가시성에 따른 AI 업데이트 빈도 조절.' },
-    { type: 'book', title: 'Game AI Pro, Ch. "Time-Slicing" 및 스케줄링 관련 장 (Steve Rabin 편)', url: 'http://www.gameaipro.com/', note: '무료 공개 PDF 모음.' },
-    { type: 'engine', title: 'Unreal Engine, Animation Budget Allocator / URO (Update Rate Optimization)', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/animation-budget-allocator-in-unreal-engine', note: '거리와 가시성에 따라 스켈레탈 메시 업데이트 빈도를 낮춤.' },
+    { type: 'book', title: 'AI Game Programming Wisdom, "Level-of-Detail AI" 관련 장들 (Steve Rabin 편)', year: 2002, note: '거리와 가시성에 따른 AI 업데이트 빈도 조절' },
+    { type: 'book', title: 'Game AI Pro, Ch. "Time-Slicing" 및 스케줄링 관련 장 (Steve Rabin 편)', url: 'http://www.gameaipro.com/', note: '무료 공개 PDF 모음' },
+    { type: 'engine', title: 'Unreal Engine, Animation Budget Allocator / URO (Update Rate Optimization)', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/animation-budget-allocator-in-unreal-engine', note: '거리와 가시성에 따라 스켈레탈 메시 업데이트 빈도를 낮춤' },
   ],
   params: [
     { key: 'agents', label: '에이전트 수', type: 'int', min: 200, max: 4000, default: 2000, shared: true, reset: true, group: '장면' },

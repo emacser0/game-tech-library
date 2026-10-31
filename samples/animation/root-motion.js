@@ -7,7 +7,7 @@ GTL.register({
   controls: '조작 없음. 캐릭터가 오른쪽으로 계속 걷고, 카메라가 따라감.',
   info: `
     <p><b>루트 모션(Root Motion)</b>은 애니메이션 클립의 루트 본 이동량을 캐릭터 이동에 쓰는 방식. 매 프레임 이번 프레임의 루트 변화량(delta)을 꺼내 캐릭터에 더함.</p>
-    <p><b>인플레이스(in-place)</b> 클립은 제자리에서 걷고, 이동은 코드가 <code>x += speed * dt</code>로 처리함.
+    <p><b>인플레이스(in-place)</b> 클립은 제자리에서 걷고, 이동은 코드가 <code>x += speed * dt</code>로 처리.
     실제 걸음은 속도가 일정하지 않음. 발을 디딜 때 느려지고 밀어낼 때 빨라짐. 그래서 일정한 코드 속도와 어긋나 발이 미끄러짐(foot sliding).</p>
     <p>"재생 속도 맞춤"은 클립 평균 속도에 맞춰 재생 속도를 바꾸는 흔한 보정. 평균은 맞지만 한 걸음 안의 속도 변화는 남음.</p>
     <p>루트 모션의 단점: 이동이 클립에 묶여 입력 반응이 둔해짐. 물리, 네트워크 예측과 맞추기도 어려움. 그래서 이동은 코드로 하고 발은 IK로 보정하는 게임도 많음.</p>`,
@@ -46,7 +46,7 @@ GTL.register({
   refs: [
     { type: 'engine', title: 'Unity Manual - Root Motion: how it works', url: 'https://docs.unity3d.com/Manual/RootMotion.html', note: 'Body Transform, Root Transform, Apply Root Motion.' },
     { type: 'engine', title: 'Unreal Engine - Root Motion', note: 'Root Motion Mode, Root Motion from Montages Only.' },
-    { type: 'article', title: 'Code vs Data Driven Displacement (Daniel Holden)', year: 2021, note: '코드 이동과 데이터(루트 모션) 이동의 장단점 비교.' },
+    { type: 'article', title: 'Code vs Data Driven Displacement (Daniel Holden)', year: 2021, note: '코드 이동과 데이터(루트 모션) 이동의 장단점 비교' },
   ],
   params: [
     { key: 'mode', label: '이동 방식', type: 'select', group: '이동', options: [

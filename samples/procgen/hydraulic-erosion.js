@@ -7,13 +7,13 @@ GTL.register({
   controls: '조작 없음. 물방울은 매 프레임 조금씩 처리됨.',
   info: `
     <p><b>수력 침식(Hydraulic Erosion)</b>: 비가 산을 깎아 골짜기를 만드는 과정을 흉내 냄. 노이즈 지형의 "둥근 언덕" 느낌을 없애는 대표 후처리.</p>
-    <p><b>물방울 방식</b>: 물방울 하나를 무작위 위치에 떨어뜨려 수십 걸음 움직임.</p>
+    <p><b>물방울 방식</b>: 물방울 하나를 무작위 위치에 떨어뜨려 수십 걸음 움직임</p>
     <ol>
-      <li>현재 위치의 높이와 경사를 양선형 보간으로 구함.</li>
+      <li>현재 위치의 높이와 경사를 양선형 보간으로 구함</li>
       <li>방향 = 이전 방향 × 관성 + 내리막 방향 × (1 - 관성). 한 칸 이동.</li>
-      <li>운반 용량 = 내려간 높이 × 속도 × 물 양 × 용량 계수.</li>
+      <li>운반 용량 = 내려간 높이 × 속도 × 물 양 × 용량 계수</li>
       <li>흙이 용량보다 적으면 바닥을 깎아 흙을 실음. 많거나 오르막이면 흙을 내려놓음.</li>
-      <li>속도를 낙차로 갱신하고 물을 조금 증발시킴.</li>
+      <li>속도를 낙차로 갱신하고 물을 조금 증발시킴</li>
     </ol>
     <p><b>침식 브러시</b>: 깎는 양을 반지름 안의 여러 칸에 나눠 깎음. 브러시 없이 한 점만 깎으면 좁고 깊은 구멍과 뾰족한 가시가 생김.</p>
     <p>어려운 점: 계수 6~7개가 서로 얽혀 결과가 민감함. 지형 높이 단위, 격자 크기를 바꾸면 다시 맞춰야 함. 깎는 양을 낙차 이하로 제한하지 않으면 높이가 진동하며 터짐.</p>`,
@@ -39,20 +39,20 @@ GTL.register({
   </svg>`,
   look: [
     'B의 물방울이 늘수록 산비탈에 가지 모양 골짜기가 파임. A는 매끈한 언덕 그대로임.',
-    '표시를 "침식/퇴적 지도"로 바꾸면 빨간(깎인 곳) 물길과 파란(쌓인 곳) 평지가 보임.',
+    '표시를 "침식/퇴적 지도"로 바꾸면 빨간(깎인 곳) 물길과 파란(쌓인 곳) 평지가 보임',
     'B의 침식 브러시를 끄면 "뾰족한 구덩이" 수가 크게 늘어남. 음영에 점 같은 잡티가 생김.',
     '관성을 0.3까지 올리면 물방울이 곧게 흘러 골짜기가 길고 곧아짐. 0이면 굽이가 많아짐.',
-    '증발률을 올리면 물방울이 빨리 말라 짧은 물길만 생김.',
+    '증발률을 올리면 물방울이 빨리 말라 짧은 물길만 생김',
   ],
   refs: [
-    { type: 'paper', title: 'Hans Theobald Beyer: Implementation of a method for hydraulic erosion (학사 논문, TU München)', year: 2015, note: '물방울 기반 침식의 단계별 식과 계수.' },
-    { type: 'talk', title: 'Sebastian Lague: Coding Adventure: Hydraulic Erosion', year: 2019, note: '물방울 방식, 침식 브러시를 보여 주는 영상과 공개 코드.' },
+    { type: 'paper', title: 'Hans Theobald Beyer: Implementation of a method for hydraulic erosion (학사 논문, TU München)', year: 2015, note: '물방울 기반 침식의 단계별 식과 계수' },
+    { type: 'talk', title: 'Sebastian Lague: Coding Adventure: Hydraulic Erosion', year: 2019, note: '물방울 방식, 침식 브러시를 보여 주는 영상과 공개 코드' },
     { type: 'paper', title: 'F. K. Musgrave, C. E. Kolb, R. S. Mace: The synthesis and rendering of eroded fractal terrains', year: 1989, note: 'SIGGRAPH 1989. 프랙털 지형에 수력, 열 침식을 적용한 초기 연구.' },
     { type: 'paper', title: 'X. Mei, P. Decaudin, B.-G. Hu: Fast Hydraulic Erosion Simulation and Visualization on GPU', year: 2007, note: 'Pacific Graphics 2007. 격자 물 흐름(파이프 모델) 방식. 물방울 방식의 대안.' },
   ],
   params: [
     { key: 'droplets', label: '물방울 수', type: 'int', min: 0, max: 150000, step: 1000, a: 0, b: 30000, group: '침식' },
-    { key: 'brush', label: '침식 브러시', type: 'bool', default: true, reset: true, help: '끄면 한 점에서만 깎음.' },
+    { key: 'brush', label: '침식 브러시', type: 'bool', default: true, reset: true, help: '끄면 한 점에서만 깎음' },
     { key: 'radius', label: '브러시 반지름 (칸)', type: 'int', min: 1, max: 5, default: 3, reset: true, when: (p) => p.brush },
     { key: 'inertia', label: '관성', type: 'range', min: 0, max: 0.5, step: 0.01, default: 0.05, reset: true },
     { key: 'capacity', label: '운반 용량 계수', type: 'range', min: 1, max: 10, step: 0.5, default: 4, reset: true },
@@ -181,7 +181,7 @@ GTL.register({
         const cap = Math.max(-dh * speed * water * P.capacity, MIN_CAP);
         const i = iy * gw + ix;
         if (sed > cap || dh > 0) {
-          // 오르막이면 낙차만큼만 채움 (넘치게 쌓으면 진동함)
+          // 오르막이면 낙차만큼만 채움 (넘치게 쌓으면 진동)
           const amt = dh > 0 ? Math.min(dh, sed) : (sed - cap) * P.deposit;
           sed -= amt; deposited += amt;
           hm[i] += amt * (1 - fx) * (1 - fy); hm[i + 1] += amt * fx * (1 - fy);

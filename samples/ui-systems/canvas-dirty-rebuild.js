@@ -7,16 +7,16 @@ GTL.register({
   controls: '조작 없음. 체력바, 타이머, 미니맵 마커가 계속 바뀜. 다시 만든 요소는 잠깐 색이 칠해짐.',
   info: `
     <p>Unity uGUI의 <b>캔버스</b>(Canvas)는 안에 있는 UI 요소를 메시 하나로 묶어서 그림. 그래서 그리기 호출(배치)이 적음.</p>
-    <p>문제: 요소 하나가 바뀌면 그 요소가 <b>더티</b>(dirty, 다시 만들어야 함) 표시를 받고, 캔버스 전체가 더티가 됨. 다음 프레임에 캔버스의 모든 요소 정점을 다시 만들고 배치를 다시 계산함.</p>
+    <p>문제: 요소 하나가 바뀌면 그 요소가 <b>더티</b>(dirty, 다시 만들어야 함) 표시를 받고, 캔버스 전체가 더티가 됨. 다음 프레임에 캔버스의 모든 요소 정점을 다시 만들고 배치를 다시 계산.</p>
     <ul>
-      <li>정적 요소 수백 개와 매 프레임 바뀌는 체력바 하나가 같은 캔버스에 있으면, 정적 요소도 매 프레임 다시 만듦.</li>
-      <li>비용은 바뀐 요소 수가 아니라 캔버스 전체 정점 수에 비례함.</li>
+      <li>정적 요소 수백 개와 매 프레임 바뀌는 체력바 하나가 같은 캔버스에 있으면, 정적 요소도 매 프레임 다시 만듦</li>
+      <li>비용은 바뀐 요소 수가 아니라 캔버스 전체 정점 수에 비례</li>
     </ul>
     <p>해결 방법: 자주 바뀌는 요소를 <b>하위 캔버스</b>(nested Canvas)로 옮김. 하위 캔버스는 부모와 따로 메시를 만들어서, 더티 표시가 부모로 번지지 않음.</p>
     <ul>
       <li>정적 캔버스: 패널, 인벤토리 칸, 아이콘, 미니맵 지형. 가끔만 다시 만듦.</li>
       <li>동적 하위 캔버스: 타이머, 체력바, 미니맵 마커. 매 프레임 다시 만들어도 정점이 적음.</li>
-      <li>Unreal UMG는 <b>Invalidation Box</b>가 같은 역할. 안쪽 위젯의 레이아웃과 그리기 결과를 저장해 두고, 바뀔 때만 다시 계산함.</li>
+      <li>Unreal UMG는 <b>Invalidation Box</b>가 같은 역할. 안쪽 위젯의 레이아웃과 그리기 결과를 저장해 두고, 바뀔 때만 다시 계산.</li>
     </ul>
     <p>단점: 캔버스끼리는 배치를 합칠 수 없어서 그리기 호출이 늘어남. 캔버스를 너무 잘게 나누면 오히려 느려짐. "자주 바뀌는 것끼리 묶기"가 기준.</p>
     <p>이 샘플은 다시 만들기를 실제 반복문으로 함. 요소마다 사각형 정점(위치, UV, 재질 번호)을 배열에 다시 쓰고, 화면은 그 배열에서 그림.</p>`,
@@ -52,7 +52,7 @@ GTL.register({
   },
   look: [
     'A는 HUD 전체가 매 프레임 주황색으로 깜박임. B는 체력바, 타이머, 미니맵 마커만 파랗게 깜박임.',
-    '"이번 프레임 다시 만든 정점"을 비교하면 A는 수천 개, B는 수십~수백 개.',
+    '"이번 프레임 다시 만든 정점"을 비교하면 A는 수천 개, B는 수십~수백 개',
     '"정적 요소 수"를 400으로 올리면 A의 정점과 재생성 시간이 함께 커짐. B는 거의 그대로.',
     '"체력바 애니메이션"과 "미니맵 마커 이동"을 끄면 A도 타이머가 바뀌는 0.1초마다만 다시 만듦. 그래도 매번 전체를 다시 만듦.',
     '"골드 바꾸기"를 누르면 B에서도 정적 캔버스 전체가 한 번 깜박임. 정적 요소도 바뀌면 다시 만들어야 함.',
@@ -61,8 +61,8 @@ GTL.register({
   refs: [
     { type: 'article', title: 'Unity - Optimization tips for Unity UI', url: 'https://unity.com/how-to/unity-ui-optimization-tips', note: '"Split up your Canvases" 항목. 요소 하나가 바뀌면 캔버스 전체가 더티가 됨.' },
     { type: 'engine', title: 'Unity uGUI 2.0 - Canvas', url: 'https://docs.unity3d.com/Packages/com.unity.ugui@2.0/manual/UICanvas.html' },
-    { type: 'engine', title: 'Unity Scripting API - Canvas', url: 'https://docs.unity3d.com/ScriptReference/Canvas.html', note: 'Canvas.willRenderCanvases 시점에 더티 요소의 그래픽을 다시 만듦.' },
-    { type: 'engine', title: 'Unreal Engine - Invalidation in Slate and UMG', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/invalidation-in-slate-and-umg-for-unreal-engine', note: 'Invalidation Box, Retainer Panel, 전역 무효화(Global Invalidation).' },
+    { type: 'engine', title: 'Unity Scripting API - Canvas', url: 'https://docs.unity3d.com/ScriptReference/Canvas.html', note: 'Canvas.willRenderCanvases 시점에 더티 요소의 그래픽을 다시 만듦' },
+    { type: 'engine', title: 'Unreal Engine - Invalidation in Slate and UMG', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/invalidation-in-slate-and-umg-for-unreal-engine', note: 'Invalidation Box, Retainer Panel, 전역 무효화(Global Invalidation)' },
   ],
   params: [
     { key: 'layout', label: '캔버스 구성', type: 'select', group: '방식', options: [

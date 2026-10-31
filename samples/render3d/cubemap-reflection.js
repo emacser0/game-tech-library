@@ -7,19 +7,19 @@ GTL.register({
   views: { a: '반사 없음', b: '반사 + 거칠기별 밉' },
   controls: '마우스 드래그: 카메라 회전, 휠: 줌',
   info: `
-    <p><b>큐브맵(cubemap)</b>은 한 점에서 본 주변을 정육면체 6면에 담은 텍스처. 방향 벡터로 바로 조회함. 게임은 레벨 곳곳에 <b>반사 프로브(reflection probe)</b>를 두고 큐브맵을 미리 구워 둠.</p>
+    <p><b>큐브맵(cubemap)</b>은 한 점에서 본 주변을 정육면체 6면에 담은 텍스처. 방향 벡터로 바로 조회. 게임은 레벨 곳곳에 <b>반사 프로브(reflection probe)</b>를 두고 큐브맵을 미리 구워 둠.</p>
     <p>동작:</p>
     <ol>
-      <li>시선을 법선으로 반사한 방향 R = reflect(-V, N)을 구함.</li>
+      <li>시선을 법선으로 반사한 방향 R = reflect(-V, N)을 구함</li>
       <li>큐브맵에서 R 방향 색을 읽어 반사색으로 씀. 세기는 프레넬(Schlick)로 정함.</li>
       <li>거친 표면은 반사가 넓게 퍼짐. 그래서 거칠기가 클수록 <b>흐린 밉 레벨</b>을 읽음(<code>textureLod</code>).</li>
     </ol>
     <p>반사가 없으면 금속은 확산광이 0이라 직접광 하이라이트만 남음. 그래서 검은 플라스틱처럼 보임.</p>
     <p>단점과 한계:</p>
     <ul>
-      <li>이 샘플은 <code>generateMipmap</code>의 박스 필터 밉을 씀. 실제 엔진은 밉마다 GGX 로브로 미리 적분(prefilter)함. 박스 필터는 거친 반사에서 블록 무늬가 남음.</li>
-      <li>큐브맵은 한 점 기준이라 물체 위치에 따른 시차가 없음. 박스 투영(parallax-corrected)으로 보정함.</li>
-      <li>동적 물체나 자기 자신은 큐브맵에 안 들어감.</li>
+      <li>이 샘플은 <code>generateMipmap</code>의 박스 필터 밉을 씀. 실제 엔진은 밉마다 GGX 로브로 미리 적분(prefilter). 박스 필터는 거친 반사에서 블록 무늬가 남음.</li>
+      <li>큐브맵은 한 점 기준이라 물체 위치에 따른 시차 없음. 박스 투영(parallax-corrected)으로 보정.</li>
+      <li>동적 물체나 자기 자신은 큐브맵에 안 들어감</li>
     </ul>`,
   // 도식: 반사 벡터 R로 큐브맵을 읽는 과정과 거칠기별 밉 레벨 선택
   diagram: (L) => `<svg viewBox="0 0 540 184" xmlns="http://www.w3.org/2000/svg">
@@ -54,8 +54,8 @@ GTL.register({
   look: [
     'A의 금속 구는 검게 보이고 하이라이트 한 점만 남음. B는 하늘과 땅이 비침.',
     '반사를 "밉 0 고정"으로 바꾸면 거칠기 1의 구도 거울처럼 선명하게 비침. 거칠기 차이가 사라짐.',
-    '"밉 레벨 보기"를 켜면 왼쪽(매끈) 구는 파랑(밉 0), 오른쪽(거침) 구는 빨강(최대 밉)으로 칠해짐.',
-    '금속성을 0으로 낮추면 정면은 반사가 약하고 가장자리만 밝게 비침(프레넬).',
+    '"밉 레벨 보기"를 켜면 왼쪽(매끈) 구는 파랑(밉 0), 오른쪽(거침) 구는 빨강(최대 밉)으로 칠해짐',
+    '금속성을 0으로 낮추면 정면은 반사가 약하고 가장자리만 밝게 비침(프레넬)',
   ],
   refs: [
     { type: 'paper', title: 'Reflection and Refraction of Light from Arbitrary Surfaces (Blinn, Newell)', url: 'https://dl.acm.org/doi/10.1145/360349.360353', year: 1976, note: 'Communications of the ACM. 환경 매핑을 처음 제안.' },

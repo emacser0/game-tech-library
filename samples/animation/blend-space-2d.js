@@ -8,15 +8,15 @@ GTL.register({
   info: `
     <p><b>2D 블렌드 스페이스</b>는 두 입력값(여기서는 좌우 속도와 앞뒤 속도)으로 이루어진 평면에 클립을 점으로 배치하는 방식. 원점에서의 거리가 속도, 각도가 이동 방향.
     Unreal의 Blend Space, Unity Blend Tree의 2D Freeform Directional이 같은 개념.</p>
-    <p>입력 지점이 정해지면 클립마다 가중치(weight)를 계산하고 포즈를 가중 평균함. 클립의 재생 위치는 정규화한 위상(0~1)으로 맞춤(sync). 그래서 걸음 주기가 다른 클립도 발이 맞음.</p>
+    <p>입력 지점이 정해지면 클립마다 가중치(weight)를 계산하고 포즈를 가중 평균. 클립의 재생 위치는 정규화한 위상(0~1)으로 맞춤(sync). 그래서 걸음 주기가 다른 클립도 발이 맞음.</p>
     <p>가중치 계산 방식:</p>
     <ul>
       <li><b>가장 가까운 클립</b>: 거리가 가장 짧은 클립만 재생. 경계를 넘는 순간 포즈가 통째로 바뀜(popping).</li>
       <li><b>삼각분할 무게중심 (Unreal)</b>: 클립 점을 삼각형으로 나누고, 입력 지점이 든 삼각형의 세 꼭짓점을 무게중심 좌표(barycentric)로 섞음. 계산이 싸고 항상 최대 3개만 섞음.</li>
-      <li><b>그레이디언트 밴드 (Unity Freeform Directional)</b>: 클립 쌍마다 극좌표(크기, 각도) 기준의 영향 띠를 만들고 가장 작은 값을 가중치로 씀. 방향 변화에 더 고르게 반응함. 대신 클립 수의 제곱만큼 계산함.</li>
+      <li><b>그레이디언트 밴드 (Unity Freeform Directional)</b>: 클립 쌍마다 극좌표(크기, 각도) 기준의 영향 띠를 만들고 가장 작은 값을 가중치로 씀. 방향 변화에 더 고르게 반응. 대신 클립 수의 제곱만큼 계산.</li>
     </ul>
     <p>Unity의 2D Simple Directional은 방향마다 클립이 하나씩만 있을 때 쓰는 단순한 방식. 이웃한 두 방향과 중앙 클립만 섞음.</p>
-    <p>단점: 블렌드는 서로 다른 포즈를 평균하므로 클립 사이가 너무 다르면 발이 미끄러지거나 다리가 꼬임. 클립 배치와 위상 동기화가 품질을 좌우함.</p>`,
+    <p>단점: 블렌드는 서로 다른 포즈를 평균하므로 클립 사이가 너무 다르면 발이 미끄러지거나 다리가 꼬임. 클립 배치와 위상 동기화가 품질을 좌우.</p>`,
   // 도식: 삼각형 안의 입력 지점과 무게중심 가중치, 가장 가까운 클립 방식의 경계 튐
   diagram: (L) => `<svg viewBox="0 0 540 200" xmlns="http://www.w3.org/2000/svg">
     <text x="10" y="16" class="t-b">${L('B: 삼각형 무게중심 가중치', 'B: barycentric weights in a triangle')}</text>
@@ -48,7 +48,7 @@ GTL.register({
     '마우스를 대각선 방향 바깥에 두면 입력 지점이 바깥 경계에 붙음(클램프). 블렌드 스페이스는 클립 범위 밖을 만들어 내지 못함.',
   ],
   refs: [
-    { type: 'engine', title: 'Unreal Engine - Blend Spaces', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/blend-spaces-in-unreal-engine', note: '샘플 점 배치, 삼각분할 기반 보간, Smoothing Time.' },
+    { type: 'engine', title: 'Unreal Engine - Blend Spaces', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/blend-spaces-in-unreal-engine', note: '샘플 점 배치, 삼각분할 기반 보간, Smoothing Time' },
     { type: 'engine', title: 'Unity Manual - 2D Blending', url: 'https://docs.unity3d.com/Manual/BlendTree-2DBlending.html', note: '2D Simple Directional, 2D Freeform Directional, 2D Freeform Cartesian.' },
     { type: 'paper', title: 'Automated Semi-Procedural Animation for Character Locomotion (Rune Skovbo Johansen)', year: 2009, note: '석사 논문. 극좌표 그레이디언트 밴드 보간. Unity Freeform Directional의 바탕.' },
   ],
@@ -180,7 +180,7 @@ GTL.register({
       return h.map((v) => v / s);
     }
 
-    // 클립 포즈 (모델 공간: x 오른쪽, y 위, z 앞). 13개 수치를 가중 평균함
+    // 클립 포즈 (모델 공간: x 오른쪽, y 위, z 앞). 13개 수치를 가중 평균
     function clipPose(c, q) {
       const s = Math.round(Math.hypot(c.x, c.y)), out = new Array(13).fill(0);
       if (s === 0) {

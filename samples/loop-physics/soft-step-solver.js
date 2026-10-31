@@ -7,22 +7,22 @@ GTL.register({
   controls: '마우스 드래그: 추 잡아끌기',
   info: `
     <p><b>소프트 스텝(Soft Step)</b>은 Box2D v3의 솔버 구조. Erin Catto가 Solver2D 실험에서 여러 솔버를 비교한 뒤 고른 방식.</p>
-    <p>기존 방식(PGS + Baumgarte)은 한 프레임에 속도 제약을 여러 번 반복해서 풂.</p>
+    <p>기존 방식(PGS + Baumgarte)은 한 프레임에 속도 제약을 여러 번 반복해서 풂</p>
     <ul>
-      <li>위치 오차 <code>C</code>는 바이어스 속도 <code>β/h * C</code>로 고침.</li>
+      <li>위치 오차 <code>C</code>는 바이어스 속도 <code>β/h * C</code>로 고침</li>
       <li><code>β</code>는 단위가 없는 값이라 dt가 바뀌면 느낌이 바뀜. 크게 잡으면 에너지가 늘어 튐.</li>
-      <li>질량비가 크면(가벼운 링크, 무거운 추) 반복을 늘려도 잘 수렴하지 않음.</li>
+      <li>질량비가 크면(가벼운 링크, 무거운 추) 반복을 늘려도 잘 수렴하지 않음</li>
     </ul>
-    <p>소프트 스텝은 세 가지를 바꿈.</p>
+    <p>소프트 스텝은 세 가지를 바꿈</p>
     <ul>
       <li><b>서브스텝</b>: 프레임을 <code>n</code>개로 나누고 각 서브스텝에서 반복은 1회만 함. 반복보다 서브스텝이 수렴에 훨씬 유리함.</li>
       <li><b>소프트 제약</b>: 제약을 진동수 <code>f</code>(Hz)와 감쇠비 <code>ζ</code>를 가진 스프링으로 봄.
         <code>ω = 2πf</code>, <code>a1 = 2ζ + hω</code>, <code>a2 = hω a1</code>, <code>a3 = 1/(1+a2)</code>.
-        충격량 = <code>-m_eff * a2*a3 * (Cdot + ω/a1 * C) - a3 * 누적 충격량</code>. dt가 바뀌어도 같은 물리 단위로 동작함.</li>
+        충격량 = <code>-m_eff * a2*a3 * (Cdot + ω/a1 * C) - a3 * 누적 충격량</code>. dt가 바뀌어도 같은 물리 단위로 동작.</li>
       <li><b>Relax</b>: 위치를 옮긴 뒤 바이어스 없이 한 번 더 풀어서 위치 보정이 만든 속도를 없앰. 튀는 현상을 막음.</li>
     </ul>
-    <p>두 뷰는 프레임당 제약 풀이 횟수가 같음(A 8회, B 4 서브스텝 × 2회).</p>
-    <p>진동수가 서브스텝 주기에 가까우면 불안정함. Box2D v3는 접촉 진동수를 서브스텝 주기의 1/4 이하로 제한함. 이 샘플도 같은 상한을 씀.</p>
+    <p>두 뷰는 프레임당 제약 풀이 횟수가 같음(A 8회, B 4 서브스텝 × 2회)</p>
+    <p>진동수가 서브스텝 주기에 가까우면 불안정함. Box2D v3는 접촉 진동수를 서브스텝 주기의 1/4 이하로 제한. 이 샘플도 같은 상한을 씀.</p>
     <p>단점: 서브스텝마다 적분과 접촉 갱신이 필요해 코드가 복잡함. 소프트 제약이라 무거운 추를 달면 조금 늘어남.</p>`,
   // 도식: 한 프레임 안의 작업 순서. A는 반복 8회 뒤 적분 1회, B는 서브스텝 4개마다 풀이, 적분, relax. 아래는 소프트 제약 계수
   diagram: (L) => {
@@ -52,8 +52,8 @@ GTL.register({
   ],
   refs: [
     { type: 'article', title: 'Solver2D (Erin Catto)', url: 'https://box2d.org/posts/2024/02/solver2d/', year: 2024, note: 'PGS, TGS, XPBD, soft step 등 솔버 비교. 질량비가 큰 체인 테스트.' },
-    { type: 'talk', title: 'Soft Constraints: Reinventing the Spring (Erin Catto, GDC 2011)', year: 2011, note: '진동수와 감쇠비로 정의한 제약.' },
-    { type: 'code', title: 'Box2D v3 (Erin Catto)', url: 'https://github.com/erincatto/box2d', note: 'b2MakeSoft, 서브스텝 솔버, relax 단계.' },
+    { type: 'talk', title: 'Soft Constraints: Reinventing the Spring (Erin Catto, GDC 2011)', year: 2011, note: '진동수와 감쇠비로 정의한 제약' },
+    { type: 'code', title: 'Box2D v3 (Erin Catto)', url: 'https://github.com/erincatto/box2d', note: 'b2MakeSoft, 서브스텝 솔버, relax 단계' },
     { type: 'paper', title: 'Stabilization of Constraints and Integrals of Motion in Dynamical Systems (J. Baumgarte)', year: 1972, note: 'Computer Methods in Applied Mechanics and Engineering. 바이어스 안정화의 원조.' },
   ],
   params: [

@@ -10,12 +10,12 @@ GTL.register({
     2D 볼록 다각형에서는 <b>두 도형의 모든 변의 법선</b>만 후보 축으로 보면 됨. 3D에서는 면 법선과 변끼리의 외적까지 봄.</p>
     <p>검사 순서:</p>
     <ol>
-      <li>축마다 꼭짓점을 내적으로 투영해 [min, max] 구간을 구함.</li>
-      <li>한 축이라도 구간이 떨어져 있으면 바로 끝냄(조기 종료, early-out).</li>
-      <li>모든 축에서 겹치면 충돌.</li>
-      <li><b>겹침이 가장 작은 축 × 그 겹침량</b>이 도형을 떼어내는 최소 이동 벡터(MTV).</li>
+      <li>축마다 꼭짓점을 내적으로 투영해 [min, max] 구간을 구함</li>
+      <li>한 축이라도 구간이 떨어져 있으면 바로 끝냄(조기 종료, early-out)</li>
+      <li>모든 축에서 겹치면 충돌</li>
+      <li><b>겹침이 가장 작은 축 × 그 겹침량</b>이 도형을 떼어내는 최소 이동 벡터(MTV)</li>
     </ol>
-    <p>A 뷰처럼 월드 X/Y축만 검사하면 AABB 검사와 같아짐. 그래서 회전한 도형이 실제로 떨어져 있어도 충돌로 판정함.</p>
+    <p>A 뷰처럼 월드 X/Y축만 검사하면 AABB 검사와 같아짐. 그래서 회전한 도형이 실제로 떨어져 있어도 충돌로 판정.</p>
     <p>화면 둘레의 선이 각 축이고, 그 위의 굵은 막대가 두 도형의 투영 구간. 초록 축이 분리축.</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 196" xmlns="http://www.w3.org/2000/svg">
     <polygon points="90,45 120,75 90,105 60,75" class="d-a"/>
@@ -39,16 +39,16 @@ GTL.register({
     <text x="300" y="118" class="t-small t-dim">${L('모두 겹치면 겹침이 가장 작은 축이 MTV', 'All overlap: least overlap axis = MTV')}</text>
   </svg>`,
   look: [
-    '도형이 비스듬히 스치듯 지나갈 때 보면 A는 "충돌 (거짓 양성!)"을 표시함. B는 초록색 분리축을 찾아냄.',
+    '도형이 비스듬히 스치듯 지나갈 때 보면 A는 "충돌 (거짓 양성!)"을 표시. B는 초록색 분리축을 찾아냄.',
     'B에서 두 도형을 겹치면 노란 화살표(MTV)가 겹침이 가장 작은 축 방향을 가리킴. 점선 도형이 밀어낸 위치.',
-    '"조기 종료"를 끄면 모든 축을 검사함. 켜면 분리축을 찾는 즉시 멈춰서 "검사한 축 수"가 줄어듦.',
-    '꼭짓점 수를 8로 올리면 후보 축이 늘어남(평행한 법선은 하나로 합침). 원은 축이 무한하므로 "중심에서 가장 가까운 꼭짓점 방향" 축을 추가하는 식으로 처리함.',
+    '"조기 종료"를 끄면 모든 축을 검사. 켜면 분리축을 찾는 즉시 멈춰서 "검사한 축 수"가 줄어듦.',
+    '꼭짓점 수를 8로 올리면 후보 축이 늘어남(평행한 법선은 하나로 합침). 원은 축이 무한하므로 "중심에서 가장 가까운 꼭짓점 방향" 축을 추가하는 식으로 처리.',
   ],
   refs: [
     { type: 'book', title: 'Real-Time Collision Detection, 5.2.1 Separating-axis Test (Christer Ericson)', year: 2005 },
     { type: 'book', title: 'Collision Detection in Interactive 3D Environments (Gino van den Bergen)', year: 2003 },
-    { type: 'article', title: 'SAT (Separating Axis Theorem), dyn4j blog (William Bittle)', url: 'https://dyn4j.org/2010/01/sat/', year: 2010, note: '투영과 MTV를 그림으로 설명한 대표 튜토리얼.' },
-    { type: 'engine', title: 'Box2D, b2CollidePolygons', url: 'https://github.com/erincatto/box2d', note: '분리가 가장 큰 축(가장 덜 겹치는 면 법선)을 찾아 접촉을 생성함.' },
+    { type: 'article', title: 'SAT (Separating Axis Theorem), dyn4j blog (William Bittle)', url: 'https://dyn4j.org/2010/01/sat/', year: 2010, note: '투영과 MTV를 그림으로 설명한 대표 튜토리얼' },
+    { type: 'engine', title: 'Box2D, b2CollidePolygons', url: 'https://github.com/erincatto/box2d', note: '분리가 가장 큰 축(가장 덜 겹치는 면 법선)을 찾아 접촉을 생성' },
   ],
   params: [
     { key: 'sidesA', label: 'A 꼭짓점 수', type: 'int', min: 3, max: 8, default: 4, shared: true, group: '도형' },

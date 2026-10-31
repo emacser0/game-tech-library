@@ -1,21 +1,21 @@
-// 이징 함수 비교: 시간과 거리가 같아도 진행 곡선에 따라 움직임의 "느낌"이 달라짐.
+// 이징 함수 비교: 시간과 거리가 같아도 진행 곡선에 따라 움직임의 "느낌"이 달라짐
 GTL.register({
   id: 'easing-functions',
   title: '이징 함수 (Easing Functions)',
   summary: '시작 값, 끝 값, 시간이 같아도 진행률 곡선 f(t)에 따라 속도감과 무게감이 달라짐. 선형 보간과 이징 곡선을 위치, 크기, 투명도, 회전에 함께 적용해 비교.',
   views: { a: 'Linear', b: 'Out Cubic' },
-  controls: '조작 없음. 자동으로 왕복함. "다시 재생"을 누르면 처음부터 재생.',
+  controls: '조작 없음. 자동으로 왕복. "다시 재생"을 누르면 처음부터 재생.',
   info: `
     <p><b>이징 함수</b>는 시간 진행률을 값 진행률로 바꾸는 곡선 <code>f</code>.
-    트윈(tween, 두 값 사이를 시간에 따라 채우는 애니메이션)은 <code>value = lerp(from, to, f(t))</code>로 계산함.
+    트윈(tween, 두 값 사이를 시간에 따라 채우는 애니메이션)은 <code>value = lerp(from, to, f(t))</code>로 계산.
     <code>t</code>는 경과 시간 / 지속 시간(0→1).</p>
     <p>필요한 이유: <code>f(t) = t</code>(Linear)는 시작과 끝에서 속도가 갑자기 바뀜. 그래서 기계적으로 보임.</p>
     <ul>
       <li><b>Out</b>: 빠르게 출발해 감속하며 도착. UI 등장처럼 빠른 반응이 필요할 때 씀.</li>
       <li><b>In</b>: 천천히 출발해 가속. 퇴장에 씀.</li>
-      <li><b>InOut</b>: 시작과 끝을 모두 부드럽게 함.</li>
-      <li><b>Back</b>: 목표를 살짝 넘었다가 돌아옴(overshoot).</li>
-      <li><b>Elastic</b>, <b>Bounce</b>: 스프링과 튕김을 흉내 냄.</li>
+      <li><b>InOut</b>: 시작과 끝을 모두 부드럽게 함</li>
+      <li><b>Back</b>: 목표를 살짝 넘었다가 돌아옴(overshoot)</li>
+      <li><b>Elastic</b>, <b>Bounce</b>: 스프링과 튕김을 흉내 냄</li>
     </ul>
     <p>왼쪽 그래프의 기울기가 속도. 아래 점열은 같은 시간 간격으로 찍은 위치. <b>점 간격이 넓을수록 빠른 구간</b>.</p>`,
   diagram: (L) => {
@@ -41,15 +41,15 @@ GTL.register({
   </svg>`;
   },
   look: [
-    '아래 점열을 A와 B에서 비교하면 Linear는 간격이 균일하고 Out Cubic은 앞쪽이 넓고 끝이 촘촘함.',
+    '아래 점열을 A와 B에서 비교하면 Linear는 간격이 균일하고 Out Cubic은 앞쪽이 넓고 끝이 촘촘함',
     'B를 outBack이나 outElastic으로 바꾸면 곡선이 1을 넘음. 크기(scale)가 목표보다 커졌다가 돌아옴.',
     '등장에 Out 계열을 쓰면 처음부터 빠르게 움직여 체감 지연이 줄어듦. 그래서 In 계열은 퇴장에 씀.',
     '속도 그래프(점선)를 보면 Linear는 시작과 끝에서 값이 수직으로 끊김. InOut 계열은 0에서 시작해 0으로 끝남.',
   ],
   refs: [
     { type: 'book', title: "Robert Penner's Easing Functions", url: 'http://robertpenner.com/easing/', year: 2001, note: '"Programming Macromedia Flash MX" 7장. 게임과 웹에서 쓰는 이징 함수 이름의 원조.' },
-    { type: 'article', title: 'Easing Functions Cheat Sheet (easings.net)', url: 'https://easings.net/', note: '각 함수의 그래프와 수식.' },
-    { type: 'engine', title: 'Unity - AnimationCurve', url: 'https://docs.unity3d.com/ScriptReference/AnimationCurve.html', note: '엔진에서는 곡선 에셋으로 이징을 직접 편집하기도 함.' },
+    { type: 'article', title: 'Easing Functions Cheat Sheet (easings.net)', url: 'https://easings.net/', note: '각 함수의 그래프와 수식' },
+    { type: 'engine', title: 'Unity - AnimationCurve', url: 'https://docs.unity3d.com/ScriptReference/AnimationCurve.html', note: '엔진에서는 곡선 에셋으로 이징을 직접 편집하기도 함' },
     { type: 'engine', title: 'Godot - Tween (TransitionType / EaseType)', url: 'https://docs.godotengine.org/en/stable/classes/class_tween.html' },
   ],
   params: [

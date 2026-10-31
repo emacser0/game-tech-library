@@ -2,17 +2,17 @@
 GTL.register({
   id: 'drunkard-walk',
   title: '드렁커드 워크 (Random Walk) 동굴',
-  summary: '단일 워커 vs 다중 워커 + 수명 비교. 무작위로 걷는 워커가 지나간 칸을 파내면 동굴이 됨. 워커 수, 수명, 방향 유지 확률로 "긴 줄기"와 "뭉친 동굴" 사이를 조절함.',
+  summary: '단일 워커 vs 다중 워커 + 수명 비교. 무작위로 걷는 워커가 지나간 칸을 파내면 동굴이 됨. 워커 수, 수명, 방향 유지 확률로 "긴 줄기"와 "뭉친 동굴" 사이를 조절.',
   views: { a: '단일 워커', b: '다중 워커 + 수명' },
   controls: '조작 없음. "다시 생성"을 누르면 새 시드로 만듦.',
   info: `
     <p><b>드렁커드 워크</b>: 취객처럼 무작위로 걷는 "워커"가 지나간 칸을 파내는 방식.
     워커는 중앙에서 출발해 매 스텝 상하좌우 중 한 방향으로 움직임. 목표 바닥 비율에 도달하면 멈춤.</p>
-    <p>장점: 워커가 판 칸은 모두 이어져 있음. 그래서 <b>연결성이 보장</b>됨. 셀룰러 오토마타 동굴과 달리 후처리가 필요 없음.
+    <p>장점: 워커가 판 칸은 모두 이어져 있음. 그래서 <b>연결성이 보장</b>됨. 셀룰러 오토마타 동굴과 달리 후처리 필요 없음.
     단점: 모양을 제어하기 어려움.</p>
     <ul>
       <li><b>단일 워커</b>: 한 줄기로 멀리 떠돌아 맵 가장자리까지 가늘고 긴 동굴이 되기 쉬움. 결과마다 편차가 큼.</li>
-      <li><b>다중 워커 + 수명</b>: 워커가 일정 스텝 후 <b>기존 바닥의 임의 지점에서 다시 출발</b>함. 짧은 가지가 중심부에 겹겹이 붙어 뭉친 동굴이 됨.
+      <li><b>다중 워커 + 수명</b>: 워커가 일정 스텝 후 <b>기존 바닥의 임의 지점에서 다시 출발</b>. 짧은 가지가 중심부에 겹겹이 붙어 뭉친 동굴이 됨.
       모양은 예측하기 쉬워지지만, 이미 판 곳에서 다시 출발하므로 <b>스텝 효율이 떨어짐</b>.</li>
       <li><b>방향 유지 확률</b>: 높이면 직선 터널이 길어지고 재방문이 줄어 효율이 오름. 낮추면 둥글게 뭉침.</li>
     </ul>`,
@@ -47,12 +47,12 @@ GTL.register({
   refs: [
     { type: 'article', title: 'RogueBasin: Random Walk Cave Generation', url: 'https://www.roguebasin.com/index.php/Random_Walk_Cave_Generation' },
     { type: 'book', title: 'Procedural Content Generation in Games (Shaker, Togelius, Nelson), 3장 Agent-based dungeon growing', url: 'https://www.pcgbook.com/', year: 2016 },
-    { type: 'game', title: 'Nuclear Throne (Vlambeer, 2015)', note: '여러 "floor maker" 워커가 무작위로 걸으며 레벨을 파내는 방식으로 알려짐.' },
-    { type: 'game', title: 'Spelunky / Brogue', note: '로그라이크 지형에 에이전트 기반 굴착 변형을 자주 씀.' },
+    { type: 'game', title: 'Nuclear Throne (Vlambeer, 2015)', note: '여러 "floor maker" 워커가 무작위로 걸으며 레벨을 파내는 방식으로 알려짐' },
+    { type: 'game', title: 'Spelunky / Brogue', note: '로그라이크 지형에 에이전트 기반 굴착 변형을 자주 씀' },
   ],
   params: [
     { key: 'walkers', label: '워커 수', type: 'int', min: 1, max: 16, a: 1, b: 6, group: '워커' },
-    { key: 'life', label: '수명 (스텝, 0=무한)', type: 'int', min: 0, max: 400, a: 0, b: 60, help: '수명이 다하면 기존 바닥의 임의 칸에서 다시 출발함.' },
+    { key: 'life', label: '수명 (스텝, 0=무한)', type: 'int', min: 0, max: 400, a: 0, b: 60, help: '수명이 다하면 기존 바닥의 임의 칸에서 다시 출발' },
     { key: 'keepDir', label: '방향 유지 확률', type: 'range', min: 0, max: 0.95, step: 0.01, default: 0.4 },
     { key: 'target', label: '목표 바닥 비율 (%)', type: 'range', min: 5, max: 70, step: 1, default: 35, shared: true, group: '맵' },
     { key: 'cell', label: '칸 크기 (px)', type: 'int', min: 3, max: 14, default: 6, shared: true },

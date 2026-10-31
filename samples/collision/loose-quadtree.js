@@ -7,19 +7,19 @@ GTL.register({
   controls: '마우스: 가까운 오브젝트의 저장 노드 표시 (실선은 노드 경계, 점선은 느슨한 경계)',
   info: `
     <p>점은 항상 리프 하나에 들어감. 하지만 크기가 있는 오브젝트는 노드 경계에 걸칠 수 있음.
-    일반 쿼드트리는 오브젝트를 <b>완전히 담는 가장 작은 노드</b>에 저장함.</p>
+    일반 쿼드트리는 오브젝트를 <b>완전히 담는 가장 작은 노드</b>에 저장.</p>
     <ul>
-      <li>작은 오브젝트도 루트의 중심선에 걸치면 루트에 저장됨.</li>
+      <li>작은 오브젝트도 루트의 중심선에 걸치면 루트에 저장됨</li>
       <li>루트에 있는 오브젝트는 모든 질의에서 검사됨. 위쪽 노드가 붐빌수록 질의가 느려짐.</li>
-      <li>오브젝트가 경계를 넘나들 때마다 저장 노드가 크게 바뀜.</li>
+      <li>오브젝트가 경계를 넘나들 때마다 저장 노드가 크게 바뀜</li>
     </ul>
     <p><b>느슨한 쿼드트리</b>(loose quadtree)는 노드의 경계를 사방으로 넓힘. 넓힌 경계 = 원래 크기 × k.</p>
     <ul>
-      <li>오브젝트는 중심이 들어 있는 노드에 저장함. 경계는 넓힌 쪽으로 판정함.</li>
+      <li>오브젝트는 중심이 들어 있는 노드에 저장. 경계는 넓힌 쪽으로 판정.</li>
       <li>k=2이면 반지름이 노드 크기의 절반 이하인 오브젝트는 위치와 관계없이 그 깊이에 들어감. 깊이가 크기로 정해지고, 위치에 따라 한 단계 더 깊이 들어갈 수 있을 뿐임.</li>
-      <li>단점: 노드끼리 겹치므로 질의 영역이 넓어짐. 노드마다 넓힌 경계만큼 더 많은 노드를 방문함.</li>
+      <li>단점: 노드끼리 겹치므로 질의 영역이 넓어짐. 노드마다 넓힌 경계만큼 더 많은 노드를 방문.</li>
     </ul>
-    <p>같은 생각을 깊이별 균일 그리드로 구현하면 <b>계층 그리드</b>(hierarchical grid)가 됨. 이 샘플도 깊이별 셀 배열로 트리를 표현함.</p>`,
+    <p>같은 생각을 깊이별 균일 그리드로 구현하면 <b>계층 그리드</b>(hierarchical grid)가 됨. 이 샘플도 깊이별 셀 배열로 트리를 표현.</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 218" xmlns="http://www.w3.org/2000/svg">
     <text x="20" y="12" class="t-a">${L('A: 일반 쿼드트리', 'A: regular quadtree')}</text>
     <text x="297" y="12" class="t-b">${L('B: 느슨한 쿼드트리 (k=2)', 'B: loose quadtree (k=2)')}</text>
@@ -36,7 +36,7 @@ GTL.register({
     <text x="466" y="64" class="t-small t-b">${L('저장 노드:', 'stored at:')}</text>
     <text x="466" y="77" class="t-small t-b">${L('왼쪽 위 자식', 'NW child')}</text>
     <text x="20" y="198" class="t-small t-a">${L('중심선에 걸쳐 루트에 남음', 'Crosses the center line: stays at root')}</text>
-    <text x="20" y="212" class="t-small t-dim">${L('루트의 오브젝트는 모든 질의가 검사함', 'Every query checks root objects')}</text>
+    <text x="20" y="212" class="t-small t-dim">${L('루트의 오브젝트는 모든 질의에서 검사', 'Every query checks root objects')}</text>
     <text x="297" y="198" class="t-small t-b">${L('중심(점)이 든 자식에 저장', 'Stored in the child that holds its center')}</text>
     <text x="297" y="212" class="t-small t-dim">${L('점선 = 느슨한 경계 (노드 크기 × 2)', 'Dashed = loose bounds (node size × 2)')}</text>
   </svg>`,

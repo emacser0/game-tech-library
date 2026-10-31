@@ -10,7 +10,7 @@ GTL.register({
     이름은 절벽 밖에서 잠시 멈춰 있다 떨어지는 만화 캐릭터 와일 E. 코요테에서 유래.</p>
     <p>왜 필요한가: 사람의 반응 지연, 입력 지연, 렌더링 지연 때문에 플레이어는 가장자리를 <b>지나친 뒤</b>에 점프를 누르는 일이 잦음.
     "지면에 닿아 있을 때만 점프"를 엄격하게 적용하면 이 입력이 무시되고 캐릭터가 구덩이로 떨어짐.</p>
-    <p>동작 원리: 지면을 떠나면 타이머(<code>coyoteTimer</code>)가 줄어듦. 타이머가 남아 있는 동안은 지상 점프를 허용함.
+    <p>동작 원리: 지면을 떠나면 타이머(<code>coyoteTimer</code>)가 줄어듦. 타이머가 남아 있는 동안은 지상 점프를 허용.
     점프하면 타이머를 0으로 만들어 이중 점프를 막음.</p>
     <pre>if (grounded) coyoteTimer = COYOTE;
 else coyoteTimer -= dt;
@@ -36,19 +36,19 @@ if (jumpPressed && coyoteTimer > 0) { vy = -JUMP; coyoteTimer = 0; }</pre>
     <rect x="110" y="132" width="150" height="12" class="f-good"/><rect x="260" y="132" width="50" height="12" class="f-b"/>
     <text x="316" y="142" class="t-small t-b">${L('코요테 100ms', 'coyote 100ms')}</text>
     <circle cx="290" cy="138" r="3.5" class="f-good"/>
-    <text x="4" y="172" class="t-small t-dim">${L('가장자리를 지나고 70ms 뒤의 입력. A는 무시함, B는 유예 구간 안이라 점프함', 'Jump pressed 70 ms after the edge. A ignores it. B is inside the grace window, so it jumps')}</text>
+    <text x="4" y="172" class="t-small t-dim">${L('가장자리를 지나고 70ms 뒤의 입력. A는 무시, B는 유예 구간 안이라 점프', 'Jump pressed 70 ms after the edge. A ignores it. B is inside the grace window, so it jumps')}</text>
   </svg>`,
   look: [
-    '자동 데모를 켜 두면 가장자리를 벗어난 뒤 70ms 늦게 점프를 누름. A는 매번 추락하고(✗), B는 정상적으로 점프함(✓).',
+    '자동 데모를 켜 두면 가장자리를 벗어난 뒤 70ms 늦게 점프를 누름. A는 매번 추락하고(✗), B는 정상적으로 점프(✓).',
     '"데모: 점프 지연"을 코요테 타임보다 크게(예: 150ms) 올리면 B도 떨어짐. 유예 띠 밖에서 눌렀기 때문.',
-    'B의 코요테 타임을 250ms 이상으로 키우면 눈에 띄게 떨어지는 중에도 점프가 되어 부자연스러움.',
+    'B의 코요테 타임을 250ms 이상으로 키우면 눈에 띄게 떨어지는 중에도 점프가 되어 부자연스러움',
     '궤적 색을 보면 상태가 구분됨. 초록은 지상, 뷰 색은 코요테 유예 중(점프 가능), 회색은 공중(점프 불가).',
   ],
   refs: [
     { type: 'code', title: 'Celeste - Player.cs (JumpGraceTime = 0.1f)', url: 'https://github.com/NoelFB/Celeste', year: 2018, note: 'Maddy Thorson, Noel Berry. jumpGraceTimer로 코요테 타임 구현.' },
-    { type: 'article', title: 'Celeste & Forgiveness (Maddy Thorson)', year: 2020, note: '코요테 타임, 점프 버퍼, 코너 보정 등 Celeste의 "관대한" 조작 기법 정리.' },
+    { type: 'article', title: 'Celeste & Forgiveness (Maddy Thorson)', year: 2020, note: '코요테 타임, 점프 버퍼, 코너 보정 등 Celeste의 "관대한" 조작 기법 정리' },
     { type: 'book', title: 'Game Feel: A Game Designer\'s Guide to Virtual Sensation (Steve Swink)', year: 2008 },
-    { type: 'talk', title: 'Why Does Celeste Feel So Good to Play? (Game Maker\'s Toolkit)', year: 2019, note: 'Mark Brown의 영상 분석.' },
+    { type: 'talk', title: 'Why Does Celeste Feel So Good to Play? (Game Maker\'s Toolkit)', year: 2019, note: 'Mark Brown의 영상 분석' },
   ],
   params: [
     { key: 'coyote', label: '코요테 타임 (ms)', type: 'range', min: 0, max: 300, step: 5, a: 0, b: 100, group: '기법' },

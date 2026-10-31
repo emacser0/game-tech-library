@@ -4,7 +4,7 @@ GTL.register({
   title: '월드 스트리밍: 그리드 셀, 로딩 범위, 히스테리시스 (Unreal World Partition)',
   summary: '반경 하나로 매 프레임 셀을 로드하고 언로드하면 경계에서 같은 셀이 계속 들락거림. 언로드 반경을 더 크게 두고 로드를 비동기로 나누면 로드 수가 줄고 프레임이 고름.',
   views: { a: '단일 반경, 즉시 로드', b: '히스테리시스 + 비동기' },
-  controls: '뷰 안에서 마우스를 누르고 있으면 스트리밍 소스(플레이어)가 마우스 쪽으로 이동함. 떼면 자동 경로로 돌아감.',
+  controls: '뷰 안에서 마우스를 누르고 있으면 스트리밍 소스(플레이어)가 마우스 쪽으로 이동. 떼면 자동 경로로 돌아감.',
   info: `
     <p><b>월드 스트리밍</b>은 넓은 월드를 그리드 셀로 나누고, 플레이어 근처 셀만 메모리에 올리는 방식. Unreal의 World Partition이 대표 사례.</p>
     <p>월드 전체를 올리면 메모리와 오브젝트 수가 감당할 수 없을 만큼 커짐. 그래서 <b>스트리밍 소스</b>(보통 플레이어) 주변의 <b>로딩 범위</b> 안 셀만 로드함.</p>
@@ -12,7 +12,7 @@ GTL.register({
     <p>B의 동작 원리:</p>
     <ul>
       <li><b>히스테리시스</b>: 로드 반경보다 언로드 반경을 크게 둠. 둘 사이에서는 상태를 바꾸지 않음.</li>
-      <li><b>비동기 로드</b>: 로드는 시간이 걸림. 동시에 진행하는 로드 수를 제한하고 가까운 셀부터 처리함.</li>
+      <li><b>비동기 로드</b>: 로드는 시간이 걸림. 동시에 진행하는 로드 수를 제한하고 가까운 셀부터 처리.</li>
     </ul>
     <p>단점: 언로드 반경만큼 메모리를 더 씀. 빠르게 움직이면 로드가 늦어 빈 셀이 보일 수 있음.</p>`,
   // 도식: 로드 반경과 언로드 반경 사이 띠, 경계를 오가는 소스
@@ -39,19 +39,19 @@ GTL.register({
     <rect x="80" y="148" width="14" height="14" class="f-dim"/><text x="98" y="159" class="t-small">${L('미로드', 'unloaded')}</text>
     <rect x="170" y="148" width="14" height="14" class="f-accent"/><text x="188" y="159" class="t-small">${L('로드 중 (비동기)', 'loading (async)')}</text>
     <rect x="300" y="148" width="14" height="14" class="f-b"/><text x="318" y="159" class="t-small">${L('로드됨', 'loaded')}</text>
-    <text x="10" y="182" class="t-small t-dim">${L('동시 로드 수를 제한하고 가까운 셀부터 처리함. 한 프레임에 몰리지 않음', 'Loads in flight are capped, nearest cells first. They do not pile up in one frame')}</text>
+    <text x="10" y="182" class="t-small t-dim">${L('동시 로드 수를 제한하고 가까운 셀부터 처리. 한 프레임에 몰리지 않음', 'Loads in flight are capped, nearest cells first. They do not pile up in one frame')}</text>
   </svg>`,
   look: [
-    '기본 상태에서 "초당 로드 수"를 비교함. A는 플레이어가 경계를 오갈 때마다 로드가 계속 생김. B는 거의 0.',
+    '기본 상태에서 "초당 로드 수"를 비교. A는 플레이어가 경계를 오갈 때마다 로드가 계속 생김. B는 거의 0.',
     'A의 셀 테두리를 봄. 빨간 테두리(방금 언로드)와 흰 테두리(방금 로드)가 같은 줄에서 깜박임.',
-    'B에서 "히스테리시스"를 0으로 낮추면 B도 A처럼 스래싱이 생김.',
-    'A를 "전부 로드"로 바꾸면 로드는 없지만 메모리와 오브젝트 수가 몇 배로 커짐.',
+    'B에서 "히스테리시스"를 0으로 낮추면 B도 A처럼 스래싱이 생김',
+    'A를 "전부 로드"로 바꾸면 로드는 없지만 메모리와 오브젝트 수가 몇 배로 커짐',
     'B에서 "로드 시간"을 올리고 "이동 속도"를 높이면 진행 방향 셀이 늦게 채워짐. 비동기 로드의 단점.',
   ],
   refs: [
-    { type: 'engine', title: 'Unreal Engine - World Partition', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/world-partition-in-unreal-engine', note: '런타임 그리드, 셀 크기, 로딩 범위, 스트리밍 소스.' },
-    { type: 'engine', title: 'Unreal Engine API - UWorldPartitionStreamingSourceComponent', note: '플레이어 말고도 스트리밍 소스를 추가할 수 있음.' },
-    { type: 'engine', title: 'Unity Scripting API - SceneManager.LoadSceneAsync', url: 'https://docs.unity3d.com/ScriptReference/SceneManagement.SceneManager.LoadSceneAsync.html', note: 'Unity에서 씬을 셀처럼 나누어 비동기로 추가 로드하는 기본 수단.' },
+    { type: 'engine', title: 'Unreal Engine - World Partition', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/world-partition-in-unreal-engine', note: '런타임 그리드, 셀 크기, 로딩 범위, 스트리밍 소스' },
+    { type: 'engine', title: 'Unreal Engine API - UWorldPartitionStreamingSourceComponent', note: '플레이어 말고도 스트리밍 소스를 추가할 수 있음' },
+    { type: 'engine', title: 'Unity Scripting API - SceneManager.LoadSceneAsync', url: 'https://docs.unity3d.com/ScriptReference/SceneManagement.SceneManager.LoadSceneAsync.html', note: 'Unity에서 씬을 셀처럼 나누어 비동기로 추가 로드하는 기본 수단' },
   ],
   params: [
     { key: 'speed', label: '이동 속도 (셀/초)', type: 'range', min: 0.2, max: 8, step: 0.1, default: 0.4, shared: true, group: '스트리밍 소스' },

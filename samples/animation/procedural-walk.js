@@ -9,9 +9,9 @@ GTL.register({
     <p>각 다리에는 몸 기준 <b>휴식 위치</b>(rest)가 있음. 발을 휴식 위치에 그냥 붙이면 몸과 함께 미끄러짐. 그래서 <b>스케이트 타는 것처럼</b> 보임(foot sliding).</p>
     <p>절차적 보행의 동작 순서:</p>
     <ul>
-      <li>발을 월드 좌표에 <b>고정(plant)</b>함.</li>
-      <li>발과 휴식 위치의 거리가 <b>임계값</b>을 넘으면 걸음을 시작함.</li>
-      <li>정해진 스텝 시간 동안 새 위치로 호를 그리며 발을 옮김.</li>
+      <li>발을 월드 좌표에 <b>고정(plant)</b>함</li>
+      <li>발과 휴식 위치의 거리가 <b>임계값</b>을 넘으면 걸음을 시작</li>
+      <li>정해진 스텝 시간 동안 새 위치로 호를 그리며 발을 옮김</li>
     </ul>
     <p><b>앞쪽 예측</b>: 새 위치를 휴식 위치보다 이동 방향 앞쪽(속도 × 스텝 시간)에 잡음. 걸음이 몸을 따라잡지 못하는 문제가 줄어듦.</p>
     <p><b>걸음새(gait) 조정</b>: 이웃 다리가 땅에 있을 때만 발을 듦. 교대 보행(삼각 보행 등)이 저절로 나타남.</p>
@@ -49,15 +49,15 @@ GTL.register({
     <text x="364" y="154" class="t-small t-dim">${L('걸음 사이에는 발 고정', 'Foot stays put between steps')}</text>
   </svg>`,
   look: [
-    'A의 발 궤적(흐린 선)을 보면 발이 몸을 따라 계속 끌림. B는 발자국이 점으로 찍히고 걸음 사이에만 이동함.',
-    '"발 미끄러짐" 값을 비교하면 A는 이동 속도만큼 나오고 B는 0 px/s.',
+    'A의 발 궤적(흐린 선)을 보면 발이 몸을 따라 계속 끌림. B는 발자국이 점으로 찍히고 걸음 사이에만 이동.',
+    '"발 미끄러짐" 값을 비교하면 A는 이동 속도만큼 나오고 B는 0 px/s',
     'B에서 "걸음새 조정"을 끄면 여러 다리가 동시에 들려 허우적댐. 켜면 교대 보행이 됨.',
     '"앞쪽 예측"을 끄고 속도를 높이면 발이 계속 뒤처짐. 다리가 늘어난 채로 질질 끌림.',
   ],
   refs: [
     { type: 'talk', title: 'An Indie Approach to Procedural Animation (David Rosen)', year: 2014, note: 'GDC 2014. Overgrowth의 절차적 보행과 IK 기법.' },
     { type: 'talk', title: 'The Rain World Animation Process (Joar Jakobsson)', year: 2016, note: 'GDC 2016. 물리와 절차적 다리 배치로 만든 생물 애니메이션.' },
-    { type: 'game', title: 'Rain World (Videocult)', year: 2017, note: '도마뱀, 거미 생물의 절차적 다리.' },
+    { type: 'game', title: 'Rain World (Videocult)', year: 2017, note: '도마뱀, 거미 생물의 절차적 다리' },
     { type: 'article', title: 'Inverse kinematics (Wikipedia)', url: 'https://en.wikipedia.org/wiki/Inverse_kinematics', note: 'IK 개요. 2-본 IK는 코사인 법칙으로 닫힌 해를 구함.' },
   ],
   params: [

@@ -8,12 +8,12 @@ GTL.register({
   views: { a: '모든 라이트 계산', b: '클러스터드 (타일 × 깊이)' },
   controls: '마우스 드래그: 카메라 회전, 휠: 줌',
   info: `
-    <p>점광원은 반경 밖에 영향이 없음. 그래도 단순한 포워드 렌더링은 픽셀마다 모든 라이트를 반복함. 라이트 256개면 픽셀당 256번 계산함.</p>
+    <p>점광원은 반경 밖에 영향 없음. 그래도 단순한 포워드 렌더링은 픽셀마다 모든 라이트를 반복. 라이트 256개면 픽셀당 256번 계산.</p>
     <p><b>타일드 컬링(tiled culling)</b>:</p>
     <ol>
-      <li>화면을 32×32 픽셀 타일로 나눔.</li>
-      <li>라이트의 경계 구를 화면에 투영해 덮는 타일 범위를 구함.</li>
-      <li>타일마다 라이트 인덱스 목록을 만들어 GPU에 올림. 셰이더는 자기 타일 목록만 반복함.</li>
+      <li>화면을 32×32 픽셀 타일로 나눔</li>
+      <li>라이트의 경계 구를 화면에 투영해 덮는 타일 범위를 구함</li>
+      <li>타일마다 라이트 인덱스 목록을 만들어 GPU에 올림. 셰이더는 자기 타일 목록만 반복.</li>
     </ol>
     <p>단점: 타일 하나에 가까운 물체와 먼 배경이 함께 있으면, 깊이 방향으로 멀리 떨어진 라이트도 목록에 들어감. 그래서 깊이가 크게 바뀌는 실루엣에서 목록이 길어짐.</p>
     <p><b>클러스터드 컬링(clustered culling)</b>(Olsson 2012): 타일을 다시 깊이 방향 로그 구간으로 나눠 3D 격자(클러스터)를 만듦. 라이트는 깊이 범위가 겹치는 클러스터에만 들어감. 깊이 버퍼 없이도 동작해 반투명 물체에도 씀.</p>
@@ -52,13 +52,13 @@ GTL.register({
     <circle cx="501.6" cy="118.4" r="5" class="f-b"/>
     <text x="290" y="170" class="t-small">${L('클러스터마다 깊이가 겹치는 라이트만', 'Each cluster keeps lights in its depth')}</text>
     <text x="290" y="184" class="t-small t-dim">${L('한 픽셀이 보는 목록: 1~2개', 'List per pixel: 1~2 lights')}</text>
-    <text x="10" y="204" class="t-small t-a">${L('A (컬링 없음)는 픽셀마다 라이트 전부를 반복함', 'A (no culling) loops over every light for every pixel')}</text>
+    <text x="10" y="204" class="t-small t-a">${L('A (컬링 없음)는 픽셀마다 라이트 전부를 반복', 'A (no culling) loops over every light for every pixel')}</text>
   </svg>`,
   look: [
     '두 뷰의 조명은 같음. "평가 수 히트맵"을 켜면 A는 전체가 빨강(라이트 전부), B는 라이트가 모인 곳만 밝음.',
     'B를 "타일 2D"로 바꾸면 기둥 실루엣 주변처럼 깊이 차가 큰 타일이 밝아짐. 클러스터는 이 부분이 줄어듦.',
     '라이트 수를 512로 올리면 A의 프레임 비용(⏱, GPU ms)이 크게 늘어남. B는 덜 늘어남.',
-    '라이트 반경을 8로 키우면 목록이 길어져 컬링 이득이 줄어듦.',
+    '라이트 반경을 8로 키우면 목록이 길어져 컬링 이득이 줄어듦',
   ],
   refs: [
     { type: 'paper', title: 'Clustered Deferred and Forward Shading (Ola Olsson, Markus Billeter, Ulf Assarsson)', url: 'https://doi.org/10.2312/EGGH/HPG12/087-096', year: 2012, note: 'HPG 2012. 클러스터드 셰이딩 원 논문.' },

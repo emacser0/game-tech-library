@@ -2,16 +2,16 @@
 GTL.register({
   id: 'local-avoidance',
   title: '로컬 회피: 반발력 vs RVO',
-  summary: '서로 엇갈려 지나가야 하는 군중을 비교. 거리 기반 반발력은 정면으로 마주치면 서로 밀며 멈추고 떨림. RVO는 "이 속도로 가면 몇 초 뒤 부딪히는지"를 보고 미리 비켜 감. 상대도 절반을 비켜 준다고 가정해 진동이 없음.',
+  summary: '서로 엇갈려 지나가야 하는 군중을 비교. 거리 기반 반발력은 정면으로 마주치면 서로 밀며 멈추고 떨림. RVO는 "이 속도로 가면 몇 초 뒤 부딪히는지"를 보고 미리 비켜 감. 상대도 절반을 비켜 준다고 가정해 진동 없음.',
   views: { a: '반발력 (separation)', b: 'RVO' },
   info: `
-    <p>로컬 회피(local avoidance)는 길찾기 경로를 따라가는 에이전트끼리 부딪히지 않게 하는 기법.</p>
-    <p><b>반발력</b>: 가까운 이웃에게서 멀어지는 힘을 선호 속도에 더함. 거리만 보므로 <b>너무 늦게 반응</b>함.
+    <p>로컬 회피(local avoidance)는 길찾기 경로를 따라가는 에이전트끼리 부딪히지 않게 하는 기법</p>
+    <p><b>반발력</b>: 가까운 이웃에게서 멀어지는 힘을 선호 속도에 더함. 거리만 보므로 <b>너무 늦게 반응</b>.
     정면으로 마주친 두 에이전트는 힘이 정확히 상쇄되어 멈추거나 좌우로 떨림.</p>
-    <p><b>Velocity Obstacle (VO)</b>: 상대가 지금 속도를 유지한다고 가정함. 그때 내가 고르면 시간 τ 안에 충돌하는 속도의 원뿔이 VO.
+    <p><b>Velocity Obstacle (VO)</b>: 상대가 지금 속도를 유지한다고 가정. 그때 내가 고르면 시간 τ 안에 충돌하는 속도의 원뿔이 VO.
     원뿔 밖의 속도를 고르면 안전함. 단, 두 에이전트가 동시에 VO를 피하면 둘 다 과하게 비켰다가 다시 돌아옴. 이 <b>진동</b>이 문제.</p>
-    <p><b>RVO (Reciprocal VO)</b>: "상대도 회피의 절반을 맡는다"고 가정함. 그래서 원뿔을 <code>(v<sub>A</sub>+v<sub>B</sub>)/2</code>만큼 옮김.</p>
-    <p>이 샘플은 van den Berg 등(2008)의 원 논문처럼 <b>후보 속도를 샘플링</b>함. 그중 <code>penalty = w / 충돌까지 시간 + |v − v<sub>pref</sub>|</code>가 가장 작은 속도를 고름.
+    <p><b>RVO (Reciprocal VO)</b>: "상대도 회피의 절반을 맡는다"고 가정. 그래서 원뿔을 <code>(v<sub>A</sub>+v<sub>B</sub>)/2</code>만큼 옮김.</p>
+    <p>이 샘플은 van den Berg 등(2008)의 원 논문처럼 <b>후보 속도를 샘플링</b>. 그중 <code>penalty = w / 충돌까지 시간 + |v − v<sub>pref</sub>|</code>가 가장 작은 속도를 고름.
     실무 표준은 선형계획법을 쓰는 ORCA/RVO2.</p>
     <p>화면 읽는 법:</p>
     <ul>
@@ -38,7 +38,7 @@ GTL.register({
     <text x="201" y="108" text-anchor="middle" class="t-small t-a">${L('반발력', 'repulsion')}</text>
     <text x="8" y="156" class="t-small t-dim">${L('두 힘이 한 직선 위에서 상쇄됨', 'The forces lie on one line and cancel')}</text>
     <text x="8" y="170" class="t-small t-dim">${L('멈추거나 좌우로 떨림', 'Agents stall or jitter left and right')}</text>
-    <text x="8" y="184" class="t-small t-dim">${L('닿기 직전에야 반응함', 'They react only when already close')}</text>
+    <text x="8" y="184" class="t-small t-dim">${L('닿기 직전에야 반응', 'They react only when already close')}</text>
     <line x1="262" y1="8" x2="262" y2="192" class="d-dim"/>
     <text x="280" y="18" class="t-b">${L('B: RVO (충돌까지 시간을 봄)', 'B: RVO (looks at time to collision)')}</text>
     <polygon points="300,100 471,61 471,139" class="f-bad" fill-opacity="0.18"/>
@@ -60,7 +60,7 @@ GTL.register({
   look: [
     '기본 장면(원형 교차)으로 실행하면 A는 가운데서 서로 밀치며 겹치고(빨간 테두리) 떨림. B는 충돌 전에 미리 같은 방향으로 비켜 소용돌이처럼 빠져나감.',
     '"겹침 누적"과 "라운드 시간"을 비교하면 반발력은 몸으로 밀고 지나가 빠르지만 겹침이 수백 번 생김. RVO는 돌아가서 약간 느리지만 거의 겹치지 않음.',
-    'A의 "반발 반경"을 키우면 겹침은 줄지만 정체가 생김.',
+    'A의 "반발 반경"을 키우면 겹침은 줄지만 정체가 생김',
     'B의 "회피 가중치 w"를 0 가까이 내리면 선호 속도만 고집해 충돌이 늘어남. 너무 크게 올리면 과하게 돌아감.',
     '장면을 "십자 교차"나 "복도 정면 충돌"로 바꿔도 같은 차이가 보임. A를 "회피 없음"으로 두면 그냥 겹쳐 지나감.',
   ],
@@ -69,7 +69,7 @@ GTL.register({
     { type: 'paper', title: 'Reciprocal n-Body Collision Avoidance (ORCA)', year: 2011, note: 'van den Berg, Guy, Lin, Manocha. Robotics Research (ISRR 2009). 선형계획 기반 ORCA.', url: 'https://doi.org/10.1007/978-3-642-19457-3_1' },
     { type: 'paper', title: 'Motion Planning in Dynamic Environments Using Velocity Obstacles', year: 1998, note: 'Fiorini & Shiller. IJRR 17(7). Velocity Obstacle 개념.', url: 'https://doi.org/10.1177/027836499801700706' },
     { type: 'code', title: 'RVO2 Library (UNC GAMMA)', url: 'https://gamma.cs.unc.edu/RVO2/', note: 'ORCA의 공식 C++ 구현. Unity/Unreal의 군중 회피(RVO avoidance)도 이 계열.' },
-    { type: 'engine', title: 'Unreal Engine - RVO Avoidance / Detour Crowd', note: 'CharacterMovementComponent의 bUseRVOAvoidance, Recast/Detour의 dtCrowd.' },
+    { type: 'engine', title: 'Unreal Engine - RVO Avoidance / Detour Crowd', note: 'CharacterMovementComponent의 bUseRVOAvoidance, Recast/Detour의 dtCrowd' },
   ],
   params: [
     { key: 'method', label: '회피 방식', type: 'select', group: '회피', options: [

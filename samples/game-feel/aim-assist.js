@@ -10,11 +10,11 @@ GTL.register({
     모든 보조는 <b>목표 주변의 보조 반경</b> 안에서만 작동하고, 목표에 가까울수록 강해짐(falloff).</p>
     <ul>
       <li><b>마찰 (Friction / Slowdown)</b>: 반경 안에서 조준 속도에 <code>1 - friction × falloff</code>를 곱함. 목표를 지나쳐 버리는 오버슈트가 줄어듦.</li>
-      <li><b>자석 (Magnetism / Pull)</b>: 플레이어가 조준을 움직이는 동안 조준점을 목표 중심 쪽으로 조금 당김. 입력이 없을 때 당기면 자동 조준처럼 느껴져서 보통 입력 중일 때만 적용함.</li>
+      <li><b>자석 (Magnetism / Pull)</b>: 플레이어가 조준을 움직이는 동안 조준점을 목표 중심 쪽으로 조금 당김. 입력이 없을 때 당기면 자동 조준처럼 느껴져서 보통 입력 중일 때만 적용.</li>
       <li><b>추적 (Adhesion / Tracking)</b>: 목표 이동 속도의 일부를 조준점에 더함. 움직이는 적 위에 조준이 "붙어" 있게 됨.</li>
     </ul>
-    <p>자동 데모에서는 <b>같은 가상 플레이어</b>가 두 뷰를 조작함. 이 플레이어에는 반응 지연(150ms)과 손떨림 노이즈가 있음. 입력은 같고, 결과 차이는 보조에서만 생김.</p>
-    <p>단점: 보조가 너무 강하면 목표가 겹칠 때 엉뚱한 적에게 끌려가거나, 게임이 대신 쏘는 느낌을 줌.</p>`,
+    <p>자동 데모에서는 <b>같은 가상 플레이어</b>가 두 뷰를 조작. 이 플레이어에는 반응 지연(150ms)과 손떨림 노이즈가 있음. 입력은 같고, 결과 차이는 보조에서만 생김.</p>
+    <p>단점: 보조가 너무 강하면 목표가 겹칠 때 엉뚱한 적에게 끌려가거나, 게임이 대신 쏘는 느낌을 줌</p>`,
   // 도식: 보조 반경 안에서 조준점 이동. A는 같은 간격으로 지나침, B는 간격이 줄며(마찰) 중심으로 휨(자석)
   diagram: (L) => `<svg viewBox="0 0 540 166" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arrA" class="m-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker><marker id="arrB" class="m-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker><marker id="arrT" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -37,15 +37,15 @@ GTL.register({
     <text x="180" y="158" class="t-small t-b">${L('B: 반경 안에서 느려지고 목표로 휨', 'B: slows inside the radius and bends to the target')}</text>
   </svg>`,
   look: [
-    '조준 궤적(꼬리)을 비교하면 A는 목표를 지나쳤다 돌아오는 S자 오버슈트가 큼. B는 반경 안에서 감속해 빨리 안착함.',
-    '"조준 유지율"과 "명중률" 수치를 비교하면 같은 가상 플레이어인데도 B가 훨씬 높음.',
+    '조준 궤적(꼬리)을 비교하면 A는 목표를 지나쳤다 돌아오는 S자 오버슈트가 큼. B는 반경 안에서 감속해 빨리 안착.',
+    '"조준 유지율"과 "명중률" 수치를 비교하면 같은 가상 플레이어인데도 B가 훨씬 높음',
     'B의 자석을 1.0으로 올리고 "입력 중일 때만 자석"을 끄면 손을 떼도 조준이 끌려감. 과한 보조의 예.',
     '목표 속도를 올리면 마찰만으로는 오히려 따라가기 어려워짐. 추적(접착)을 켜면 이 문제가 줄어듦.',
   ],
   refs: [
-    { type: 'game', title: 'Halo: Combat Evolved (Bungie, 2001)', note: '콘솔 FPS에서 조준 감속(reticle friction)과 탄 자석(bullet magnetism)을 대중화한 사례.' },
+    { type: 'game', title: 'Halo: Combat Evolved (Bungie, 2001)', note: '콘솔 FPS에서 조준 감속(reticle friction)과 탄 자석(bullet magnetism)을 대중화한 사례' },
     { type: 'book', title: 'Game Feel: A Game Designer\'s Guide to Virtual Sensation (Steve Swink)', year: 2008 },
-    { type: 'engine', title: 'Unity Input System - Stick Deadzone processor', url: 'https://docs.unity3d.com/Packages/com.unity.inputsystem@1.7/manual/Processors.html', note: '스틱 입력 데드존/응답 곡선 처리.' },
+    { type: 'engine', title: 'Unity Input System - Stick Deadzone processor', url: 'https://docs.unity3d.com/Packages/com.unity.inputsystem@1.7/manual/Processors.html', note: '스틱 입력 데드존/응답 곡선 처리' },
   ],
   params: [
     { key: 'friction', label: '마찰 (감속)', type: 'range', min: 0, max: 0.95, step: 0.01, a: 0, b: 0.55, group: '보조' },

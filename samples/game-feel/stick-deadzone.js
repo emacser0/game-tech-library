@@ -9,10 +9,10 @@ GTL.register({
     <p><b>데드존(Dead Zone)</b>: 스틱 중심 근처의 입력을 0으로 버리는 구역.
     스틱은 손을 떼도 중심으로 정확히 돌아오지 않음. 이 작은 값(드리프트)을 그대로 쓰면 캐릭터가 저절로 걸어감.</p>
     <ul>
-      <li><b>축별(Axial)</b>: x, y를 따로 검사함. <code>|x| &lt; d</code>면 x = 0. 구현이 가장 쉬움.
+      <li><b>축별(Axial)</b>: x, y를 따로 검사. <code>|x| &lt; d</code>면 x = 0. 구현이 가장 쉬움.
       단점은 축 근처 방향이 축으로 쏠림. 20°로 기울여도 0°로 감.</li>
-      <li><b>원형(Radial)</b>: 벡터 길이로 검사함. <code>|v| &lt; d</code>면 0. 방향은 그대로 유지됨.
-      단점은 경계를 넘는 순간 출력이 0에서 d로 바로 뜀. 아주 느린 이동이 불가능함.</li>
+      <li><b>원형(Radial)</b>: 벡터 길이로 검사. <code>|v| &lt; d</code>면 0. 방향은 그대로 유지됨.
+      단점은 경계를 넘는 순간 출력이 0에서 d로 바로 뜀. 아주 느린 이동 불가능.</li>
       <li><b>스케일드 원형(Scaled Radial)</b>: 원형 검사 뒤 남은 구간을 0~1로 다시 늘림.
       <code>out = norm(v) × (|v| - d) / (1 - d)</code>. 방향 유지, 출력 연속.</li>
     </ul>
@@ -44,13 +44,13 @@ GTL.register({
   look: [
     '자동 데모의 원 그리기 단계에서 A의 궤적은 축 근처가 평평하게 꺾여 둥근 사각형이 됨. B는 원에 가까움.',
     '"방향 왜곡" 측정값을 비교하면 A만 0°보다 큼. 축 근처 입력이 축으로 쏠리기 때문. B는 방향을 그대로 둠.',
-    'B의 방식을 "원형"으로 바꾸면 "경계 출력 크기"가 데드존 크기(0.25) 근처로 뜀. 스케일드 원형은 0 근처에서 시작함.',
-    '두 뷰 모두 "데드존 없음"으로 바꾸고 드리프트를 0.2로 올리면 손을 뗀 구간에도 캐릭터가 계속 미끄러짐.',
+    'B의 방식을 "원형"으로 바꾸면 "경계 출력 크기"가 데드존 크기(0.25) 근처로 뜀. 스케일드 원형은 0 근처에서 시작.',
+    '두 뷰 모두 "데드존 없음"으로 바꾸고 드리프트를 0.2로 올리면 손을 뗀 구간에도 캐릭터가 계속 미끄러짐',
   ],
   refs: [
     { type: 'article', title: 'Doing Thumbstick Dead Zones Right (Josh Sutphin)', note: '축별, 원형, 스케일드 원형 데드존을 단계별로 비교한 글. 이 샘플의 기준.' },
-    { type: 'book', title: 'Game Feel: A Game Designer\'s Guide to Virtual Sensation (Steve Swink)', year: 2008, note: '입력 장치의 민감도와 매핑.' },
-    { type: 'engine', title: 'Unity Input System - StickDeadzoneProcessor', note: 'min, max 값으로 원형 데드존을 걸고 남은 구간을 다시 늘리는 처리기.' },
+    { type: 'book', title: 'Game Feel: A Game Designer\'s Guide to Virtual Sensation (Steve Swink)', year: 2008, note: '입력 장치의 민감도와 매핑' },
+    { type: 'engine', title: 'Unity Input System - StickDeadzoneProcessor', note: 'min, max 값으로 원형 데드존을 걸고 남은 구간을 다시 늘리는 처리기' },
   ],
   params: [
     { key: 'mode', label: '데드존 방식', type: 'select', group: '기법', options: [

@@ -6,18 +6,18 @@ GTL.register({
   views: { a: 'A* (ε = 1)', b: '가중 A* (ε = 2)' },
   controls: '드래그: 벽 칠하기/지우기, S/G 원 드래그: 시작/목표 이동, 우클릭 드래그: 지우기',
   info: `
-    <p><b>휴리스틱 선택</b>: 이동 규칙에 맞는 거리 함수를 써야 함.</p>
+    <p><b>휴리스틱 선택</b>: 이동 규칙에 맞는 거리 함수를 써야 함</p>
     <ul>
-      <li>4방향 이동: Manhattan이 정확한 하한.</li>
-      <li>8방향 이동(대각선 비용 √2): <b>Octile</b>이 정확한 하한.</li>
-      <li>Euclidean: 항상 admissible(실제 비용보다 크지 않음). 단, 실제보다 작아서 더 많이 탐색함.</li>
-      <li>h = 0: A*가 Dijkstra와 같아짐.</li>
-      <li>8방향에 Manhattan: 실제 비용을 <b>과대평가</b>함. 빨라지지만 최적 경로를 보장하지 못함.</li>
+      <li>4방향 이동: Manhattan이 정확한 하한</li>
+      <li>8방향 이동(대각선 비용 √2): <b>Octile</b>이 정확한 하한</li>
+      <li>Euclidean: 항상 admissible(실제 비용보다 크지 않음). 단, 실제보다 작아서 더 많이 탐색.</li>
+      <li>h = 0: A*가 Dijkstra와 같아짐</li>
+      <li>8방향에 Manhattan: 실제 비용을 <b>과대평가</b>. 빨라지지만 최적 경로를 보장하지 못함.</li>
     </ul>
     <p><b>가중 A*</b>: <code>f = g + ε×h</code>. ε &gt; 1이면 Greedy 쪽으로 기울어 탐색량이 크게 줄어듦. 경로 비용은 최적의 ε배 이내로 보장됨(bounded suboptimal).</p>
     <p><b>동점 처리</b>: 장애물 없는 넓은 영역에는 f가 같은 노드가 많이 생김. 먼저 넣은 노드부터 꺼내면(FIFO) 같은 f 띠 전체를 훑음.
     <b>h가 작은(목표에 가까운) 노드를 먼저</b> 꺼내면 거의 일직선으로 나아감.</p>
-    <p>"최적 대비"는 같은 맵에서 Dijkstra로 구한 최소 비용과 비교한 값.</p>`,
+    <p>"최적 대비"는 같은 맵에서 Dijkstra로 구한 최소 비용과 비교한 값</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
     <text x="10" y="18" class="t-small t-dim">${L('n에서 G까지 거리 (dx 4, dy 2)', 'Distance from n to G (dx 4, dy 2)')}</text>
     ${[40, 72, 104, 136, 168].map((x) => `<line x1="${x}" y1="56" x2="${x}" y2="120" class="d-dim"/>`).join('')}
@@ -45,15 +45,15 @@ GTL.register({
     <text x="300" y="184" class="t-small t-dim">${L('ε가 크면 목표에 가까운 Q가 앞섬', 'Larger ε favors Q, nearer the goal')}</text>
   </svg>`,
   look: [
-    'B의 ε를 1, 1.5, 3 순으로 올리면 확장 노드 수는 줄고 "최적 대비 %"는 커짐.',
-    '"빈 맵"에서 A의 동점 처리를 FIFO에서 "h 작은 노드 우선"으로 바꾸면 탐색 영역이 넓은 마름모에서 가는 선으로 줄어듦.',
+    'B의 ε를 1, 1.5, 3 순으로 올리면 확장 노드 수는 줄고 "최적 대비 %"는 커짐',
+    '"빈 맵"에서 A의 동점 처리를 FIFO에서 "h 작은 노드 우선"으로 바꾸면 탐색 영역이 넓은 마름모에서 가는 선으로 줄어듦',
     '대각선 이동을 켜고 휴리스틱을 Manhattan(과대평가)으로 바꾸면 빨라지지만 최적 대비가 100%를 넘을 수 있음. Octile과 비교해 볼 것.',
-    '휴리스틱을 "0 (= Dijkstra)"로 바꾸면 A*가 Dijkstra와 똑같이 원형으로 퍼짐.',
+    '휴리스틱을 "0 (= Dijkstra)"로 바꾸면 A*가 Dijkstra와 똑같이 원형으로 퍼짐',
   ],
   refs: [
     { type: 'paper', title: 'A Formal Basis for the Heuristic Determination of Minimum Cost Paths', year: 1968, note: 'Hart, Nilsson, Raphael. admissible 휴리스틱과 최적성 증명.', url: 'https://doi.org/10.1109/TSSC.1968.300136' },
     { type: 'paper', title: 'Heuristic search viewed as path finding in a graph', year: 1970, note: 'Ira Pohl. Artificial Intelligence 1(3-4). 가중 A*(weighted A*)의 기원.', url: 'https://doi.org/10.1016/0004-3702(70)90007-X' },
-    { type: 'article', title: "Amit's A* Pages - Heuristics", url: 'http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html', note: 'Manhattan/Diagonal/Euclidean, 가중치, tie-breaking 설명.' },
+    { type: 'article', title: "Amit's A* Pages - Heuristics", url: 'http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html', note: 'Manhattan/Diagonal/Euclidean, 가중치, tie-breaking 설명' },
     { type: 'article', title: 'Implementation of A* (Red Blob Games)', url: 'https://www.redblobgames.com/pathfinding/a-star/implementation.html', note: 'Amit Patel. 동점 처리와 경로 미관(ugly paths) 문제.' },
   ],
   params: [

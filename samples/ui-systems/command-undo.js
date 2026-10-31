@@ -2,21 +2,21 @@
 GTL.register({
   id: 'command-undo',
   title: '커맨드 패턴: 실행 취소, 다시 실행, 리플레이',
-  summary: '입력을 받자마자 데이터를 바꾸면 되돌릴 방법이 없음. 동작을 커맨드 객체로 만들어 기록하면 실행 취소, 다시 실행, 리플레이가 됨. 바뀐 칸만 저장해서 전체 스냅숏보다 메모리가 훨씬 적음.',
+  summary: '입력을 받자마자 데이터를 바꾸면 되돌릴 방법 없음. 동작을 커맨드 객체로 만들어 기록하면 실행 취소, 다시 실행, 리플레이가 됨. 바뀐 칸만 저장해서 전체 스냅숏보다 메모리가 훨씬 적음.',
   views: { a: '직접 실행', b: '커맨드 객체' },
-  controls: '드래그로 타일 칠하기, Shift + 클릭으로 영역 채우기. Z 실행 취소, X 다시 실행. 자동 데모가 칠하기와 실행 취소를 반복함.',
+  controls: '드래그로 타일 칠하기, Shift + 클릭으로 영역 채우기. Z 실행 취소, X 다시 실행. 자동 데모가 칠하기와 실행 취소를 반복.',
   info: `
     <p><b>커맨드 패턴</b>(Command)은 "무엇을 할지"를 객체로 만드는 방법. 객체에 <code>execute()</code>와 <code>undo()</code>를 둠.</p>
     <p>직접 실행은 입력 처리 코드가 데이터를 바로 바꿈. 바꾸기 전 값이 남지 않아서 되돌릴 수 없음.</p>
     <p>커맨드 방식의 동작:</p>
     <ul>
-      <li>칠하기 커맨드는 바뀐 칸의 번호, 이전 값, 새 값만 저장함.</li>
-      <li>실행 취소: 커맨드를 실행 취소 스택에서 꺼내 <code>undo()</code>를 호출하고 다시 실행 스택에 넣음.</li>
-      <li>새 동작을 하면 다시 실행 스택을 비움.</li>
-      <li>리플레이: 처음 상태에서 커맨드를 순서대로 다시 실행함. 결정적(deterministic)이면 같은 결과가 나옴.</li>
-      <li>같은 커맨드 기록을 네트워크로 보내거나 AI 입력으로 쓸 수도 있음.</li>
+      <li>칠하기 커맨드는 바뀐 칸의 번호, 이전 값, 새 값만 저장</li>
+      <li>실행 취소: 커맨드를 실행 취소 스택에서 꺼내 <code>undo()</code>를 호출하고 다시 실행 스택에 넣음</li>
+      <li>새 동작을 하면 다시 실행 스택을 비움</li>
+      <li>리플레이: 처음 상태에서 커맨드를 순서대로 다시 실행. 결정적(deterministic)이면 같은 결과가 나옴.</li>
+      <li>같은 커맨드 기록을 네트워크로 보내거나 AI 입력으로 쓸 수도 있음</li>
     </ul>
-    <p>비교용 <b>스냅숏</b> 방식은 동작마다 전체 맵을 복사함. 구현은 쉽지만 메모리가 맵 크기 × 기록 수만큼 늘어남. 커맨드는 바뀐 칸 수에 비례하므로, 넓은 영역 채우기처럼 많은 칸을 바꾸는 동작에서는 차이가 줄어듦.</p>
+    <p>비교용 <b>스냅숏</b> 방식은 동작마다 전체 맵을 복사. 구현은 쉽지만 메모리가 맵 크기 × 기록 수만큼 늘어남. 커맨드는 바뀐 칸 수에 비례하므로, 넓은 영역 채우기처럼 많은 칸을 바꾸는 동작에서는 차이가 줄어듦.</p>
     <p>단점: 모든 상태 변경이 커맨드를 거쳐야 함. 한 군데라도 직접 바꾸면 실행 취소 결과가 어긋남. 무작위나 시간에 의존하는 동작은 결과를 커맨드에 저장해야 리플레이가 같아짐.</p>`,
   // 도식: 실행 취소 스택과 다시 실행 스택 사이의 커맨드 이동, 아래는 스냅숏 vs 커맨드 메모리
   diagram: (L) => `<svg viewBox="0 0 540 206" xmlns="http://www.w3.org/2000/svg">
@@ -51,13 +51,13 @@ GTL.register({
   look: [
     '자동 데모에서 "실행 취소"가 나올 때 B는 방금 칠한 칸이 원래대로 돌아감(흰 테두리). A는 "실행 취소 불가"만 뜨고 그대로임.',
     'B의 방식을 "스냅숏"으로 바꾸면 실행 취소는 되지만 "기록 메모리"가 커맨드 방식보다 4배 이상 큼. 맵 크기를 64로 키우면 차이가 더 벌어짐.',
-    '"리플레이" 버튼을 누르면 B는 빈 맵에서 기록된 커맨드를 하나씩 다시 실행해서 같은 그림을 만듦.',
+    '"리플레이" 버튼을 누르면 B는 빈 맵에서 기록된 커맨드를 하나씩 다시 실행해서 같은 그림을 만듦',
     '직접 드래그로 칠한 뒤 Z를 누르면 두 뷰의 차이가 바로 보임. 입력은 두 뷰에 똑같이 들어감.',
   ],
   refs: [
-    { type: 'book', title: 'Game Programming Patterns - Command (Robert Nystrom)', url: 'https://gameprogrammingpatterns.com/command.html', year: 2014, note: '입력 처리, 실행 취소, 리플레이 예제.' },
-    { type: 'book', title: 'Design Patterns: Elements of Reusable Object-Oriented Software (Gamma, Helm, Johnson, Vlissides)', year: 1994, note: 'Command 패턴의 원전.' },
-    { type: 'engine', title: 'Unity Scripting API - Undo', url: 'https://docs.unity3d.com/ScriptReference/Undo.html', note: '에디터의 실행 취소 기록 API.' },
+    { type: 'book', title: 'Game Programming Patterns - Command (Robert Nystrom)', url: 'https://gameprogrammingpatterns.com/command.html', year: 2014, note: '입력 처리, 실행 취소, 리플레이 예제' },
+    { type: 'book', title: 'Design Patterns: Elements of Reusable Object-Oriented Software (Gamma, Helm, Johnson, Vlissides)', year: 1994, note: 'Command 패턴의 원전' },
+    { type: 'engine', title: 'Unity Scripting API - Undo', url: 'https://docs.unity3d.com/ScriptReference/Undo.html', note: '에디터의 실행 취소 기록 API' },
   ],
   params: [
     { key: 'mode', label: '실행 방식', type: 'select', group: '방식', options: [
@@ -223,7 +223,7 @@ GTL.register({
       const r = ctx.rng;
       const PLAN = ['stroke', 'stroke', 'fill', 'undo', 'undo', 'redo', 'stroke', 'fill', 'undo', 'stroke'];
       const kind = PLAN[step % PLAN.length];
-      // 무작위 값은 동작 종류와 관계없이 항상 같은 개수만큼 뽑음. 그래야 두 뷰가 같은 순서를 유지함
+      // 무작위 값은 동작 종류와 관계없이 항상 같은 개수만큼 뽑음. 그래야 두 뷰가 같은 순서를 유지
       const x0 = r.int(0, cols - 1), y0 = r.int(0, rows - 2), x1 = r.int(0, cols - 1), y1 = r.int(0, rows - 2), v = r.int(1, PALETTE.length - 1);
       if (kind === 'stroke') strokeLine(x0, y0, x1, y1, v);
       else if (kind === 'fill') floodFill(x0, y0, v);

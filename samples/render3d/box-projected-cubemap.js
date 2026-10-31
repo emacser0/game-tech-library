@@ -7,18 +7,18 @@ GTL.register({
   views: { a: '무한 거리 조회', b: '박스 투영 (시차 보정)' },
   controls: '마우스 드래그: 시선 회전. 카메라는 방 안을 자동으로 오감.',
   info: `
-    <p><b>반사 프로브(reflection probe)</b>는 한 지점에서 주변을 큐브맵으로 찍어 두고, 반사 방향으로 그 큐브맵을 읽는 방식.</p>
+    <p><b>반사 프로브(reflection probe)</b>는 한 지점에서 주변을 큐브맵으로 찍어 두고, 반사 방향으로 그 큐브맵을 읽는 방식</p>
     <p>큐브맵 조회는 방향만 씀. 그래서 반사하는 점의 위치와 상관없이 같은 방향이면 같은 색이 나옴. 하늘처럼 아주 먼 환경에서는 맞지만 방 안에서는 틀림:</p>
     <ul>
-      <li>카메라가 움직이면 바닥 반사가 벽과 따로 미끄러짐.</li>
-      <li>바닥과 벽이 만나는 선이 반사 속에서 이어지지 않음.</li>
+      <li>카메라가 움직이면 바닥 반사가 벽과 따로 미끄러짐</li>
+      <li>바닥과 벽이 만나는 선이 반사 속에서 이어지지 않음</li>
     </ul>
-    <p><b>박스 투영(box projection, parallax correction)</b>은 방을 상자로 근사해서 보정함:</p>
+    <p><b>박스 투영(box projection, parallax correction)</b>은 방을 상자로 근사해서 보정:</p>
     <ol>
-      <li>반사하는 점 P에서 반사 방향 R로 광선을 쏴서 프로브 박스와 만나는 점 H를 구함.</li>
-      <li>프로브 중심 C에서 H를 향하는 방향 <code>H - C</code>로 큐브맵을 읽음.</li>
+      <li>반사하는 점 P에서 반사 방향 R로 광선을 쏴서 프로브 박스와 만나는 점 H를 구함</li>
+      <li>프로브 중심 C에서 H를 향하는 방향 <code>H - C</code>로 큐브맵을 읽음</li>
     </ol>
-    <p>Unity는 Reflection Probe의 <b>Box Projection</b> 옵션, Unreal은 <b>Box Reflection Capture</b>가 이 방식임.</p>
+    <p>Unity는 Reflection Probe의 <b>Box Projection</b> 옵션, Unreal은 <b>Box Reflection Capture</b>가 이 방식임</p>
     <p>한계: 방이 상자 모양일 때만 정확함. 박스 크기가 실제 벽과 다르면 다시 어긋남. 큐브맵에 없는 물체(이 샘플의 구)는 반사에 안 나옴.</p>`,
   // 도식: 위에서 본 방. 반사 광선이 벽과 만나는 점 H, A와 B가 큐브맵을 읽는 방향
   diagram: (L) => `<svg viewBox="0 0 540 200" xmlns="http://www.w3.org/2000/svg">
@@ -56,9 +56,9 @@ GTL.register({
     'B에서 "박스 크기 배율"을 1에서 벗어나게 하면 B도 어긋남. 박스가 실제 벽과 맞아야 정확함.',
   ],
   refs: [
-    { type: 'engine', title: 'Unity Manual: Reflection Probes (Box Projection)', url: 'https://docs.unity3d.com/Manual/class-ReflectionProbe.html', note: 'Box Projection을 켜면 프로브 박스 기준으로 반사 방향을 보정함.' },
-    { type: 'engine', title: 'Unreal Engine: Reflections Captures', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/reflections-captures-in-unreal-engine', note: 'Sphere와 Box Reflection Capture. Box는 방 모양에 맞춰 시차를 보정함.' },
-    { type: 'article', title: 'Image-based Lighting approaches and parallax-corrected cubemap (Sebastien Lagarde)', year: 2012, note: '박스 투영 공식과 실제 게임 적용을 정리한 글.' },
+    { type: 'engine', title: 'Unity Manual: Reflection Probes (Box Projection)', url: 'https://docs.unity3d.com/Manual/class-ReflectionProbe.html', note: 'Box Projection을 켜면 프로브 박스 기준으로 반사 방향을 보정' },
+    { type: 'engine', title: 'Unreal Engine: Reflections Captures', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/reflections-captures-in-unreal-engine', note: 'Sphere와 Box Reflection Capture. Box는 방 모양에 맞춰 시차를 보정.' },
+    { type: 'article', title: 'Image-based Lighting approaches and parallax-corrected cubemap (Sebastien Lagarde)', year: 2012, note: '박스 투영 공식과 실제 게임 적용을 정리한 글' },
   ],
   params: [
     { key: 'method', label: '큐브맵 조회', type: 'select', group: '반사', options: [

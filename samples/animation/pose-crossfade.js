@@ -2,13 +2,13 @@
 GTL.register({
   id: 'pose-crossfade',
   title: '애니메이션 크로스페이드 블렌딩',
-  summary: '상태가 바뀔 때 새 클립으로 즉시 바꾸면 관절이 한 프레임에 순간 이동(pop)함. 크로스페이드(두 클립을 함께 재생하며 가중치를 옮김)와 걷기↔달리기 위상 동기화로 부드럽게 전환.',
+  summary: '상태가 바뀔 때 새 클립으로 즉시 바꾸면 관절이 한 프레임에 순간 이동(pop). 크로스페이드(두 클립을 함께 재생하며 가중치를 옮김)와 걷기↔달리기 위상 동기화로 부드럽게 전환.',
   views: { a: '즉시 전환', b: '크로스페이드 0.3초' },
   controls: '1 대기, 2 걷기, 3 달리기, 4 웅크리기 (두 뷰 공통). 키를 누르지 않으면 상태가 자동으로 바뀜.',
   info: `
     <p>애니메이션 상태 머신이 <code>Idle → Run</code>으로 바뀌면, 새 클립의 첫 프레임 자세는 이전 자세와 전혀 다름.
     <b>즉시 전환</b>하면 모든 관절이 한 프레임 안에 튐. 눈에 띄는 <b>팝(pop)</b>이 생김.</p>
-    <p><b>크로스페이드</b>는 전환 시간 동안 두 클립을 모두 평가함. 그리고 <code>pose = lerp(from, to, w)</code>로 섞음. 실제 엔진은 관절 회전을 쿼터니언 slerp나 nlerp로 섞음.</p>
+    <p><b>크로스페이드</b>는 전환 시간 동안 두 클립을 모두 평가. 그리고 <code>pose = lerp(from, to, w)</code>로 섞음. 실제 엔진은 관절 회전을 쿼터니언 slerp나 nlerp로 섞음.</p>
     <p>걷기↔달리기처럼 주기 동작끼리 섞을 때는 두 클립의 <b>정규화 위상</b>(주기 안에서의 진행률 0~1)을 맞춰야 함(<b>sync, 위상 동기화</b>).
     맞추지 않으면 왼발과 오른발이 엇갈림. 다리가 꼬이거나 무릎이 오그라듦.</p>
     <p><b>고정 포즈 블렌드(frozen)</b>는 이전 클립을 전환 순간의 자세로 멈춘 채 섞음. 클립 1개만 평가해 비용이 쌈.
@@ -42,16 +42,16 @@ GTL.register({
   </svg>`;
   },
   look: [
-    '아래 그래프(오른쪽 허벅지 각도)를 보면 A는 전환마다 수직으로 끊기고 B는 매끄럽게 이어짐.',
-    '"최대 관절 점프" 값을 비교하면 즉시 전환은 프레임당 수십 도, 크로스페이드는 프레임당 몇 도.',
-    'B의 "보행 위상 동기화"를 끄고 2(걷기)와 3(달리기)을 번갈아 누르면 섞이는 동안 다리가 엇갈려 허우적댐.',
+    '아래 그래프(오른쪽 허벅지 각도)를 보면 A는 전환마다 수직으로 끊기고 B는 매끄럽게 이어짐',
+    '"최대 관절 점프" 값을 비교하면 즉시 전환은 프레임당 수십 도, 크로스페이드는 프레임당 몇 도',
+    'B의 "보행 위상 동기화"를 끄고 2(걷기)와 3(달리기)을 번갈아 누르면 섞이는 동안 다리가 엇갈려 허우적댐',
     '전환 시간을 1초 이상으로 늘리면 반응이 둔해짐. 게임에서는 보통 0.1~0.3초.',
   ],
   refs: [
     { type: 'engine', title: 'Unity Manual - Animation transitions', url: 'https://docs.unity3d.com/Manual/class-Transition.html', note: 'Transition Duration, Exit Time, Interruption Source.' },
-    { type: 'engine', title: 'Unreal Engine - Animation Sync Groups', note: '길이가 다른 보행 클립의 위상을 맞춰 블렌드.' },
+    { type: 'engine', title: 'Unreal Engine - Animation Sync Groups', note: '길이가 다른 보행 클립의 위상을 맞춰 블렌드' },
     { type: 'talk', title: 'Inertialization: High-Performance Animation Transitions in Gears of War (David Bollo)', year: 2018, note: 'GDC 2018. 크로스페이드 대신 포즈 차이를 감쇠시키는 전환.' },
-    { type: 'book', title: 'Game Engine Architecture (Jason Gregory) - Animation Blending', note: 'LERP 블렌딩, 크로스페이드 종류(smooth, frozen), 위상 동기화.' },
+    { type: 'book', title: 'Game Engine Architecture (Jason Gregory) - Animation Blending', note: 'LERP 블렌딩, 크로스페이드 종류(smooth, frozen), 위상 동기화' },
   ],
   params: [
     { key: 'mode', label: '전환 방식', type: 'select', group: '전환', options: [

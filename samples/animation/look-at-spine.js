@@ -1,4 +1,4 @@
-// 룩앳(Look At): 머리만 회전 vs 척추, 목, 머리에 회전을 나눠 주고 각도와 속도를 제한.
+// 룩앳(Look At): 머리만 회전 vs 척추, 목, 머리에 회전을 나눠 주고 각도와 속도를 제한
 GTL.register({
   id: 'look-at-spine',
   title: '룩앳: 머리만 회전 vs 척추 분산 + 각도 제한',
@@ -7,11 +7,11 @@ GTL.register({
   controls: '마우스를 뷰 위에 올리면 목표가 마우스를 따라감. 마우스가 밖에 있으면 목표가 자동으로 캐릭터 주위를 돎.',
   info: `
     <p><b>룩앳(Look At)</b>은 재생 중인 애니메이션 위에 회전을 더해 캐릭터가 목표를 바라보게 하는 절차적 애니메이션. 총구 방향을 맞추는 <b>에임 오프셋(Aim Offset)</b>도 같은 문제를 다룸.</p>
-    <p>머리 관절만 돌리면 쉽지만 문제가 셋 있음.</p>
+    <p>머리 관절만 돌리면 쉽지만 문제가 셋 있음</p>
     <ul>
-      <li>목 한 곳에 회전이 몰려 꺾임이 보임.</li>
-      <li>목표가 뒤로 가면 회전이 180°를 넘어 반대쪽으로 뒤집힘.</li>
-      <li>목표가 순간 이동하면 머리도 한 프레임에 돌아감.</li>
+      <li>목 한 곳에 회전이 몰려 꺾임이 보임</li>
+      <li>목표가 뒤로 가면 회전이 180°를 넘어 반대쪽으로 뒤집힘</li>
+      <li>목표가 순간 이동하면 머리도 한 프레임에 돌아감</li>
     </ul>
     <p>해결: 회전을 척추, 가슴, 목, 머리에 가중치로 나눔(Unity <code>SetLookAtWeight</code>의 body, head 가중치와 같은 생각). 전체 각도를 제한하고, 회전 속도에 상한을 둠.</p>
     <p>단점: 가중치와 제한값은 캐릭터마다 손으로 맞춰야 함. 제한 밖의 목표를 어떻게 처리할지(멈춤, 정면 복귀)도 정해야 함.</p>`,
@@ -48,14 +48,14 @@ GTL.register({
   },
   look: [
     '목표가 캐릭터 뒤로 넘어갈 때 A의 머리가 한 프레임에 반대로 뒤집힘. "최대 머리 회전" 값이 360° 가까이 나옴. B는 제한 각도에서 멈춤.',
-    '"목 꺾임" 값을 비교하면 목표가 뒤에 있을 때 A는 150° 이상, B는 60° 아래에 머묾.',
-    'B의 "회전 분산"을 "머리만"으로 바꾸면 각도 제한이 있어도 목만 꺾여 부자연스러움.',
+    '"목 꺾임" 값을 비교하면 목표가 뒤에 있을 때 A는 150° 이상, B는 60° 아래에 머묾',
+    'B의 "회전 분산"을 "머리만"으로 바꾸면 각도 제한이 있어도 목만 꺾여 부자연스러움',
     'B의 "범위 밖이면 정면 복귀"를 켜면 뒤쪽 목표를 포기하고 정면을 봄. 경비병 AI처럼 보임.',
   ],
   refs: [
-    { type: 'engine', title: 'Unity Scripting API - Animator.SetLookAtWeight', url: 'https://docs.unity3d.com/ScriptReference/Animator.SetLookAtWeight.html', note: 'bodyWeight, headWeight, eyesWeight, clampWeight로 회전을 몸과 머리에 나눔.' },
-    { type: 'engine', title: 'Unreal Engine - Aim Offset', note: '조준 방향(yaw, pitch)에 따라 애디티브 포즈를 섞는 블렌드 스페이스.' },
-    { type: 'engine', title: 'Unreal Engine - Look At (Animation Blueprint node)', note: 'Look At Clamp로 최대 각도를 제한.' },
+    { type: 'engine', title: 'Unity Scripting API - Animator.SetLookAtWeight', url: 'https://docs.unity3d.com/ScriptReference/Animator.SetLookAtWeight.html', note: 'bodyWeight, headWeight, eyesWeight, clampWeight로 회전을 몸과 머리에 나눔' },
+    { type: 'engine', title: 'Unreal Engine - Aim Offset', note: '조준 방향(yaw, pitch)에 따라 애디티브 포즈를 섞는 블렌드 스페이스' },
+    { type: 'engine', title: 'Unreal Engine - Look At (Animation Blueprint node)', note: 'Look At Clamp로 최대 각도를 제한' },
   ],
   params: [
     { key: 'dist', label: '회전 분산', type: 'select', group: '룩앳', options: [

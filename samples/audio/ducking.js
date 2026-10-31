@@ -13,7 +13,7 @@ GTL.register({
       <li><b>감소량</b>: 보통 -6~-12dB. 너무 크면 음악이 끊기는 느낌.</li>
       <li><b>어택(Attack)</b>: 줄어드는 데 걸리는 시간. 짧으면 대사 첫 음절이 안 묻힘. 너무 짧으면 "펌핑"이 들림.</li>
       <li><b>릴리스(Release)</b>: 다시 올라오는 시간. 문장 사이 짧은 쉼마다 음악이 오르내리지 않게 길게 둠.</li>
-      <li><b>홀드(Hold)</b>: 대사가 끝난 뒤 바로 올리지 않고 기다리는 시간.</li>
+      <li><b>홀드(Hold)</b>: 대사가 끝난 뒤 바로 올리지 않고 기다리는 시간</li>
     </ul>
     <p>트리거는 두 가지. 대사 이벤트 시작과 끝으로 거는 방식(이 샘플)과, 대사 버스의 실제 레벨로 거는 사이드체인 컴프레서 방식.
     Wwise의 Auto-ducking, FMOD의 Sidechain + Compressor, Unity Audio Mixer의 Duck Volume이 대표적.</p>`,
@@ -39,15 +39,15 @@ GTL.register({
   </svg>`,
   look: [
     '아래 그래프의 빨간 구간은 대사가 음악보다 6dB 넘게 크지 않은 구간. A는 대사마다 빨간 구간이 길고, B는 거의 없음.',
-    'B의 어택을 600ms 이상으로 늘리면 대사 첫 부분에 다시 빨간 구간이 생김.',
-    'B의 릴리스를 50ms로 줄이고 홀드를 0으로 두면 문장 사이마다 음악 선이 출렁임 (펌핑).',
-    '"음악 레벨"을 -12dB로 낮추면 A도 대사가 들리지만, 대사 없는 구간의 음악도 같이 작아짐.',
+    'B의 어택을 600ms 이상으로 늘리면 대사 첫 부분에 다시 빨간 구간이 생김',
+    'B의 릴리스를 50ms로 줄이고 홀드를 0으로 두면 문장 사이마다 음악 선이 출렁임 (펌핑)',
+    '"음악 레벨"을 -12dB로 낮추면 A도 대사가 들리지만, 대사 없는 구간의 음악도 같이 작아짐',
   ],
   refs: [
-    { type: 'engine', title: 'Unity Manual - Audio Mixer, Duck Volume', url: 'https://docs.unity3d.com/Manual/AudioMixer.html', note: 'Send로 사이드체인을 연결하는 Duck Volume 이펙트.' },
+    { type: 'engine', title: 'Unity Manual - Audio Mixer, Duck Volume', url: 'https://docs.unity3d.com/Manual/AudioMixer.html', note: 'Send로 사이드체인을 연결하는 Duck Volume 이펙트' },
     { type: 'engine', title: 'Wwise - Auto-ducking (Bus Properties)', note: '버스 단위로 다른 버스를 지정한 dB만큼 낮춤. Fade out, Fade in, Recovery time 설정.' },
-    { type: 'engine', title: 'MDN - AudioParam.setTargetAtTime', url: 'https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/setTargetAtTime', note: '게인 변화를 부드럽게 넣는 방법.' },
-    { type: 'book', title: 'Game Audio Programming: Principles and Practices (Guy Somberg 편)', year: 2016, note: '믹싱, 버스, 덕킹 같은 런타임 믹스 기법.' },
+    { type: 'engine', title: 'MDN - AudioParam.setTargetAtTime', url: 'https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/setTargetAtTime', note: '게인 변화를 부드럽게 넣는 방법' },
+    { type: 'book', title: 'Game Audio Programming: Principles and Practices (Guy Somberg 편)', year: 2016, note: '믹싱, 버스, 덕킹 같은 런타임 믹스 기법' },
   ],
   params: [
     { key: 'duck', label: '덕킹', type: 'bool', a: false, b: true, group: '덕킹' },

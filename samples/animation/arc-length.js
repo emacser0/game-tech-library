@@ -7,13 +7,13 @@ GTL.register({
   controls: '드래그: Bézier 제어점 이동',
   info: `
     <p>매개 곡선 <code>B(t)</code>의 <code>t</code>는 길이가 아닌 매개변수. 제어점이 한쪽에 몰리면 그쪽은 <code>|B'(t)|</code>가 작아져 <b>느려짐</b>. 먼 쪽은 <b>빨라짐</b>.</p>
-    <p>레일 위 카메라, 탄환 궤적, 기차, 컨베이어처럼 일정한 속도가 필요한 곳에서 문제가 됨.</p>
+    <p>레일 위 카메라, 탄환 궤적, 기차, 컨베이어처럼 일정한 속도가 필요한 곳에서 문제가 됨</p>
     <p>해결 방법(호 길이 재매개화):</p>
     <ul>
-      <li>곡선을 N개로 샘플링해 <b>누적 길이 테이블</b> <code>L[i] = s(t<sub>i</sub>)</code>를 만듦.</li>
-      <li>이동 거리 <code>d = speed * time</code>을 구함.</li>
-      <li>이진 탐색으로 <code>L[i] ≤ d &lt; L[i+1]</code>인 구간을 찾음.</li>
-      <li>구간 안에서 선형 보간해 <code>t</code>를 얻음.</li>
+      <li>곡선을 N개로 샘플링해 <b>누적 길이 테이블</b> <code>L[i] = s(t<sub>i</sub>)</code>를 만듦</li>
+      <li>이동 거리 <code>d = speed * time</code>을 구함</li>
+      <li>이진 탐색으로 <code>L[i] ≤ d &lt; L[i+1]</code>인 구간을 찾음</li>
+      <li>구간 안에서 선형 보간해 <code>t</code>를 얻음</li>
     </ul>
     <p>단점: LUT가 거칠면 구간 안에서 속도 오차가 조금 남음. 더 정밀하게 하려면 Gauss-Legendre 적분과 Newton 반복을 씀.</p>
     <p>흰 점열은 <b>같은 시간 간격</b>마다 오브젝트가 있던 위치. 간격이 일정하면 등속.</p>`,
@@ -44,15 +44,15 @@ GTL.register({
   },
   look: [
     'A의 흰 점열을 보면 제어점이 몰린 시작 부분은 촘촘하고 중간은 넓음. B는 모든 구간의 간격이 같음.',
-    '아래 속도 그래프를 보면 A는 목표 속도(1.0)의 몇 배까지 출렁이고 B는 평평함.',
+    '아래 속도 그래프를 보면 A는 목표 속도(1.0)의 몇 배까지 출렁이고 B는 평평함',
     'B에서 LUT 샘플 수를 3~5로 줄이면 구간마다 속도가 계단처럼 변함. 샘플 수와 정확도는 서로 맞바꾸는 관계.',
-    '제어점 P1을 P0 위에 겹치면 A는 출발 직후 거의 멈춤.',
+    '제어점 P1을 P0 위에 겹치면 A는 출발 직후 거의 멈춤',
   ],
   refs: [
     { type: 'paper', title: 'Computing the Arc Length of Parametric Curves (Guenter & Parent)', year: 1990, note: 'IEEE Computer Graphics and Applications 10(3). 적응적 적분과 테이블로 호 길이 매개화.' },
     { type: 'talk', title: 'The Beauty of Bézier Curves (Freya Holmér)', year: 2021, note: 'YouTube. 후반부에 LUT를 이용한 등속 이동 설명.' },
-    { type: 'book', title: 'Computer Animation: Algorithms and Techniques (Rick Parent)', note: '보간 기반 애니메이션 장에서 호 길이 매개화와 속도 곡선(ease) 제어를 다룸.' },
-    { type: 'engine', title: 'Unity Splines - SplineUtility.GetPointAtLinearDistance', url: 'https://docs.unity3d.com/Packages/com.unity.splines@latest', note: '엔진 스플라인 API의 거리 기반 평가.' },
+    { type: 'book', title: 'Computer Animation: Algorithms and Techniques (Rick Parent)', note: '보간 기반 애니메이션 장에서 호 길이 매개화와 속도 곡선(ease) 제어를 다룸' },
+    { type: 'engine', title: 'Unity Splines - SplineUtility.GetPointAtLinearDistance', url: 'https://docs.unity3d.com/Packages/com.unity.splines@latest', note: '엔진 스플라인 API의 거리 기반 평가' },
   ],
   params: [
     { key: 'method', label: '진행 방식', type: 'select', group: '매개화', options: [

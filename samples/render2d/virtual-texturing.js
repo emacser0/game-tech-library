@@ -2,7 +2,7 @@
 GTL.register({
   id: 'virtual-texturing',
   title: '가상 텍스처링 (Unreal Runtime Virtual Texture, 스트리밍 VT)',
-  summary: '16384x16384 크기의 절차적 텍스처 위를 카메라가 이동함. A는 낮은 해상도 하나를 통째로 올려서 확대하면 흐림. B는 화면에 보이는 타일만 필요한 mip으로 만들어 작은 캐시에 넣고, 없는 타일은 더 거친 mip으로 대신 그림.',
+  summary: '16384x16384 크기의 절차적 텍스처 위를 카메라가 이동. A는 낮은 해상도 하나를 통째로 올려서 확대하면 흐림. B는 화면에 보이는 타일만 필요한 mip으로 만들어 작은 캐시에 넣고, 없는 타일은 더 거친 mip으로 대신 그림.',
   views: { a: '고정 해상도 전체 로드', b: '가상 텍스처링 (타일 캐시)' },
   controls: '드래그로 이동, 휠로 확대와 축소. 조작하면 자동 카메라가 멈춤.',
   info: `
@@ -10,13 +10,13 @@ GTL.register({
     <p>16384x16384 RGBA 텍스처는 mip 체인까지 약 1.3GB. 통째로 올릴 수 없어서 낮은 해상도 하나만 쓰면 확대했을 때 흐림.</p>
     <p>동작 원리:</p>
     <ul>
-      <li><b>피드백 패스</b>: 저해상도로 화면을 훑어 픽셀마다 필요한 (mip, 타일 x, 타일 y)를 기록함.</li>
+      <li><b>피드백 패스</b>: 저해상도로 화면을 훑어 픽셀마다 필요한 (mip, 타일 x, 타일 y)를 기록</li>
       <li><b>페이지 테이블</b>: mip별 표. 가상 타일 주소를 물리 캐시의 슬롯 번호로 바꿈.</li>
       <li><b>물리 캐시</b>: 크기가 고정된 타일 아틀라스. 가득 차면 가장 오래 안 쓴 타일(LRU)을 내보냄.</li>
-      <li><b>업로드 예산</b>: 프레임마다 만들 수 있는 타일 수를 제한함. 끊김(hitch)을 막음.</li>
-      <li><b>mip 폴백</b>: 아직 없는 타일은 캐시에 있는 부모 타일(더 거친 mip)의 일부를 확대해 그림.</li>
+      <li><b>업로드 예산</b>: 프레임마다 만들 수 있는 타일 수를 제한. 끊김(hitch)을 막음.</li>
+      <li><b>mip 폴백</b>: 아직 없는 타일은 캐시에 있는 부모 타일(더 거친 mip)의 일부를 확대해 그림</li>
     </ul>
-    <p>단점: 페이지 테이블 조회만큼 샘플링 비용이 늘어남. 카메라가 빠르게 움직이면 잠시 흐린 타일이 보임(팝인). 타일 경계에 필터링 이음매가 생기지 않게 테두리(border) 텍셀이 필요함.</p>`,
+    <p>단점: 페이지 테이블 조회만큼 샘플링 비용이 늘어남. 카메라가 빠르게 움직이면 잠시 흐린 타일이 보임(팝인). 타일 경계에 필터링 이음매가 생기지 않게 테두리(border) 텍셀 필요.</p>`,
   diagram: [
     (L) => `<svg viewBox="0 0 540 186" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arr" class="m-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -61,17 +61,17 @@ GTL.register({
     <text x="436" y="60" class="t-small t-dim">${L('한 변 1/4 부분을', 'Take a 1/4 part')}</text>
     <text x="436" y="74" class="t-small t-dim">${L('4배로 확대해', 'and draw it 4x')}</text>
     <text x="436" y="88" class="t-small t-dim">${L('흐리게 그림', 'larger (blurry)')}</text>
-    <text x="4" y="146" class="t-small t-dim">${L('동시에 mip 1, 0 순서로 로드를 요청함. 다음 프레임부터 점점 선명해짐', 'Meanwhile it requests mip 1, then mip 0. The tile gets sharper over the next frames')}</text>
+    <text x="4" y="146" class="t-small t-dim">${L('동시에 mip 1, 0 순서로 로드 요청. 다음 프레임부터 점점 선명해짐', 'Meanwhile it requests mip 1, then mip 0. The tile gets sharper over the next frames')}</text>
   </svg>`,
   ],
   look: [
     '처음 화면에서 A는 확대된 텍스처가 크게 흐림. B는 잠깐 흐렸다가 몇 프레임 안에 선명해짐(빨간 테두리 = 폴백 타일).',
     'B의 "프레임당 업로드"를 1로 낮추면 폴백 타일이 오래 남음. 12로 올리면 빨리 선명해지지만 "생성 시간"이 늘어남.',
     'B의 "캐시 크기"를 128로 낮추고 "mip 바이어스"를 -1로 내리면 보이는 타일이 캐시보다 많아짐. "캐시 부족"이 생기고 일부 타일이 계속 흐림.',
-    'A의 "고정 mip"을 4에서 낮출수록 메모리가 4배씩 늘어남. 그래도 최대로 확대하면 여전히 흐림. "선명한 전체 로드" 값과 비교함.',
+    'A의 "고정 mip"을 4에서 낮출수록 메모리가 4배씩 늘어남. 그래도 최대로 확대하면 여전히 흐림. "선명한 전체 로드" 값과 비교.',
   ],
   refs: [
-    { type: 'engine', title: 'Unreal Engine: Virtual Texturing (Streaming Virtual Texturing, Runtime Virtual Texturing)', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/virtual-texturing-in-unreal-engine', note: 'SVT는 디스크에서 타일을 스트리밍, RVT는 머티리얼로 타일을 실행 중에 생성함.' },
+    { type: 'engine', title: 'Unreal Engine: Virtual Texturing (Streaming Virtual Texturing, Runtime Virtual Texturing)', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/virtual-texturing-in-unreal-engine', note: 'SVT는 디스크에서 타일을 스트리밍, RVT는 머티리얼로 타일을 실행 중에 생성' },
     { type: 'talk', title: 'Sparse Virtual Textures (Sean Barrett)', year: 2008, note: 'GDC 2008. 피드백, 페이지 테이블, 물리 캐시 구조를 처음 널리 알린 발표.' },
     { type: 'article', title: 'Software Virtual Textures (J.M.P. van Waveren, id Software)', year: 2012, note: 'Rage의 MegaTexture 구현. 피드백 버퍼, 페이지 테이블 갱신, 타일 테두리 처리.' },
     { type: 'talk', title: 'Adaptive Virtual Texture Rendering in Far Cry 4 (Ka Chen)', year: 2015, note: 'GDC 2015. 지형 텍스처를 실행 중에 합성해 가상 텍스처에 넣음. RVT와 같은 생각.' },
@@ -88,7 +88,7 @@ GTL.register({
       { value: 512, label: '512 (8MB)' },
     ], default: 256, reset: true, when: (p) => p.method === 'vt' },
     { key: 'budget', label: '프레임당 업로드 (타일)', type: 'int', min: 1, max: 12, default: 4, when: (p) => p.method === 'vt', help: '프레임마다 새로 만들어 캐시에 넣을 수 있는 타일 수' },
-    { key: 'bias', label: 'mip 바이어스', type: 'range', min: -1, max: 2, step: 0.25, default: 0, when: (p) => p.method === 'vt', help: '음수면 더 고해상도 mip을 요청함. 타일 수가 늘어남' },
+    { key: 'bias', label: 'mip 바이어스', type: 'range', min: -1, max: 2, step: 0.25, default: 0, when: (p) => p.method === 'vt', help: '음수면 더 고해상도 mip 요청. 타일 수가 늘어남' },
     { key: 'autoCam', label: '자동 카메라', type: 'bool', default: true, shared: true, group: '카메라와 표시' },
     { key: 'camSpeed', label: '카메라 속도', type: 'range', min: 0.2, max: 3, step: 0.1, default: 1, shared: true },
     { key: 'showTiles', label: '타일 경계 표시', type: 'bool', default: true, shared: true, help: '빨간 테두리는 폴백(더 거친 mip으로 대신 그린) 타일' },
@@ -240,7 +240,7 @@ GTL.register({
       const slots = [];
       for (let i = 0; i < cap; i++) slots.push({ mip: -1, tx: 0, ty: 0, used: -1, pinned: false });
       vt = { cap, cols, atlas, ag, tileImg, table, slots, frame: 0, evictions: 0, uploads: 0, genMs: 0, queue: 0, full: 0, requested: 0, samples: 0 };
-      // 가장 거친 두 단계(mip 8, 7)는 항상 상주: 폴백이 반드시 성공함
+      // 가장 거친 두 단계(mip 8, 7)는 항상 상주: 폴백이 반드시 성공
       for (let m = MAXMIP; m >= MAXMIP - 1; m--) {
         const n = 1 << (MAXMIP - m);
         for (let ty = 0; ty < n; ty++) for (let tx = 0; tx < n; tx++) { const s = loadTile(m, tx, ty); if (s >= 0) vt.slots[s].pinned = true; }

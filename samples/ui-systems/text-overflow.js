@@ -14,9 +14,9 @@ GTL.register({
       <li><b>말줄임</b>: 넘치는 부분을 "…"로 자름. 간단하지만 뜻이 사라질 수 있음.</li>
       <li><b>줄바꿈</b>: 단어 단위로 줄을 나눔. 단어 하나가 너무 길면 글자 단위로 나눔.</li>
       <li><b>자동 축소</b>(auto size, best fit): 줄바꿈한 결과가 상자에 들어갈 때까지 글자 크기를 줄임. 이분 탐색으로 가장 큰 크기를 찾음.</li>
-      <li><b>의사 지역화</b>(pseudo-localization): 번역 전에 글자를 악센트 문자로 바꾸고 길이를 약 40% 늘린 가짜 문자열로 미리 검사함.</li>
+      <li><b>의사 지역화</b>(pseudo-localization): 번역 전에 글자를 악센트 문자로 바꾸고 길이를 약 40% 늘린 가짜 문자열로 미리 검사</li>
     </ul>
-    <p>단점: 자동 축소는 글자 크기 측정(<code>measureText</code>)을 여러 번 호출함. 문자열이나 상자 크기가 바뀔 때만 다시 계산하고 결과를 저장해 둬야 함. 너무 작아진 글자는 읽기 어려우므로 최소 크기를 정해 둠.</p>`,
+    <p>단점: 자동 축소는 글자 크기 측정(<code>measureText</code>)을 여러 번 호출. 문자열이나 상자 크기가 바뀔 때만 다시 계산하고 결과를 저장해 둬야 함. 너무 작아진 글자는 읽기 어려우므로 최소 크기를 정해 둠.</p>`,
   // 도식: 한 줄 고정 크기(넘침) vs 줄바꿈 + 자동 축소, 아래는 자동 축소 계산 순서
   diagram: (L) => `<svg viewBox="0 0 540 196" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arr" class="m-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -50,14 +50,14 @@ GTL.register({
   look: [
     '처음 화면(독일어)에서 A의 "Speichern und beenden", "Sprachchat-Einstellungen"이 버튼 밖으로 넘침(빨간 테두리). B는 줄을 나누거나 글자를 줄여서 안에 들어감.',
     '자동 순환을 끄고 언어를 "의사 지역화"로 고르면 A에서 넘치는 버튼 수가 가장 많음. 번역 전에 넘침을 찾는 용도.',
-    'B의 "최소 글자 크기"를 16으로 올리면 축소할 수 없어서 마지막 줄이 말줄임으로 잘림.',
+    'B의 "최소 글자 크기"를 16으로 올리면 축소할 수 없어서 마지막 줄이 말줄임으로 잘림',
     '버튼 너비를 260으로 늘리면 A의 넘침이 줄어듦. 대신 한국어에서는 버튼이 텅 빈 것처럼 보임.',
   ],
   refs: [
-    { type: 'article', title: 'W3C Internationalization - Text size in translation', url: 'https://www.w3.org/International/articles/article-text-size.en', note: '원문 길이별 번역 후 길이 증가 비율.' },
+    { type: 'article', title: 'W3C Internationalization - Text size in translation', url: 'https://www.w3.org/International/articles/article-text-size.en', note: '원문 길이별 번역 후 길이 증가 비율' },
     { type: 'engine', title: 'Godot - Label (autowrap_mode, text_overrun_behavior)', url: 'https://docs.godotengine.org/en/stable/classes/class_label.html' },
-    { type: 'engine', title: 'TextMeshPro - Auto Size 옵션', note: 'Unity TextMeshPro 컴포넌트의 최소, 최대 글자 크기 사이 자동 맞춤.' },
-    { type: 'article', title: 'MDN - text-overflow', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow', note: '웹 CSS의 말줄임 처리.' },
+    { type: 'engine', title: 'TextMeshPro - Auto Size 옵션', note: 'Unity TextMeshPro 컴포넌트의 최소, 최대 글자 크기 사이 자동 맞춤' },
+    { type: 'article', title: 'MDN - text-overflow', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow', note: '웹 CSS의 말줄임 처리' },
   ],
   params: [
     { key: 'lang', label: '언어', type: 'select', group: '장면', shared: true, options: [

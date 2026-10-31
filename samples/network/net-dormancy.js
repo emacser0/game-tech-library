@@ -28,18 +28,18 @@
     views: { a: '모두 깨어 있음, 매 틱 검사', b: '휴면 + 적응형 빈도' },
     controls: '조작 없음. "문 5개 열기" 버튼으로 휴면 중인 문을 깨울 수 있음.',
     info: `
-      <p><b>넷 휴면(Net Dormancy)</b>: 한동안 바뀌지 않을 액터를 복제 검사 대상에서 빼는 Unreal의 기능.</p>
-      <p>왜 필요한가: 서버는 넷 틱마다 복제 대상 액터의 속성을 지난번 보낸 값(섀도 상태)과 비교함.
-      바뀐 것이 없어도 비교 비용은 듦. 맵에 문, 아이템, 장식 액터가 수천 개면 이 비교가 서버 CPU를 크게 차지함.</p>
+      <p><b>넷 휴면(Net Dormancy)</b>: 한동안 바뀌지 않을 액터를 복제 검사 대상에서 빼는 Unreal의 기능</p>
+      <p>왜 필요한가: 서버는 넷 틱마다 복제 대상 액터의 속성을 지난번 보낸 값(섀도 상태)과 비교.
+      바뀐 것이 없어도 비교 비용은 듦. 맵에 문, 아이템, 장식 액터가 수천 개면 이 비교가 서버 CPU를 크게 차지.</p>
       <ul>
-        <li><code>DORM_Awake</code>: 기본값. 매번 검사함.</li>
+        <li><code>DORM_Awake</code>: 기본값. 매번 검사.</li>
         <li><code>DORM_DormantAll</code>: 휴면. 액터 채널을 닫고 검사하지 않음.</li>
-        <li><code>FlushNetDormancy()</code>: 휴면 중인 액터의 값을 바꿀 때 호출함. 액터가 깨어나 바뀐 값을 보내고, 다시 휴면으로 돌아갈 수 있음.</li>
+        <li><code>FlushNetDormancy()</code>: 휴면 중인 액터의 값을 바꿀 때 호출. 액터가 깨어나 바뀐 값을 보내고, 다시 휴면으로 돌아갈 수 있음.</li>
         <li><code>NetUpdateFrequency</code>: 액터를 초당 몇 번 검사할지 정함. 깃발 점령률처럼 계속 바뀌지만 급하지 않은 값은 낮게 둠.</li>
-        <li><b>적응형 업데이트 빈도</b>: 바뀐 것이 없으면 검사 간격을 <code>MinNetUpdateFrequency</code>까지 늘리고, 바뀌면 다시 높임.</li>
+        <li><b>적응형 업데이트 빈도</b>: 바뀐 것이 없으면 검사 간격을 <code>MinNetUpdateFrequency</code>까지 늘리고, 바뀌면 다시 높임</li>
       </ul>
       <p>단점: 휴면 중에 값을 바꾸고 Flush를 빼먹으면 클라이언트에 반영되지 않음(흔한 버그). 적응형 빈도는 드문 변경을 최대 <code>1 / 최소 빈도</code>초 늦게 보냄.</p>
-      <p>이 샘플의 비교 수와 바이트는 액터 종류별로 정한 단순화한 값.</p>`,
+      <p>이 샘플의 비교 수와 바이트는 액터 종류별로 정한 단순화한 값</p>`,
     diagram: (L) => `<svg viewBox="0 0 540 200" xmlns="http://www.w3.org/2000/svg">
       <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
       <marker id="arrB" class="m-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
@@ -72,16 +72,16 @@
       <text x="4" y="194" class="t-small t-dim">${L('휴면 액터는 채널이 닫혀 비교 비용이 0. 깨울 때만 채널 열기 비용이 듦', 'A dormant actor has a closed channel and costs no compares. Waking it costs one channel open')}</text>
     </svg>`,
     look: [
-      '"속성 비교 / 틱"을 비교하면 A는 모든 액터를 매번 검사함. B는 움직이는 액터와 깨어난 액터만 검사해서 몇 분의 일로 줄어듦.',
-      '"문 5개 열기"를 누르면 B의 문이 노란 테두리(Flush)로 깨어나 값을 보내고, 1초 뒤 다시 회색(휴면)으로 돌아감.',
+      '"속성 비교 / 틱"을 비교하면 A는 모든 액터를 매번 검사. B는 움직이는 액터와 깨어난 액터만 검사해서 몇 분의 일로 줄어듦.',
+      '"문 5개 열기"를 누르면 B의 문이 노란 테두리(Flush)로 깨어나 값을 보내고, 1초 뒤 다시 회색(휴면)으로 돌아감',
       'B에서 "변경 시 Flush 호출"을 끄고 문을 열면 빨간 테두리가 남음. 서버 값이 바뀌었지만 클라이언트에 영영 가지 않음.',
-      'B의 MinNetUpdateFrequency를 0.5로 낮추면 비교 수는 더 줄지만 "평균 반영 지연"이 늘어남.',
-      '"NetUpdateFrequency"를 A처럼 "모두 틱마다"로 두면 깃발(점령률) 액터가 매 틱 전송되어 대역폭이 늘어남.',
+      'B의 MinNetUpdateFrequency를 0.5로 낮추면 비교 수는 더 줄지만 "평균 반영 지연"이 늘어남',
+      '"NetUpdateFrequency"를 A처럼 "모두 틱마다"로 두면 깃발(점령률) 액터가 매 틱 전송되어 대역폭이 늘어남',
     ],
     refs: [
-      { type: 'engine', title: 'Unreal Engine - Actor Network Dormancy', note: 'DORM_Awake, DORM_DormantAll, FlushNetDormancy 설명. 휴면 중 값 변경 시 Flush가 필요함.' },
-      { type: 'engine', title: 'Unreal Engine - Detailed Actor Replication Flow', note: '액터마다 NetUpdateFrequency로 검사 시점을 정하고, 속성을 비교해 바뀐 것만 보내는 흐름.' },
-      { type: 'engine', title: 'Unreal Engine - AActor::NetUpdateFrequency, MinNetUpdateFrequency', note: '적응형 업데이트 빈도(net.UseAdaptiveNetUpdateFrequency)가 두 값 사이에서 빈도를 조절함.' },
+      { type: 'engine', title: 'Unreal Engine - Actor Network Dormancy', note: 'DORM_Awake, DORM_DormantAll, FlushNetDormancy 설명. 휴면 중 값 변경 시 Flush 필요.' },
+      { type: 'engine', title: 'Unreal Engine - Detailed Actor Replication Flow', note: '액터마다 NetUpdateFrequency로 검사 시점을 정하고, 속성을 비교해 바뀐 것만 보내는 흐름' },
+      { type: 'engine', title: 'Unreal Engine - AActor::NetUpdateFrequency, MinNetUpdateFrequency', note: '적응형 업데이트 빈도(net.UseAdaptiveNetUpdateFrequency)가 두 값 사이에서 빈도 조절' },
       { type: 'article', title: 'Network Compendium (Cedric Neukirchen)', note: 'Unreal 네트워크 입문 문서. 복제, 관련성, 우선순위 정리.' },
     ],
     params: [

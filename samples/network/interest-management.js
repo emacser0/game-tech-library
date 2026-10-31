@@ -118,13 +118,13 @@
   GTL.register({
     id: 'interest-management',
     title: '관심 영역 관리 (AOI)',
-    summary: '모든 클라이언트에게 월드 전체를 보내면 대역폭이 (엔티티 수 × 접속자 수)로 폭증함. 각 클라이언트 주변(관심 영역)의 엔티티만 보내면 대역폭이 크게 줄어듦. 경계 떨림은 히스테리시스로 막음.',
+    summary: '모든 클라이언트에게 월드 전체를 보내면 대역폭이 (엔티티 수 × 접속자 수)로 폭증. 각 클라이언트 주변(관심 영역)의 엔티티만 보내면 대역폭이 크게 줄어듦. 경계 떨림은 히스테리시스로 막음.',
     views: { a: '전체 브로드캐스트', b: '반경 AOI + 히스테리시스' },
     controls: '←↑→↓ / WASD: 클라이언트 #0 (주황/하늘색) 이동',
     info: `
-      <p><b>관심 영역 관리(AOI, Area of Interest)</b>: 서버가 클라이언트마다 주변 엔티티만 골라 보내는 기법.</p>
-      <p>왜 필요한가: MMO나 배틀로얄처럼 넓은 월드에서는 플레이어가 볼 수 없는 먼 엔티티까지 보낼 이유가 없음.</p>
-      <p>서버는 클라이언트마다 <b>관련성(relevancy)</b>을 판정해 관심 영역 안의 엔티티만 복제함.
+      <p><b>관심 영역 관리(AOI, Area of Interest)</b>: 서버가 클라이언트마다 주변 엔티티만 골라 보내는 기법</p>
+      <p>왜 필요한가: MMO나 배틀로얄처럼 넓은 월드에서는 플레이어가 볼 수 없는 먼 엔티티까지 보낼 이유 없음</p>
+      <p>서버는 클라이언트마다 <b>관련성(relevancy)</b>을 판정해 관심 영역 안의 엔티티만 복제.
       엔티티가 영역에 들어오면 생성(spawn) 메시지를, 나가면 삭제 메시지를 보냄. 판정 방식:</p>
       <ul>
         <li><b>반경</b>: 플레이어와의 거리 &lt; R. Unreal의 <code>NetCullDistanceSquared</code>와 같은 발상.</li>
@@ -157,13 +157,13 @@
     },
     look: [
       '대역폭 패널을 비교하면, A는 모든 클라이언트가 엔티티 전부를 받음. B는 각자 주변만 받아 수 배 작음.',
-      'B의 AOI 반경을 100으로 줄이면 클라이언트 화면(카메라 사각형) 안에 점선(아직 모르는 엔티티)이 생기고, 엔티티가 갑자기 나타남.',
+      'B의 AOI 반경을 100으로 줄이면 클라이언트 화면(카메라 사각형) 안에 점선(아직 모르는 엔티티)이 생기고, 엔티티가 갑자기 나타남',
       '히스테리시스를 끄면 "진입/이탈 이벤트"가 늘어남. 경계에 걸친 엔티티가 계속 생성, 삭제됨.',
       'AOI 방식을 "격자"로 바꾸면 서버 맵에 칸이 보임. 거리 검사 대상이 전체 엔티티에서 주변 칸 엔티티로 줄어듦.',
     ],
     refs: [
       { type: 'engine', title: 'Unreal Engine - Actor Relevancy and Priority', note: 'Unreal 네트워킹 문서. NetCullDistanceSquared, bAlwaysRelevant, 우선순위.' },
-      { type: 'engine', title: 'Unreal Engine - Replication Graph', note: '공간 격자 노드로 대규모 접속자 관련성 판정 (Fortnite).' },
+      { type: 'engine', title: 'Unreal Engine - Replication Graph', note: '공간 격자 노드로 대규모 접속자 관련성 판정 (Fortnite)' },
       { type: 'talk', title: 'The TRIBES Engine Networking Model', year: 2000, note: 'Mark Frohnmayer & Tim Gift, GDC 2000. Ghost 관리와 범위(scoping).' },
       { type: 'book', title: 'Networked Virtual Environments: Design and Implementation', year: 1999, note: 'Sandeep Singhal & Michael Zyda. 관심 영역 관리와 공간 분할.' },
       { type: 'article', title: 'State Synchronization', url: 'https://gafferongames.com/post/state_synchronization/', note: 'Glenn Fiedler. 우선순위 누적기(priority accumulator)로 대역폭 예산 분배.' },

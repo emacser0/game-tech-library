@@ -4,7 +4,7 @@ GTL.register({
   title: 'HZB 오클루전 컬링: 깊이 밉 피라미드 (Unreal HZB)',
   summary: '프러스텀 컬링만 쓰면 건물 뒤에 가려진 오브젝트도 그림. 깊이 버퍼의 max 밉 피라미드(HZB)로 텍셀 1~2개만 읽어 가려진 오브젝트를 보수적으로 걸러냄.',
   views: { a: '프러스텀 컬링만', b: '프러스텀 + HZB' },
-  controls: '마우스를 오브젝트 근처에 올리면 그 오브젝트의 HZB 검사(읽은 텍셀, 가까운 깊이)를 아래 피라미드에 표시함.',
+  controls: '마우스를 오브젝트 근처에 올리면 그 오브젝트의 HZB 검사(읽은 텍셀, 가까운 깊이)를 아래 피라미드에 표시',
   info: `
     <p><b>오클루전 컬링</b>은 다른 물체에 가려 보이지 않는 오브젝트를 그리기 전에 빼는 기법. <b>HZB</b>(Hierarchical Z-Buffer)는 깊이 버퍼로 이를 빠르게 판정하는 방식.</p>
     <p>프러스텀 컬링은 화면 밖만 걸러냄. 도시처럼 건물이 많은 장면에서는 화면 안이어도 대부분 가려져 있음. 이 오브젝트를 그리면 GPU 비용만 듦.</p>
@@ -15,7 +15,7 @@ GTL.register({
       <li>오브젝트 범위가 텍셀 2개 안에 들어가는 레벨을 고름. 그 텍셀의 max 깊이보다 오브젝트의 가장 가까운 점이 멀면 확실히 가려짐.</li>
     </ul>
     <p>max를 쓰기 때문에 판정이 <b>보수적</b>임. 가려진 것을 그릴 수는 있어도, 보이는 것을 빼지는 않음.</p>
-    <p>Unreal은 이전 프레임 깊이로 HZB를 만들어 검사함. 그래서 카메라가 빠르게 돌면 한 프레임 늦게 나타나는 문제가 생길 수 있음. Unity의 기본 오클루전 컬링은 미리 구운(bake) 가시성 데이터를 씀.</p>`,
+    <p>Unreal은 이전 프레임 깊이로 HZB를 만들어 검사. 그래서 카메라가 빠르게 돌면 한 프레임 늦게 나타나는 문제가 생길 수 있음. Unity의 기본 오클루전 컬링은 미리 구운(bake) 가시성 데이터를 씀.</p>`,
   // 도식: 깊이 버퍼 8열, max 피라미드, 오브젝트 하나의 보수적 검사
   diagram: (L) => {
     const d0 = [40, 44, 30, 34, 90, 95, 38, 36];
@@ -47,14 +47,14 @@ GTL.register({
   </svg>`;
   },
   look: [
-    '기본 상태에서 "그린 오브젝트" 수를 비교함. B가 A보다 훨씬 적음. 건물 뒤의 빨간 테두리 오브젝트가 HZB로 빠진 것.',
+    '기본 상태에서 "그린 오브젝트" 수 비교. B가 A보다 훨씬 적음. 건물 뒤의 빨간 테두리 오브젝트가 HZB로 빠진 것.',
     '아래 피라미드를 봄. 위 레벨로 갈수록 텍셀 수가 반씩 줄고 값은 먼 쪽(max)을 따름. 건물 사이 틈이 있으면 그 칸은 멀게 나옴.',
     'B에서 "밉 바이어스"를 올리면 더 거친 레벨을 읽음. 텍셀은 덜 읽지만 틈의 먼 깊이가 섞여 빠지는 오브젝트가 줄어듦.',
-    '"깊이 버퍼 해상도"를 낮추면 열이 넓어져 판정이 더 보수적이 됨.',
+    '"깊이 버퍼 해상도"를 낮추면 열이 넓어져 판정이 더 보수적이 됨',
   ],
   refs: [
     { type: 'paper', title: 'Hierarchical Z-Buffer Visibility', year: 1993, note: 'Greene, Kass, Miller. SIGGRAPH 1993. Z 피라미드로 가시성을 판정하는 원조 논문.' },
-    { type: 'engine', title: 'Unreal Engine - Visibility and Occlusion Culling', note: 'Hardware Occlusion Queries와 HZB Occlusion 설정, r.HZBOcclusion.' },
+    { type: 'engine', title: 'Unreal Engine - Visibility and Occlusion Culling', note: 'Hardware Occlusion Queries와 HZB Occlusion 설정, r.HZBOcclusion' },
     { type: 'engine', title: 'Unity Manual - Occlusion culling', url: 'https://docs.unity3d.com/Manual/OcclusionCulling.html', note: '미리 구운 가시성 데이터를 쓰는 방식. HZB와 목적은 같고 방법이 다름.' },
     { type: 'article', title: 'Hierarchical-Z map based occlusion culling', year: 2010, note: 'Daniel Rakos (RasterGrid 블로그). GPU에서 HZB 컬링을 구현하는 과정.' },
   ],

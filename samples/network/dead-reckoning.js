@@ -118,7 +118,7 @@
   GTL.register({
     id: 'dead-reckoning',
     title: '데드 레커닝 / 외삽 (Dead Reckoning)',
-    summary: '보간은 정확하지만 항상 과거를 보여줌. 외삽(데드 레커닝)은 마지막 위치와 속도로 "지금"을 추측해 지연이 없음. 대신 급회전 때 빗나가고 새 스냅샷마다 튐. 이 튐은 속도 블렌딩으로 숨김.',
+    summary: '보간은 정확하지만 항상 과거를 보여줌. 외삽(데드 레커닝)은 마지막 위치와 속도로 "지금"을 추측해 지연 없음. 대신 급회전 때 빗나가고 새 스냅샷마다 튐. 이 튐은 속도 블렌딩으로 숨김.',
     views: { a: '보간 (렌더 지연)', b: '외삽 + 속도 블렌딩' },
     controls: '←↑→↓ / WASD: 주황/하늘색 차량을 그 방향으로 조향 (서버에 바로 반영된다고 가정)',
     info: `
@@ -128,10 +128,10 @@
       군사 시뮬레이션 표준(DIS, IEEE 1278)과 레이싱, 비행 게임에서 씀.</p>
       <p>보완 기법:</p>
       <ul>
-        <li><b>Projective Velocity Blending</b>(Curtiss Murphy): 새 스냅샷이 오면 두 궤적을 <i>블렌딩 시간</i>에 걸쳐 섞음. 하나는 지금 보이는 위치와 속도에서 출발한 궤적, 하나는 새 스냅샷으로 외삽한 궤적. 그래서 튐 없이 수렴함.</li>
+        <li><b>Projective Velocity Blending</b>(Curtiss Murphy): 새 스냅샷이 오면 두 궤적을 <i>블렌딩 시간</i>에 걸쳐 섞음. 하나는 지금 보이는 위치와 속도에서 출발한 궤적, 하나는 새 스냅샷으로 외삽한 궤적. 그래서 튐 없이 수렴.</li>
         <li><b>임계값 기반 전송</b>(DIS 방식): 서버도 클라이언트와 같은 외삽 모델을 돌림. 오차가 임계값을 넘을 때만 상태를 보냄. 대역폭이 크게 줄어듦.</li>
       </ul>
-      <p>단점: 방향을 바꾸면 추정이 빗나감. 새 스냅샷이 오면 화면 위치가 <b>순간이동</b>함.</p>`,
+      <p>단점: 방향을 바꾸면 추정이 빗나감. 새 스냅샷이 오면 화면 위치가 <b>순간이동</b>.</p>`,
     diagram: (L) => `<svg viewBox="0 0 540 200" xmlns="http://www.w3.org/2000/svg">
       <defs><marker id="arrB" class="m-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
       <path d="M30,160 L250,160 Q330,160 360,90 L378,46" class="d-dim"/>
@@ -160,7 +160,7 @@
     refs: [
       { type: 'book', title: 'Believable Dead Reckoning for Networked Games', year: 2011, note: 'Curtiss Murphy, Game Engine Gems 2. Projective Velocity Blending.' },
       { type: 'article', title: 'Dead Reckoning: Latency Hiding for Networked Games', year: 1997, note: 'Jesse Aronson, Gamasutra.' },
-      { type: 'paper', title: 'IEEE 1278.1 - Distributed Interactive Simulation (DIS) Application Protocols', note: '데드 레커닝 알고리즘과 임계값 기반 갱신을 표준화.' },
+      { type: 'paper', title: 'IEEE 1278.1 - Distributed Interactive Simulation (DIS) Application Protocols', note: '데드 레커닝 알고리즘과 임계값 기반 갱신을 표준화' },
       { type: 'article', title: 'Fast-Paced Multiplayer (Part III): Entity Interpolation', url: 'https://www.gabrielgambetta.com/entity-interpolation.html', note: 'Gabriel Gambetta. 외삽(dead reckoning)과 보간 비교.' },
       { type: 'article', title: 'Snapshot Interpolation', url: 'https://gafferongames.com/post/snapshot_interpolation/', note: 'Glenn Fiedler. 외삽이 물리 객체에서 깨지는 이유.' },
     ],

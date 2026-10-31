@@ -2,11 +2,11 @@
 GTL.register({
   id: 'accel-curves',
   title: '가속, 감속 곡선 & 공중 제어',
-  summary: '입력 즉시 최고 속도, 떼는 즉시 정지하면 정확하지만 무게감이 없음. 가속, 감속, 반전 시간을 따로 조절하고 공중 제어를 줄이면 캐릭터에 질량과 관성이 생김.',
+  summary: '입력 즉시 최고 속도, 떼는 즉시 정지하면 정확하지만 무게감 없음. 가속, 감속, 반전 시간을 따로 조절하고 공중 제어를 줄이면 캐릭터에 질량과 관성이 생김.',
   views: { a: '즉시 속도 (Instant)', b: '가속/감속 곡선 + 공중 제어 50%' },
   controls: '←→ / A D 이동, Space / Z / ↑ / W 점프 (키를 누르면 자동 데모가 잠시 멈춤)',
   info: `
-    <p>수평 이동의 성격은 현재 속도를 목표 속도(입력 × 최고 속도)로 어떻게 바꾸는지에 따라 정해짐.</p>
+    <p>수평 이동의 성격은 현재 속도를 목표 속도(입력 × 최고 속도)로 어떻게 바꾸는지에 따라 정해짐</p>
     <ul>
       <li><b>즉시</b>: <code>vx = dir × max</code>. 반응은 완벽함. 대신 무게가 없어 로봇처럼 딱딱함(초기 Mega Man 계열).</li>
       <li><b>선형 가속/감속</b>: <code>vx = approach(vx, target, rate × dt)</code>. 가속, 감속, <b>반전</b>(입력이 속도와 반대 방향) 비율을 따로 둠.
@@ -43,10 +43,10 @@ GTL.register({
     '"반전 가속 배수"를 1로 내리면 방향 전환이 둔해짐(그래프 기울기 같음). 3 이상으로 올리면 미끄러짐 없이 탁 꺾임.',
   ],
   refs: [
-    { type: 'book', title: 'Game Feel: A Game Designer\'s Guide to Virtual Sensation (Steve Swink)', year: 2008, note: '입력→반응 곡선(ADSR 엔벨로프)으로 움직임의 느낌을 분석.' },
-    { type: 'article', title: 'Sonic Physics Guide (Sonic Retro)', url: 'https://info.sonicretro.org/Sonic_Physics_Guide', note: 'acceleration / deceleration / friction / air acceleration 값을 프레임 단위로 정리한 실제 게임 분석.' },
-    { type: 'talk', title: 'Platformer Toolkit (Game Maker\'s Toolkit)', url: 'https://gmtk.itch.io/platformer-toolkit', year: 2022, note: '가속, 감속, 반전 속도와 공중 제어를 따로 조절.' },
-    { type: 'code', title: 'Celeste - Player.cs (RunAccel, RunReduce, AirMult)', url: 'https://github.com/NoelFB/Celeste', year: 2018, note: '공중에서는 가속에 AirMult(0.65)를 곱함.' },
+    { type: 'book', title: 'Game Feel: A Game Designer\'s Guide to Virtual Sensation (Steve Swink)', year: 2008, note: '입력→반응 곡선(ADSR 엔벨로프)으로 움직임의 느낌을 분석' },
+    { type: 'article', title: 'Sonic Physics Guide (Sonic Retro)', url: 'https://info.sonicretro.org/Sonic_Physics_Guide', note: 'acceleration / deceleration / friction / air acceleration 값을 프레임 단위로 정리한 실제 게임 분석' },
+    { type: 'talk', title: 'Platformer Toolkit (Game Maker\'s Toolkit)', url: 'https://gmtk.itch.io/platformer-toolkit', year: 2022, note: '가속, 감속, 반전 속도와 공중 제어를 따로 조절' },
+    { type: 'code', title: 'Celeste - Player.cs (RunAccel, RunReduce, AirMult)', url: 'https://github.com/NoelFB/Celeste', year: 2018, note: '공중에서는 가속에 AirMult(0.65)를 곱함' },
   ],
   params: [
     { key: 'mode', label: '속도 변화 방식', type: 'select', group: '이동', options: [

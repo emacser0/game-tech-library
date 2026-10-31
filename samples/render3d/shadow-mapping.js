@@ -7,23 +7,23 @@ GTL.register({
   views: { a: 'Hard, 바이어스 0', b: 'PCF + 바이어스' },
   controls: '마우스 드래그: 카메라 회전, 휠: 줌',
   info: `
-    <p><b>섀도 매핑(shadow mapping)</b>은 2패스로 그림자를 만드는 방법.</p>
+    <p><b>섀도 매핑(shadow mapping)</b>은 2패스로 그림자를 만드는 방법</p>
     <ul>
-      <li>1패스: 광원(방향광)에서 직교 투영으로 장면을 렌더해 깊이를 <b>섀도 맵</b>에 저장함.</li>
+      <li>1패스: 광원(방향광)에서 직교 투영으로 장면을 렌더해 깊이를 <b>섀도 맵</b>에 저장</li>
       <li>2패스: 각 픽셀을 광원 공간으로 옮김. 저장된 깊이보다 멀면 그림자.</li>
     </ul>
-    <p>이 샘플은 확장 없이 동작하도록 깊이를 RGBA8에 24비트 이상으로 <b>패킹</b>함.</p>
+    <p>이 샘플은 확장 없이 동작하도록 깊이를 RGBA8에 24비트 이상으로 <b>패킹</b></p>
     <p><b>섀도 애크니(shadow acne)</b>: 섀도 맵 텍셀 하나가 표면의 넓은 영역을 덮음. 그래서 표면이 자기 자신을 가려 줄무늬가 생김. 광원이 비스듬할수록 심함. 해결 방법:</p>
     <ul>
-      <li><b>상수 바이어스</b>: 비교 깊이를 일정량 밀어냄.</li>
-      <li><b>slope-scaled 바이어스</b>: 표면 기울기에 비례해 밀어냄.</li>
-      <li><b>normal offset</b>: 조회 위치를 법선 방향으로 밂.</li>
-      <li><b>앞면 컬링</b>: 섀도 패스에서 닫힌 메시의 뒷면 깊이를 저장함.</li>
+      <li><b>상수 바이어스</b>: 비교 깊이를 일정량 밀어냄</li>
+      <li><b>slope-scaled 바이어스</b>: 표면 기울기에 비례해 밀어냄</li>
+      <li><b>normal offset</b>: 조회 위치를 법선 방향으로 밂</li>
+      <li><b>앞면 컬링</b>: 섀도 패스에서 닫힌 메시의 뒷면 깊이를 저장</li>
     </ul>
     <p>단점: 바이어스가 너무 크면 물체 밑동에서 그림자가 떨어짐. 이를 <b>피터 패닝(peter panning)</b>이라 부름.</p>
     <p>경계를 부드럽게 하는 필터링:</p>
     <ul>
-      <li><b>PCF</b>(Reeves 1987): 깊이 대신 주변 텍셀의 <i>비교 결과</i>를 평균함. 여기서는 탭마다 bilinear 가중을 씀.</li>
+      <li><b>PCF</b>(Reeves 1987): 깊이 대신 주변 텍셀의 <i>비교 결과</i>를 평균. 여기서는 탭마다 bilinear 가중을 씀.</li>
       <li><b>PCSS</b>(Fernando 2005): 먼저 주변 차폐물(blocker)의 평균 깊이를 찾음. 차폐물과 수신면 거리에 비례해 PCF 반경을 키움. 그래서 <b>접촉부는 날카롭고 멀수록 흐린</b> 그림자가 됨.</li>
     </ul>`,
   // 도식: 비스듬한 면에서 섀도 맵 텍셀 깊이가 계단이 되어 생기는 애크니와 바이어스
@@ -67,7 +67,7 @@ GTL.register({
   </svg>`,
   look: [
     'A의 바닥과 물체 표면을 보면 물결 줄무늬(섀도 애크니)가 보임. "광원 고도"를 낮추면 더 심해짐.',
-    'B에서 상수 바이어스를 0.4 이상으로 올리면 큐브와 기둥 밑동에서 그림자가 떨어져 물체가 떠 보임(피터 패닝).',
+    'B에서 상수 바이어스를 0.4 이상으로 올리면 큐브와 기둥 밑동에서 그림자가 떨어져 물체가 떠 보임(피터 패닝)',
     '해상도를 256으로 낮추면 경계가 계단처럼 보임. "텍셀 시각화"를 켜면 섀도 맵 텍셀 크기가 보임.',
     'PCSS로 바꾸면 기둥 그림자가 밑동은 날카롭고 끝으로 갈수록 흐려짐. "광원 크기"로 흐림 정도가 바뀜.',
   ],
@@ -75,7 +75,7 @@ GTL.register({
     { type: 'paper', title: 'Casting Curved Shadows on Curved Surfaces (Lance Williams)', url: 'https://dl.acm.org/doi/10.1145/965139.807402', year: 1978, note: 'SIGGRAPH 78. 섀도 맵 원조.' },
     { type: 'paper', title: 'Rendering Antialiased Shadows with Depth Maps (Reeves, Salesin, Cook)', url: 'https://dl.acm.org/doi/10.1145/37402.37435', year: 1987, note: 'SIGGRAPH 87. Percentage-Closer Filtering.' },
     { type: 'talk', title: 'Percentage-Closer Soft Shadows (Randima Fernando, NVIDIA)', year: 2005, note: 'SIGGRAPH 2005 Sketches.' },
-    { type: 'article', title: 'Common Techniques to Improve Shadow Depth Maps (Microsoft Docs)', url: 'https://learn.microsoft.com/en-us/windows/win32/dxtecharts/common-techniques-to-improve-shadow-depth-maps', note: 'slope-scaled bias, 앞면 컬링, 피터 패닝 설명.' },
+    { type: 'article', title: 'Common Techniques to Improve Shadow Depth Maps (Microsoft Docs)', url: 'https://learn.microsoft.com/en-us/windows/win32/dxtecharts/common-techniques-to-improve-shadow-depth-maps', note: 'slope-scaled bias, 앞면 컬링, 피터 패닝 설명' },
     { type: 'article', title: 'LearnOpenGL: Shadow Mapping', url: 'https://learnopengl.com/Advanced-Lighting/Shadows/Shadow-Mapping' },
     { type: 'talk', title: 'Next Generation Post Processing in Call of Duty: Advanced Warfare (Jorge Jimenez)', year: 2014, note: 'SIGGRAPH 2014. Interleaved Gradient Noise (PCSS 샘플 회전에 사용).' },
   ],

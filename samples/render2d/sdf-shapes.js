@@ -69,23 +69,23 @@
   GTL.register({
     id: 'sdf-shapes',
     title: 'SDF 렌더링 (거리장 텍스처)',
-    summary: '같은 64×64 텍스처에 커버리지(알파) 대신 "가장자리까지의 부호 거리"를 저장함. 수십 배 확대해도 가장자리가 선명하고, 외곽선, 글로우, 그림자, 굵기 조절을 셰이더 몇 줄로 얻음.',
+    summary: '같은 64×64 텍스처에 커버리지(알파) 대신 "가장자리까지의 부호 거리"를 저장. 수십 배 확대해도 가장자리가 선명하고, 외곽선, 글로우, 그림자, 굵기 조절을 셰이더 몇 줄로 얻음.',
     renderer: 'webgl',
     views: { a: '64² 비트맵 (bilinear)', b: '64² SDF' },
     info: `
       <p>비트맵 알파를 확대하면 bilinear 보간 때문에 가장자리가 <b>흐릿한 경사</b>가 됨. 알파 테스트(&gt;0.5)를 하면 모양이 <b>울퉁불퉁하게 뭉개짐</b>.</p>
-      <p><b>SDF(Signed Distance Field, 부호 거리장)</b>는 텍셀마다 가장 가까운 가장자리까지의 거리를 저장함 (안쪽 +, 바깥 −).
+      <p><b>SDF(Signed Distance Field, 부호 거리장)</b>는 텍셀마다 가장 가까운 가장자리까지의 거리를 저장 (안쪽 +, 바깥 −).
       거리는 텍셀 사이에서 거의 선형이라 bilinear 보간이 <b>정확한 가장자리 위치</b>를 되살림.
       <code>smoothstep</code> 폭을 화면 미분(<code>fwidth</code>)에 맞추면 어떤 배율에서도 1px 안티에일리어싱이 됨.</p>
-      <p>같은 텍스처 하나로 여러 효과를 냄.</p>
+      <p>같은 텍스처 하나로 여러 효과를 냄</p>
       <ul>
-      <li>굵기: 임계값을 옮김.</li>
-      <li>외곽선: 두 임계값 사이를 칠함.</li>
-      <li>글로우: 바깥 거리에 따라 감쇠.</li>
-      <li>그림자: 오프셋 위치에서 한 번 더 샘플.</li>
+      <li>굵기: 임계값을 옮김</li>
+      <li>외곽선: 두 임계값 사이를 칠함</li>
+      <li>글로우: 바깥 거리에 따라 감쇠</li>
+      <li>그림자: 오프셋 위치에서 한 번 더 샘플</li>
       </ul>
       <p>Valve가 TF2의 UI와 데칼에 도입해 유명해졌음. 지금은 대부분 게임 엔진 텍스트 렌더링(TextMeshPro 등)의 기본.
-      단점은 날카로운 모서리가 둥글게 깎이는 것. MSDF(다채널 SDF)가 이를 보완함.</p>
+      단점은 날카로운 모서리가 둥글게 깎이는 것. MSDF(다채널 SDF)가 이를 보완.</p>
       <p>여기서는 512² 마스크에 Felzenszwalb 거리 변환을 적용해 저해상도 SDF를 만듦. 왼쪽 아래 작은 사각형이 실제 텍스처.</p>`,
     diagram: (L) => `<svg viewBox="0 0 540 176" xmlns="http://www.w3.org/2000/svg">
       <text x="20" y="14" class="t-a">${L('A: 알파 비트맵', 'A: alpha bitmap')}</text>
@@ -109,8 +109,8 @@
       <text x="136" y="28" class="t-small t-dim">${L('실제 경계', 'true edge')}</text>
     </svg>`,
     look: [
-      '확대를 12배 이상 올리면 A의 글자는 흐릿하게 번지고, B는 여전히 칼같이 선명함.',
-      'A를 "알파 테스트"로 바꾸면 선명해지지만 모양이 울퉁불퉁 뭉개짐 (Valve 논문의 비교 그림과 같음).',
+      '확대를 12배 이상 올리면 A의 글자는 흐릿하게 번지고, B는 여전히 칼같이 선명함',
+      'A를 "알파 테스트"로 바꾸면 선명해지지만 모양이 울퉁불퉁 뭉개짐 (Valve 논문의 비교 그림과 같음)',
       'B에서 외곽선, 글로우, 그림자, 굵기를 바꾸면 효과가 바로 붙음. 텍스처는 그대로임.',
       '"텍스처 해상도"를 32로 낮추면 SDF도 모서리가 둥글어짐. 날카로운 모서리에 약한 SDF의 한계가 드러남.',
     ],
@@ -119,7 +119,7 @@
       { type: 'paper', title: 'Distance Transforms of Sampled Functions (Felzenszwalb, Huttenlocher)', year: 2012, note: 'Theory of Computing. O(n) 정확한 유클리드 거리 변환.' },
       { type: 'paper', title: 'Shape Decomposition for Multi-channel Distance Fields (Viktor Chlumský)', year: 2015, note: '석사 논문. 날카로운 모서리를 보존하는 MSDF.' },
       { type: 'article', title: '2D distance functions (Inigo Quilez)', url: 'https://iquilezles.org/articles/distfunctions2d/' },
-      { type: 'engine', title: 'TextMeshPro (Unity): SDF 폰트 렌더링', note: '외곽선, 언더레이, 글로우를 SDF 셰이더 파라미터로 제공.' },
+      { type: 'engine', title: 'TextMeshPro (Unity): SDF 폰트 렌더링', note: '외곽선, 언더레이, 글로우를 SDF 셰이더 파라미터로 제공' },
     ],
     params: [
       { key: 'mode', label: '렌더링', type: 'select', group: '방식', options: [

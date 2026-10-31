@@ -2,25 +2,25 @@
 GTL.register({
   id: 'projected-decals',
   title: '데칼: 겹친 평면 vs 박스 투영',
-  summary: '바닥에 표식을 붙이는 두 방법을 비교함. 평면을 겹쳐 놓으면 평평한 곳은 Z-파이팅, 굴곡진 곳은 뜨거나 파묻힘. 박스 투영 데칼은 깊이 버퍼에서 표면 위치를 복원해 어떤 굴곡에도 정확히 붙음.',
+  summary: '바닥에 표식을 붙이는 두 방법을 비교. 평면을 겹쳐 놓으면 평평한 곳은 Z-파이팅, 굴곡진 곳은 뜨거나 파묻힘. 박스 투영 데칼은 깊이 버퍼에서 표면 위치를 복원해 어떤 굴곡에도 정확히 붙음.',
   renderer: 'webgl2',
   views: { a: '겹친 평면', b: '박스 투영 데칼' },
   controls: '마우스 드래그: 카메라 회전, 휠: 줌',
   info: `
-    <p><b>데칼(decal)</b>은 총탄 자국, 핏자국, 도로 표시처럼 기존 표면 위에 덧그리는 무늬.</p>
+    <p><b>데칼(decal)</b>은 총탄 자국, 핏자국, 도로 표시처럼 기존 표면 위에 덧그리는 무늬</p>
     <p><b>겹친 평면</b>: 표면 바로 위에 사각형 메시를 놓는 가장 단순한 방법. 문제:</p>
     <ul>
       <li>표면과 같은 높이면 깊이 값이 거의 같아 픽셀마다 앞뒤가 바뀜(<b>Z-파이팅</b>). 멀수록 깊이 정밀도가 낮아 심해짐.</li>
-      <li>띄우면 굴곡진 곳에서 공중에 뜨고, 볼록한 곳에서는 표면 속에 파묻힘.</li>
+      <li>띄우면 굴곡진 곳에서 공중에 뜨고, 볼록한 곳에서는 표면 속에 파묻힘</li>
       <li><code>glPolygonOffset</code>은 깊이만 조금 당겨 Z-파이팅을 줄임. 굴곡 문제는 그대로임.</li>
     </ul>
-    <p><b>박스 투영 데칼(deferred decal)</b>: 장면을 먼저 그린 뒤 데칼 영역을 덮는 박스를 그림.</p>
+    <p><b>박스 투영 데칼(deferred decal)</b>: 장면을 먼저 그린 뒤 데칼 영역을 덮는 박스를 그림</p>
     <ol>
-      <li>박스의 각 픽셀에서 깊이 버퍼를 읽어 월드 위치를 복원함.</li>
+      <li>박스의 각 픽셀에서 깊이 버퍼를 읽어 월드 위치를 복원</li>
       <li>위치를 데칼 공간으로 옮김. 박스 밖이면 버림.</li>
       <li>데칼 공간 xz를 텍스처 UV로 씀. 표면 법선과 투영 방향 각도로 가장자리를 흐림(angle fade).</li>
     </ol>
-    <p>단점: 깊이 버퍼가 필요함. 투영 방향과 평행한 면(벽 옆면 등)에서는 텍스처가 길게 늘어남. 다른 물체가 박스 안에 들어오면 그 물체에도 찍힘. 그래서 엔진은 레이어나 스텐실로 받을 물체를 고름.</p>`,
+    <p>단점: 깊이 버퍼 필요. 투영 방향과 평행한 면(벽 옆면 등)에서는 텍스처가 길게 늘어남. 다른 물체가 박스 안에 들어오면 그 물체에도 찍힘. 그래서 엔진은 레이어나 스텐실로 받을 물체를 고름.</p>`,
   // 도식: 굴곡진 표면 위의 평면 데칼과 박스 투영 데칼
   diagram: (L) => `<svg viewBox="0 0 540 182" xmlns="http://www.w3.org/2000/svg">
     <text x="10" y="16" class="t-a">${L('A: 표면 위에 평면을 놓음', 'A: a quad on top of the surface')}</text>
@@ -40,13 +40,13 @@ GTL.register({
     'A의 평평한 바닥에서 데칼이 줄무늬로 깜빡임(Z-파이팅). 카메라를 멀리 보내면 더 심해짐.',
     'A에서 오프셋을 0.05로 올리면 깜빡임은 사라짐. 대신 언덕을 지날 때 데칼 일부가 땅속에 묻히고 계단에서는 공중에 뜸.',
     'B는 데칼이 언덕, 구, 계단 모서리를 따라 휘어 붙음. "박스 보기"로 투영 영역이 보임.',
-    'B에서 각도 페이드를 끄면 구와 계단 옆면에서 텍스처가 세로로 길게 늘어남.',
+    'B에서 각도 페이드를 끄면 구와 계단 옆면에서 텍스처가 세로로 길게 늘어남',
   ],
   refs: [
     { type: 'talk', title: 'Screen Space Decals in Warhammer 40,000: Space Marine (Pope Kim)', year: 2012, note: 'SIGGRAPH 2012 Talks. 깊이 버퍼로 위치를 복원하는 박스 데칼.' },
     { type: 'engine', title: 'Unreal Engine Documentation: Decal Materials' },
     { type: 'engine', title: 'Unity HDRP Documentation: Decal Projector' },
-    { type: 'article', title: 'Learning to Love your Z-buffer (Steve Baker)', url: 'https://www.sjbaker.org/steve/omniv/love_your_z_buffer.html', note: '원근 깊이 정밀도와 Z-파이팅.' },
+    { type: 'article', title: 'Learning to Love your Z-buffer (Steve Baker)', url: 'https://www.sjbaker.org/steve/omniv/love_your_z_buffer.html', note: '원근 깊이 정밀도와 Z-파이팅' },
   ],
   params: [
     { key: 'method', label: '데칼 방식', type: 'select', group: '데칼', options: [

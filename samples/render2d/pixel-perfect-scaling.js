@@ -6,12 +6,12 @@ GTL.register({
   renderer: 'webgl',
   views: { a: 'Nearest, 비정수 배율', b: '정수 배율 + 레터박스' },
   info: `
-    <p>픽셀아트 게임은 160×90 같은 고정 내부 해상도로 그린 뒤 창 크기에 맞춰 확대함. 이때 배율은 대부분 정수가 아님.</p>
+    <p>픽셀아트 게임은 160×90 같은 고정 내부 해상도로 그린 뒤 창 크기에 맞춰 확대. 이때 배율은 대부분 정수가 아님.</p>
     <ul>
     <li><b>Nearest (비정수)</b>: 화면을 꽉 채우지만 텍셀이 3px, 4px 폭으로 불균일하게 나뉨. 1px 줄무늬가 굵기가 다른 줄로 보임.
     카메라가 움직이면 넓어지는 텍셀이 계속 바뀌어 <b>반짝임(Shimmer)</b>이 생김.</li>
     <li><b>정수 배율</b>: floor(배율)로 확대하고 남는 공간은 테두리로 둠. 모든 텍셀이 정확히 같은 크기. Celeste(320×180)를 비롯한 많은 픽셀아트 게임의 기본값.</li>
-    <li><b>Bilinear</b>: 균일하지만 전체가 흐릿함.</li>
+    <li><b>Bilinear</b>: 균일하지만 전체가 흐릿함</li>
     <li><b>Sharp bilinear</b>: 텍셀 안쪽은 Nearest처럼 평평하게 두고, <b>텍셀 경계의 1px 남짓만</b> bilinear로 섞음. 화면을 꽉 채우면서도 선명하고 균일함.</li>
     </ul>
     <p>"카메라 텍셀 스냅"을 켜면 카메라가 텍셀 단위로만 움직임. 서브픽셀 이동 때문에 생기는 반짝임은 사라지지만, 비정수 배율의 불균일함은 남음.</p>`,
@@ -33,14 +33,14 @@ GTL.register({
   look: [
     'A의 왼쪽 1px 세로 줄무늬를 보면 굵은 줄과 가는 줄이 섞여 있고, 스크롤되면 물결처럼 반짝임. B는 모든 줄이 같은 굵기.',
     'B를 Sharp bilinear로 바꾸면 화면을 꽉 채우면서도 줄무늬가 균일함. 가까이 보면 텍셀 경계만 살짝 섞여 있음.',
-    '"텍셀 경계 표시"를 켜면 A의 텍셀 칸 폭이 불규칙한 것이 직접 보임.',
+    '"텍셀 경계 표시"를 켜면 A의 텍셀 칸 폭이 불규칙한 것이 직접 보임',
     '배율을 정확히 3.00이나 4.00으로 맞추면 A도 깨끗해짐. 원인은 비정수 배율 그 자체.',
   ],
   refs: [
     { type: 'engine', title: 'Godot: Multiple resolutions (stretch mode, integer scaling)', url: 'https://docs.godotengine.org/en/stable/tutorials/rendering/multiple_resolutions.html' },
-    { type: 'engine', title: 'Unity: 2D Pixel Perfect Camera', url: 'https://docs.unity3d.com/Packages/com.unity.2d.pixel-perfect@latest', note: '정수 배율, 업스케일 RT, 픽셀 스냅 옵션.' },
+    { type: 'engine', title: 'Unity: 2D Pixel Perfect Camera', url: 'https://docs.unity3d.com/Packages/com.unity.2d.pixel-perfect@latest', note: '정수 배율, 업스케일 RT, 픽셀 스냅 옵션' },
     { type: 'code', title: 'sharp-bilinear shader (libretro)', url: 'https://github.com/libretro/glsl-shaders', note: '정수 배율 nearest로 먼저 확대하고 나머지만 bilinear로 처리. 에뮬레이터에서 널리 쓰임.' },
-    { type: 'game', title: 'Celeste (Maddy Makes Games)', year: 2018, note: '320×180 내부 해상도를 정수 배율로 확대하는 대표적 픽셀아트 게임.' },
+    { type: 'game', title: 'Celeste (Maddy Makes Games)', year: 2018, note: '320×180 내부 해상도를 정수 배율로 확대하는 대표적 픽셀아트 게임' },
   ],
   params: [
     { key: 'mode', label: '확대 방식', type: 'select', group: '스케일링', options: [

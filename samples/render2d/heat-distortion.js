@@ -9,15 +9,15 @@ GTL.register({
   info: `
     <p>뜨거운 공기는 밀도가 달라서 빛을 굴절시킴. 그래서 불꽃 너머 배경이 일렁여 보임. 게임은 이 현상을 실제 광학 계산 없이 <b>UV 오프셋</b>으로 흉내 냄.</p>
     <ol>
-    <li>장면 전체를 렌더 타겟(텍스처)에 그림.</li>
-    <li>풀스크린 패스에서 노이즈 텍스처를 읽어 2D 벡터 <code>(n.rg * 2 - 1)</code>를 얻음.</li>
-    <li>벡터에 강도와 <b>마스크</b>를 곱해 UV에 더한 뒤 장면 텍스처를 읽음.</li>
+    <li>장면 전체를 렌더 타겟(텍스처)에 그림</li>
+    <li>풀스크린 패스에서 노이즈 텍스처를 읽어 2D 벡터 <code>(n.rg * 2 - 1)</code>를 얻음</li>
+    <li>벡터에 강도와 <b>마스크</b>를 곱해 UV에 더한 뒤 장면 텍스처를 읽음</li>
     </ol>
     <ul>
     <li>노이즈를 위로 스크롤하면 열기가 올라가는 느낌이 남. 속도가 다른 두 층을 더하면 반복 무늬가 덜 보임.</li>
     <li>마스크는 열원 위쪽 기둥 모양. 마스크가 없으면 화면 전체가 흔들려서 멀미가 남.</li>
-    <li>충격파는 노이즈 대신 고리 모양 마스크와 바깥 방향 벡터를 씀.</li>
-    <li>색수차(R, G, B를 조금씩 다른 오프셋으로 읽기)를 더하면 렌즈 느낌이 강해짐.</li>
+    <li>충격파는 노이즈 대신 고리 모양 마스크와 바깥 방향 벡터를 씀</li>
+    <li>색수차(R, G, B를 조금씩 다른 오프셋으로 읽기)를 더하면 렌즈 느낌이 강해짐</li>
     </ul>
     <p>단점: 화면 밖이나 앞쪽 물체의 픽셀을 끌어와서 경계가 번질 수 있음. 실제 엔진은 깊이를 비교해 앞쪽 물체가 끌려오지 않게 막기도 함.</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 170" xmlns="http://www.w3.org/2000/svg">
@@ -49,15 +49,15 @@ GTL.register({
     <text x="10" y="162" class="t-small t-dim">${L('색 = scene(uv + (n.rg * 2 - 1) x 강도 x 마스크). 마스크가 없으면 화면 전체가 흔들림.', 'color = scene(uv + (n.rg * 2 - 1) x strength x mask). Without a mask the whole screen wobbles.')}</text>
   </svg>`,
   look: [
-    'A와 B의 불꽃 위 벽돌 줄눈을 비교하면 B만 줄눈이 물결처럼 일렁임.',
-    'B의 "디버그 보기"를 "오프셋 벡터"로 바꾸면 왜곡이 들어가는 영역과 방향이 색으로 보임.',
+    'A와 B의 불꽃 위 벽돌 줄눈을 비교하면 B만 줄눈이 물결처럼 일렁임',
+    'B의 "디버그 보기"를 "오프셋 벡터"로 바꾸면 왜곡이 들어가는 영역과 방향이 색으로 보임',
     'B의 "마스크"를 끄면 화면 전체가 흔들림. 열원 근처만 왜곡해야 자연스러움.',
     '뷰를 클릭하면 충격파 고리가 퍼지며 배경을 바깥으로 밀어냄. "색수차"를 켜면 고리 가장자리에 무지개 띠가 생김.',
   ],
   refs: [
     { type: 'book', title: 'GPU Gems 2, Chapter 19: Generic Refraction Simulation (Tiago Sousa)', year: 2005, note: '장면 텍스처를 노멀맵으로 흔들어 읽는 굴절 기법. 앞쪽 물체가 끌려오는 문제를 마스크로 막는 방법도 다룸.' },
-    { type: 'engine', title: 'Unreal Engine: 머티리얼 Refraction 입력', note: '반투명 머티리얼의 굴절을 별도 Distortion 패스에서 화면 UV 오프셋으로 처리함.' },
-    { type: 'engine', title: 'Unity URP: Opaque Texture (_CameraOpaqueTexture)', note: '불투명 패스 결과를 텍스처로 받아 열기 왜곡에 사용함.' },
+    { type: 'engine', title: 'Unreal Engine: 머티리얼 Refraction 입력', note: '반투명 머티리얼의 굴절을 별도 Distortion 패스에서 화면 UV 오프셋으로 처리' },
+    { type: 'engine', title: 'Unity URP: Opaque Texture (_CameraOpaqueTexture)', note: '불투명 패스 결과를 텍스처로 받아 열기 왜곡에 사용' },
   ],
   params: [
     { key: 'on', label: '왜곡', type: 'bool', group: '왜곡', a: false, b: true },

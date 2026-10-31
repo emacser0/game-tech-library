@@ -7,7 +7,7 @@ GTL.register({
   views: { a: 'Bilinear 확대', b: '에지 적응 (EASU 유사) + RCAS' },
   controls: '마우스: 돋보기 위치',
   info: `
-    <p>해상도를 가로세로 절반으로 낮추면 셰이딩할 픽셀이 1/4로 줄어듦. 대신 확대(업스케일) 필터의 품질이 화질을 결정함.</p>
+    <p>해상도를 가로세로 절반으로 낮추면 셰이딩할 픽셀이 1/4로 줄어듦. 대신 확대(업스케일) 필터의 품질이 화질을 결정.</p>
     <ul>
     <li><b>Nearest</b>: 가장 가까운 텍셀 복사. 계단과 깍두기가 그대로 커짐.</li>
     <li><b>Bilinear</b>: 주변 2×2를 선형 보간. 하드웨어가 공짜로 해 주지만 경계가 흐려짐.</li>
@@ -15,7 +15,7 @@ GTL.register({
     <li><b>에지 적응 (EASU 유사)</b>: 12탭에서 밝기 기울기로 경계 방향을 찾음. Lanczos 비슷한 커널을 경계를 따라 길게, 가로질러 좁게 늘임. 결과를 가운데 2×2의 최소값, 최대값으로 잘라 링잉을 막음.</li>
     <li><b>RCAS 샤프닝</b>: 상하좌우 4탭으로 선명하게 만듦. 이웃의 최소값, 최대값을 보고 0~1을 넘지 않는 만큼만 강도를 정해서 하얀 테가 생기지 않음.</li>
     </ul>
-    <p>AMD FidelityFX Super Resolution 1(FSR 1)이 EASU와 RCAS 두 패스로 이렇게 동작함. 이 샘플은 핵심 아이디어만 옮긴 단순화 구현이라 원본과 결과가 똑같지는 않음.</p>
+    <p>AMD FidelityFX Super Resolution 1(FSR 1)이 EASU와 RCAS 두 패스로 이렇게 동작. 이 샘플은 핵심 아이디어만 옮긴 단순화 구현이라 원본과 결과가 똑같지는 않음.</p>
     <p>공간 업스케일은 프레임 하나의 정보만 씀. 없는 디테일은 만들지 못하고, 입력에 계단이 있으면 계단을 선명하게 키움. 그래서 입력이 안티에일리어싱된 상태여야 함. 여러 프레임을 모으는 시간 업스케일(FSR 2, DLSS, TAAU)은 이 한계를 넘음.</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 162" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arr" class="m-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -45,15 +45,15 @@ GTL.register({
     <text x="392" y="153" class="t-small t-dim">${L('이웃 최소, 최대로 강도 제한', 'Clamped by neighbor min/max')}</text>
   </svg>`,
   look: [
-    'A와 B의 돋보기를 비교하면 A는 지멘스 스타 바퀴살과 삼각형 경계가 뿌옇게 번짐. B는 경계가 또렷하고 링잉이 없음.',
-    'A를 "Catmull-Rom"으로 바꾸면 선명해지지만 밝은 선 옆에 어두운 테가 생김.',
+    'A와 B의 돋보기를 비교하면 A는 지멘스 스타 바퀴살과 삼각형 경계가 뿌옇게 번짐. B는 경계가 또렷하고 링잉 없음.',
+    'A를 "Catmull-Rom"으로 바꾸면 선명해지지만 밝은 선 옆에 어두운 테가 생김',
     '"렌더 배율"을 0.33까지 내리면 두 방식 모두 가는 선이 사라짐. 공간 업스케일은 없는 정보를 되살리지 못함.',
     '"입력 안티에일리어싱"을 끄면 B도 계단이 선명하게 커짐. 입력이 AA된 상태여야 하는 이유임.',
-    'A를 "네이티브"로 바꾸면 출력 해상도로 직접 렌더한 정답과 B를 비교할 수 있음.',
+    'A를 "네이티브"로 바꾸면 출력 해상도로 직접 렌더한 정답과 B를 비교할 수 있음',
   ],
   refs: [
     { type: 'code', title: 'AMD FidelityFX Super Resolution 1 (FSR 1): ffx_fsr1.h, EASU와 RCAS', url: 'https://github.com/GPUOpen-Effects/FidelityFX-FSR', year: 2021, note: '원본 셰이더와 문서. 이 샘플의 탭 배치, 가중치 근사, 대비 제한 샤프닝의 출처.' },
-    { type: 'article', title: 'AMD FidelityFX Super Resolution 1 (GPUOpen 문서)', url: 'https://gpuopen.com/fidelityfx-superresolution/', note: '입력에 안티에일리어싱이 필요하다는 조건과 배율별 품질 모드.' },
+    { type: 'article', title: 'AMD FidelityFX Super Resolution 1 (GPUOpen 문서)', url: 'https://gpuopen.com/fidelityfx-superresolution/', note: '입력에 안티에일리어싱이 필요하다는 조건과 배율별 품질 모드' },
     { type: 'paper', title: 'Cubic Convolution Interpolation for Digital Image Processing (Robert G. Keys)', year: 1981, note: 'IEEE Trans. ASSP. Catmull-Rom 계열 쌍삼차 보간 커널.' },
   ],
   params: [

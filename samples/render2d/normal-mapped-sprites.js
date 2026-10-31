@@ -8,7 +8,7 @@ GTL.register({
   controls: '마우스: 광원 이동 (뷰 밖이면 자동 궤도)',
   info: `
     <p><b>노멀맵(Normal Map)</b>은 픽셀마다 표면이 향하는 방향(법선)을 RGB에 저장한 텍스처. 2D 게임의 동적 조명은 스프라이트 옆에 노멀맵을 함께 둠.</p>
-    <p>프래그먼트마다 광원 방향 <code>L = normalize(lightPos − fragPos, lightHeight)</code>를 구함. 그리고 내적 <code>max(dot(N, L), 0)</code>으로 확산광을 계산함.
+    <p>프래그먼트마다 광원 방향 <code>L = normalize(lightPos − fragPos, lightHeight)</code>를 구함. 그리고 내적 <code>max(dot(N, L), 0)</code>으로 확산광을 계산.
     핵심은 빛이 화면 평면 위 <b>높이 z</b>에 떠 있다고 가정하는 것. 높이가 낮으면 빛이 스치듯 비춰 요철이 길게 강조됨. 높으면 정면광처럼 평평해짐.</p>
     <p>여기서는 절차적으로 만든 높이맵을 중앙 차분해 노멀맵을 만듦. Sprite Lamp, Laigter 같은 툴이 손그림으로 하는 일과 같음.
     Dead Cells는 3D 모델을 저해상도로 렌더링하면서 노멀도 함께 뽑아, 2D 스프라이트에 동적 조명을 적용했음.</p>`,
@@ -33,14 +33,14 @@ GTL.register({
   look: [
     '마우스로 빛을 움직이면 B의 벽돌 모서리는 빛 쪽이 밝아지고 반대쪽에 그림자가 짐. A는 둥근 얼룩만 움직임.',
     '"광원 높이"를 20 정도로 낮추면 스치는 빛(Grazing Light)에 표면 거칠기가 강하게 드러남. 400 이상이면 거의 평평해짐.',
-    '"노멀 강도"를 키우면 요철이 과장되고, 0으로 내리면 A와 같아짐.',
-    '"보기"를 노멀맵으로 바꾸면 법선을 RGB(x→R, y→G, z→B)로 저장한 특유의 보라색 이미지가 보임.',
+    '"노멀 강도"를 키우면 요철이 과장되고, 0으로 내리면 A와 같아짐',
+    '"보기"를 노멀맵으로 바꾸면 법선을 RGB(x→R, y→G, z→B)로 저장한 특유의 보라색 이미지가 보임',
   ],
   refs: [
     { type: 'engine', title: 'Godot: 2D lights and shadows (Normal maps)', url: 'https://docs.godotengine.org/en/stable/tutorials/2d/2d_lights_and_shadows.html' },
     { type: 'engine', title: 'Unity URP: 2D Lights / Secondary Textures (normal map)', url: 'https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@latest' },
     { type: 'article', title: 'Art Design Deep Dive: Using a 3D pipeline for 2D animation in Dead Cells (Thomas Vasseur)', year: 2018, note: 'Gamasutra. 3D 모델에서 픽셀아트 스프라이트와 노멀맵을 함께 뽑는 과정.' },
-    { type: 'code', title: 'Sprite Lamp (Snake Hill Games)', year: 2014, note: '손그림 조명 레이어에서 2D 스프라이트용 노멀/깊이 맵을 만드는 도구.' },
+    { type: 'code', title: 'Sprite Lamp (Snake Hill Games)', year: 2014, note: '손그림 조명 레이어에서 2D 스프라이트용 노멀/깊이 맵을 만드는 도구' },
     { type: 'paper', title: 'Models of light reflection for computer synthesized pictures (James F. Blinn)', year: 1977, note: 'SIGGRAPH. Blinn-Phong 하이라이트의 원전.' },
   ],
   params: [

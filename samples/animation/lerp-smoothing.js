@@ -4,11 +4,11 @@ GTL.register({
   title: 'lerp 스무딩과 프레임레이트 독립성',
   summary: '매 프레임 x = lerp(x, target, k)는 간단하지만 프레임이 많을수록 빨리 따라감. k*dt로 바꾸는 흔한 수정도 낮은 FPS에서 틀림. 지수 감쇠 1 − e^(−λ*dt)를 쓰면 어떤 FPS에서도 같은 곡선이 됨.',
   views: { a: 'lerp(x, t, k) 매 프레임', b: 'lerp(x, t, 1 − e^(−λdt))' },
-  controls: '조작 없음. 목표가 2초마다 좌우로 순간 이동함. 한 뷰 안의 세 줄은 서로 다른 FPS로 시뮬레이션함.',
+  controls: '조작 없음. 목표가 2초마다 좌우로 순간 이동. 한 뷰 안의 세 줄은 서로 다른 FPS로 시뮬레이션.',
   info: `
     <p><code>x = lerp(x, target, 0.1)</code>은 카메라, UI, 추종 오브젝트에 흔히 쓰는 스무딩. 매 프레임 남은 거리의 10%를 줄임.</p>
-    <p>문제: 1초 뒤 남는 비율은 <code>0.9<sup>fps</sup></code>. 그래서 <b>144 FPS는 60 FPS보다 훨씬 빨리 도착</b>하고 20 FPS는 느리게 도착함.</p>
-    <p>흔한 수정 <code>lerp(x, t, k*dt*60)</code>은 1차 근사. dt가 크면 오차가 커짐. <code>k*dt*60 &gt; 1</code>이면 목표를 넘어 진동하거나 발산함.</p>
+    <p>문제: 1초 뒤 남는 비율은 <code>0.9<sup>fps</sup></code>. 그래서 <b>144 FPS는 60 FPS보다 훨씬 빨리 도착</b>하고 20 FPS는 느리게 도착.</p>
+    <p>흔한 수정 <code>lerp(x, t, k*dt*60)</code>은 1차 근사. dt가 크면 오차가 커짐. <code>k*dt*60 &gt; 1</code>이면 목표를 넘어 진동하거나 발산.</p>
     <p>정확한 해: 남은 비율은 시간에 대해 지수적으로 줄어듦. 따라서 <code>x = lerp(x, t, 1 − e<sup>−λ*dt</sup>)</code>.
     여기서는 <code>λ = −ln(1 − k)*60</code>으로 정함. 그래서 <b>60 FPS에서는 세 방식이 정확히 같음</b>. 반감기로 쓰면 <code>λ = ln2 / halfLife</code>.</p>`,
   // 도식: 남은 거리의 계단 그래프. A는 프레임마다 같은 비율을 줄여 FPS가 낮으면 늦음. B는 dt에 맞춘 비율이라 계단 모서리가 같은 지수 곡선 위에 놓임
@@ -42,15 +42,15 @@ GTL.register({
   </svg>`;
   },
   look: [
-    'A를 보면 세 줄(20, 60, 144 FPS)이 서로 다른 속도로 도착함. B는 세 줄이 겹쳐 하나로 보임.',
+    'A를 보면 세 줄(20, 60, 144 FPS)이 서로 다른 속도로 도착. B는 세 줄이 겹쳐 하나로 보임.',
     '아래 그래프를 보면 A는 곡선 세 개가 벌어지고 B는 하나로 겹침. 가운데 60 FPS 줄은 두 뷰가 같음.',
-    'A를 "lerp(x, t, k*dt*60) 보정"으로 바꾸고 FPS 세트를 10 / 30 / 240, k를 0.2~0.3으로 두면 10 FPS 줄이 목표를 지나쳐 출렁임. k가 0.35 이상이면 발산함.',
-    '"90% 도달" 값을 보면 FPS별 차이가 숫자로 나옴.',
+    'A를 "lerp(x, t, k*dt*60) 보정"으로 바꾸고 FPS 세트를 10 / 30 / 240, k를 0.2~0.3으로 두면 10 FPS 줄이 목표를 지나쳐 출렁임. k가 0.35 이상이면 발산.',
+    '"90% 도달" 값을 보면 FPS별 차이가 숫자로 나옴',
   ],
   refs: [
     { type: 'article', title: 'Frame Rate Independent Damping Using Lerp (Rory Driscoll)', url: 'https://www.rorydriscoll.com/2016/03/07/frame-rate-independent-damping-using-lerp/', year: 2016 },
     { type: 'talk', title: 'Lerp smoothing is broken (Freya Holmér)', note: 'YouTube. lerp 스무딩의 프레임 의존성, exp 감쇠 해법, 반감기 파라미터화.' },
-    { type: 'article', title: 'Spring-It-On: The Game Developer\'s Spring-Roll-Call (Daniel Holden)', url: 'https://theorangeduck.com/page/spring-roll-call', year: 2021, note: 'damper를 반감기로 정확하게 쓰는 법.' },
+    { type: 'article', title: 'Spring-It-On: The Game Developer\'s Spring-Roll-Call (Daniel Holden)', url: 'https://theorangeduck.com/page/spring-roll-call', year: 2021, note: 'damper를 반감기로 정확하게 쓰는 법' },
   ],
   params: [
     { key: 'method', label: '스무딩 방식', type: 'select', group: '스무딩', options: [

@@ -9,12 +9,12 @@ GTL.register({
   info: `
     <p>8비트 시절 하드웨어는 프레임버퍼에 색 대신 팔레트 인덱스를 저장했음. 팔레트 레지스터 몇 개만 바꾸면 화면 전체 색이 바로 바뀜.</p>
     <p>그래서 인덱스 범위를 돌리는 <b>컬러 사이클링(Color Cycling)</b>으로 그림 한 장에 폭포, 용암, 물결을 움직였음. Mark Ferrari의 작업이 유명함.</p>
-    <p>현대 GPU에서도 같은 기법을 씀. 스프라이트에 인덱스(R)와 팔레트 행(G)을 저장함. 프래그먼트 셰이더가
+    <p>현대 GPU에서도 같은 기법을 씀. 스프라이트에 인덱스(R)와 팔레트 행(G)을 저장. 프래그먼트 셰이더가
     <code>texture2D(u_pal, vec2((idx+0.5)/64, (row+0.5)/4))</code>로 색을 찾음. 팔레트 텍스처는 64×4 = 1KB라서 매 프레임 갱신해도 비용이 거의 없음.</p>
     <ul>
     <li><b>RGB 고정</b>: 미리 구운 RGB 텍스처. 팔레트를 바꾸려면 다시 구워야 함. 그래서 사이클링과 시간대 변화가 불가능.</li>
     <li><b>CPU 재채색</b>: 매 프레임 CPU가 모든 픽셀을 다시 칠하고 텍스처 전체를 업로드. 결과는 같지만 업로드량이 수백 배.</li>
-    <li><b>GPU LUT</b>: 인덱스 텍스처는 그대로 두고 1KB 팔레트만 업로드.</li>
+    <li><b>GPU LUT</b>: 인덱스 텍스처는 그대로 두고 1KB 팔레트만 업로드</li>
     </ul>`,
   diagram: (L) => `<svg viewBox="0 0 540 170" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arr" class="m-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -36,16 +36,16 @@ GTL.register({
   </svg>`,
   look: [
     'B의 폭포, 강, 횃불을 보면 흐르는 동안 A는 멈춰 있음. 픽셀 데이터는 같고 팔레트만 움직임.',
-    'A를 "CPU 재채색"으로 바꾸면 B와 똑같이 보이지만 "업로드/프레임"이 수백 KB로 커짐.',
+    'A를 "CPU 재채색"으로 바꾸면 B와 똑같이 보이지만 "업로드/프레임"이 수백 KB로 커짐',
     '"시간대"를 움직이면 하늘, 산, 물이 낮 → 노을 → 밤으로 바뀜. 인덱스 이미지는 한 장뿐임.',
     '"인덱스 시각화"를 켜면 픽셀마다 저장된 번호가 무지개색으로 보임. 폭포의 줄무늬가 사이클링 범위임.',
     '"기사 피격" 버튼을 누르면 기사 3명이 잠깐 흰색으로 바뀜. 세 기사는 스프라이트 데이터가 같고 팔레트 행만 다름.',
   ],
   refs: [
     { type: 'talk', title: "8 Bit & '8 Bitish' Graphics-Outside the Box (Mark Ferrari)", year: 2016, note: 'GDC 2016. 컬러 사이클링 배경 아트의 제작 과정.' },
-    { type: 'article', title: 'Old School Color Cycling with HTML5 (Joseph Huckaby)', year: 2010, note: 'Mark Ferrari의 LBM 아트를 캔버스에서 사이클링하는 데모와 해설.' },
+    { type: 'article', title: 'Old School Color Cycling with HTML5 (Joseph Huckaby)', year: 2010, note: 'Mark Ferrari의 LBM 아트를 캔버스에서 사이클링하는 데모와 해설' },
     { type: 'article', title: 'Breaking the NES for Shovel Knight (David D\'Angelo, Yacht Club Games)', year: 2014, note: 'NES 팔레트 제약과 이를 다룬 방법. Gamasutra 기고.' },
-    { type: 'engine', title: 'Indexed color / palette textures', note: '많은 레트로 스타일 게임이 인덱스+LUT 셰이더로 팔레트 스왑(적 색 변형, 피격 플래시)을 구현함.' },
+    { type: 'engine', title: 'Indexed color / palette textures', note: '많은 레트로 스타일 게임이 인덱스+LUT 셰이더로 팔레트 스왑(적 색 변형, 피격 플래시)을 구현' },
   ],
   params: [
     { key: 'mode', label: '방식', type: 'select', group: '표현 방식', options: [

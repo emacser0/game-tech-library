@@ -2,22 +2,22 @@
 GTL.register({
   id: 'flow-field',
   title: '플로우 필드 (Flow Field) vs 유닛별 A*',
-  summary: '수백 유닛이 같은 목표로 갈 때 유닛마다 A*를 돌리면, 목표가 바뀔 때마다 길찾기 요청이 몰림. 플로우 필드는 목표에서 Dijkstra를 한 번 퍼뜨려 방향 지도를 만듦. 유닛 수와 상관없는 비용으로 모든 유닛을 안내함.',
+  summary: '수백 유닛이 같은 목표로 갈 때 유닛마다 A*를 돌리면, 목표가 바뀔 때마다 길찾기 요청이 몰림. 플로우 필드는 목표에서 Dijkstra를 한 번 퍼뜨려 방향 지도를 만듦. 유닛 수와 상관없는 비용으로 모든 유닛을 안내.',
   views: { a: '유닛별 A* (프레임 예산)', b: '플로우 필드' },
   controls: '클릭: 목표 지점 변경 (미러 입력을 켜면 양쪽 동시)',
   info: `
-    <p><b>유닛별 A*</b>: 유닛마다 자기 위치에서 목표까지 경로를 요청함. 프레임 시간을 지키려면 프레임당 처리할 요청 수(예산)를 제한해야 함.
+    <p><b>유닛별 A*</b>: 유닛마다 자기 위치에서 목표까지 경로를 요청. 프레임 시간을 지키려면 프레임당 처리할 요청 수(예산)를 제한해야 함.
     그래서 목표가 바뀌면 수백 개의 요청이 큐에 쌓임. <b>뒤쪽 유닛은 경로를 받을 때까지 멈춰 있음</b>(회색).</p>
-    <p><b>플로우 필드(Flow Field)</b>: 동작 순서는 다음과 같음.</p>
+    <p><b>플로우 필드(Flow Field)</b>: 동작 순서는 다음과 같음</p>
     <ul>
-      <li>목표 칸에서 맵 전체로 Dijkstra를 한 번 퍼뜨림.</li>
-      <li>그 결과로 <b>적분 필드</b>(칸마다 목표까지 비용)가 생김.</li>
-      <li>칸마다 "비용이 가장 낮은 이웃 방향"을 저장함.</li>
-      <li>유닛은 자기 칸의 화살표만 읽음.</li>
+      <li>목표 칸에서 맵 전체로 Dijkstra를 한 번 퍼뜨림</li>
+      <li>그 결과로 <b>적분 필드</b>(칸마다 목표까지 비용)가 생김</li>
+      <li>칸마다 "비용이 가장 낮은 이웃 방향"을 저장</li>
+      <li>유닛은 자기 칸의 화살표만 읽음</li>
     </ul>
     <p>그래서 <b>유닛 수가 늘어도 길찾기 비용이 늘지 않음</b>. Supreme Commander 2, Planetary Annihilation 같은 RTS가 대규모 부대 이동에 썼음.</p>
-    <p>단점: 맵 전체(또는 섹터)를 계산해야 하고, 목표마다 필드가 하나씩 필요함. 그래서 실제로는 섹터/포털 계층과 캐시를 함께 씀.</p>
-    <p>두 뷰 모두 같은 분리(separation) 조향과 벽 충돌을 씀.</p>`,
+    <p>단점: 맵 전체(또는 섹터)를 계산해야 하고, 목표마다 필드가 하나씩 필요. 그래서 실제로는 섹터/포털 계층과 캐시를 함께 씀.</p>
+    <p>두 뷰 모두 같은 분리(separation) 조향과 벽 충돌을 씀</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 218" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="ffA" class="m-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
     <marker id="ffB" class="m-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3.5" markerHeight="3.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -46,14 +46,14 @@ GTL.register({
     <text x="290" y="210" class="t-small t-dim">${L('비용: 맵 크기에 비례, 유닛 수와 무관', 'cost: map size only, not unit count')}</text>
   </svg>`,
   look: [
-    '클릭하거나 자동 이동으로 목표를 바꾸면 A의 "경로 대기 유닛"이 유닛 수만큼 치솟음. 회색 유닛은 차례로 출발함. B는 모든 유닛이 즉시 방향을 틈.',
-    'A의 "프레임당 경로 예산"을 올리면 대기는 줄지만 "길찾기 비용"(ms/프레임)이 크게 늘어남.',
-    '유닛 수를 600으로 늘려도 B의 필드 계산 비용은 그대로임(맵 크기에만 비례).',
-    'B의 "필드 표시"를 "방향 화살표"나 "적분 비용"으로 바꾸면 적분 필드가 벽을 돌아 퍼지는 모양이 보임.',
+    '클릭하거나 자동 이동으로 목표를 바꾸면 A의 "경로 대기 유닛"이 유닛 수만큼 치솟음. 회색 유닛은 차례로 출발. B는 모든 유닛이 즉시 방향을 틈.',
+    'A의 "프레임당 경로 예산"을 올리면 대기는 줄지만 "길찾기 비용"(ms/프레임)이 크게 늘어남',
+    '유닛 수를 600으로 늘려도 B의 필드 계산 비용은 그대로임(맵 크기에만 비례)',
+    'B의 "필드 표시"를 "방향 화살표"나 "적분 비용"으로 바꾸면 적분 필드가 벽을 돌아 퍼지는 모양이 보임',
   ],
   refs: [
     { type: 'book', title: 'Crowd Pathfinding and Steering Using Flow Field Tiles', year: 2013, note: 'Elijah Emerson, Game AI Pro (CRC Press) 23장. Supreme Commander 2의 플로우 필드 구현.' },
-    { type: 'game', title: 'Supreme Commander 2 (Gas Powered Games, 2010)', note: '플로우 필드 기반 대규모 유닛 이동.' },
+    { type: 'game', title: 'Supreme Commander 2 (Gas Powered Games, 2010)', note: '플로우 필드 기반 대규모 유닛 이동' },
     { type: 'article', title: 'Flow Field Pathfinding for Tower Defense (Red Blob Games)', url: 'https://www.redblobgames.com/pathfinding/tower-defense/', year: 2014, note: 'Amit Patel. BFS/Dijkstra로 만든 방향장 시각화.' },
     { type: 'paper', title: 'Continuum Crowds', year: 2006, note: 'Treuille, Cooper, Popović. SIGGRAPH 2006. 포텐셜 필드 기반 군중.', url: 'https://doi.org/10.1145/1141911.1142008' },
   ],

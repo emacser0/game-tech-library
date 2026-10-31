@@ -2,11 +2,11 @@
 GTL.register({
   id: 'stacking-solver',
   title: '상자 쌓기 & 솔버 반복 / Warm Starting',
-  summary: 'Sequential Impulses 솔버는 접촉 충격량을 반복해서 조금씩 맞춤. 반복이 부족하면 높은 스택이 서로 파고들어 가라앉음. 이전 프레임의 충격량으로 시작하는 Warm Starting이 이 문제를 적은 비용으로 해결함.',
+  summary: 'Sequential Impulses 솔버는 접촉 충격량을 반복해서 조금씩 맞춤. 반복이 부족하면 높은 스택이 서로 파고들어 가라앉음. 이전 프레임의 충격량으로 시작하는 Warm Starting이 이 문제를 적은 비용으로 해결.',
   views: { a: 'Warm Start 끔', b: 'Warm Start 켬' },
   controls: '마우스 클릭: 클릭한 위치 위에서 상자 떨어뜨리기',
   info: `
-    <p><b>Sequential Impulses</b>는 Box2D 계열 솔버의 방식. 접촉마다 "관통 속도를 없애는 충격량 λ"를 구하고, 모든 접촉에 대해 <b>여러 번 반복</b>함(Gauss-Seidel).
+    <p><b>Sequential Impulses</b>는 Box2D 계열 솔버의 방식. 접촉마다 "관통 속도를 없애는 충격량 λ"를 구하고, 모든 접촉에 대해 <b>여러 번 반복</b>(Gauss-Seidel).
     핵심은 누적 충격량을 <code>λ ≥ 0</code>으로 제한(클램프)하는 것(Catto, GDC 2006).</p>
     <p>문제: 높이 N인 기둥의 바닥 접촉은 위 상자 N개의 무게를 받쳐야 함. 한 번 반복할 때 정보는 대략 한 상자씩만 전달됨.
     그래서 <b>반복 수 &lt; 스택 높이</b>이면 충격량이 모자라 상자가 서로 파고듦.</p>
@@ -17,8 +17,8 @@ GTL.register({
       <li><b>Baumgarte 안정화</b>: <code>bias = β/dt * max(관통 - slop, 0)</code>를 속도에 섞음. 단점은 보정 속도가 실제 운동 에너지가 되어 튀는 것. warm start가 이 에너지를 다음 프레임에 다시 넣음.</li>
       <li><b>Split impulse</b>(기본값): 위치 갱신에만 쓰는 별도 의사 속도로 보정을 풂. 위 문제를 피함.</li>
     </ul>
-    <p>살짝 떨어진 접촉도 추측성(speculative) 접촉으로 유지함. warm start 정보가 끊기지 않게 하기 위함.</p>
-    <p>빨간 영역은 겹침(관통), 노란 막대는 접촉 법선 충격량 크기.</p>`,
+    <p>살짝 떨어진 접촉도 추측성(speculative) 접촉으로 유지. warm start 정보가 끊기지 않게 하기 위함.</p>
+    <p>빨간 영역은 겹침(관통), 노란 막대는 접촉 법선 충격량 크기</p>`,
   // 도식: 높이 12 스택의 바닥 접촉 충격량이 반복마다 쌓이는 모습. warm start는 지난 프레임 값에서 출발
   diagram: (L) => {
     const X = (i) => 300 + i * 18, Y = (v) => 160 - v * 100;
@@ -53,13 +53,13 @@ GTL.register({
     'A의 반복 횟수를 스택 높이 이상(예: 20~40)으로 올리면 A도 훨씬 덜 가라앉음. 대신 솔버 시간이 그만큼 늘어남. B는 6회로 충분.',
     '장면을 "무거운 상자 위"로 바꾸면 질량비 때문에 수렴이 훨씬 어려움. Warm Start가 있어도 반복을 올려야 함.',
     '위치 보정을 Baumgarte로 바꾸고 "무거운 상자 위" 장면을 보면 B의 스택이 통째로 튀어 오름. 보정 충격량이 warm start로 다음 프레임에 다시 들어가기 때문. Split impulse는 이 에너지 유입을 막음.',
-    'β를 0으로 하면 관통이 회복되지 않고 계속 쌓임.',
+    'β를 0으로 하면 관통이 회복되지 않고 계속 쌓임',
   ],
   refs: [
     { type: 'talk', title: 'Fast and Simple Physics using Sequential Impulses (Erin Catto)', url: 'https://box2d.org/publications/', year: 2006, note: 'GDC 2006. 누적 충격량 클램프, warm starting, Baumgarte.' },
-    { type: 'code', title: 'Box2D Lite', url: 'https://github.com/erincatto/box2d-lite', note: '이 샘플 솔버 구조의 원형 (Arbiter, warm starting).' },
-    { type: 'paper', title: 'Stabilization of Constraints and Integrals of Motion in Dynamical Systems (J. Baumgarte)', year: 1972, note: '위치 오차를 속도 제약에 섞는 안정화 기법.' },
-    { type: 'engine', title: 'Unity - Physics settings: Default Solver Iterations', note: 'PhysX 솔버 반복 횟수 (Rigidbody.solverIterations로 개별 설정).' },
+    { type: 'code', title: 'Box2D Lite', url: 'https://github.com/erincatto/box2d-lite', note: '이 샘플 솔버 구조의 원형 (Arbiter, warm starting)' },
+    { type: 'paper', title: 'Stabilization of Constraints and Integrals of Motion in Dynamical Systems (J. Baumgarte)', year: 1972, note: '위치 오차를 속도 제약에 섞는 안정화 기법' },
+    { type: 'engine', title: 'Unity - Physics settings: Default Solver Iterations', note: 'PhysX 솔버 반복 횟수 (Rigidbody.solverIterations로 개별 설정)' },
   ],
   params: [
     { key: 'warm', label: 'Warm Starting', type: 'bool', a: false, b: true, default: false, group: '솔버' },

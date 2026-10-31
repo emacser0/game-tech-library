@@ -2,7 +2,7 @@
 GTL.register({
   id: 'hit-flash-outline',
   title: '피격 플래시 & 스프라이트 외곽선 셰이더',
-  summary: '맞은 스프라이트를 잠깐 흰색으로 바꾸고, 투명 픽셀 주변의 알파를 검사해 외곽선을 그림. 같은 스프라이트 데이터로 피격 피드백과 배경 대비 가독성을 얻음. 곱하기 틴트로는 흰색 플래시가 불가능함.',
+  summary: '맞은 스프라이트를 잠깐 흰색으로 바꾸고, 투명 픽셀 주변의 알파를 검사해 외곽선을 그림. 같은 스프라이트 데이터로 피격 피드백과 배경 대비 가독성을 얻음. 곱하기 틴트로는 흰색 플래시 불가능.',
   renderer: 'webgl',
   views: { a: '곱하기 틴트, 외곽선 없음', b: '흰색 섞기 + 8방향 외곽선' },
   controls: '스프라이트 클릭: 피격',
@@ -16,7 +16,7 @@ GTL.register({
     <p><b>외곽선(Outline)</b>은 투명 픽셀에서 주변 텍셀의 알파를 읽음. 주변에 불투명 픽셀이 있으면 외곽선 색으로 칠함.</p>
     <ul>
     <li>4방향(마름모)은 대각선 모서리가 비어 보임. 8방향(정사각형)은 모서리까지 채움.</li>
-    <li>두께가 w면 픽셀마다 최대 (2w+1)² 번 텍스처를 읽음.</li>
+    <li>두께가 w면 픽셀마다 최대 (2w+1)² 번 텍스처를 읽음</li>
     <li>스프라이트 둘레에 투명 여백이 w 텍셀 이상 있어야 함. 없으면 외곽선이 잘림.</li>
     </ul>`,
   diagram: (L) => `<svg viewBox="0 0 540 172" xmlns="http://www.w3.org/2000/svg">
@@ -47,14 +47,14 @@ GTL.register({
   </svg>`,
   look: [
     'A와 B에서 몬스터가 맞을 때를 비교하면 A는 색이 변하지 않음. B는 한순간 하얗게 빛남.',
-    'A의 "플래시 색"을 빨강으로 바꾸면 곱하기 틴트도 보이지만 어둡게 변할 뿐 밝아지지 않음.',
-    'B의 "외곽선 모양"을 "4방향"으로 바꾸고 두께를 2 이상으로 올리면 대각선 모서리가 깎여 보임.',
+    'A의 "플래시 색"을 빨강으로 바꾸면 곱하기 틴트도 보이지만 어둡게 변할 뿐 밝아지지 않음',
+    'B의 "외곽선 모양"을 "4방향"으로 바꾸고 두께를 2 이상으로 올리면 대각선 모서리가 깎여 보임',
     '외곽선을 끄면 녹색 몬스터가 수풀 배경에 묻힘. 켜면 실루엣이 바로 구분됨.',
   ],
   refs: [
-    { type: 'engine', title: 'Godot Engine: CanvasItem shaders', url: 'https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/canvas_item_shader.html', note: 'TEXTURE_PIXEL_SIZE로 주변 텍셀을 읽어 외곽선을 만드는 방식에 필요한 내장 값.' },
-    { type: 'talk', title: 'Juice it or lose it (Martin Jonasson, Petri Purho)', year: 2012, note: '피격 플래시 같은 작은 피드백이 손맛을 얼마나 바꾸는지 보여준 발표.' },
-    { type: 'game', title: 'Hollow Knight (Team Cherry)', year: 2017, note: '적이 맞으면 흰색으로 번쩍이는 피격 플래시의 대표 사례.' },
+    { type: 'engine', title: 'Godot Engine: CanvasItem shaders', url: 'https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/canvas_item_shader.html', note: 'TEXTURE_PIXEL_SIZE로 주변 텍셀을 읽어 외곽선을 만드는 방식에 필요한 내장 값' },
+    { type: 'talk', title: 'Juice it or lose it (Martin Jonasson, Petri Purho)', year: 2012, note: '피격 플래시 같은 작은 피드백이 손맛을 얼마나 바꾸는지 보여준 발표' },
+    { type: 'game', title: 'Hollow Knight (Team Cherry)', year: 2017, note: '적이 맞으면 흰색으로 번쩍이는 피격 플래시의 대표 사례' },
   ],
   params: [
     { key: 'flashMode', label: '플래시 방식', type: 'select', group: '피격 플래시', options: [

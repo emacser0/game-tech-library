@@ -2,17 +2,17 @@
 GTL.register({
   id: 'noise-types',
   title: '노이즈 종류 (White, Value, Perlin, Simplex, Worley)',
-  summary: 'Value 노이즈 vs Perlin 노이즈 비교. 노이즈는 종류마다 모양, 연속성, 격자 아티팩트가 다름. 같은 주파수에서 2D 필드, 1D 단면, 값 분포(히스토그램)를 비교함.',
+  summary: 'Value 노이즈 vs Perlin 노이즈 비교. 노이즈는 종류마다 모양, 연속성, 격자 아티팩트가 다름. 같은 주파수에서 2D 필드, 1D 단면, 값 분포(히스토그램)를 비교.',
   views: { a: 'Value 노이즈', b: 'Perlin (Gradient) 노이즈' },
   controls: '마우스 세로 이동: 1D 단면 위치 선택',
   info: `
     <p><b>노이즈</b>: 절차적 생성의 기본 재료. 위치마다 정해진, 무작위처럼 보이는 값을 돌려주는 함수.</p>
     <ul>
-      <li><b>White</b>: 샘플마다 독립된 난수. 이웃한 값끼리 연관이 없음.</li>
-      <li><b>Value 노이즈</b>: 정수 격자점에 난수 <i>값</i>을 두고 사이를 보간함. 계산이 싸지만 극값이 격자점에 몰려 <b>네모난 덩어리</b>가 보임.</li>
-      <li><b>Perlin 노이즈</b>(1985, 2002 개선판): 격자점에 난수 <i>기울기</i>를 두고 내적을 보간함. 격자점 값이 항상 0이라 극값이 격자 사이로 흩어짐. 그래서 더 자연스러움.</li>
+      <li><b>White</b>: 샘플마다 독립된 난수. 이웃한 값끼리 연관 없음.</li>
+      <li><b>Value 노이즈</b>: 정수 격자점에 난수 <i>값</i>을 두고 사이를 보간. 계산이 싸지만 극값이 격자점에 몰려 <b>네모난 덩어리</b>가 보임.</li>
+      <li><b>Perlin 노이즈</b>(1985, 2002 개선판): 격자점에 난수 <i>기울기</i>를 두고 내적을 보간. 격자점 값이 항상 0이라 극값이 격자 사이로 흩어짐. 그래서 더 자연스러움.</li>
       <li><b>Simplex</b>: 정사각형 대신 삼각형(심플렉스) 격자를 씀. 방향성 아티팩트가 적고 고차원에서 빠름.</li>
-      <li><b>Worley(셀룰러) 노이즈</b>: 셀마다 흩뿌린 특징점까지의 거리(F1)를 씀. F2−F1은 셀 경계를 강조함. 돌바닥, 세포, 균열 텍스처에 쓰임.</li>
+      <li><b>Worley(셀룰러) 노이즈</b>: 셀마다 흩뿌린 특징점까지의 거리(F1)를 씀. F2−F1은 셀 경계를 강조. 돌바닥, 세포, 균열 텍스처에 쓰임.</li>
     </ul>`,
   // 도식: 1D 단면에서 Value(격자점에 값)와 Perlin(격자점에 기울기)의 차이, 극값 위치
   diagram: (L) => `<svg viewBox="0 0 540 178" xmlns="http://www.w3.org/2000/svg">
@@ -33,11 +33,11 @@ GTL.register({
     '"정수 격자 표시"를 켜고 A(Value)를 보면 밝고 어두운 점이 격자 교차점에 몰려 있음. B(Perlin)는 교차점이 항상 중간 회색임.',
     '1D 단면 그래프를 보면 Perlin, Simplex 곡선은 격자 눈금(세로 점선)마다 0.5를 지남. Value는 눈금에서 평평한 극값을 가짐.',
     '히스토그램을 비교하면 White는 평평함(균등 분포). Value는 넓게 퍼지고, Perlin, Simplex는 가운데로 몰린 종 모양임. 지형 높이로 쓸 때 정규화가 필요한 이유.',
-    '색상을 "등고선 밴드"로 바꾸면 Value 노이즈의 축에 맞춰진 마름모, 사각형 윤곽이 뚜렷해짐.',
+    '색상을 "등고선 밴드"로 바꾸면 Value 노이즈의 축에 맞춰진 마름모, 사각형 윤곽이 뚜렷해짐',
   ],
   refs: [
-    { type: 'paper', title: 'An Image Synthesizer (Ken Perlin, SIGGRAPH 1985)', url: 'https://dl.acm.org/doi/10.1145/325165.325247', year: 1985, note: 'Perlin 노이즈 최초 발표.' },
-    { type: 'paper', title: 'Improving Noise (Ken Perlin, SIGGRAPH 2002)', url: 'https://mrl.cs.nyu.edu/~perlin/paper445.pdf', year: 2002, note: '5차 fade 곡선과 개선된 기울기 집합.' },
+    { type: 'paper', title: 'An Image Synthesizer (Ken Perlin, SIGGRAPH 1985)', url: 'https://dl.acm.org/doi/10.1145/325165.325247', year: 1985, note: 'Perlin 노이즈 최초 발표' },
+    { type: 'paper', title: 'Improving Noise (Ken Perlin, SIGGRAPH 2002)', url: 'https://mrl.cs.nyu.edu/~perlin/paper445.pdf', year: 2002, note: '5차 fade 곡선과 개선된 기울기 집합' },
     { type: 'paper', title: 'A Cellular Texture Basis Function (Steven Worley, SIGGRAPH 1996)', url: 'https://dl.acm.org/doi/10.1145/237170.237267', year: 1996 },
     { type: 'article', title: 'Simplex noise demystified (Stefan Gustavson)', year: 2005, note: 'Simplex 노이즈 구현 해설. 이 샘플의 simplex 구현이 따르는 방식.' },
     { type: 'article', title: 'Red Blob Games: Making maps with noise functions', url: 'https://www.redblobgames.com/maps/terrain-from-noise/', note: 'Amit Patel. 노이즈로 지형을 만드는 입문 글.' },

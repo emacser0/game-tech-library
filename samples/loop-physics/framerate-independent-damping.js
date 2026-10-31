@@ -6,15 +6,15 @@ GTL.register({
   views: { a: 'lerp(x, t, k)', b: 'damp: 1 - e^(-λ*dt)' },
   controls: '조작 없음. 목표가 3초마다 좌우로 바뀜.',
   info: `
-    <p><b>프레임레이트 독립 감쇠</b>는 FPS와 관계없이 같은 속도로 목표에 다가가게 하는 방법.</p>
+    <p><b>프레임레이트 독립 감쇠</b>는 FPS와 관계없이 같은 속도로 목표에 다가가게 하는 방법</p>
     <p>한 프레임에 남은 거리의 <code>k</code>만큼 다가가면 n 프레임 뒤 남은 거리는 <code>(1-k)ⁿ</code>. 1초 동안의 프레임 수 n이 곧 FPS.
-    그래서 <b>144fps가 10fps보다 14배 빨리</b> 수렴함. 기기 성능에 따라 게임 속도가 달라지는 대표적인 버그.</p>
+    그래서 <b>144fps가 10fps보다 14배 빨리</b> 수렴. 기기 성능에 따라 게임 속도가 달라지는 대표적인 버그.</p>
     <p>흔한 수정인 <code>lerp(x, t, k*dt*60)</code>은 1차 근사일 뿐임. 두 가지 문제가 남음.</p>
     <ul>
-      <li>낮은 FPS에서 여전히 결과가 다름.</li>
-      <li><code>k*dt*60 &gt; 1</code>이면 목표를 지나침.</li>
+      <li>낮은 FPS에서 여전히 결과가 다름</li>
+      <li><code>k*dt*60 &gt; 1</code>이면 목표를 지나침</li>
     </ul>
-    <p>정답은 연속 시간 지수 감쇠 <code>dx/dt = -λ(x - t)</code>의 정확한 해를 쓰는 것.</p>
+    <p>정답은 연속 시간 지수 감쇠 <code>dx/dt = -λ(x - t)</code>의 정확한 해를 쓰는 것</p>
     <p><code>x = lerp(x, t, 1 - exp(-λ*dt))</code> (= <code>1 - (1-k)^(dt*60)</code>, 60fps에서 기존 k와 같은 느낌)</p>
     <p>단점: <code>exp</code> 계산이 한 번 더 들어감. 기존 k 값을 λ로 바꿔야 함.</p>
     <p>각 뷰 안의 레인 5개는 서로 다른 호스트 FPS를 <b>흉내 냄</b>. 두 뷰는 같은 시드로 같은 프레임 타이밍을 받음.</p>`,
@@ -51,16 +51,16 @@ GTL.register({
   </svg>`;
   },
   look: [
-    'A의 레인을 비교하면 144fps 레인(맨 아래)이 가장 먼저 도착하고 10fps 레인이 한참 늦음. B는 다섯 레인이 같은 시각에 도착함(도착 시간 편차 통계).',
+    'A의 레인을 비교하면 144fps 레인(맨 아래)이 가장 먼저 도착하고 10fps 레인이 한참 늦음. B는 다섯 레인이 같은 시각에 도착(도착 시간 편차 통계).',
     'A를 "k*dt*60 선형 보정"으로 바꾸면 차이가 줄지만 10fps 레인은 여전히 다름. k를 0.3 이상으로 올리면 10fps 레인이 목표를 지나쳐 출렁임.',
     '지터를 올려도 B의 곡선은 겹침. 각 프레임이 실제 dt만큼 정확히 감쇠하기 때문.',
     'Unity에서 Vector3.Lerp(a, b, k)를 Update에서 쓰는 코드가 이 문제를 가짐. Time.deltaTime을 지수에 넣어야 해결됨.',
   ],
   refs: [
-    { type: 'article', title: 'Frame Rate Independent Damping using Lerp (Rory Driscoll)', year: 2016, note: '1 - (1-k)^dt 유도.' },
+    { type: 'article', title: 'Frame Rate Independent Damping using Lerp (Rory Driscoll)', year: 2016, note: '1 - (1-k)^dt 유도' },
     { type: 'article', title: "Spring-It-On: The Game Developer's Spring-Roll-Call (Daniel Holden)", url: 'https://theorangeduck.com/page/spring-roll-call', year: 2021, note: '"damper" 절. 지수 감쇠와 half-life 파라미터화.' },
     { type: 'engine', title: 'Unity - Mathf.Lerp / Time.deltaTime', url: 'https://docs.unity3d.com/ScriptReference/Mathf.Lerp.html' },
-    { type: 'article', title: 'Game Programming Patterns - Game Loop', url: 'https://gameprogrammingpatterns.com/game-loop.html', year: 2014, note: '가변 dt 루프에서 dt를 곱해야 하는 이유.' },
+    { type: 'article', title: 'Game Programming Patterns - Game Loop', url: 'https://gameprogrammingpatterns.com/game-loop.html', year: 2014, note: '가변 dt 루프에서 dt를 곱해야 하는 이유' },
   ],
   params: [
     { key: 'method', label: '감쇠 방식', type: 'select', group: '감쇠', options: [

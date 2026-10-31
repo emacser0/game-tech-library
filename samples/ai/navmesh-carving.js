@@ -2,9 +2,9 @@
 GTL.register({
   id: 'navmesh-carving',
   title: '움직이는 장애물: 회피 vs 내비메시 카빙 (NavMeshObstacle)',
-  summary: '상자가 짧은 통로를 막았다 비켰다 함. 회피만 쓰면 경로가 그대로라 에이전트가 상자 앞에서 멈춤. 카빙을 쓰면 멈춘 상자 자리를 내비메시에서 잘라 내고, 에이전트가 경로를 다시 계산해 우회함.',
+  summary: '상자가 짧은 통로를 막았다 비켰다 함. 회피만 쓰면 경로가 그대로라 에이전트가 상자 앞에서 멈춤. 카빙을 쓰면 멈춘 상자 자리를 내비메시에서 잘라 내고, 에이전트가 경로를 다시 계산해 우회.',
   views: { a: '회피만 (카빙 없음)', b: '정지 시 카빙' },
-  controls: '조작 없음. 에이전트가 왼쪽 방에서 오른쪽 목표(초록)로 계속 이동함.',
+  controls: '조작 없음. 에이전트가 왼쪽 방에서 오른쪽 목표(초록)로 계속 이동.',
   info: `
     <p><b>내비메시 장애물</b>: 문, 상자처럼 움직이는 물체가 길을 막을 때 쓰는 컴포넌트. Unity의 NavMeshObstacle, Unreal의 Nav Modifier가 대표 예.</p>
     <p>처리 방식은 두 가지:</p>
@@ -12,7 +12,7 @@ GTL.register({
       <li><b>회피만</b>: 내비메시는 그대로 둠. 에이전트는 로컬 회피로 장애물을 피하려 함. 경로는 여전히 막힌 통로를 지나므로, 통로가 완전히 막히면 상자를 계속 밀며 멈춤.</li>
       <li><b>카빙(Carving)</b>: 장애물 발자국(footprint)에 에이전트 반지름을 더한 영역을 내비메시에서 잘라 냄. 내비메시가 바뀌면 에이전트가 경로를 다시 계산해 돌아감.</li>
     </ul>
-    <p>카빙은 내비메시 일부를 다시 만드는 작업이라 비쌈. 그래서 Unity는 <b>Carve Only Stationary</b> 옵션으로 멈춘 장애물만 카빙함. 멈춘 뒤 <b>Time To Stationary</b>만큼 지나야 정지로 판정. 움직이는 동안은 구멍을 지우고 회피만 씀.</p>
+    <p>카빙은 내비메시 일부를 다시 만드는 작업이라 비쌈. 그래서 Unity는 <b>Carve Only Stationary</b> 옵션으로 멈춘 장애물만 카빙. 멈춘 뒤 <b>Time To Stationary</b>만큼 지나야 정지로 판정. 움직이는 동안은 구멍을 지우고 회피만 씀.</p>
     <p>Unreal은 Runtime Generation을 Dynamic Modifiers Only로 두면 Nav Modifier가 걸친 타일만 다시 만듦. 영역 클래스를 NavArea_Null로 두면 그 영역을 지나갈 수 없음.</p>
     <p>단점: 정지 판정 시간 동안은 에이전트가 막힌 쪽으로 계속 감. 카빙이 자주 바뀌면 내비메시 갱신과 경로 재계산이 몰려 비용이 튐.</p>`,
   // 도식: 장애물 발자국 + 에이전트 반지름만큼 셀을 잘라 내고, 경로가 우회로로 바뀜
@@ -54,13 +54,13 @@ GTL.register({
   look: [
     '상자가 통로를 막으면 A의 에이전트는 상자 앞에 몰려 멈춤(빨간 테두리). B는 상자가 멈추고 0.5초 뒤 통로 셀이 잘려 나감(빨간 빗금). 에이전트는 아래 우회로로 돌아감.',
     'B의 "정지 판정 시간"을 3초로 올리면 그동안 B도 상자 앞에 몰림. "막힌 시간 합계"가 늘어남.',
-    'B에서 "정지했을 때만 카빙"을 끄면 상자가 움직이는 동안에도 카빙함. 우회는 빨라지지만 "내비메시 갱신 수"가 크게 늘어남.',
-    '상자가 비키면 B는 구멍을 지우고 경로를 다시 계산함. 굵은 선(첫 에이전트의 경로)이 짧은 통로로 돌아오고, 점선으로 이전 경로가 잠깐 남음.',
+    'B에서 "정지했을 때만 카빙"을 끄면 상자가 움직이는 동안에도 카빙. 우회는 빨라지지만 "내비메시 갱신 수"가 크게 늘어남.',
+    '상자가 비키면 B는 구멍을 지우고 경로를 다시 계산. 굵은 선(첫 에이전트의 경로)이 짧은 통로로 돌아오고, 점선으로 이전 경로가 잠깐 남음.',
   ],
   refs: [
-    { type: 'engine', title: 'Unity Manual - NavMesh Obstacle', url: 'https://docs.unity3d.com/Manual/class-NavMeshObstacle.html', note: 'Carve, Move Threshold, Time To Stationary, Carve Only Stationary 설명.' },
-    { type: 'engine', title: 'Unity Scripting API - AI.NavMeshObstacle', url: 'https://docs.unity3d.com/ScriptReference/AI.NavMeshObstacle.html', note: 'carving, carveOnlyStationary, carvingTimeToStationary 속성.' },
-    { type: 'engine', title: 'Unreal Engine - Modifying the Navigation Mesh', note: 'Nav Modifier Volume, Nav Area 클래스, Runtime Generation (Dynamic, Dynamic Modifiers Only).' },
+    { type: 'engine', title: 'Unity Manual - NavMesh Obstacle', url: 'https://docs.unity3d.com/Manual/class-NavMeshObstacle.html', note: 'Carve, Move Threshold, Time To Stationary, Carve Only Stationary 설명' },
+    { type: 'engine', title: 'Unity Scripting API - AI.NavMeshObstacle', url: 'https://docs.unity3d.com/ScriptReference/AI.NavMeshObstacle.html', note: 'carving, carveOnlyStationary, carvingTimeToStationary 속성' },
+    { type: 'engine', title: 'Unreal Engine - Modifying the Navigation Mesh', note: 'Nav Modifier Volume, Nav Area 클래스, Runtime Generation (Dynamic, Dynamic Modifiers Only)' },
     { type: 'code', title: 'Recast & Detour (DetourTileCache)', url: 'https://github.com/recastnavigation/recastnavigation', note: 'Mikko Mononen. 타일 단위로 장애물을 넣고 빼는 동적 내비메시. Unity와 Unreal 내비게이션의 바탕.' },
   ],
   params: [

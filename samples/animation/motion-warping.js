@@ -4,16 +4,16 @@ GTL.register({
   title: '모션 워핑 (Unreal Motion Warping)',
   summary: '돌진 공격 클립은 정해진 거리만큼만 이동하게 만들어짐. 루트 모션을 그대로 쓰면 적이 멀거나 가까울 때 타격 프레임이 빗나감. 모션 워핑은 워프 구간 안의 루트 모션을 늘리고 돌려 타격 프레임이 목표 지점에 정확히 닿게 함.',
   views: { a: '루트 모션 그대로', b: '모션 워핑' },
-  controls: '조작 없음. 캐릭터가 적을 향해 돌진 공격을 반복함. 위에서 내려다본 장면.',
+  controls: '조작 없음. 캐릭터가 적을 향해 돌진 공격을 반복. 위에서 내려다본 장면.',
   info: `
     <p><b>모션 워핑(Motion Warping)</b>은 애니메이션의 루트 모션을 실행 중에 고쳐 정해진 목표(warp target)에 도달하게 하는 기법. Unreal의 Motion Warping 플러그인이 대표적. Unity의 Target Matching(<code>Animator.MatchTarget</code>)도 같은 목적.</p>
     <p>애니메이터는 돌진 공격, 뛰어넘기 같은 클립을 한 가지 거리로 만듦. 실제 게임에서 적과 장애물의 거리는 매번 다름. 루트 모션을 그대로 쓰면 타격 프레임(contact frame)에 캐릭터가 목표 앞에서 멈추거나 지나침.</p>
     <p>동작 원리:</p>
     <ul>
-      <li>클립 타임라인에 <b>워프 구간</b>을 표시함 (Unreal에서는 Motion Warping 노티파이 스테이트). 구간 끝을 타격 프레임에 맞춤.</li>
-      <li>게임 코드가 매 공격마다 워프 목표(위치, 회전)를 등록함.</li>
-      <li>구간 안에서 매 프레임 "구간 끝까지 남은 원래 루트 이동"과 "목표까지 남은 거리"를 비교함. 두 벡터를 맞추는 배율과 회전으로 이번 프레임 이동량을 고침. Unreal의 Skew Warp도 남은 이동을 목표에 맞춰 변형하는 방식.</li>
-      <li>회전 워핑은 남은 구간 시간 동안 캐릭터 방향을 목표 쪽으로 나눠 돌림.</li>
+      <li>클립 타임라인에 <b>워프 구간</b>을 표시 (Unreal에서는 Motion Warping 노티파이 스테이트). 구간 끝을 타격 프레임에 맞춤.</li>
+      <li>게임 코드가 매 공격마다 워프 목표(위치, 회전)를 등록</li>
+      <li>구간 안에서 매 프레임 "구간 끝까지 남은 원래 루트 이동"과 "목표까지 남은 거리"를 비교. 두 벡터를 맞추는 배율과 회전으로 이번 프레임 이동량을 고침. Unreal의 Skew Warp도 남은 이동을 목표에 맞춰 변형하는 방식.</li>
+      <li>회전 워핑은 남은 구간 시간 동안 캐릭터 방향을 목표 쪽으로 나눠 돌림</li>
       <li>구간 밖의 루트 모션은 원래 그대로 씀. 그래서 예비 동작과 마무리 동작의 느낌이 유지됨.</li>
     </ul>
     <p>단점: 목표가 원래 거리와 너무 다르면 발이 크게 미끄러짐. 그래서 워핑 배율 한도를 두거나 거리별로 클립을 여러 개 만들어 고름.</p>`,
@@ -45,9 +45,9 @@ GTL.register({
     '"목표 거리"를 원래 거리(180)로, "목표 각도"와 "공격마다 목표 흔들기"를 0으로 두면 A와 B가 같음. 거리를 멀리 둘수록 B의 이동 속도 그래프가 구간 안에서만 커짐.',
   ],
   refs: [
-    { type: 'engine', title: 'Unreal Engine - Motion Warping', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/motion-warping-in-unreal-engine', note: 'Motion Warping 컴포넌트, 노티파이 스테이트, Skew Warp, 워프 목표 등록.' },
-    { type: 'engine', title: 'Unity Manual - Target Matching', url: 'https://docs.unity3d.com/Manual/TargetMatching.html', note: 'Animator.MatchTarget으로 정해진 구간에서 신체 부위를 목표 위치에 맞춤.' },
-    { type: 'engine', title: 'Unreal Engine - Root Motion', note: '모션 워핑이 고치는 대상인 루트 모션의 동작 방식.' },
+    { type: 'engine', title: 'Unreal Engine - Motion Warping', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/motion-warping-in-unreal-engine', note: 'Motion Warping 컴포넌트, 노티파이 스테이트, Skew Warp, 워프 목표 등록' },
+    { type: 'engine', title: 'Unity Manual - Target Matching', url: 'https://docs.unity3d.com/Manual/TargetMatching.html', note: 'Animator.MatchTarget으로 정해진 구간에서 신체 부위를 목표 위치에 맞춤' },
+    { type: 'engine', title: 'Unreal Engine - Root Motion', note: '모션 워핑이 고치는 대상인 루트 모션의 동작 방식' },
   ],
   params: [
     { key: 'warp', label: '모션 워핑', type: 'bool', group: '워핑', a: false, b: true, default: false },

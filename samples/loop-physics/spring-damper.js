@@ -2,24 +2,24 @@
 GTL.register({
   id: 'spring-damper',
   title: '감쇠 스프링 & 임계 감쇠 (SmoothDamp)',
-  summary: 'x = lerp(x, target, k)는 목표가 바뀌는 순간 속도가 끊기며 튐. 감쇠 스프링은 속도를 상태로 가져 가속도가 유한함. 감쇠비 ζ=1(임계 감쇠)이면 오버슈트 없이 가장 빨리 수렴함.',
+  summary: 'x = lerp(x, target, k)는 목표가 바뀌는 순간 속도가 끊기며 튐. 감쇠 스프링은 속도를 상태로 가져 가속도가 유한함. 감쇠비 ζ=1(임계 감쇠)이면 오버슈트 없이 가장 빨리 수렴.',
   views: { a: '프레임 lerp', b: '임계 감쇠 스프링' },
-  controls: '추적 대상을 "마우스"로 고르면 마우스를 따라감.',
+  controls: '추적 대상을 "마우스"로 고르면 마우스를 따라감',
   info: `
     <p><b>감쇠 스프링</b>은 카메라, UI, 조준점이 목표를 부드럽게 따라가게 하는 방법. 속도를 상태로 가지고 스프링 힘으로 움직임.</p>
     <p>흔히 쓰는 <code>x += (target - x)*k</code>는 <b>위치만 상태로 가진 1차 필터</b>. 두 가지 문제가 있음.</p>
     <ul>
       <li>목표가 순간 이동하면 그 프레임에 속도가 0에서 <code>k*거리/dt</code>로 바로 뜀. 카메라가 "툭" 끊기는 느낌(가속도 스파이크).</li>
-      <li>끝에서 지수적으로 느려져 멈추기까지 오래 걸림.</li>
+      <li>끝에서 지수적으로 느려져 멈추기까지 오래 걸림</li>
     </ul>
     <p>감쇠 스프링 <code>a = ω²(target - x) - 2ζω*v</code>는 위치와 속도가 모두 연속임. 감쇠비 <code>ζ</code>에 따라 움직임이 달라짐.</p>
     <ul>
-      <li>ζ &lt; 1: 목표를 지나쳤다가 출렁임(오버슈트).</li>
-      <li>ζ &gt; 1: 굼뜸.</li>
-      <li><b>ζ = 1 (임계 감쇠)</b>: 오버슈트 없이 가장 빨리 수렴.</li>
+      <li>ζ &lt; 1: 목표를 지나쳤다가 출렁임(오버슈트)</li>
+      <li>ζ &gt; 1: 굼뜸</li>
+      <li><b>ζ = 1 (임계 감쇠)</b>: 오버슈트 없이 가장 빨리 수렴</li>
     </ul>
-    <p>이 샘플은 언제나 안정한 <b>암시적 Euler</b>(implicit Euler)로 적분함. Unity의 <code>Mathf.SmoothDamp</code>는 Game Programming Gems 4의 임계 감쇠 스프링 근사(지수 함수의 다항 근사)를 씀.</p>
-    <p>단점: lerp보다 파라미터(진동수, 감쇠비)가 하나 더 많고, 속도 상태를 따로 저장해야 함.</p>`,
+    <p>이 샘플은 언제나 안정한 <b>암시적 Euler</b>(implicit Euler)로 적분. Unity의 <code>Mathf.SmoothDamp</code>는 Game Programming Gems 4의 임계 감쇠 스프링 근사(지수 함수의 다항 근사)를 씀.</p>
+    <p>단점: lerp보다 파라미터(진동수, 감쇠비)가 하나 더 많고, 속도 상태를 따로 저장해야 함</p>`,
   // 도식: 목표가 0에서 1로 순간 이동했을 때의 응답. lerp는 첫 프레임에 속도가 튐. 임계 감쇠 스프링은 속도 0에서 출발
   diagram: (L) => {
     const X = (t) => (50 + t * 280).toFixed(1), Y = (v) => (150 - v * 100).toFixed(1);
@@ -56,8 +56,8 @@ GTL.register({
   refs: [
     { type: 'engine', title: 'Unity - Mathf.SmoothDamp', url: 'https://docs.unity3d.com/ScriptReference/Mathf.SmoothDamp.html' },
     { type: 'book', title: 'Critically Damped Ease-In/Ease-Out Smoothing (Thomas Lowe)', year: 2004, note: 'Game Programming Gems 4. SmoothDamp의 원전.' },
-    { type: 'article', title: "Spring-It-On: The Game Developer's Spring-Roll-Call (Daniel Holden)", url: 'https://theorangeduck.com/page/spring-roll-call', year: 2021, note: '감쇠 스프링의 해석해와 half-life 파라미터화.' },
-    { type: 'article', title: 'Damped Springs (Ryan Juckett)', note: '감쇠비와 각진동수로 정의한 스프링을 dt와 관계없이 푸는 해석해.' },
+    { type: 'article', title: "Spring-It-On: The Game Developer's Spring-Roll-Call (Daniel Holden)", url: 'https://theorangeduck.com/page/spring-roll-call', year: 2021, note: '감쇠 스프링의 해석해와 half-life 파라미터화' },
+    { type: 'article', title: 'Damped Springs (Ryan Juckett)', note: '감쇠비와 각진동수로 정의한 스프링을 dt와 관계없이 푸는 해석해' },
   ],
   params: [
     { key: 'method', label: '추적 방식', type: 'select', group: '추적', options: [

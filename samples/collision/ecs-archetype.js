@@ -2,20 +2,20 @@
 GTL.register({
   id: 'ecs-archetype',
   title: 'ECS 아키타입 청크 (Unity Entities, Unreal Mass)',
-  summary: '종류가 섞인 객체 배열을 가상 호출로 업데이트하는 방식과, 같은 컴포넌트 조합끼리 청크에 모아 시스템이 맞는 청크만 도는 방식을 비교함. 대신 컴포넌트를 붙이고 떼면 엔티티가 다른 청크로 옮겨 가는 비용이 생김.',
+  summary: '종류가 섞인 객체 배열을 가상 호출로 업데이트하는 방식과, 같은 컴포넌트 조합끼리 청크에 모아 시스템이 맞는 청크만 도는 방식을 비교. 대신 컴포넌트를 붙이고 떼면 엔티티가 다른 청크로 옮겨 가는 비용이 생김.',
   views: { a: '객체 배열 + 가상 호출', b: '아키타입 청크' },
   info: `
     <p><b>ECS</b>(Entity Component System)에서 엔티티는 번호일 뿐이고, 데이터는 컴포넌트(위치, 속도, 체력 등)에 있음. <b>아키타입</b>은 컴포넌트 조합 하나. 같은 아키타입의 엔티티는 같은 <b>청크</b>에 모임.</p>
     <p>청크 안에서는 컴포넌트마다 배열이 따로 있음(SoA). 그래서 이동 시스템은 위치와 속도 배열만 차례로 읽음. Unity Entities는 16KB 청크, Unreal Mass는 프래그먼트(Fragment) 청크를 씀.</p>
     <p>A 방식(객체 배열)의 문제:</p>
     <ul>
-      <li>여러 종류 객체가 생성 순서대로 섞여 메모리에 흩어짐.</li>
+      <li>여러 종류 객체가 생성 순서대로 섞여 메모리에 흩어짐</li>
       <li>객체마다 가상 호출과 종류별 분기가 생김. 쓰지 않는 필드도 캐시에 같이 올라옴.</li>
     </ul>
     <p>B 방식의 동작:</p>
     <ul>
-      <li>시스템은 필요한 컴포넌트를 모두 가진 아키타입만 찾음(쿼리).</li>
-      <li>맞는 청크를 처음부터 끝까지 분기 없이 돎.</li>
+      <li>시스템은 필요한 컴포넌트를 모두 가진 아키타입만 찾음(쿼리)</li>
+      <li>맞는 청크를 처음부터 끝까지 분기 없이 돎</li>
     </ul>
     <p>단점: 컴포넌트를 붙이거나 떼는 <b>구조 변경</b>(structural change)은 엔티티를 다른 아키타입의 청크로 복사하고, 빈자리를 마지막 엔티티로 메움. 자주 바뀌는 상태는 컴포넌트 대신 값(플래그)으로 두는 편이 나음.</p>
     <p>이 샘플은 JavaScript라서 실제 엔진보다 차이가 작게 나올 수 있음. 측정값은 이 브라우저에서 잰 실제 시간.</p>`,
@@ -47,17 +47,17 @@ GTL.register({
   </svg>`;
   },
   look: [
-    '기본 상태에서 "업데이트" ms를 비교함. B가 더 빠름. 엔티티 수를 늘리면 차이가 커짐.',
+    '기본 상태에서 "업데이트" ms 비교. B가 더 빠름. 엔티티 수를 늘리면 차이가 커짐.',
     'B의 메모리 그림을 봄. 아키타입마다 청크가 한 줄씩 있고, 청크 안은 컴포넌트별 색 띠로 나뉨. A는 종류 색이 뒤섞여 있음.',
-    '"프레임당 구조 변경"을 2000으로 올리면 B의 "구조 변경" ms가 A보다 몇 배 커짐. A는 플래그만 바꿈. B는 엔티티를 매번 다른 청크로 복사함.',
+    '"프레임당 구조 변경"을 2000으로 올리면 B의 "구조 변경" ms가 A보다 몇 배 커짐. A는 플래그만 바꿈. B는 엔티티를 매번 다른 청크로 복사.',
     '"프레임당 구조 변경"을 0으로 두고 다시 시작하면 "청크 채움 비율"이 100 %에 가까움. 구조 변경을 켜면 두 아키타입 청크에 빈자리가 생겨 비율이 떨어짐.',
   ],
   refs: [
     { type: 'engine', title: 'Unity Entities - Archetypes concepts, Chunks, Structural changes', note: 'Entities 패키지 문서. 아키타입, 16KB 청크, 구조 변경 비용과 EntityCommandBuffer.' },
-    { type: 'engine', title: 'Unreal Engine - MassEntity (Fragments, Archetypes, Processors)', note: 'Mass의 프래그먼트, 아키타입 청크, 프로세서(시스템).' },
+    { type: 'engine', title: 'Unreal Engine - MassEntity (Fragments, Archetypes, Processors)', note: 'Mass의 프래그먼트, 아키타입 청크, 프로세서(시스템)' },
     { type: 'talk', title: 'Overwatch Gameplay Architecture and Netcode', year: 2017, note: 'Timothy Ford, GDC 2017. 실제 게임의 ECS 구조.' },
     { type: 'talk', title: 'Data-Oriented Design and C++', year: 2014, note: 'Mike Acton, CppCon 2014.' },
-    { type: 'article', title: 'Building an ECS #2: Archetypes and Vectorization', note: 'Sander Mertens (Flecs 작성자).' },
+    { type: 'article', title: 'Building an ECS #2: Archetypes and Vectorization', note: 'Sander Mertens (Flecs 작성자)' },
   ],
   params: [
     { key: 'count', label: '엔티티 수', type: 'int', min: 5000, max: 200000, step: 5000, default: 60000, shared: true, reset: true, group: '장면' },

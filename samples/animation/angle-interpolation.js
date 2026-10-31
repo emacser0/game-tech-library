@@ -1,18 +1,18 @@
-// 각도 보간: 각도를 일반 숫자처럼 lerp하면 ±180° 경계에서 반대 방향으로 한 바퀴 돎.
+// 각도 보간: 각도를 일반 숫자처럼 lerp하면 ±180° 경계에서 반대 방향으로 한 바퀴 돎
 GTL.register({
   id: 'angle-interpolation',
   title: '각도 보간: 최단 경로 (lerpAngle)',
   summary: 'atan2가 돌려주는 각도는 -180°~180° 경계에서 끊김. 그냥 lerp하면 경계를 넘을 때 포탑이 반대 방향으로 거의 한 바퀴 돎. 각도 차이를 [-π, π]로 감싸면 최단 경로로 보간됨.',
   views: { a: '단순 lerp', b: '최단 경로 lerpAngle' },
-  controls: '마우스를 뷰 안에 두면 포탑이 마우스를 조준함. 포탑 왼쪽을 지나가 볼 것. 마우스가 밖에 있으면 목표가 자동으로 회전함.',
+  controls: '마우스를 뷰 안에 두면 포탑이 마우스를 조준. 포탑 왼쪽을 지나가 볼 것. 마우스가 밖에 있으면 목표가 자동으로 회전.',
   info: `
     <p>각도는 원 위의 값. <code>170°</code>와 <code>-170°</code>는 실제로 20°만 떨어져 있음. 하지만 숫자로는 340° 차이.</p>
-    <p><code>lerp(a, b, t)</code>는 숫자 사이를 보간함. 그래서 <b>긴 쪽(340°)으로 돌아감</b>.
+    <p><code>lerp(a, b, t)</code>는 숫자 사이를 보간. 그래서 <b>긴 쪽(340°)으로 돌아감</b>.
     마우스 조준 포탑, 캐릭터 회전, 카메라 yaw(좌우 회전)에서 흔한 버그.</p>
     <p>해결 방법은 차이를 먼저 감싸는 것: <code>d = wrap(b - a, -π, π)</code>, <code>a + d*t</code>.
     Unity의 <code>Mathf.LerpAngle</code>와 Godot의 <code>lerp_angle</code>이 이 방식.
     3D 회전에서는 쿼터니언 내적 부호를 확인해 같은 문제를 해결함(<code>dot &lt; 0</code>이면 -q 사용).</p>
-    <p>아래 다이얼은 무작위 각도 사이를 트윈함. 빨간 호는 180°보다 긴 경로로 돌아간 경우.</p>`,
+    <p>아래 다이얼은 무작위 각도 사이를 트윈. 빨간 호는 180°보다 긴 경로로 돌아간 경우.</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 180" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arrA" class="m-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
     <marker id="arrB" class="m-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -42,12 +42,12 @@ GTL.register({
   </svg>`,
   look: [
     'A에서 목표(점)가 포탑 왼쪽(±180° 경계)을 지나면 포탑이 반대로 휙 한 바퀴 돎. B는 계속 따라감.',
-    '"총 회전량 / 목표 회전량" 값을 보면 B는 1.0 근처를 유지하고 A는 경계를 넘을 때마다 크게 늘어남.',
+    '"총 회전량 / 목표 회전량" 값을 보면 B는 1.0 근처를 유지하고 A는 경계를 넘을 때마다 크게 늘어남',
     '다이얼을 보면 A는 절반 정도가 빨간 호(먼 길)로 돎. B는 항상 180° 이하의 초록 호.',
     '추적 속도를 높이면 A의 헛회전이 빨라질 뿐 사라지지 않음. 속도가 아니라 각도 표현(wrap)의 문제.',
   ],
   refs: [
-    { type: 'engine', title: 'Unity - Mathf.LerpAngle', url: 'https://docs.unity3d.com/ScriptReference/Mathf.LerpAngle.html', note: '360° 경계를 고려해 올바르게 보간.' },
+    { type: 'engine', title: 'Unity - Mathf.LerpAngle', url: 'https://docs.unity3d.com/ScriptReference/Mathf.LerpAngle.html', note: '360° 경계를 고려해 올바르게 보간' },
     { type: 'engine', title: 'Godot - @GlobalScope.lerp_angle', url: 'https://docs.godotengine.org/en/stable/classes/class_%40globalscope.html', note: 'lerp_angle, angle_difference' },
     { type: 'paper', title: 'Animating Rotation with Quaternion Curves (Ken Shoemake)', year: 1985, note: 'SIGGRAPH \'85. 3D 회전의 최단 경로(q vs -q) 문제의 출발점.' },
   ],

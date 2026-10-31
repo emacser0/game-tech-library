@@ -2,22 +2,22 @@
 GTL.register({
   id: 'normal-mapping',
   title: '노멀 매핑 & 패럴랙스 매핑',
-  summary: '정점은 그대로 두고 픽셀마다 텍스처에서 법선을 읽어 조명함. 저폴리곤 표면에 요철이 생김. 패럴랙스 오클루전 매핑은 깊이감까지 더함.',
+  summary: '정점은 그대로 두고 픽셀마다 텍스처에서 법선을 읽어 조명. 저폴리곤 표면에 요철이 생김. 패럴랙스 오클루전 매핑은 깊이감까지 더함.',
   renderer: 'webgl',
   views: { a: '정점 법선만', b: '노멀 맵' },
   controls: '마우스 드래그: 카메라 회전, 휠: 줌',
   info: `
     <p><b>노멀 맵(normal map)</b>은 텍셀마다 법선 방향을 RGB로 저장한 텍스처. 기준은 <b>탄젠트 공간(tangent space)</b>: T = U 방향, B = V 방향, N = 표면 법선.</p>
-    <p>폴리곤을 늘리지 않고 표면에 요철을 그릴 수 있어 필요함.</p>
+    <p>폴리곤을 늘리지 않고 표면에 요철을 그릴 수 있어 필요</p>
     <p>동작 원리:</p>
     <ul>
-      <li>셰이더가 정점에서 받은 TBN 행렬로 법선을 월드 공간으로 바꿔 조명함.</li>
-      <li>탄젠트는 삼각형의 위치와 UV 변화로 CPU에서 계산함(Lengyel 방식, w = 손잡이 방향).</li>
+      <li>셰이더가 정점에서 받은 TBN 행렬로 법선을 월드 공간으로 바꿔 조명</li>
+      <li>탄젠트는 삼각형의 위치와 UV 변화로 CPU에서 계산(Lengyel 방식, w = 손잡이 방향)</li>
       <li>노멀 맵은 절차적 높이맵을 중앙 차분해 만듦. 높이는 알파 채널에 넣음.</li>
     </ul>
-    <p><b>초록 채널 반전</b>은 흔한 버그를 재현함. OpenGL(Y+)과 DirectX(Y−)의 노멀 맵 규약이 달라 생김. 요철이 한 축으로만 뒤집혀 보임.</p>
+    <p><b>초록 채널 반전</b>은 흔한 버그를 재현. OpenGL(Y+)과 DirectX(Y−)의 노멀 맵 규약이 달라 생김. 요철이 한 축으로만 뒤집혀 보임.</p>
     <p><b>패럴랙스 오클루전 매핑(POM)</b>은 시선 방향으로 높이맵을 여러 층 샘플링해 교차점을 찾고 UV를 옮김. 비스듬히 보면 벽돌이 실제로 튀어나와 보임.</p>
-    <p>단점: 실루엣은 바뀌지 않음. WebGL1의 루프 제약 때문에 고정 24단계로 샘플링함.</p>`,
+    <p>단점: 실루엣은 바뀌지 않음. WebGL1의 루프 제약 때문에 고정 24단계로 샘플링.</p>`,
   // 도식: 정점 법선만 쓸 때와 노멀 맵으로 텍셀마다 법선을 바꿀 때
   diagram: (L) => `<svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arrA" class="m-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker><marker id="arrB" class="m-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -52,13 +52,13 @@ GTL.register({
   look: [
     '광원이 움직일 때 A는 평평한 벽지처럼 보임. B는 벽돌 모서리에 그림자와 하이라이트가 생김.',
     'B를 "패럴랙스 오클루전"으로 바꾸고 카메라를 낮춰 비스듬히 보면 줄눈이 움푹 들어가 보임. 구의 가장자리(실루엣)는 여전히 매끈함.',
-    '"초록 채널 반전"을 켜면 위아래 요철만 뒤집혀 광원이 엉뚱한 쪽에서 비추는 것처럼 보임.',
-    '디버그를 "탄젠트(T)"로 바꾸면 큐브는 면마다, 구는 경도 방향으로 탄젠트가 바뀌는 모습이 색으로 보임.',
+    '"초록 채널 반전"을 켜면 위아래 요철만 뒤집혀 광원이 엉뚱한 쪽에서 비추는 것처럼 보임',
+    '디버그를 "탄젠트(T)"로 바꾸면 큐브는 면마다, 구는 경도 방향으로 탄젠트가 바뀌는 모습이 색으로 보임',
   ],
   refs: [
     { type: 'paper', title: 'Simulation of Wrinkled Surfaces (James F. Blinn)', url: 'https://dl.acm.org/doi/10.1145/965139.507101', year: 1978, note: 'SIGGRAPH 78. 범프 매핑의 원조.' },
     { type: 'paper', title: 'Efficient Bump Mapping Hardware (Peercy, Airey, Cabral)', year: 1997, note: 'SIGGRAPH 97. 탄젠트 공간 법선 섭동.' },
-    { type: 'book', title: 'Mathematics for 3D Game Programming and Computer Graphics (Eric Lengyel): Computing Tangent Space Basis Vectors', note: '정점별 탄젠트와 손잡이(w) 계산법.' },
+    { type: 'book', title: 'Mathematics for 3D Game Programming and Computer Graphics (Eric Lengyel): Computing Tangent Space Basis Vectors', note: '정점별 탄젠트와 손잡이(w) 계산법' },
     { type: 'paper', title: 'Dynamic Parallax Occlusion Mapping with Approximate Soft Shadows (Natalya Tatarchuk)', year: 2006, note: 'I3D 2006 / ATI. POM.' },
     { type: 'article', title: 'LearnOpenGL: Normal Mapping / Parallax Mapping', url: 'https://learnopengl.com/Advanced-Lighting/Parallax-Mapping' },
   ],

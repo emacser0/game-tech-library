@@ -153,22 +153,22 @@
   GTL.register({
     id: 'rollback-netcode',
     title: '롤백 넷코드 vs 딜레이 기반 (GGPO)',
-    summary: '딜레이 기반 락스텝은 상대 입력이 올 때까지 기다림. 그래서 지연이 입력 지연을 넘으면 게임이 멈춤. 롤백은 상대 입력을 예측해 바로 진행하고, 예측이 틀리면 과거 프레임으로 되돌아가 다시 시뮬레이션함.',
+    summary: '딜레이 기반 락스텝은 상대 입력이 올 때까지 기다림. 그래서 지연이 입력 지연을 넘으면 게임이 멈춤. 롤백은 상대 입력을 예측해 바로 진행하고, 예측이 틀리면 과거 프레임으로 되돌아가 다시 시뮬레이션.',
     views: { a: '딜레이 기반 (입력 지연 4F)', b: '롤백 (입력 지연 2F)' },
     controls: '← → / A D 이동, Space 또는 Z 공격 (P1, 두 뷰 동시). P2는 결정론적 봇',
     info: `
-      <p>대전 격투 게임의 두 동기화 방식을 비교함. 두 피어는 <b>같은 입력으로 같은 결정론적 시뮬레이션</b>을 돌림. 그래서 상태 대신 입력만 주고받음.</p>
-      <p><b>딜레이 기반(lockstep)</b>: 내 입력을 D프레임 뒤에 적용하도록 예약하고, 그동안 상대 입력이 도착하기를 기다림.</p>
+      <p>대전 격투 게임의 두 동기화 방식 비교. 두 피어는 <b>같은 입력으로 같은 결정론적 시뮬레이션</b>을 돌림. 그래서 상태 대신 입력만 주고받음.</p>
+      <p><b>딜레이 기반(lockstep)</b>: 내 입력을 D프레임 뒤에 적용하도록 예약하고, 그동안 상대 입력이 도착하기를 기다림</p>
       <ul>
         <li>편도 지연이 D × 16.7ms보다 크면 상대 입력이 제때 오지 않음. 그러면 <b>게임 전체가 멈춤</b>(지터만 있어도 끊김).</li>
-        <li>입력 지연을 늘리면 멈춤은 줄지만 조작감이 둔해짐.</li>
+        <li>입력 지연을 늘리면 멈춤은 줄지만 조작감이 둔해짐</li>
       </ul>
-      <p><b>롤백(rollback, GGPO)</b>: 입력 지연은 짧게 두고, 아직 안 온 상대 입력을 "직전 입력 반복"으로 <b>예측</b>해 바로 진행함.</p>
+      <p><b>롤백(rollback, GGPO)</b>: 입력 지연은 짧게 두고, 아직 안 온 상대 입력을 "직전 입력 반복"으로 <b>예측</b>해 바로 진행</p>
       <ul>
-        <li>매 프레임 상태를 저장해 둠.</li>
-        <li>실제 입력이 예측과 다르면 저장한 상태로 되돌아감(rollback).</li>
-        <li>그 프레임부터 현재 프레임까지 다시 시뮬레이션함.</li>
-        <li>내 조작감은 오프라인과 거의 같음.</li>
+        <li>매 프레임 상태를 저장해 둠</li>
+        <li>실제 입력이 예측과 다르면 저장한 상태로 되돌아감(rollback)</li>
+        <li>그 프레임부터 현재 프레임까지 다시 시뮬레이션</li>
+        <li>내 조작감은 오프라인과 거의 같음</li>
       </ul>
       <p>단점: 화면에서 상대가 순간이동할 수 있음. 예측할 수 있는 최대 프레임 수를 넘으면 롤백도 멈춤.</p>
       <p>입력 패킷은 매 틱 최근 8프레임 입력을 중복으로 담음. 그래서 손실이 생겨도 다음 패킷으로 복구됨. (단순화: 원격 피어는 항상 나와 같은 프레임에 있다고 가정)</p>`,
@@ -186,14 +186,14 @@
     </svg>`,
     look: [
       '"정지 틱 비율"을 비교하면, A는 비율이 높고 게임이 자주 멈칫함(프레임 막대의 빨간 틱). B는 멈추지 않음.',
-      'B의 P1 화면을 "정답" 패널과 비교하면, P2(분홍)가 가끔 순간이동함. 노란(예측) 프레임이 확정되며 롤백이 일어난 순간임.',
-      'A의 입력 지연을 7 이상으로 올리면 멈춤은 사라지지만, 내 캐릭터가 키보다 한참 늦게 움직임.',
-      'B의 편도 지연을 250ms로 올리고 최대 예측/롤백을 4로 낮추면, 예측 범위를 넘어 롤백도 멈춤.',
-      '"재시뮬레이션 프레임/초"를 보면 롤백의 CPU 비용을 알 수 있음.',
+      'B의 P1 화면을 "정답" 패널과 비교하면, P2(분홍)가 가끔 순간이동. 노란(예측) 프레임이 확정되며 롤백이 일어난 순간임.',
+      'A의 입력 지연을 7 이상으로 올리면 멈춤은 사라지지만, 내 캐릭터가 키보다 한참 늦게 움직임',
+      'B의 편도 지연을 250ms로 올리고 최대 예측/롤백을 4로 낮추면, 예측 범위를 넘어 롤백도 멈춤',
+      '"재시뮬레이션 프레임/초"를 보면 롤백의 CPU 비용을 알 수 있음',
     ],
     refs: [
       { type: 'code', title: 'GGPO - Rollback Networking SDK', url: 'https://github.com/pond3r/ggpo', note: 'Tony Cannon. 2019년 MIT 라이선스로 공개.' },
-      { type: 'article', title: 'Fight the Lag! The Trick Behind GGPO\'s Low-Latency Netcode', year: 2012, note: 'Tony Cannon, Game Developer Magazine (2012년 9월).' },
+      { type: 'article', title: 'Fight the Lag! The Trick Behind GGPO\'s Low-Latency Netcode', year: 2012, note: 'Tony Cannon, Game Developer Magazine (2012년 9월)' },
       { type: 'talk', title: '8 Frames in 16ms: Rollback Networking in Mortal Kombat and Injustice 2', year: 2018, note: 'Michael Stallone (NetherRealm), GDC 2018.' },
       { type: 'article', title: 'Deterministic Lockstep', url: 'https://gafferongames.com/post/deterministic_lockstep/', note: 'Glenn Fiedler. 입력만 교환하는 결정론적 동기화.' },
       { type: 'talk', title: '1500 Archers on a 28.8: Network Programming in Age of Empires and Beyond', year: 2001, note: 'Paul Bettner & Mark Terrano, GDC 2001. RTS 락스텝과 턴 지연.' },

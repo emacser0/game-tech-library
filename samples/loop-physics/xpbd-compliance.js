@@ -2,21 +2,21 @@
 GTL.register({
   id: 'xpbd-compliance',
   title: 'XPBD vs PBD: 반복 횟수와 강성',
-  summary: 'PBD의 강성 k는 반복 횟수와 dt에 따라 실제 단단함이 달라짐. XPBD는 컴플라이언스 α와 라그랑주 승수 λ를 써서 반복 횟수와 상관없이 같은 늘어남으로 수렴함.',
+  summary: 'PBD의 강성 k는 반복 횟수와 dt에 따라 실제 단단함이 달라짐. XPBD는 컴플라이언스 α와 라그랑주 승수 λ를 써서 반복 횟수와 상관없이 같은 늘어남으로 수렴.',
   views: { a: 'PBD (강성 k)', b: 'XPBD (컴플라이언스 α)' },
   controls: '조작 없음. 각 뷰의 기둥 3개는 반복 횟수만 다름.',
   info: `
     <p><b>PBD(Position Based Dynamics)</b>는 위치를 직접 고쳐 제약을 맞추는 방법. 천, 로프, 소프트 바디에 널리 씀.
     거리 제약은 반복마다 오차 <code>C</code>의 <code>k</code>(0~1) 비율만큼 고침.</p>
     <p>문제: 같은 <code>k</code>라도 반복을 많이 돌수록, 서브스텝을 늘릴수록 더 단단해짐. 성능 때문에 반복 횟수를 바꾸면 재질 느낌까지 바뀜.</p>
-    <p>반복 보정 <code>k' = 1 - (1 - k)^(1/n)</code>(Müller 2007)는 반복 횟수 의존을 줄이지만 dt 의존은 남음.</p>
-    <p><b>XPBD(Extended PBD)</b>는 제약마다 라그랑주 승수 <code>λ</code>를 누적하고, 컴플라이언스(강성의 역수) <code>α</code>를 씀.</p>
+    <p>반복 보정 <code>k' = 1 - (1 - k)^(1/n)</code>(Müller 2007)는 반복 횟수 의존을 줄이지만 dt 의존은 남음</p>
+    <p><b>XPBD(Extended PBD)</b>는 제약마다 라그랑주 승수 <code>λ</code>를 누적하고, 컴플라이언스(강성의 역수) <code>α</code>를 씀</p>
     <ul>
       <li><code>α̃ = α / h²</code></li>
       <li><code>Δλ = (-C - α̃ λ) / (w1 + w2 + α̃)</code></li>
       <li><code>λ += Δλ</code>, 위치 보정은 <code>Δx = w ∇C Δλ</code></li>
     </ul>
-    <p><code>λ</code>가 이번 스텝에 누적된 힘(정확히는 힘 × h²)을 기억함. 그래서 반복을 더 돌아도 단단해지지 않고 <code>α</code>가 정한 늘어남으로 수렴함.
+    <p><code>λ</code>가 이번 스텝에 누적된 힘(정확히는 힘 × h²)을 기억. 그래서 반복을 더 돌아도 단단해지지 않고 <code>α</code>가 정한 늘어남으로 수렴.
     <code>α = 0</code>이면 PBD의 <code>k = 1</code>과 같은 단단한 제약.</p>
     <p>추가 비용은 제약마다 실수 하나(<code>λ</code>)와 나눗셈 한 번. 단점: 반복이 너무 적으면 수렴 전이라 목표보다 조금 더 늘어남. 서브스텝을 늘리면 해결됨.</p>
     <p>초록 눈금은 α에서 계산한 정답 길이. 질량 1 입자 n개가 매달린 체인에서 총 늘어남 = <code>α g n(n+1)/2</code>.</p>`,
@@ -41,7 +41,7 @@ GTL.register({
     <text x="310" y="106" class="t-small t-mono">α̃ = α / h²</text>
     <text x="310" y="120" class="t-small t-mono">Δλ = (-C - α̃ λ) / (w1 + w2 + α̃)</text>
     <text x="310" y="134" class="t-small t-mono">λ += Δλ,  Δx = w ∇C Δλ</text>
-    <text x="310" y="150" class="t-small t-dim">${L('λ가 누적된 힘을 기억함', 'λ remembers the force so far')}</text>
+    <text x="310" y="150" class="t-small t-dim">${L('λ가 누적된 힘을 기억', 'λ remembers the force so far')}</text>
     <text x="310" y="176" class="t-small t-dim">${L('초록 점선: α에서 계산한 정답', 'Green dashes: answer from α')}</text>
   </svg>`;
   },
@@ -55,7 +55,7 @@ GTL.register({
     { type: 'paper', title: 'XPBD: Position-Based Simulation of Compliant Constrained Dynamics (Macklin, Müller, Chentanez)', year: 2016, note: 'MIG 2016. 컴플라이언스와 λ 누적으로 반복 횟수, dt 의존 제거.' },
     { type: 'paper', title: 'Position Based Dynamics (Müller, Heidelberger, Hennix, Ratcliff)', year: 2007, note: 'Journal of Visual Communication and Image Representation. 강성 k와 반복 보정 1-(1-k)^(1/n).' },
     { type: 'paper', title: 'Small Steps in Physics Simulation (Macklin, Storey, Lu, Terdiman, Chentanez, Jeschke, Müller)', year: 2019, note: 'SCA 2019. 반복 대신 서브스텝을 늘리는 XPBD.' },
-    { type: 'talk', title: 'Ten Minute Physics (Matthias Müller)', note: 'XPBD 소프트 바디, 천 예제 영상과 코드.' },
+    { type: 'talk', title: 'Ten Minute Physics (Matthias Müller)', note: 'XPBD 소프트 바디, 천 예제 영상과 코드' },
   ],
   params: [
     { key: 'method', label: '솔버', type: 'select', group: '솔버', options: [

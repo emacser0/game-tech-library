@@ -6,18 +6,18 @@ GTL.register({
   renderer: 'webgl',
   views: { a: '스트레이트 알파', b: '프리멀티플라이드 알파' },
   info: `
-    <p><b>스트레이트(Straight) 알파</b>는 (r, g, b, a)를 따로 저장하고, 블렌딩 때 <code>src×a + dst×(1−a)</code>를 계산함.
+    <p><b>스트레이트(Straight) 알파</b>는 (r, g, b, a)를 따로 저장하고, 블렌딩 때 <code>src×a + dst×(1−a)</code>를 계산.
     완전 투명 픽셀(a=0)의 RGB는 보통 검정(0,0,0)임.</p>
     <p>문제는 가장자리에서 일어남. GPU가 불투명 주황 (1,0.5,0)과 투명 검정 (0,0,0,0)을 반반 섞으면 <b>(0.5, 0.25, 0, 0.5)</b>가 됨.
     이 값은 반투명한 <b>어두운 주황</b>이라서 테두리가 시커멓게 보임. 이 테두리를 프린지(Fringe)라고 부름.</p>
-    <p><b>프리멀티플라이드(Premultiplied) 알파</b>는 RGB에 a를 미리 곱해 (r×a, g×a, b×a, a)로 저장하고, <code>src + dst×(1−a)</code>로 블렌딩함.
+    <p><b>프리멀티플라이드(Premultiplied) 알파</b>는 RGB에 a를 미리 곱해 (r×a, g×a, b×a, a)로 저장하고, <code>src + dst×(1−a)</code>로 블렌딩.
     같은 보간 결과 (0.5, 0.25, 0, 0.5)가 이번에는 "불투명 주황 50%"를 정확히 뜻함.</p>
     <ul>
-    <li>필터링, 밉맵, 합성이 모두 선형 연산으로 올바르게 동작함.</li>
-    <li>a=0이면서 RGB가 있는 픽셀로 <b>가산 블렌딩</b>까지 같은 블렌드 상태에서 표현 가능.</li>
+    <li>필터링, 밉맵, 합성이 모두 선형 연산으로 올바르게 동작</li>
+    <li>a=0이면서 RGB가 있는 픽셀로 <b>가산 블렌딩</b>까지 같은 블렌드 상태에서 표현 가능</li>
     </ul>
     <p>"셰이더에서 곱하기"는 흔한 실수. 필터링이 <i>이미 끝난 뒤</i>에 곱하므로 프린지가 그대로 남음.
-    스트레이트 알파를 유지해야 하면 <b>알파 블리딩</b>(Edge Padding)으로 완화함. 투명 영역에 가장자리 색을 번지게 칠하는 방법임.</p>`,
+    스트레이트 알파를 유지해야 하면 <b>알파 블리딩</b>(Edge Padding)으로 완화. 투명 영역에 가장자리 색을 번지게 칠하는 방법임.</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 176" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arr" class="m-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
     <text x="10" y="14">${L('가장자리 텍셀 두 개를 bilinear로 반반 섞음', 'Bilinear blends two edge texels half and half')}</text>
@@ -47,16 +47,16 @@ GTL.register({
   </svg>`,
   look: [
     '배경을 밝은 하늘로 두면 A의 별 테두리와 가는 광선에 검은 띠가 보임. B는 깨끗함.',
-    '"크기"를 줄여 밉맵이 쓰이게 하면 A의 작은 별들이 전체적으로 어둡고 탁해짐 (밉맵 평균에 검정이 섞임).',
+    '"크기"를 줄여 밉맵이 쓰이게 하면 A의 작은 별들이 전체적으로 어둡고 탁해짐 (밉맵 평균에 검정이 섞임)',
     'A에서 "투명 픽셀 RGB"를 흰색이나 마젠타로 바꾸면 프린지 색도 그대로 따라 바뀜. 보이지 않아야 할 데이터가 보이는 것.',
     'A를 "셰이더에서 곱하기"로 바꿔도 프린지는 남음. "알파 블리딩"을 쓰면 크게 줄어듦.',
     '필터를 Nearest로 바꾸면 두 방식의 차이가 사라짐. 문제의 원인이 보간이라는 뜻.',
   ],
   refs: [
-    { type: 'article', title: 'Premultiplied alpha (Shawn Hargreaves Blog)', year: 2006, note: 'XNA 팀의 글. 프리멀티플라이드 알파가 "올바른" 표현인 이유를 설명함. XNA 4.0이 기본값으로 채택.' },
+    { type: 'article', title: 'Premultiplied alpha (Shawn Hargreaves Blog)', year: 2006, note: 'XNA 팀의 글. 프리멀티플라이드 알파가 "올바른" 표현인 이유 설명. XNA 4.0이 기본값으로 채택.' },
     { type: 'paper', title: 'Compositing Digital Images (Thomas Porter, Tom Duff)', url: 'https://dl.acm.org/doi/10.1145/964965.808606', year: 1984, note: 'SIGGRAPH. over 연산자와 premultiplied 표현의 원전.' },
-    { type: 'article', title: 'WebGL: UNPACK_PREMULTIPLY_ALPHA_WEBGL / premultipliedAlpha', url: 'https://registry.khronos.org/webgl/specs/latest/1.0/', note: 'WebGL 명세의 텍스처 업로드와 캔버스 합성 규칙.' },
-    { type: 'engine', title: 'Unity: Texture Import Settings: Alpha Is Transparency', url: 'https://docs.unity3d.com/Manual/class-TextureImporter.html', note: '투명 픽셀을 주변 색으로 채워(블리딩) 필터링 프린지를 줄이는 옵션.' },
+    { type: 'article', title: 'WebGL: UNPACK_PREMULTIPLY_ALPHA_WEBGL / premultipliedAlpha', url: 'https://registry.khronos.org/webgl/specs/latest/1.0/', note: 'WebGL 명세의 텍스처 업로드와 캔버스 합성 규칙' },
+    { type: 'engine', title: 'Unity: Texture Import Settings: Alpha Is Transparency', url: 'https://docs.unity3d.com/Manual/class-TextureImporter.html', note: '투명 픽셀을 주변 색으로 채워(블리딩) 필터링 프린지를 줄이는 옵션' },
   ],
   params: [
     { key: 'mode', label: '알파 방식', type: 'select', group: '블렌딩', options: [

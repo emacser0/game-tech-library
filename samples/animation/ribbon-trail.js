@@ -4,16 +4,16 @@ GTL.register({
   title: '궤적 효과: 점 찍기 vs 연속 리본',
   summary: '빠르게 휘두르는 칼끝에 매 프레임 점을 찍으면 점 사이가 벌어져 궤적이 끊김. 지나간 위치를 정점으로 이어 띠(리본)를 만들면 속도와 상관없이 이어지고, 곡선 보간으로 꺾임도 없앰.',
   views: { a: '매 프레임 점 찍기', b: '리본 + 곡선 보간' },
-  controls: '조작 없음. 칼끝이 빠르게 휘두르고 잠깐 멈추기를 반복함.',
+  controls: '조작 없음. 칼끝이 빠르게 휘두르고 잠깐 멈추기를 반복.',
   info: `
-    <p>칼 휘두르기, 미사일 연기, 자동차 미등 같은 궤적은 지나간 위치를 기록해서 그림.</p>
+    <p>칼 휘두르기, 미사일 연기, 자동차 미등 같은 궤적은 지나간 위치를 기록해서 그림</p>
     <p><b>점 찍기</b>: 매 프레임 칼끝에 입자를 하나 놓음. 이동 거리가 점 크기보다 크면 점 사이가 빔. 빠른 동작일수록, 프레임레이트가 낮을수록 심함.</p>
     <p><b>리본(ribbon)</b>: 위치를 정점 목록에 넣고 이웃 정점을 잇는 띠를 만듦. 정점마다 진행 방향의 수직 방향으로 너비만큼 벌려 사각형 두 개(삼각형 띠)를 이음.</p>
     <ul>
-      <li><b>정점 최소 간격</b>: 이만큼 움직였을 때만 정점을 추가함. 크면 정점이 적지만 곡선이 각짐.</li>
+      <li><b>정점 최소 간격</b>: 이만큼 움직였을 때만 정점을 추가. 크면 정점이 적지만 곡선이 각짐.</li>
       <li><b>수명</b>: 정점이 생긴 뒤 사라질 때까지의 시간. 나이에 따라 투명도를 줄임.</li>
-      <li><b>너비 감쇠</b>: 오래된 정점일수록 좁게 해서 꼬리를 뾰족하게 만듦.</li>
-      <li><b>곡선 보간</b>: Catmull-Rom 스플라인으로 정점 사이를 나눠 매끈하게 만듦.</li>
+      <li><b>너비 감쇠</b>: 오래된 정점일수록 좁게 해서 꼬리를 뾰족하게 만듦</li>
+      <li><b>곡선 보간</b>: Catmull-Rom 스플라인으로 정점 사이를 나눠 매끈하게 만듦</li>
     </ul>
     <p>단점: 급하게 꺾이는 곳에서 띠가 안쪽으로 겹치거나 꼬일 수 있음. 텍스처를 입히면 UV 늘어남도 다뤄야 함.</p>`,
   // 도식: 같은 경로에서 프레임마다 점 하나(간격이 지름보다 크면 끊김) vs 정점을 이어 만든 삼각형 띠(진행 방향의 수직으로 너비만큼 벌림, 꼬리로 갈수록 좁아짐)
@@ -56,13 +56,13 @@ GTL.register({
   look: [
     'A를 보면 휘두르는 순간 점이 띄엄띄엄 찍혀 궤적이 끊김. "끊긴 구간" 값이 B는 0, A는 0보다 큼.',
     'B의 "곡선 보간"을 끄고 "정점 최소 간격"을 40px로 올리면 리본이 꺾인 선분으로 보임. 다시 켜면 매끈해짐.',
-    'B의 "너비 감쇠"를 끄면 꼬리가 뭉툭하게 잘림.',
+    'B의 "너비 감쇠"를 끄면 꼬리가 뭉툭하게 잘림',
     '"휘두르기 속도"를 올리면 A의 점 간격이 더 벌어짐. B는 정점 간격만 늘고 띠는 이어짐.',
   ],
   refs: [
-    { type: 'engine', title: 'Unity Manual - Trail Renderer', url: 'https://docs.unity3d.com/Manual/class-TrailRenderer.html', note: 'Time(수명), Min Vertex Distance(정점 최소 간격), Width 곡선.' },
+    { type: 'engine', title: 'Unity Manual - Trail Renderer', url: 'https://docs.unity3d.com/Manual/class-TrailRenderer.html', note: 'Time(수명), Min Vertex Distance(정점 최소 간격), Width 곡선' },
     { type: 'engine', title: 'Unreal Engine - Niagara Ribbon Renderer', note: '입자를 순서대로 이어 리본으로 그림. 탄젠트 기반 곡선 분할 지원.' },
-    { type: 'book', title: 'Real-Time Rendering (Akenine-Möller, Haines, Hoffman) - Particle Systems', note: '빌보드, 입자 궤적 표현.' },
+    { type: 'book', title: 'Real-Time Rendering (Akenine-Möller, Haines, Hoffman) - Particle Systems', note: '빌보드, 입자 궤적 표현' },
   ],
   params: [
     { key: 'mode', label: '그리기 방식', type: 'select', group: '궤적', options: [

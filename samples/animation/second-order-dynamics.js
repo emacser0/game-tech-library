@@ -4,17 +4,17 @@ GTL.register({
   title: '2차 동역학으로 성격 있는 추종',
   summary: '지수 감쇠 lerp는 항상 "느리게 다가가기"만 함. 스프링-댐퍼 2차 시스템 y + k₁ẏ + k₂ÿ = x + k₃ẋ 를 직관적인 f, ζ, r 파라미터로 다루면 overshoot, 탄성, 예비 동작(anticipation)까지 표현 가능.',
   views: { a: '지수 lerp 추종', b: '2차 동역학 (f, ζ, r)' },
-  controls: '마우스를 뷰 안에 두면 목표가 마우스를 따라감.',
+  controls: '마우스를 뷰 안에 두면 목표가 마우스를 따라감',
   info: `
     <p><b>2차 동역학</b>은 스프링과 댐퍼처럼 위치와 속도를 함께 다루는 추종 방식. 지수 lerp와 달리 목표를 넘어가거나 출렁일 수 있음.</p>
-    <p>t3ssel8r의 방식은 2차 시스템의 계수를 직관적인 값 세 개로 바꿈.</p>
+    <p>t3ssel8r의 방식은 2차 시스템의 계수를 직관적인 값 세 개로 바꿈</p>
     <ul>
       <li><b>f (Hz)</b>: 고유 진동수. 응답 속도를 정함. 클수록 빠르게 반응.</li>
       <li><b>ζ (zeta)</b>: 감쇠비. 0이면 계속 진동. 0~1이면 overshoot 후 안정. 1 이상이면 진동 없이 천천히 수렴.</li>
       <li><b>r</b>: 초기 반응. 0이면 천천히 출발, 1이면 즉시 반응, 1보다 크면 목표를 앞질러 나감. 음수면 반대로 살짝 물러났다가 출발(<b>예비 동작</b>).</li>
     </ul>
     <p>계수: <code>k₁ = ζ/(πf)</code>, <code>k₂ = 1/(2πf)²</code>, <code>k₃ = rζ/(2πf)</code>. 적분은 semi-implicit Euler.
-    큰 dt에서 발산하지 않도록 <code>k₂</code>를 <code>max(k₂, T²/2 + Tk₁/2, Tk₁)</code>로 클램프함.</p>
+    큰 dt에서 발산하지 않도록 <code>k₂</code>를 <code>max(k₂, T²/2 + Tk₁/2, Tk₁)</code>로 클램프.</p>
     <p>오른쪽 아래 그래프는 현재 파라미터의 <b>계단 응답</b>. 목표가 0에서 1로 순간 이동했을 때 y가 시간에 따라 변하는 모습.</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 186" xmlns="http://www.w3.org/2000/svg">
     <text x="4" y="20" class="t-a">${L('A: 지수 lerp (1차)', 'A: exponential lerp (1st order)')}</text>
@@ -47,15 +47,15 @@ GTL.register({
   </svg>`,
   look: [
     'A(lerp)에서 목표가 점프하면 무조건 감속하며 다가감. overshoot도 예비 동작도 없음.',
-    'B에서 ζ를 0.1로 내리면 오래 출렁임. 1.5로 올리면 lerp와 비슷하게 느리게 수렴함.',
+    'B에서 ζ를 0.1로 내리면 오래 출렁임. 1.5로 올리면 lerp와 비슷하게 느리게 수렴.',
     'r을 -2로 하면 목표 반대쪽으로 살짝 물러난 뒤 출발함(anticipation). 3으로 올리면 출발 순간 앞으로 튐.',
     '계단 응답 그래프를 비교하면 모양이 곧 "성격". 그래프가 같으면 느낌도 같음.',
   ],
   refs: [
     { type: 'talk', title: 'Giving Personality to Procedural Animations using Math (t3ssel8r)', year: 2022, note: 'YouTube. f, ζ, r 파라미터화와 안정성 클램프의 출처.' },
-    { type: 'article', title: 'Spring-It-On: The Game Developer\'s Spring-Roll-Call (Daniel Holden)', url: 'https://theorangeduck.com/page/spring-roll-call', year: 2021, note: '감쇠 스프링의 해석해와 반감기 파라미터화.' },
-    { type: 'book', title: 'Game Programming Gems 4 - Critically Damped Ease-In/Ease-Out Smoothing (Thomas Lowe)', year: 2004, note: 'Unity SmoothDamp의 기반이 된 임계 감쇠 스무딩.' },
-    { type: 'engine', title: 'Unity - Vector3.SmoothDamp', url: 'https://docs.unity3d.com/ScriptReference/Vector3.SmoothDamp.html', note: '임계 감쇠(ζ=1) 스프링 추종.' },
+    { type: 'article', title: 'Spring-It-On: The Game Developer\'s Spring-Roll-Call (Daniel Holden)', url: 'https://theorangeduck.com/page/spring-roll-call', year: 2021, note: '감쇠 스프링의 해석해와 반감기 파라미터화' },
+    { type: 'book', title: 'Game Programming Gems 4 - Critically Damped Ease-In/Ease-Out Smoothing (Thomas Lowe)', year: 2004, note: 'Unity SmoothDamp의 기반이 된 임계 감쇠 스무딩' },
+    { type: 'engine', title: 'Unity - Vector3.SmoothDamp', url: 'https://docs.unity3d.com/ScriptReference/Vector3.SmoothDamp.html', note: '임계 감쇠(ζ=1) 스프링 추종' },
   ],
   params: [
     { key: 'method', label: '추종 방식', type: 'select', group: '추종', options: [

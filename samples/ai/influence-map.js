@@ -2,7 +2,7 @@
 GTL.register({
   id: 'influence-map',
   title: '영향력 맵 (Influence Map): 스탬프 vs 전파',
-  summary: '두 진영 유닛의 영향력을 격자에 퍼뜨려 장악 지역, 최전선, 긴장 지역을 읽어 냄. 거리 스탬프는 벽을 무시하고 즉시 바뀜. 감쇠와 관성이 있는 전파는 벽을 돌아 흐르고 과거 정보를 기억함.',
+  summary: '두 진영 유닛의 영향력을 격자에 퍼뜨려 장악 지역, 최전선, 긴장 지역을 읽어 냄. 거리 스탬프는 벽을 무시하고 즉시 바뀜. 감쇠와 관성이 있는 전파는 벽을 돌아 흐르고 과거 정보를 기억.',
   views: { a: '거리 스탬프 (벽 무시)', b: '전파 (decay + momentum)' },
   controls: '클릭: 빨강 진영 유닛 추가, 우클릭: 파랑 진영 유닛 추가',
   info: `
@@ -18,7 +18,7 @@ GTL.register({
       <li><b>전파</b>: 갱신마다 각 칸이 목표값을 향해 <code>momentum</code> 비율만큼 다가감. 목표값은 이웃 값에 <code>exp(−decay × 거리)</code>를 곱한 값 중 최댓값.
       벽 칸은 0이라서 영향력이 <b>길을 따라 돌아서</b> 퍼짐. 관성 때문에 유닛이 지나간 자리에 잔상이 남음(정찰 기억).</li>
     </ul>
-    <p>⚔ 표시: 취약도(최전선)가 가장 높은 칸.</p>`,
+    <p>⚔ 표시: 취약도(최전선)가 가장 높은 칸</p>`,
   diagram: (L) => {
     const cols = 9, rows = 5, cs = 22, ux = 2, uy = 1, wall = (x, y) => x === 4 && y < 4;
     const free = (x, y) => x >= 0 && y >= 0 && x < cols && y < rows && !wall(x, y);
@@ -65,11 +65,11 @@ GTL.register({
     '기본 상태로 실행하면 A는 벽 바로 너머 칸까지 같은 색으로 물듦. B는 벽에서 끊기고 문과 통로로만 흘러 들어감.',
     'B의 momentum을 0.1로 낮추면 잔상이 길게 남아 유닛 이동의 "기억"이 생김. 0.9로 높이면 현재 상태를 빠르게 따라감.',
     'decay를 키우면 영향 범위가 좁아짐. 줄이면 맵 전체로 퍼짐.',
-    '표시를 "취약도 (최전선)"로 바꾸면 A의 경계선은 벽을 가로지르고, B의 경계선은 통로를 따라 그려짐.',
+    '표시를 "취약도 (최전선)"로 바꾸면 A의 경계선은 벽을 가로지르고, B의 경계선은 통로를 따라 그려짐',
   ],
   refs: [
     { type: 'article', title: 'The Core Mechanics of Influence Mapping', year: 2011, note: 'Alex J. Champandard, AiGameDev.com. momentum/decay 전파 알고리즘.' },
-    { type: 'book', title: 'Modular Tactical Influence Maps', year: 2015, note: 'Dave Mark, Game AI Pro 2 (CRC Press) 30장.' },
+    { type: 'book', title: 'Modular Tactical Influence Maps', year: 2015, note: 'Dave Mark, Game AI Pro 2 (CRC Press) 30장' },
     { type: 'book', title: 'Game Programming Gems 2 - Influence Mapping', year: 2001, note: 'Paul Tozour. 영향력 맵의 고전적 소개.' },
     { type: 'book', title: 'Artificial Intelligence for Games (3rd ed.)', year: 2019, note: 'Ian Millington. Tactical and Strategic AI 장, Influence Maps.' },
   ],

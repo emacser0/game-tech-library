@@ -1,6 +1,6 @@
 // 클라이언트 측 예측 (Client-side Prediction)
-// 모든 네트워크는 뷰 내부에서 시뮬레이션함. 패킷 지연/손실은 (시드, 채널, 보낸 틱)의 해시로 정해지므로
-// A/B가 같은 시각에 보낸 패킷은 정확히 같은 네트워크 상태를 겪음.
+// 모든 네트워크는 뷰 내부에서 시뮬레이션. 패킷 지연/손실은 (시드, 채널, 보낸 틱)의 해시로 정해지므로
+// A/B가 같은 시각에 보낸 패킷은 정확히 같은 네트워크 상태를 겪음
 (() => {
   const U = GTL.util, D = U.draw, C = U.colors;
   const STEP = 1000 / 60; // 시뮬레이션 기본 틱 (ms)
@@ -120,21 +120,21 @@
   GTL.register({
     id: 'client-prediction',
     title: '클라이언트 측 예측 (Client-side Prediction)',
-    summary: '내 입력을 서버 응답 없이 로컬에서 바로 시뮬레이션함. 지연이 커도 조작이 즉시 반응함. 서버 상태가 오면 미확인 입력을 다시 적용해 맞춤.',
+    summary: '내 입력을 서버 응답 없이 로컬에서 바로 시뮬레이션. 지연이 커도 조작이 즉시 반응. 서버 상태가 오면 미확인 입력을 다시 적용해 맞춤.',
     views: { a: '예측 없음 (서버 응답 대기)', b: '예측 + 재조정' },
     controls: '←↑→↓ / WASD 이동 (두 뷰 동시). 키 입력이 자동 입력보다 우선.',
     info: `
-      <p><b>클라이언트 측 예측</b>: 서버와 같은 이동 코드를 클라이언트에서도 실행해 입력을 바로 화면에 반영하는 기법.</p>
+      <p><b>클라이언트 측 예측</b>: 서버와 같은 이동 코드를 클라이언트에서도 실행해 입력을 바로 화면에 반영하는 기법</p>
       <p>권위 서버(authoritative server) 구조에서는 클라이언트가 입력만 보내고, 위치는 서버가 정함.
       예측이 없으면 <b>입력이 서버에 도착 → 서버가 처리 → 스냅샷이 돌아옴</b> 과정을 모두 기다림.
-      그래서 화면이 RTT(왕복 지연) + 스냅샷 대기 시간만큼 늦게 반응함.</p>
+      그래서 화면이 RTT(왕복 지연) + 스냅샷 대기 시간만큼 늦게 반응.</p>
       <ul>
-        <li>서버 스냅샷에 "마지막으로 처리한 입력 번호"가 담김.</li>
-        <li>클라이언트는 서버 상태로 되돌린 뒤, 아직 확인되지 않은 입력을 다시 적용함(<b>재조정, reconciliation</b>).</li>
+        <li>서버 스냅샷에 "마지막으로 처리한 입력 번호"가 담김</li>
+        <li>클라이언트는 서버 상태로 되돌린 뒤, 아직 확인되지 않은 입력을 다시 적용(<b>재조정, reconciliation</b>)</li>
         <li>게임 로직이 결정론적(같은 입력이면 같은 결과)이면 결과가 예측과 같음. 그래서 보정이 보이지 않음.</li>
         <li>입력 패킷마다 최근 입력 3개를 중복으로 담음. 패킷 일부가 손실돼도 서버가 입력을 놓치지 않음.</li>
       </ul>
-      <p>단점: 재조정 없이 예측만 하면 스냅샷이 올 때마다 위치가 과거로 끌려감.</p>`,
+      <p>단점: 재조정 없이 예측만 하면 스냅샷이 올 때마다 위치가 과거로 끌려감</p>`,
     diagram: (L) => `<svg viewBox="0 0 540 192" xmlns="http://www.w3.org/2000/svg">
       <defs><marker id="arr" class="m-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
       <marker id="arrA" class="m-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -156,12 +156,12 @@
       <text x="400" y="34" text-anchor="middle" class="t-a">${L('A: 여기서 반응', 'A: moves here')}</text>
       <path d="M152,170 L398,170" class="d-a" marker-start="url(#arrA)" marker-end="url(#arrA)"/>
       <text x="275" y="162" text-anchor="middle" class="t-small t-a">${L('RTT + 스냅샷 대기', 'RTT + snapshot wait')}</text>
-      <text x="4" y="188" class="t-small t-dim">${L('B는 서버 상태로 되돌린 뒤 미확인 입력(#6, #7)을 다시 적용함', 'B rewinds to the server state, then replays the unacked inputs (#6, #7)')}</text>
+      <text x="4" y="188" class="t-small t-dim">${L('B는 서버 상태로 되돌린 뒤 미확인 입력(#6, #7)을 다시 적용', 'B rewinds to the server state, then replays the unacked inputs (#6, #7)')}</text>
     </svg>`,
     look: [
       '오른쪽 "입력 vs 화면" 그래프에서 두 선을 비교하면, A는 화면 이동(주황)이 입력(회색 계단)보다 RTT만큼 늦게 시작하고 늦게 멈춤. B는 두 선이 거의 겹침.',
-      '편도 지연을 300ms 이상으로 올리면 A는 조작이 "물에 잠긴" 듯 둔해짐. B는 지연과 관계없이 즉시 반응함.',
-      'B에서 "서버 재조정"을 끄면 스냅샷이 올 때마다 캐릭터가 과거 위치로 끌려가 덜컹거림 (다음 샘플 "서버 재조정" 참고).',
+      '편도 지연을 300ms 이상으로 올리면 A는 조작이 "물에 잠긴" 듯 둔해짐. B는 지연과 관계없이 즉시 반응.',
+      'B에서 "서버 재조정"을 끄면 스냅샷이 올 때마다 캐릭터가 과거 위치로 끌려가 덜컹거림 (다음 샘플 "서버 재조정" 참고)',
       '하단 타임라인에서 선의 방향을 보면 패킷 종류가 구분됨. 위→아래 회색 선은 입력, 아래→위 색 선은 스냅샷, 빨간 X는 손실 패킷.',
     ],
     refs: [

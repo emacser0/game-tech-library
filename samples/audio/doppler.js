@@ -10,14 +10,14 @@ GTL.register({
     다가올 때는 파면 간격이 좁아져 높게, 멀어질 때는 넓어져 낮게 들림.</p>
     <p>청자가 멈춰 있을 때 식: <code>f' = f × c / (c - v<sub>r</sub>)</code></p>
     <ul>
-      <li><code>c</code>: 음속 (공기 중 약 343m/s).</li>
+      <li><code>c</code>: 음속 (공기 중 약 343m/s)</li>
       <li><code>v<sub>r</sub></code>: 음원 속도 중 청자를 향하는 성분. 다가오면 +, 멀어지면 -.</li>
-      <li>게임은 여기에 <b>도플러 배율</b>을 곱해 과장하거나 줄임 (Unity의 Doppler Level, FMOD의 Doppler Scale).</li>
+      <li>게임은 여기에 <b>도플러 배율</b>을 곱해 과장하거나 줄임 (Unity의 Doppler Level, FMOD의 Doppler Scale)</li>
     </ul>
     <p>구현 방법: 매 프레임 상대 속도를 구해 <code>playbackRate</code>나 오실레이터 주파수에 배율을 곱함.
-    Web Audio의 <code>PannerNode</code>는 예전에 도플러를 지원했지만 명세에서 빠졌음. 그래서 직접 계산함.</p>
+    Web Audio의 <code>PannerNode</code>는 예전에 도플러를 지원했지만 명세에서 빠졌음. 그래서 직접 계산.</p>
     <p>주의점: 순간이동이나 카메라 컷처럼 위치가 튀면 속도가 엄청 커져 피치가 튐. 속도를 위치 차분으로 구한다면 상한을 두거나 컷 직후에는 0으로 둠.
-    음속 지연(소리가 늦게 도착함)은 이 샘플에서 생략함.</p>
+    음속 지연(소리가 늦게 도착함)은 이 샘플에서 생략.</p>
     <p>위쪽 원은 파면. A는 음원을 따라다니는 같은 간격의 원, B는 내보낸 위치에서 퍼지는 원이라 앞쪽이 촘촘함. 파면은 보기 쉽게 실제 음속의 1/4 속도로 그림.</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 196" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
@@ -49,16 +49,16 @@ GTL.register({
     <text x="4" y="190" class="t-small t-dim">${L('음원이 앞을 지나는 순간 v_r의 부호가 바뀌어 피치가 높음에서 낮음으로 넘어감', 'As the source passes, v_r flips sign, so the pitch swings from high to low')}</text>
   </svg>`,
   look: [
-    '아래 주파수 그래프에서 A는 평평한 선, B는 음원이 지나가는 순간 높은 값에서 낮은 값으로 떨어짐.',
+    '아래 주파수 그래프에서 A는 평평한 선, B는 음원이 지나가는 순간 높은 값에서 낮은 값으로 떨어짐',
     'B의 배율을 2~3으로 올리면 낙차가 커져 만화 같은 효과음이 됨. 0.3 정도면 은은함.',
     '"통과 거리"를 1m로 줄이면 B의 피치가 거의 순간적으로 떨어짐. 멀리 지나가면 천천히 바뀜.',
     '"음원 속도"를 음속의 절반 이상으로 올리면 다가올 때 배율이 2배 가까이 됨. "최대 피치 배율"로 상한을 둠.',
   ],
   refs: [
     { type: 'engine', title: 'Unity Manual - Audio Source (Doppler Level)', url: 'https://docs.unity3d.com/Manual/class-AudioSource.html', note: '음원별 도플러 정도. 0이면 꺼짐.' },
-    { type: 'engine', title: 'FMOD Engine - 3D Sound (doppler scale)', note: 'Core API의 set3DSettings에서 도플러 배율, 거리 단위, 롤오프 배율을 정함.' },
-    { type: 'engine', title: 'MDN - AudioParam (frequency, playbackRate)', url: 'https://developer.mozilla.org/en-US/docs/Web/API/AudioParam', note: '계산한 배율을 넣는 대상.' },
-    { type: 'article', title: 'Wikipedia - Doppler effect', url: 'https://en.wikipedia.org/wiki/Doppler_effect', note: '음원, 청자가 움직일 때의 일반식.' },
+    { type: 'engine', title: 'FMOD Engine - 3D Sound (doppler scale)', note: 'Core API의 set3DSettings에서 도플러 배율, 거리 단위, 롤오프 배율을 정함' },
+    { type: 'engine', title: 'MDN - AudioParam (frequency, playbackRate)', url: 'https://developer.mozilla.org/en-US/docs/Web/API/AudioParam', note: '계산한 배율을 넣는 대상' },
+    { type: 'article', title: 'Wikipedia - Doppler effect', url: 'https://en.wikipedia.org/wiki/Doppler_effect', note: '음원, 청자가 움직일 때의 일반식' },
   ],
   params: [
     { key: 'doppler', label: '도플러', type: 'bool', a: false, b: true, group: '도플러' },

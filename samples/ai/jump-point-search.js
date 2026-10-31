@@ -7,20 +7,20 @@ GTL.register({
   controls: '드래그: 벽 칠하기/지우기, S/G 원 드래그: 시작/목표 이동, 우클릭 드래그: 지우기',
   info: `
     <p>8방향 균일 격자에는 <b>대칭 경로</b>가 많음. 대칭 경로는 대각선과 직선의 이동 순서만 다르고 비용은 같은 경로. A*는 이 경로들을 모두 열린 목록에 넣음.</p>
-    <p><b>JPS</b>(Jump Point Search)는 진행 방향을 유지하며 칸을 스캔함. 아래 두 곳에서만 멈추고, 그 칸(점프 포인트)만 힙에 넣음.</p>
+    <p><b>JPS</b>(Jump Point Search)는 진행 방향을 유지하며 칸을 스캔. 아래 두 곳에서만 멈추고, 그 칸(점프 포인트)만 힙에 넣음.</p>
     <ul>
       <li><b>강제 이웃(forced neighbor)</b>이 있는 칸: 장애물 때문에 다른 길로는 갈 수 없는 이웃이 생긴 곳</li>
       <li>목표 칸</li>
     </ul>
-    <p>대각선으로 갈 때는 칸마다 수평, 수직 점프를 먼저 시도함.</p>
+    <p>대각선으로 갈 때는 칸마다 수평, 수직 점프를 먼저 시도</p>
     <p>경로 비용은 A*와 같은 최적값. 대신 <b>힙 연산 수가 훨씬 적음</b>.</p>
     <p>단점:</p>
     <ul>
-      <li>칸 스캔(점프 테스트)이 많아짐. 메모리 접근이 싼 격자에서만 유리함.</li>
-      <li>칸마다 비용이 다른 지형(가중치 격자)에는 그대로 쓸 수 없음.</li>
+      <li>칸 스캔(점프 테스트)이 많아짐. 메모리 접근이 싼 격자에서만 유리.</li>
+      <li>칸마다 비용이 다른 지형(가중치 격자)에는 그대로 쓸 수 없음</li>
     </ul>
     <p>이 구현은 <b>모서리 가로지르기를 금지</b>하는 변형. PathFinding.js의 JPFMoveDiagonallyIfNoObstacles와 같은 규칙.</p>
-    <p>B 뷰 읽는 법: 원은 점프 포인트, 선은 부모에서 점프한 구간, 흐린 칸은 스캔한 칸.</p>`,
+    <p>B 뷰 읽는 법: 원은 점프 포인트, 선은 부모에서 점프한 구간, 흐린 칸은 스캔한 칸</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 170" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="jpsA" class="m-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
     <marker id="jpsB" class="m-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -53,7 +53,7 @@ GTL.register({
     { type: 'paper', title: 'Online Graph Pruning for Pathfinding on Grid Maps', year: 2011, note: 'Daniel Harabor, Alban Grastien. AAAI-11. JPS 원논문.', url: 'https://ojs.aaai.org/index.php/AAAI/article/view/7994' },
     { type: 'paper', title: 'Improving Jump Point Search', year: 2014, note: 'Harabor & Grastien. ICAPS 2014. 블록 단위 스캔, 전처리(JPS+) 등.' },
     { type: 'talk', title: 'JPS+: Over 100x Faster than A*', year: 2015, note: 'Steve Rabin, GDC 2015 AI Summit.' },
-    { type: 'code', title: 'PathFinding.js (Xueqiao Xu)', url: 'https://github.com/qiao/PathFinding.js', note: 'JPS 대각선 규칙 변형들의 공개 구현.' },
+    { type: 'code', title: 'PathFinding.js (Xueqiao Xu)', url: 'https://github.com/qiao/PathFinding.js', note: 'JPS 대각선 규칙 변형들의 공개 구현' },
   ],
   params: [
     { key: 'algo', label: '알고리즘', type: 'select', group: '탐색', options: [

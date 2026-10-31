@@ -215,10 +215,10 @@
       <p>왜 체크섬이 필요한가: 결과가 비트 단위로 같아야 함. 컴파일러 최적화, CPU 명령(x87, FMA), 수학 라이브러리 차이로 실수 계산 결과가 아주 조금만 달라도 됨.
       그 차이는 거리 비교, 목표 선택, 사망 판정을 거치며 커짐. 결국 서로 다른 게임을 하게 됨(<b>디싱크</b>). 아무도 알아채지 못함.</p>
       <ul>
-        <li>매 턴(또는 N턴마다) 상태를 해시함. 실수는 Float64 비트를 그대로 섞음.</li>
-        <li>해시를 명령 패킷에 실어 보냄. 호스트가 같은 턴의 해시를 비교함.</li>
-        <li>다르면 <b>정지</b>(오류 보고, 상태 덤프로 원인 추적) 또는 <b>재동기화</b>(호스트가 그 턴의 전체 상태를 보내고, 받은 피어가 이후 턴을 다시 시뮬레이션).</li>
-        <li>이 샘플은 피어 2에만 일부러 오차를 넣음. "한 번 주입"은 2초에 유닛 하나의 x에 0.00001을 더함. "float32 반올림"은 피어 2가 거리 계산을 float32로 반올림함.</li>
+        <li>매 턴(또는 N턴마다) 상태 해시. 실수는 Float64 비트를 그대로 섞음.</li>
+        <li>해시를 명령 패킷에 실어 보냄. 호스트가 같은 턴의 해시 비교.</li>
+        <li>다르면 <b>정지</b>(오류 보고, 상태 덤프로 원인 추적) 또는 <b>재동기화</b>(호스트가 그 턴의 전체 상태를 보내고, 받은 피어가 이후 턴을 다시 시뮬레이션)</li>
+        <li>이 샘플은 피어 2에만 일부러 오차를 넣음. "한 번 주입"은 2초에 유닛 하나의 x에 0.00001을 더함. "float32 반올림"은 피어 2가 거리 계산을 float32로 반올림.</li>
       </ul>
       <p>단점: 체크섬은 갈라졌다는 사실만 알려줌. 원인(어떤 코드가 비결정적인지) 찾기는 여전히 어려움. 재동기화는 전체 상태 크기만큼 대역폭이 들고, 원인이 남아 있으면 계속 반복됨.</p>`,
     diagram: (L) => {
@@ -235,16 +235,16 @@
       <text x="305" y="72" text-anchor="middle" class="t-b">≠</text>
       <path d="M330,56 L362,78" class="d-b" marker-end="url(#arrB)"/>
       <text x="370" y="70" class="t-small t-b">${L('재동기화', 'resync')}</text>
-      <text x="4" y="126" class="t-small t-a">${L('A: 감지 없음. T4의 작은 실수 오차가 커져 두 피어가 다른 게임을 진행함', 'A: no check. A tiny float error at T4 grows and the peers play different games')}</text>
-      <text x="4" y="144" class="t-small t-b">${L('B: 턴마다 상태 해시를 교환함. T4에서 다름을 바로 감지함', 'B: peers swap a state hash every turn. The T4 mismatch shows up at once')}</text>
-      <text x="4" y="160" class="t-small t-b">${L('호스트가 T4 상태를 보내고 피어 2가 이후 턴을 다시 계산함', 'The host sends its T4 state and peer 2 re-simulates the later turns')}</text>
+      <text x="4" y="126" class="t-small t-a">${L('A: 감지 없음. T4의 작은 실수 오차가 커져 두 피어가 다른 게임을 진행', 'A: no check. A tiny float error at T4 grows and the peers play different games')}</text>
+      <text x="4" y="144" class="t-small t-b">${L('B: 턴마다 상태 해시 교환. T4에서 다름을 바로 감지', 'B: peers swap a state hash every turn. The T4 mismatch shows up at once')}</text>
+      <text x="4" y="160" class="t-small t-b">${L('호스트가 T4 상태를 보내고 피어 2가 이후 턴을 다시 계산', 'The host sends its T4 state and peer 2 re-simulates the later turns')}</text>
     </svg>`;
     },
     look: [
       '15초쯤 지켜보면 A의 피어 2 화면에 빨간 테두리(피어 1과 위치가 다른 유닛)가 늘고 두 피어의 점수가 달라짐. 체크섬이 없으니 아무 경고도 없음.',
-      'B는 오차를 넣은 턴에 바로 "디싱크 감지"가 뜨고, RTT 정도 뒤에 재동기화되어 두 화면이 다시 같아짐.',
+      'B는 오차를 넣은 턴에 바로 "디싱크 감지"가 뜨고, RTT 정도 뒤에 재동기화되어 두 화면이 다시 같아짐',
       '아래 그래프(로그 눈금)에서 A의 상태 차이가 1e-7 근처에서 시작해 교전 때마다 계단식으로 커지고, 결국 수십 px가 됨. 작은 오차가 증폭되는 모습임.',
-      '오차 주입을 "float32 반올림"으로 바꾸면 B는 재동기화를 계속 반복함. 원인을 고치지 않으면 재동기화로 해결되지 않음.',
+      '오차 주입을 "float32 반올림"으로 바꾸면 B는 재동기화를 계속 반복. 원인을 고치지 않으면 재동기화로 해결되지 않음.',
       'B의 디싱크 처리를 "정지"로 바꾸면 감지 즉시 두 피어가 멈춤. 개발 중 디버깅에 쓰는 방식.',
     ],
     refs: [

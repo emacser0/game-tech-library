@@ -38,13 +38,13 @@
   GTL.register({
     id: 'net-quantize',
     title: '벡터, 회전 양자화 (Unreal NetQuantize)',
-    summary: 'float32 벡터 하나는 96비트. Unreal의 FVector_NetQuantize는 정수로 반올림해 약 절반으로 줄이고, 회전은 축마다 8비트나 16비트로 압축함. 대신 느린 물체는 계단처럼 움직이고, 멀리 겨냥하면 조준 방향 오차가 커짐.',
+    summary: 'float32 벡터 하나는 96비트. Unreal의 FVector_NetQuantize는 정수로 반올림해 약 절반으로 줄이고, 회전은 축마다 8비트나 16비트로 압축. 대신 느린 물체는 계단처럼 움직이고, 멀리 겨냥하면 조준 방향 오차가 커짐.',
     views: { a: 'float32 그대로', b: 'NetQuantize + 8비트 회전' },
     controls: '조작 없음. 물체가 천천히 움직이고 조준 방향이 천천히 돌아감.',
     info: `
-      <p><b>양자화</b>: 실수를 정해진 간격의 정수로 반올림해 적은 비트로 보내는 기법. Unreal은 복제용 벡터, 회전 타입을 정밀도별로 제공함.</p>
+      <p><b>양자화</b>: 실수를 정해진 간격의 정수로 반올림해 적은 비트로 보내는 기법. Unreal은 복제용 벡터, 회전 타입을 정밀도별로 제공.</p>
       <ul>
-        <li><code>FVector</code>: float32 3개, 96비트.</li>
+        <li><code>FVector</code>: float32 3개, 96비트</li>
         <li><code>FVector_NetQuantize</code>: 1cm(정수) 단위. 값 크기에 맞춰 성분 비트 수를 줄임(최대 20비트).</li>
         <li><code>FVector_NetQuantize10</code>, <code>FVector_NetQuantize100</code>: 0.1cm, 0.01cm 단위. 비트가 더 듦.</li>
         <li><code>FVector_NetQuantizeNormal</code>: 길이 1인 방향 벡터. 성분마다 [-1, 1]을 16비트로.</li>
@@ -53,7 +53,7 @@
       <p>왜 필요한가: 위치와 회전은 거의 모든 패킷에 실림. 플레이어 수 × 전송률을 곱하면 비트 절약이 그대로 대역폭 절약이 됨.
       Unreal의 <code>FRepMovement</code>도 기본값이 위치 정수 반올림, 회전 8비트.</p>
       <p>단점: 간격보다 작은 움직임은 사라짐. 느린 물체는 계단처럼 튀고, 각도 오차는 거리에 비례해 커짐(30m에서 1.4도 간격이면 최대 약 37cm).</p>
-      <p>이 샘플의 가변 길이 비트 수는 UE 직렬화 방식을 단순화한 근사값.</p>`,
+      <p>이 샘플의 가변 길이 비트 수는 UE 직렬화 방식을 단순화한 근사값</p>`,
     diagram: [
       (L) => `<svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
         <text x="4" y="14" class="t-a">${L('A: float32 성분 3개 = 96비트', 'A: 3 float32 components = 96 bits')}</text>
@@ -82,20 +82,20 @@
         <text x="80" y="130" class="t-small t-dim">${L('점선: 8비트 회전이 낼 수 있는 방향 (1.4도 간격)', 'dotted: directions an 8-bit rotation can send (1.4 deg steps)')}</text>
         <text x="4" y="16" class="t-small">${L('초록: 실제 조준', 'green: true aim')}</text>
         <text x="4" y="30" class="t-small t-b">${L('파랑: 반올림한 방향', 'blue: rounded aim')}</text>
-        <text x="4" y="146" class="t-small t-dim">${L('각도 오차는 같아도 빗나가는 거리는 거리에 비례함 (오차 = 거리 × 각도)', 'The angle error is fixed, but the miss distance grows with range (miss = range × angle)')}</text>
+        <text x="4" y="146" class="t-small t-dim">${L('각도 오차는 같아도 빗나가는 거리는 거리에 비례 (오차 = 거리 × 각도)', 'The angle error is fixed, but the miss distance grows with range (miss = range × angle)')}</text>
       </svg>`,
     ],
     look: [
       'B의 위치 패널에서 물체(파랑)가 1cm 격자를 따라 계단처럼 튐. A(주황)는 실제 경로(초록)를 그대로 따라감.',
-      'B의 위치 정밀도를 NetQuantize100으로 바꾸면 계단이 사라지고 위치 비트가 늘어남.',
+      'B의 위치 정밀도를 NetQuantize100으로 바꾸면 계단이 사라지고 위치 비트가 늘어남',
       '조준 패널에서 B의 회전 압축을 8비트로 두면 목표 지점 오차가 수십 cm. 16비트나 NetQuantizeNormal로 바꾸면 거의 0.',
-      '"조준 거리"를 늘리면 같은 각도 오차가 더 큰 빗나감이 됨.',
+      '"조준 거리"를 늘리면 같은 각도 오차가 더 큰 빗나감이 됨',
       '"월드 좌표 크기"를 키우면 정수 성분이 커져서 NetQuantize의 비트 수도 늘어남. float32는 항상 96비트.',
     ],
     refs: [
       { type: 'engine', title: 'Unreal Engine API - FVector_NetQuantize, FVector_NetQuantize10, FVector_NetQuantize100, FVector_NetQuantizeNormal', note: 'NetSerialization.h에 정의된 복제용 벡터 타입. 정밀도별 배율과 최대 비트 수가 다름.' },
       { type: 'engine', title: 'Unreal Engine API - FRotator::SerializeCompressed, SerializeCompressedShort', note: '축마다 8비트, 16비트로 압축. 0인 축은 플래그만 보냄.' },
-      { type: 'engine', title: 'Unreal Engine API - FRepMovement', note: 'LocationQuantizationLevel, RotationQuantizationLevel로 이동 복제 정밀도를 고름.' },
+      { type: 'engine', title: 'Unreal Engine API - FRepMovement', note: 'LocationQuantizationLevel, RotationQuantizationLevel로 이동 복제 정밀도를 고름' },
       { type: 'article', title: 'Snapshot Compression', url: 'https://gafferongames.com/post/snapshot_compression/', note: 'Glenn Fiedler. 위치, 회전 양자화와 비트 수 계산.' },
     ],
     params: [

@@ -13,12 +13,12 @@ GTL.register({
       <i>속도 컷</i>(<code>vy *= 0.5</code>)은 순간적이라 궤적이 꺾임.
       <i>중력 배수</i>(<code>g *= 3</code>)는 부드럽게 일찍 정점에 닿음.</li>
       <li><b>하강 중력 배수</b>: 떨어지는 중(<code>vy &gt; 0</code>)에 중력을 1.5~3배로 키움. 상승은 시원하고, 하강은 빠르고 묵직해짐.
-      Kyle Pittman은 높이와 수평 거리로 초기 속도와 중력을 역산하고, 하강 구간에 다른 중력을 쓰는 방법을 정리함.</li>
+      Kyle Pittman은 높이와 수평 거리로 초기 속도와 중력을 역산하고, 하강 구간에 다른 중력을 쓰는 방법을 정리.</li>
       <li><b>최고점 체공 (apex hang)</b>: 버튼을 누른 채 <code>|vy|</code>가 임계값보다 작으면 중력을 절반으로 줄임. 정점에서 위치를 미세 조정할 시간이 생김
       (Celeste의 <code>HalfGravThreshold</code>).</li>
       <li><b>최대 낙하 속도</b>: <code>vy</code>에 상한을 둠. 끝없이 빨라지지 않아 착지 지점을 읽을 수 있음.</li>
     </ul>
-    <p>궤적 색: 뷰 색은 누른 채 상승, 노랑은 뗀 뒤 상승(컷), 보라는 최고점 체공, 회색은 하강.</p>`,
+    <p>궤적 색: 뷰 색은 누른 채 상승, 노랑은 뗀 뒤 상승(컷), 보라는 최고점 체공, 회색은 하강</p>`,
   // 도식: A의 대칭 포물선 vs B의 비대칭 궤적 (누른 채 점프, 일찍 뗀 점프, 최고점 체공, 무거운 하강)
   diagram: (L) => `<svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
     <line x1="20" y1="160" x2="530" y2="160" class="d-dim"/>
@@ -37,12 +37,12 @@ GTL.register({
     '자동 데모를 켜 두면 50 / 120 / 220 / 500ms 동안 누르는 점프를 번갈아 함. A는 모든 점프 높이가 같고(최소/최대 높이 비 100%), B는 누른 시간에 따라 높이가 달라짐.',
     'B의 "점프 컷"을 "속도 컷"으로 바꾸면 버튼을 떼는 순간 궤적이 꺾이고 vy 그래프가 계단처럼 뜀. "중력 배수"에서는 곡선이 매끄러움.',
     '하강 중력 배수를 1로 내리면 대칭 포물선이 됨. 3으로 올리면 하강이 확 빨라짐(그래프 오른쪽 기울기).',
-    '최고점 체공을 켜고 임계 속도를 200으로 올리면 정점의 보라색 구간이 길어져 캐릭터가 둥실 머무름.',
+    '최고점 체공을 켜고 임계 속도를 200으로 올리면 정점의 보라색 구간이 길어져 캐릭터가 둥실 머무름',
   ],
   refs: [
-    { type: 'talk', title: 'Math for Game Programmers: Building a Better Jump (Kyle Pittman, GDC 2016)', year: 2016, note: '점프 높이/거리에서 v0와 g 역산, 하강 중력 배수, 가변 높이.' },
-    { type: 'code', title: 'Celeste - Player.cs (VarJumpTime, HalfGravThreshold, MaxFall)', url: 'https://github.com/NoelFB/Celeste', year: 2018, note: '누르는 동안 상승 속도 유지, 정점 근처 중력 절반, 최대 낙하 속도.' },
-    { type: 'talk', title: 'Platformer Toolkit (Game Maker\'s Toolkit)', url: 'https://gmtk.itch.io/platformer-toolkit', year: 2022, note: '점프 컷, 하강 중력 배수 등을 슬라이더로 비교.' },
+    { type: 'talk', title: 'Math for Game Programmers: Building a Better Jump (Kyle Pittman, GDC 2016)', year: 2016, note: '점프 높이/거리에서 v0와 g 역산, 하강 중력 배수, 가변 높이' },
+    { type: 'code', title: 'Celeste - Player.cs (VarJumpTime, HalfGravThreshold, MaxFall)', url: 'https://github.com/NoelFB/Celeste', year: 2018, note: '누르는 동안 상승 속도 유지, 정점 근처 중력 절반, 최대 낙하 속도' },
+    { type: 'talk', title: 'Platformer Toolkit (Game Maker\'s Toolkit)', url: 'https://gmtk.itch.io/platformer-toolkit', year: 2022, note: '점프 컷, 하강 중력 배수 등을 슬라이더로 비교' },
     { type: 'book', title: 'Game Feel: A Game Designer\'s Guide to Virtual Sensation (Steve Swink)', year: 2008 },
   ],
   params: [

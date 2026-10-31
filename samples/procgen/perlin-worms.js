@@ -39,13 +39,13 @@ GTL.register({
   look: [
     '두 뷰의 "연결 영역 수"를 비교하면 A는 수십 개, B는 몇 개뿐임. 빨간 칸이 가장 큰 영역과 이어지지 않은 곳.',
     'B의 방향 방식을 백색 노이즈로 바꾸면 굴이 떨리고 짧게 뭉침. 같은 길이를 가도 멀리 못 감.',
-    'B의 회전 세기를 올리면 굴이 구불구불해지고, 낮추면 거의 직선이 됨.',
+    'B의 회전 세기를 올리면 굴이 구불구불해지고, 낮추면 거의 직선이 됨',
     'A의 빈 공간 목표를 50%까지 올려도 가장 큰 영역은 40%도 안 됨. 60%에서야 하나로 이어지고, 그때는 동굴이 아니라 넓은 벌판이 됨.',
   ],
   refs: [
-    { type: 'code', title: 'libnoise examples: Perlin worms', note: '노이즈로 방향을 정하는 웜 데모.' },
+    { type: 'code', title: 'libnoise examples: Perlin worms', note: '노이즈로 방향을 정하는 웜 데모' },
     { type: 'game', title: 'Minecraft (Mojang): 1.18 이전 동굴 carver', note: '굴 파기(carver)로 휘어진 터널을 파는 방식. 1.18부터는 노이즈 동굴(치즈, 스파게티 동굴)을 함께 씀.' },
-    { type: 'article', title: 'Red Blob Games: Making maps with noise functions', url: 'https://www.redblobgames.com/maps/terrain-from-noise/', note: '노이즈 임계값으로 지형을 만드는 기본 방식.' },
+    { type: 'article', title: 'Red Blob Games: Making maps with noise functions', url: 'https://www.redblobgames.com/maps/terrain-from-noise/', note: '노이즈 임계값으로 지형을 만드는 기본 방식' },
   ],
   params: [
     { key: 'mode', label: '생성 방식', type: 'select', group: '동굴', options: [
@@ -53,7 +53,7 @@ GTL.register({
       { value: 'white', label: '웜 + 백색 노이즈 방향' },
       { value: 'perlin', label: '웜 + 펄린 노이즈 방향' },
     ], a: 'threshold', b: 'perlin' },
-    { key: 'target', label: '빈 공간 목표 (%)', type: 'range', min: 5, max: 60, step: 1, default: 24, when: (p) => p.mode === 'threshold', help: '이 비율이 되도록 임계값을 자동으로 정함.' },
+    { key: 'target', label: '빈 공간 목표 (%)', type: 'range', min: 5, max: 60, step: 1, default: 24, when: (p) => p.mode === 'threshold', help: '이 비율이 되도록 임계값을 자동으로 정함' },
     { key: 'noiseScale', label: '노이즈 주파수', type: 'range', min: 2, max: 16, step: 0.5, default: 7, when: (p) => p.mode === 'threshold' },
     { key: 'worms', label: '웜 수', type: 'int', min: 1, max: 20, default: 6, when: (p) => p.mode !== 'threshold' },
     { key: 'length', label: '웜 길이 (걸음)', type: 'int', min: 20, max: 600, default: 220, when: (p) => p.mode !== 'threshold' },

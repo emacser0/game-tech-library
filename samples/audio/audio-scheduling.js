@@ -6,14 +6,14 @@ GTL.register({
   views: { a: 'setTimeout 즉시 재생', b: 'lookahead 예약' },
   controls: '조작 없음. 16분음표 메트로놈이 계속 울림. 메인 스레드 부하는 실제로 바쁜 대기를 걸어서 만듦.',
   info: `
-    <p>리듬 게임, 음악 시퀀서, 연사 무기처럼 <b>박자가 정확해야 하는 소리</b>는 재생 시각을 어떻게 정하느냐가 중요함.</p>
+    <p>리듬 게임, 음악 시퀀서, 연사 무기처럼 <b>박자가 정확해야 하는 소리</b>는 재생 시각을 어떻게 정하느냐가 중요함</p>
     <p><b>A: setTimeout 즉시 재생.</b> 다음 노트 시각까지 타이머를 걸고, 깨어나면 바로 재생.
     타이머는 메인 스레드에서 돌기 때문에 렌더링, GC, 긴 작업이 있으면 늦게 깨어남. 그 지연이 그대로 박자 오차가 됨.</p>
     <p><b>B: lookahead 예약</b> (Chris Wilson, "A Tale of Two Clocks"):</p>
     <ul>
-      <li>짧은 간격(예: 25ms)으로 타이머를 돌림.</li>
-      <li>깨어날 때마다 "지금부터 예약 범위(예: 100ms) 안에 있는 노트"를 모두 찾음.</li>
-      <li>찾은 노트를 <code>osc.start(정확한 시각)</code>으로 오디오 시계(<code>AudioContext.currentTime</code>)에 예약.</li>
+      <li>짧은 간격(예: 25ms)으로 타이머를 돌림</li>
+      <li>깨어날 때마다 "지금부터 예약 범위(예: 100ms) 안에 있는 노트"를 모두 찾음</li>
+      <li>찾은 노트를 <code>osc.start(정확한 시각)</code>으로 오디오 시계(<code>AudioContext.currentTime</code>)에 예약</li>
       <li>오디오 시계는 별도 스레드에서 샘플 단위로 정확함. 타이머가 늦어도 예약 범위 안이면 오차 0.</li>
     </ul>
     <p>단점: 예약 범위만큼 지연이 생겨 템포 변경이나 정지가 늦게 반영됨. 범위가 너무 짧으면 긴 부하를 못 견딤.
@@ -47,15 +47,15 @@ GTL.register({
   look: [
     '아래 히스토그램에서 A는 오차가 수 ms~수십 ms로 퍼짐. B는 거의 모두 0ms 칸에 모임.',
     '"부하 스파이크 (ms)"를 150으로 올리면 A는 스파이크마다 큰 오차가 생김. B는 예약 범위(100ms)를 넘는 만큼만 늦음.',
-    'B의 "예약 범위"를 타이머 간격보다 작게(예: 20ms) 하면 B도 늦는 노트가 생김.',
+    'B의 "예약 범위"를 타이머 간격보다 작게(예: 20ms) 하면 B도 늦는 노트가 생김',
     '부하를 모두 0으로 두면 A도 오차가 작아짐. 그래도 B보다 퍼짐이 큼 (타이머 자체의 지터).',
     '브라우저 탭을 다른 탭으로 바꿨다가 돌아오면 A는 크게 늦음. 백그라운드 탭은 타이머가 느려짐.',
   ],
   refs: [
     { type: 'article', title: 'A Tale of Two Clocks - Scheduling Web Audio with Precision (Chris Wilson)', url: 'https://web.dev/articles/audio-scheduling', year: 2013, note: 'HTML5 Rocks에 처음 실림. lookahead 25ms, scheduleAheadTime 100ms 예시.' },
-    { type: 'engine', title: 'MDN - AudioContext.currentTime', url: 'https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/currentTime', note: '오디오 하드웨어 시계. 초 단위, 계속 증가함.' },
-    { type: 'engine', title: 'MDN - AudioScheduledSourceNode.start', url: 'https://developer.mozilla.org/en-US/docs/Web/API/AudioScheduledSourceNode/start', note: 'when 인자로 정확한 재생 시각을 예약.' },
-    { type: 'engine', title: 'FMOD Engine - Channel::setDelay (DSP clock)', note: '네이티브 엔진도 DSP 시계 기준으로 샘플 단위 예약을 제공함.' },
+    { type: 'engine', title: 'MDN - AudioContext.currentTime', url: 'https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/currentTime', note: '오디오 하드웨어 시계. 초 단위, 계속 증가.' },
+    { type: 'engine', title: 'MDN - AudioScheduledSourceNode.start', url: 'https://developer.mozilla.org/en-US/docs/Web/API/AudioScheduledSourceNode/start', note: 'when 인자로 정확한 재생 시각을 예약' },
+    { type: 'engine', title: 'FMOD Engine - Channel::setDelay (DSP clock)', note: '네이티브 엔진도 DSP 시계 기준으로 샘플 단위 예약 제공' },
   ],
   params: [
     { key: 'mode', label: '스케줄링 방식', type: 'select', group: '스케줄링', options: [

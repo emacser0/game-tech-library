@@ -17,9 +17,9 @@ GTL.register({
   controls: '조작 없음. "다시 생성"을 누르면 새 시드로 만듦.',
   info: `
     <p><b>L-시스템</b>(Lindenmayer, 1968): 문자열 다시쓰기 규칙으로 식물 모양을 만드는 방식.
-    공리(axiom, 시작 문자열)에서 출발함. 매 반복마다 모든 기호를 규칙에 따라 <i>동시에</i> 바꿈.
+    공리(axiom, 시작 문자열)에서 출발. 매 반복마다 모든 기호를 규칙에 따라 <i>동시에</i> 바꿈.
     예: <code>F → F[+F]F[-F]F</code>.</p>
-    <p>결과 문자열은 거북이 그래픽 명령으로 해석함:</p>
+    <p>결과 문자열을 거북이 그래픽 명령으로 해석:</p>
     <ul>
       <li><code>F</code>: 앞으로 가며 선 그리기</li>
       <li><code>+ −</code>: 회전</li>
@@ -66,18 +66,18 @@ GTL.register({
   look: [
     'A와 B를 비교하면 A의 식물은 모두 똑같음(같은 규칙, 같은 각도). B는 같은 "종"이지만 가지 배치와 높이가 개체마다 다름.',
     'A에서 "각도 지터"만 올려도 꽤 달라 보임. 반대로 "확률적 규칙"만 켜고 지터를 0으로 두면 분기 구조만 달라짐.',
-    '반복 횟수를 1씩 올리면 문자열 길이 수치가 몇 배씩 커짐(ABOP 1.24a는 매번 약 5배).',
+    '반복 횟수를 1씩 올리면 문자열 길이 수치가 몇 배씩 커짐(ABOP 1.24a는 매번 약 5배)',
     '"바람"을 켜면 가지가 깊이에 비례해 흔들림. 끝가지일수록 많이 움직임.',
   ],
   refs: [
     { type: 'book', title: 'The Algorithmic Beauty of Plants (Prusinkiewicz & Lindenmayer, 1990)', url: 'http://algorithmicbotany.org/papers/#abop', year: 1990, note: '그림 1.24 프리셋의 첫 규칙과 확률적 L-시스템(1.24a 변형은 그림 1.27)의 출처. 나머지 프리셋의 대체 규칙은 이 샘플이 만든 변형.' },
-    { type: 'paper', title: 'Mathematical models for cellular interactions in development (Aristid Lindenmayer, J. Theoretical Biology 1968)', year: 1968, note: 'L-시스템 원 논문.' },
+    { type: 'paper', title: 'Mathematical models for cellular interactions in development (Aristid Lindenmayer, J. Theoretical Biology 1968)', year: 1968, note: 'L-시스템 원 논문' },
     { type: 'engine', title: 'SpeedTree', note: '게임, 영화용 절차적 식생 도구. 규칙 기반 생성에 아티스트 편집을 더함.' },
   ],
   params: [
     { key: 'preset', label: '식물 규칙', type: 'select', group: 'L-시스템', options: Object.entries(PRESETS).map(([value, p]) => ({ value, label: p.label })), default: 'd', shared: true },
     { key: 'iters', label: '반복 횟수 (0=프리셋 기본)', type: 'int', min: 0, max: 8, default: 0, shared: true },
-    { key: 'stochastic', label: '확률적 규칙', type: 'bool', a: false, b: true, help: '기호마다 여러 규칙 중 하나를 무작위로 고름.' },
+    { key: 'stochastic', label: '확률적 규칙', type: 'bool', a: false, b: true, help: '기호마다 여러 규칙 중 하나를 무작위로 고름' },
     { key: 'jitter', label: '각도 지터 (±°)', type: 'range', min: 0, max: 20, step: 0.5, a: 0, b: 7 },
     { key: 'angleOfs', label: '각도 오프셋 (°)', type: 'range', min: -12, max: 12, step: 0.5, default: 0 },
     { key: 'count', label: '개체 수', type: 'int', min: 1, max: 7, default: 4, shared: true, group: '장면' },

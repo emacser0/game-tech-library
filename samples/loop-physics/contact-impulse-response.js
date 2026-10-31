@@ -14,7 +14,7 @@ GTL.register({
         <code>j = -(1 + e) * dot(v_rel, n) / (w1 + w2)</code>. 두 물체에 <code>±j n</code>을 역질량만큼 나눠 줌. 서로 멀어지는 중이면(<code>dot(v_rel, n) &gt; 0</code>) 건너뜀.</li>
     </ul>
     <p>임펄스 방식도 위치 보정은 함께 씀. 속도만 바꾸면 이미 생긴 겹침이 남기 때문.</p>
-    <p>단점: 여러 물체가 동시에 닿으면 순서대로 풀어서 오차가 생김. 정확히 맞추려면 반복 솔버가 필요함(이 카테고리의 "상자 쌓기" 샘플 참고).</p>`,
+    <p>단점: 여러 물체가 동시에 닿으면 순서대로 풀어서 오차가 생김. 정확히 맞추려면 반복 솔버 필요(이 카테고리의 "상자 쌓기" 샘플 참고).</p>`,
   // 도식: 위치 보정만 하면 속도가 그대로 남음. 임펄스는 법선 방향 상대 속도를 질량 비율로 나눠 바꿈
   diagram: (L) => `<svg viewBox="0 0 540 196" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -48,7 +48,7 @@ GTL.register({
   refs: [
     { type: 'article', title: 'Physics, Part 3: Collision Response (Chris Hecker)', year: 1997, note: 'Game Developer Magazine. 충격량 식 유도.' },
     { type: 'article', title: 'How to Create a Custom 2D Physics Engine: The Basics and Impulse Resolution (Randy Gaul)', year: 2013, note: 'Envato Tuts+. 임펄스 해결과 위치 보정.' },
-    { type: 'book', title: 'Game Physics Engine Development (Ian Millington)', year: 2007, note: '접촉 해결, 반발 계수, 겹침 해소.' },
+    { type: 'book', title: 'Game Physics Engine Development (Ian Millington)', year: 2007, note: '접촉 해결, 반발 계수, 겹침 해소' },
   ],
   params: [
     { key: 'method', label: '충돌 응답', type: 'select', group: '응답', options: [

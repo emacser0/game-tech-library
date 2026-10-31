@@ -20,9 +20,9 @@ GTL.register({
     <ul>
       <li><b>백페이스 컬링</b>: 닫힌 메시의 뒷면은 늘 앞면에 가려짐. 래스터화 전에 버려 삼각형과 프래그먼트를 대략 절반으로 줄임.</li>
       <li><b>앞→뒤 정렬</b>: 가까운 물체를 먼저 그림. 뒤 물체의 프래그먼트는 깊이 테스트(early-Z)에서 탈락해 셰이딩되지 않음. 뒤→앞이 최악.</li>
-      <li><b>Z-프리패스</b>: 색 없이 깊이만 먼저 그린 뒤 <code>LEQUAL</code>로 다시 그림. 픽셀당 정확히 한 번만 셰이딩함. 단점: 정점 처리는 2배.</li>
+      <li><b>Z-프리패스</b>: 색 없이 깊이만 먼저 그린 뒤 <code>LEQUAL</code>로 다시 그림. 픽셀당 정확히 한 번만 셰이딩. 단점: 정점 처리는 2배.</li>
     </ul>
-    <p>주의: 깊이 테스트를 끄면 반투명 파티클처럼 모든 프래그먼트가 셰이딩됨. 이 오버드로는 정렬로도 못 줄임. 반투명은 오히려 뒤→앞 정렬이 <i>필요</i>함.</p>`,
+    <p>주의: 깊이 테스트를 끄면 반투명 파티클처럼 모든 프래그먼트가 셰이딩됨. 이 오버드로는 정렬로도 못 줄임. 반투명은 오히려 뒤→앞 정렬 <i>필요</i>.</p>`,
   // 도식: 한 픽셀 위에 겹친 물체 3개. 그리는 순서에 따라 셰이딩 횟수가 달라짐
   diagram: (L) => `<svg viewBox="0 0 540 184" xmlns="http://www.w3.org/2000/svg">
     <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
@@ -57,11 +57,11 @@ GTL.register({
   look: [
     'A의 히트맵을 보면 노랑과 빨강 영역이 넓음. B는 대부분 파랑(1회). 평균 오버드로 수치도 크게 차이 남.',
     'B에서 백페이스 컬링만 끄면 구와 토러스 안쪽 면 때문에 수치가 올라감. 정렬만 "없음"으로 바꿔도 마찬가지.',
-    'Z-프리패스를 켜면 정렬과 상관없이 평균이 1.0에 가까워짐.',
+    'Z-프리패스를 켜면 정렬과 상관없이 평균이 1.0에 가까워짐',
     '"셰이딩 보기"로 바꾸면 A와 B의 최종 화면이 똑같음. 오버드로는 눈에 보이지 않는 비용.',
   ],
   refs: [
-    { type: 'article', title: 'A trip through the Graphics Pipeline 2011, part 7: Z/Stencil processing, 3 ways (Fabian Giesen)', url: 'https://fgiesen.wordpress.com/2011/07/08/a-trip-through-the-graphics-pipeline-2011-part-7/', year: 2011, note: 'Early-Z, Hi-Z 동작.' },
+    { type: 'article', title: 'A trip through the Graphics Pipeline 2011, part 7: Z/Stencil processing, 3 ways (Fabian Giesen)', url: 'https://fgiesen.wordpress.com/2011/07/08/a-trip-through-the-graphics-pipeline-2011-part-7/', year: 2011, note: 'Early-Z, Hi-Z 동작' },
     { type: 'engine', title: 'Unreal Engine: Optimization Viewmodes (Shader Complexity / Quad Overdraw)', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/viewport-modes-in-unreal-engine' },
     { type: 'engine', title: 'Unity: Rendering order: opaque front-to-back, transparent back-to-front (Render queue)', url: 'https://docs.unity3d.com/Manual/SL-SubShaderTags.html' },
     { type: 'article', title: 'LearnOpenGL: Face culling', url: 'https://learnopengl.com/Advanced-OpenGL/Face-culling' },

@@ -17,7 +17,7 @@ GTL.register({
       <li>Unity 모델 임포터의 Anim. Compression을 Keyframe Reduction으로 두면 Rotation Error(도), Position Error, Scale Error(%) 값이 허용 오차 역할.</li>
       <li>Unreal은 애니메이션 시퀀스마다 압축 코덱을 고름. 코덱이 오차 임계값 안에서 키를 줄이거나 정밀도를 낮춤. UE5의 기본 코덱은 ACL(Animation Compression Library) 기반.</li>
     </ul>
-    <p>공정한 비교를 위해 A는 기본으로 B와 같은 키 수를 균일하게 배치함. B는 키마다 시간 값을 따로 저장하므로 키 하나가 더 큼. "같은 크기" 예산을 고르면 A가 그만큼 키를 더 씀.</p>
+    <p>공정한 비교를 위해 A는 기본으로 B와 같은 키 수를 균일하게 배치. B는 키마다 시간 값을 따로 저장하므로 키 하나가 더 큼. "같은 크기" 예산을 고르면 A가 그만큼 키를 더 씀.</p>
     <p>단점: 오차는 커브 하나 기준이라 본 계층을 따라 쌓임. 손끝처럼 루트에서 먼 본은 작은 회전 오차로도 크게 흔들림. 실무 압축기는 그래서 본 위치 오차(가상 정점 오차)로 판단하기도 함.</p>`,
   // 도식: 이웃 키 보간선과 허용 오차 띠. 띠 안의 키는 제거, 띠 밖의 키는 유지
   diagram: (L) => `<svg viewBox="0 0 540 200" xmlns="http://www.w3.org/2000/svg">
@@ -61,9 +61,9 @@ GTL.register({
   ],
   refs: [
     { type: 'engine', title: 'Unity Manual - Animation tab (Model Import Settings): Anim. Compression', url: 'https://docs.unity3d.com/Manual/class-AnimationClip.html', note: 'Off, Keyframe Reduction, Optimal 중 선택. Rotation Error, Position Error, Scale Error가 허용 오차.' },
-    { type: 'engine', title: 'Unreal Engine - Animation Compression', note: '애니메이션 시퀀스마다 압축 코덱과 오차 임계값을 지정.' },
+    { type: 'engine', title: 'Unreal Engine - Animation Compression', note: '애니메이션 시퀀스마다 압축 코덱과 오차 임계값을 지정' },
     { type: 'code', title: 'Animation Compression Library (ACL)', url: 'https://github.com/nfrechette/acl', note: 'Nicholas Frechette. 가상 정점 오차 기준으로 정밀도를 고르는 압축 라이브러리. UE5의 기본 애니메이션 코덱 기반.' },
-    { type: 'article', title: 'Nicholas Frechette - Animation Compression: Table of Contents (blog series)', note: '균일 샘플링, 선형 키 감소, 커브 피팅, 오차 측정 방식을 차례로 비교.' },
+    { type: 'article', title: 'Nicholas Frechette - Animation Compression: Table of Contents (blog series)', note: '균일 샘플링, 선형 키 감소, 커브 피팅, 오차 측정 방식을 차례로 비교' },
     { type: 'book', title: 'Game Engine Architecture - Animation Systems (Compression Techniques)', note: 'Jason Gregory. 채널 생략, 양자화, 샘플 주기와 키 감소를 정리.' },
   ],
   params: [

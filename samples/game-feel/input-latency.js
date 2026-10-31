@@ -2,18 +2,18 @@
 GTL.register({
   id: 'input-latency',
   title: '입력 지연 체감 (프레임 지연)',
-  summary: '같은 순간에 점프를 눌러도 입력이 몇 프레임 늦게 반영되면 캐릭터는 그만큼 늦게 뜀. 0 프레임과 6 프레임(100ms) 지연을 같은 입력으로 비교함.',
+  summary: '같은 순간에 점프를 눌러도 입력이 몇 프레임 늦게 반영되면 캐릭터는 그만큼 늦게 뜀. 0 프레임과 6 프레임(100ms) 지연을 같은 입력으로 비교.',
   views: { a: '지연 0 프레임', b: '지연 6 프레임 (100ms)' },
   controls: 'Space / Z / ↑ / W 점프 (키를 누르면 자동 데모가 잠시 멈춤)',
   info: `
     <p><b>입력 지연(Input Lag)</b>: 버튼을 누른 순간부터 그 결과가 게임 상태에 반영되기까지 걸리는 시간.
     여러 단계가 쌓여서 생김. 예: 컨트롤러 폴링, OS 이벤트 처리, 게임 루프 대기, 렌더 큐, 디스플레이 처리.</p>
     <p>왜 중요한가: 플레이어는 화면을 보고 "지금"이라고 판단해 버튼을 누름.
-    반영이 늦으면 캐릭터는 그만큼 앞으로 더 간 뒤에 뜀. 타이밍 여유가 작은 장애물부터 실패함.</p>
-    <p>이 샘플은 입력을 큐에 넣고 N 프레임 뒤에 꺼내 적용함. 바닥의 흰 표시는 버튼을 누른 지점, 뷰 색 표시는 점프가 실제로 시작된 지점.
+    반영이 늦으면 캐릭터는 그만큼 앞으로 더 간 뒤에 뜀. 타이밍 여유가 작은 장애물부터 실패.</p>
+    <p>이 샘플은 입력을 큐에 넣고 N 프레임 뒤에 꺼내 적용. 바닥의 흰 표시는 버튼을 누른 지점, 뷰 색 표시는 점프가 실제로 시작된 지점.
     두 표시 사이 거리 = 속도 × 지연 시간.</p>
     <ul>
-      <li>줄이는 방법: 입력을 프레임 시작 직전에 읽기, 렌더 큐(버퍼링 프레임) 줄이기, 수직 동기 대기 줄이기.</li>
+      <li>줄이는 방법: 입력을 프레임 시작 직전에 읽기, 렌더 큐(버퍼링 프레임) 줄이기, 수직 동기 대기 줄이기</li>
       <li>숨기는 방법: 점프 버퍼, 코요테 타임 같은 관대한 판정. 대전 게임 롤백 넷코드의 입력 지연 설정도 같은 문제를 다룸.</li>
     </ul>`,
   // 도식: 같은 프레임에 누른 입력이 큐를 거쳐 N 프레임 뒤에 적용되는 흐름과 그 사이 이동 거리
@@ -39,15 +39,15 @@ GTL.register({
   </svg>`,
   look: [
     '자동 데모는 두 뷰에서 같은 순간에 점프를 누름. A는 모두 통과하고, B는 높은 장애물에서 자주 부딪힘.',
-    'B의 입력 지연을 2 프레임으로 낮추면 거의 다 통과함. 4 프레임부터 실패가 섞이기 시작함.',
-    '"이동 속도"를 올리면 같은 지연이라도 흰 표시와 색 표시 사이가 벌어지고 실패가 늘어남.',
+    'B의 입력 지연을 2 프레임으로 낮추면 거의 다 통과. 4 프레임부터 실패가 섞이기 시작.',
+    '"이동 속도"를 올리면 같은 지연이라도 흰 표시와 색 표시 사이가 벌어지고 실패가 늘어남',
     '자동 데모를 끄고 직접 해 보면 B는 일찍 누르도록 손이 적응해 감. 지연이 "무겁다"는 느낌으로 남음.',
   ],
   refs: [
-    { type: 'book', title: 'Game Feel: A Game Designer\'s Guide to Virtual Sensation (Steve Swink)', year: 2008, note: '응답성(responsiveness)과 입력 지연이 조작감에 주는 영향.' },
+    { type: 'book', title: 'Game Feel: A Game Designer\'s Guide to Virtual Sensation (Steve Swink)', year: 2008, note: '응답성(responsiveness)과 입력 지연이 조작감에 주는 영향' },
     { type: 'talk', title: '8 Frames in 16ms: Rollback Networking in Mortal Kombat and Injustice 2 (Michael Stallone)', year: 2018, note: 'GDC 2018. 입력 지연 프레임과 롤백의 균형.' },
-    { type: 'article', title: 'Computer latency: 1977-2017 (Dan Luu)', url: 'https://danluu.com/input-lag/', year: 2017, note: '키 입력에서 화면 반영까지의 지연 측정 사례.' },
-    { type: 'engine', title: 'NVIDIA Reflex', note: '렌더 큐를 줄여 시스템 지연을 낮추는 SDK.' },
+    { type: 'article', title: 'Computer latency: 1977-2017 (Dan Luu)', url: 'https://danluu.com/input-lag/', year: 2017, note: '키 입력에서 화면 반영까지의 지연 측정 사례' },
+    { type: 'engine', title: 'NVIDIA Reflex', note: '렌더 큐를 줄여 시스템 지연을 낮추는 SDK' },
   ],
   params: [
     { key: 'delay', label: '입력 지연 (프레임@60)', type: 'int', min: 0, max: 12, a: 0, b: 6, default: 0, group: '기법' },

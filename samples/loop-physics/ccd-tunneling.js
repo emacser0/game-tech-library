@@ -7,17 +7,17 @@ GTL.register({
   controls: '마우스 클릭: 클릭한 방향으로 공 하나 추가 발사',
   info: `
     <p><b>터널링</b>은 빠른 물체가 얇은 벽을 그냥 통과하는 현상. <b>연속 충돌 감지</b>(CCD, Continuous Collision Detection)는 이를 막는 방법.</p>
-    <p><b>이산 충돌 검사</b>는 스텝이 끝난 위치에서만 겹침을 확인함. 그래서 두 가지 문제가 생김.</p>
+    <p><b>이산 충돌 검사</b>는 스텝이 끝난 위치에서만 겹침 확인. 그래서 두 가지 문제가 생김.</p>
     <ul>
-      <li>한 스텝 이동량 <code>v*dt</code>가 <code>벽 두께 + 공 지름</code>보다 크면 겹치는 순간을 아예 놓침. 공이 <b>벽을 그냥 통과</b>함.</li>
+      <li>한 스텝 이동량 <code>v*dt</code>가 <code>벽 두께 + 공 지름</code>보다 크면 겹치는 순간을 아예 놓침. 공이 <b>벽을 그냥 통과</b>.</li>
       <li>이동량이 <code>반지름 + 두께/2</code>만 넘어도 겹친 순간에 공 중심이 벽 중앙선을 이미 넘었을 수 있음. 그러면 반대 방향으로 밀려 <b>벽 건너편으로 빠져나감</b>.</li>
     </ul>
     <p>해결 방법:</p>
     <ul>
       <li><b>서브스텝</b>: dt를 n등분해 검사 간격을 줄임. 비용이 n배이고, 충분히 빠르면 여전히 뚫림.</li>
-      <li><b>스윕 검사(CCD)</b>: 공이 이동하며 지나는 영역(캡슐 모양)과 벽을 교차시켜 <b>처음 부딪치는 시각 t∈[0,1]</b>을 구함. 그 시점에서 반사하고 남은 시간만큼 다시 이동함. 속도와 관계없이 정확함.</li>
+      <li><b>스윕 검사(CCD)</b>: 공이 이동하며 지나는 영역(캡슐 모양)과 벽을 교차시켜 <b>처음 부딪치는 시각 t∈[0,1]</b>을 구함. 그 시점에서 반사하고 남은 시간만큼 다시 이동. 속도와 관계없이 정확함.</li>
     </ul>
-    <p>단점: 스윕 검사는 이산 검사보다 계산이 복잡하고 비쌈.</p>
+    <p>단점: 스윕 검사는 이산 검사보다 계산이 복잡하고 비쌈</p>
     <p>회색 점은 각 공이 물리 스텝마다 실제로 있었던 위치. 점 사이의 빈 곳이 검사하지 않은 구간.</p>`,
   // 도식: 이산 검사는 스텝 사이 구간을 보지 않음. 스윕 검사는 경로 전체에서 첫 접촉 시각을 구함
   diagram: (L) => `<svg viewBox="0 0 540 176" xmlns="http://www.w3.org/2000/svg">
@@ -42,16 +42,16 @@ GTL.register({
     <text x="290" y="156" class="t-small">${L('처음 닿는 시각 t∈[0,1]을 구해 그 자리에서 반사', 'Reflect at first contact time t in [0,1]')}</text>
   </svg>`,
   look: [
-    'A를 그대로 두면 공들이 얇은 벽을 통과해 상자 밖으로 탈출함(빨간 X). B는 같은 속도에서 관통 0.',
+    'A를 그대로 두면 공들이 얇은 벽을 통과해 상자 밖으로 탈출(빨간 X). B는 같은 속도에서 관통 0.',
     'A의 방식을 "서브스텝"으로 바꾸고 서브스텝 수를 올리면 관통이 줄어듦. 하지만 속도를 6000까지 올리면 다시 뚫림.',
     '시간 배율을 0.1로 낮추면 회색 점이 벽을 건너뛰는 모습이 보임. B에서는 노란 원(TOI 충돌 지점)이 벽 표면에 찍힘.',
     '벽 두께를 키우거나 속도를 낮추면 A도 막힘. 스텝당 이동량이 "반지름 + 두께/2"(통계의 안전 임계)보다 작아야 안전함.',
   ],
   refs: [
-    { type: 'talk', title: 'Continuous Collision (Erin Catto, GDC 2013)', url: 'https://box2d.org/publications/', year: 2013, note: 'Box2D의 TOI, Conservative Advancement 설명.' },
-    { type: 'engine', title: 'Unity - Continuous collision detection (CCD)', url: 'https://docs.unity3d.com/Manual/ContinuousCollisionDetection.html', note: 'Discrete, Continuous, Continuous Dynamic, Continuous Speculative 모드.' },
+    { type: 'talk', title: 'Continuous Collision (Erin Catto, GDC 2013)', url: 'https://box2d.org/publications/', year: 2013, note: 'Box2D의 TOI, Conservative Advancement 설명' },
+    { type: 'engine', title: 'Unity - Continuous collision detection (CCD)', url: 'https://docs.unity3d.com/Manual/ContinuousCollisionDetection.html', note: 'Discrete, Continuous, Continuous Dynamic, Continuous Speculative 모드' },
     { type: 'book', title: 'Real-Time Collision Detection (Christer Ericson)', year: 2005, note: '5.5절 Dynamic intersection tests. 움직이는 구 vs 평면, 캡슐.' },
-    { type: 'engine', title: 'Box2D - Bullet bodies (b2BodyDef::isBullet)', note: '빠른 동적 바디끼리도 CCD를 적용하는 플래그.' },
+    { type: 'engine', title: 'Box2D - Bullet bodies (b2BodyDef::isBullet)', note: '빠른 동적 바디끼리도 CCD를 적용하는 플래그' },
   ],
   params: [
     { key: 'method', label: '충돌 검사', type: 'select', group: '검사 방식', options: [

@@ -122,21 +122,21 @@
     views: { a: '랙 보상 없음 (현재 위치 판정)', b: '랙 보상 (되감기 판정)' },
     controls: '← → / A D: 피격자(위쪽 원) 좌우 이동, Space: 수동 사격 (자동 사격을 끈 경우)',
     info: `
-      <p><b>랙 보상</b>: 서버가 사수가 보던 시각으로 대상을 되감아 명중을 판정하는 기법.</p>
+      <p><b>랙 보상</b>: 서버가 사수가 보던 시각으로 대상을 되감아 명중을 판정하는 기법</p>
       <p>왜 필요한가: 사수 화면 속 적은 <code>서버→사수 지연 + 보간 지연</code>만큼 과거 위치임.
       사수가 화면에서 정확히 조준해도, 명령이 서버에 닿을 무렵 적은 이미 이동해 있음.
       그래서 <b>현재 위치로 판정하면 빗나감</b>. 사수가 이동 방향 앞을 겨냥(리드)해도, 필요한 리드 양이 핑마다 달라짐.</p>
       <ul>
-        <li>서버는 각 플레이어의 과거 위치(히트박스)를 일정 시간 기록해 둠.</li>
-        <li>사격 명령에는 사수가 렌더링하던 시각이 들어 있음.</li>
-        <li>서버는 대상을 그 시각으로 <b>되감아(rewind)</b> 판정한 뒤 원래대로 되돌림.</li>
-        <li>결과: "보이는 대로 맞음(favor the shooter)".</li>
+        <li>서버는 각 플레이어의 과거 위치(히트박스)를 일정 시간 기록해 둠</li>
+        <li>사격 명령에는 사수가 렌더링하던 시각이 들어 있음</li>
+        <li>서버는 대상을 그 시각으로 <b>되감아(rewind)</b> 판정한 뒤 원래대로 되돌림</li>
+        <li>결과: "보이는 대로 맞음(favor the shooter)"</li>
       </ul>
       <p>단점: 피격자는 이미 엄폐물 뒤로 들어갔는데 맞는 일이 생김. 그래서 최대 되감기 시간을 제한해 높은 핑 사수의 이점을 줄임.
       Valve Source는 최대 1초. Overwatch는 높은 핑에서 보정량을 줄임.</p>`,
     diagram: (L) => `<svg viewBox="0 0 540 180" xmlns="http://www.w3.org/2000/svg">
       <defs><marker id="arr" class="m-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
-      <text x="4" y="16" class="t-small t-dim">${L('서버는 히트박스 위치 기록을 보관함 (Source 최대 1초)', 'The server keeps a history of hitbox positions (Source: up to 1 s)')}</text>
+      <text x="4" y="16" class="t-small t-dim">${L('서버는 히트박스 위치 기록 보관 (Source 최대 1초)', 'The server keeps a history of hitbox positions (Source: up to 1 s)')}</text>
       <circle cx="40" cy="110" r="8" class="f-dim"/>
       <text x="40" y="136" text-anchor="middle" class="t-small">${L('사수', 'shooter')}</text>
       ${[200, 300, 350].map((x) => `<rect x="${x}" y="90" width="24" height="40" class="f-dim" opacity="0.5"/>`).join('')}
@@ -153,16 +153,16 @@
       <text x="337" y="168" text-anchor="middle" class="t-small">${L('사수 화면과 서버 현재 사이의 시간 (편도 지연 + 보간 지연)', 'Gap between shooter view and server now (latency + interp delay)')}</text>
     </svg>`,
     look: [
-      'A에서 사수 화면과 서버 판정을 비교하면, 화면에서는 명중(초록 탄)이어도 서버는 대부분 빗나감으로 판정함. "서버 인정률"이 낮고, 피격자가 멈춰 있을 때만 맞음.',
+      'A에서 사수 화면과 서버 판정을 비교하면, 화면에서는 명중(초록 탄)이어도 서버는 대부분 빗나감으로 판정. "서버 인정률"이 낮고, 피격자가 멈춰 있을 때만 맞음.',
       'B에서 서버 패널을 보면 점선 원(되감은 히트박스)에 판정이 일어남. 인정률이 거의 100%.',
       'B의 피격자 화면을 보면, 엄폐물(회색 벽) 뒤에 들어간 직후 "피격!"이 뜨기도 함. "엄폐 뒤 피격" 수치가 올라감.',
-      '사수 지연을 250ms 이상으로 올리고 B의 "최대 되감기"를 100ms로 낮추면 인정률이 다시 떨어짐(높은 핑 제한).',
+      '사수 지연을 250ms 이상으로 올리고 B의 "최대 되감기"를 100ms로 낮추면 인정률이 다시 떨어짐(높은 핑 제한)',
     ],
     refs: [
       { type: 'engine', title: 'Lag compensation', url: 'https://developer.valvesoftware.com/wiki/Lag_Compensation', note: 'Valve Developer Wiki. 서버 측 히트박스 되감기.' },
       { type: 'paper', title: 'Latency Compensating Methods in Client/Server In-game Protocol Design and Optimization', url: 'https://developer.valvesoftware.com/wiki/Latency_Compensating_Methods_in_Client/Server_In-game_Protocol_Design_and_Optimization', year: 2001, note: 'Yahn Bernier (Valve).' },
       { type: 'article', title: 'Fast-Paced Multiplayer (Part IV): Lag Compensation', url: 'https://www.gabrielgambetta.com/lag-compensation.html', note: 'Gabriel Gambetta.' },
-      { type: 'engine', title: 'Source Multiplayer Networking - Lag compensation', url: 'https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking', note: '명령 실행 시각 = 서버 시각 − 패킷 지연 − 클라 보간 지연.' },
+      { type: 'engine', title: 'Source Multiplayer Networking - Lag compensation', url: 'https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking', note: '명령 실행 시각 = 서버 시각 − 패킷 지연 − 클라 보간 지연' },
       { type: 'talk', title: 'Overwatch Gameplay Architecture and Netcode', year: 2017, note: 'Tim Ford, GDC 2017. 히트 판정 되감기와 높은 핑 제한.' },
       { type: 'talk', title: 'I Shot You First: Networking the Gameplay of HALO: REACH', year: 2011, note: 'David Aldridge, GDC 2011.' },
     ],

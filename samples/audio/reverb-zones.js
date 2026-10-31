@@ -12,10 +12,10 @@ GTL.register({
     <ul>
       <li>트리거 하나로 프리셋을 바로 바꾸면 경계에서 Wet 레벨이 한 프레임에 크게 바뀜. 잔향이 갑자기 켜지고 "툭" 소리(지퍼 노이즈)가 남.</li>
       <li>Unity의 <b>Audio Reverb Zone</b>은 구 모양 영역에 <code>minDistance</code>(내부 반지름)와 <code>maxDistance</code>(외부 반지름)를 둠. 내부 안은 효과 100%, 외부 밖은 0%, 그 사이는 거리에 따라 섞음.</li>
-      <li>Unreal의 <b>Audio Volume</b>은 Reverb Settings의 Fade Time 동안 잔향을 서서히 바꿈.</li>
+      <li>Unreal의 <b>Audio Volume</b>은 Reverb Settings의 Fade Time 동안 잔향을 서서히 바꿈</li>
     </ul>
     <p>Audio Volume의 <b>Interior Settings</b>는 공간을 나누는 다른 축. 청자가 안에 있으면 바깥 음원에 Exterior Volume과 Exterior LPF를 걸고, 밖에 있으면 안쪽 음원에 Interior 값을 검. 값마다 따로 페이드 시간이 있음.</p>
-    <p>단점: 영역이 겹치면 우선순위나 가중치 규칙이 필요함. 섞는 구간이 너무 넓으면 바깥에서도 동굴 잔향이 들림.
+    <p>단점: 영역이 겹치면 우선순위나 가중치 규칙 필요. 섞는 구간이 너무 넓으면 바깥에서도 동굴 잔향이 들림.
     이 샘플은 두 프리셋을 각각 ConvolverNode(노이즈를 감쇠시켜 만든 임펄스 응답)에 통과시키고 Wet 이득만 섞음.</p>`,
   diagram: [
     (L) => `<svg viewBox="0 0 540 208" xmlns="http://www.w3.org/2000/svg">
@@ -68,16 +68,16 @@ GTL.register({
   ],
   look: [
     'A는 청자가 동굴 벽을 넘는 순간 Wet 레벨 그래프가 세로로 튐. B는 내부 반지름과 외부 반지름 사이에서 비스듬히 바뀜.',
-    '측정값 "최근 최대 변화 (프레임당)"를 비교하면 A는 10dB 이상, B는 1dB 미만.',
+    '측정값 "최근 최대 변화 (프레임당)"를 비교하면 A는 10dB 이상, B는 1dB 미만',
     'B에서 동굴에 들어가면 아래 "폭포 LPF" 선이 서서히 내려감. 바깥 폭포 소리가 벽 너머 소리처럼 먹먹해짐. A는 그대로.',
-    'A의 페이드 시간을 0.5초로 올리면 즉시 교체여도 튐이 줄어듦. 대신 경계에서 늦게 반응함.',
+    'A의 페이드 시간을 0.5초로 올리면 즉시 교체여도 튐이 줄어듦. 대신 경계에서 늦게 반응.',
     '"소리 켜기"를 누르고 A를 들으면 입구에서 잔향이 갑자기 켜짐. B는 입구 앞부터 서서히 울림.',
   ],
   refs: [
     { type: 'engine', title: 'Unity Manual - Audio Reverb Zone', url: 'https://docs.unity3d.com/Manual/class-AudioReverbZone.html', note: 'Min Distance 안은 전체 효과, Max Distance 밖은 효과 없음. 그 사이에서 서서히 섞음.' },
-    { type: 'engine', title: 'Unity Scripting API - AudioReverbZone', url: 'https://docs.unity3d.com/ScriptReference/AudioReverbZone.html', note: 'minDistance, maxDistance, reverbPreset, decayTime 같은 속성.' },
-    { type: 'engine', title: 'Unreal Engine - Audio Volumes', note: 'Reverb Settings(Reverb Effect, Volume, Fade Time)와 Interior Settings(Exterior/Interior Volume, LPF, 각 페이드 시간).' },
-    { type: 'engine', title: 'MDN - ConvolverNode', url: 'https://developer.mozilla.org/en-US/docs/Web/API/ConvolverNode', note: '임펄스 응답 버퍼로 컨볼루션 잔향을 만듦.' },
+    { type: 'engine', title: 'Unity Scripting API - AudioReverbZone', url: 'https://docs.unity3d.com/ScriptReference/AudioReverbZone.html', note: 'minDistance, maxDistance, reverbPreset, decayTime 같은 속성' },
+    { type: 'engine', title: 'Unreal Engine - Audio Volumes', note: 'Reverb Settings(Reverb Effect, Volume, Fade Time)와 Interior Settings(Exterior/Interior Volume, LPF, 각 페이드 시간)' },
+    { type: 'engine', title: 'MDN - ConvolverNode', url: 'https://developer.mozilla.org/en-US/docs/Web/API/ConvolverNode', note: '임펄스 응답 버퍼로 컨볼루션 잔향을 만듦' },
   ],
   params: [
     { key: 'blend', label: '프리셋 전환 방식', type: 'select', group: '잔향 영역', options: [

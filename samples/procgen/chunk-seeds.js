@@ -4,11 +4,11 @@ GTL.register({
   title: '시드 & 결정론: 청크 해시 시드 vs 순차 RNG',
   summary: '순차 RNG vs 청크 좌표 해시 시드 비교. 순차 RNG는 탐험 순서에 따라 세계가 달라짐. 좌표 해시 시드는 어떤 순서로 가도 같은 세계가 나옴.',
   views: { a: '순차 RNG (전역 난수 스트림)', b: '좌표 해시 시드' },
-  controls: '조작 없음. 두 패널은 같은 월드 시드로 서로 다른 순서로 탐험함.',
+  controls: '조작 없음. 두 패널은 같은 월드 시드로 서로 다른 순서로 탐험.',
   info: `
-    <p>무한 월드는 플레이어가 다가갈 때 청크(맵 조각)를 생성함. 이때 청크마다 쓸 난수를 어디서 얻느냐가 문제임.</p>
+    <p>무한 월드는 플레이어가 다가갈 때 청크(맵 조각)를 생성. 이때 청크마다 쓸 난수를 어디서 얻느냐가 문제임.</p>
     <p>각 뷰의 두 패널은 <b>같은 월드 시드</b>를 쓰는 두 플레이어임(또는 저장 후 다시 불러온 같은 플레이어).
-    왼쪽은 행 우선, 오른쪽은 다른 순서로 청크를 방문함.
+    왼쪽은 행 우선, 오른쪽은 다른 순서로 청크를 방문.
     두 패널이 모두 방문한 청크의 내용이 같으면 초록, 다르면 빨강 테두리.</p>
     <p><b>순차 RNG</b>: <code>rng = new Rng(worldSeed)</code> 하나에서 청크를 만들 때마다 값을 꺼냄.
     청크 (3,2)의 내용은 "그 전에 난수를 몇 번 뽑았는가"에 따라 달라짐. 그래서 순서가 바뀌면 다른 세계가 됨.
@@ -19,7 +19,7 @@ GTL.register({
       <li>청크를 내렸다가(언로드) 다시 생성</li>
     </ul>
     <p><b>좌표 해시</b>: <code>rng = new Rng(hash(worldSeed, cx, cy))</code>. 청크는 자기 좌표만으로 정해짐.
-    그래서 순서와 무관하고 병렬 생성도 가능함.</p>
+    그래서 순서와 무관하고 병렬 생성도 가능.</p>
     <p>단점: <b>나쁜 해시</b>(예: <code>seed + cx + cy</code>)를 쓰면 (1,0)과 (0,1)이 같은 시드가 됨.
     그 결과 대각선 방향으로 같은 청크가 반복됨. 입력이 조금만 바뀌어도 출력이 크게 바뀌는(avalanche) 해시를 써야 함.</p>`,
   // 도식: 방문 순서에 따라 같은 청크가 다른 난수를 받는 순차 RNG vs 좌표만으로 정해지는 해시 시드
@@ -46,15 +46,15 @@ GTL.register({
   look: [
     'A를 보면 공통 청크가 거의 전부 빨강임(같은 시드인데 다른 세계). B는 공통 청크가 모두 초록임.',
     'A에서 왼쪽 첫 청크와 오른쪽 첫 청크(중앙)를 비교하면 내용이 같음. 같은 순번의 난수를 받았기 때문임. 위치가 아니라 순서가 내용을 정함.',
-    'B의 방식을 "나쁜 해시 (seed + x + y)"로 바꾸면 모두 초록이지만 대각선 줄무늬로 같은 청크가 반복됨("중복 청크" 수치 증가).',
-    '오른쪽 패널 순서를 "무작위"로 바꿔도 B는 여전히 전부 일치함.',
+    'B의 방식을 "나쁜 해시 (seed + x + y)"로 바꾸면 모두 초록이지만 대각선 줄무늬로 같은 청크가 반복됨("중복 청크" 수치 증가)',
+    '오른쪽 패널 순서를 "무작위"로 바꿔도 B는 여전히 전부 일치',
     'Minecraft에서 시드 공유가 가능한 이유도 같음. 지형이 (월드 시드, 좌표)만으로 정해지는 순수 함수이기 때문임.',
   ],
   refs: [
     { type: 'game', title: 'Minecraft: 월드 시드', note: '같은 시드와 같은 버전이면 탐험 순서와 무관하게 같은 지형. 청크 좌표에서 시드를 파생.' },
     { type: 'game', title: "No Man's Sky (Hello Games, 2016)", note: '1,800경 개 행성을 저장하지 않음. 좌표와 시드로 결정론적으로 다시 생성.' },
-    { type: 'talk', title: 'Squirrel Eiserloh: Noise-Based RNG (GDC 2017 Math for Game Programmers)', year: 2017, note: '상태 있는 RNG 대신 위치 기반 해시 노이즈(Squirrel3)를 쓰자는 발표.' },
-    { type: 'article', title: 'Red Blob Games: Making maps with noise functions', url: 'https://www.redblobgames.com/maps/terrain-from-noise/', note: '지형을 좌표의 함수로 다룸.' },
+    { type: 'talk', title: 'Squirrel Eiserloh: Noise-Based RNG (GDC 2017 Math for Game Programmers)', year: 2017, note: '상태 있는 RNG 대신 위치 기반 해시 노이즈(Squirrel3)를 쓰자는 발표' },
+    { type: 'article', title: 'Red Blob Games: Making maps with noise functions', url: 'https://www.redblobgames.com/maps/terrain-from-noise/', note: '지형을 좌표의 함수로 다룸' },
   ],
   params: [
     { key: 'method', label: '청크 시드 방식', type: 'select', group: '시드', options: [

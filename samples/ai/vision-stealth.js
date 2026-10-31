@@ -6,22 +6,22 @@ GTL.register({
   views: { a: '시야각만 (벽 무시)', b: '시야각 + 다중 레이캐스트' },
   controls: '마우스를 뷰 위에 올리면 플레이어(초록)가 마우스를 따라감, 마우스가 뷰 밖에 있으면 자동 경로로 잠입',
   info: `
-    <p>감지 판정은 값싼 검사부터 차례로 걸러 냄.</p>
+    <p>감지 판정은 값싼 검사부터 차례로 걸러 냄</p>
     <ol>
-      <li><b>거리</b>: 감지 거리 밖이면 즉시 탈락.</li>
-      <li><b>시야각</b>: 정면 벡터와 대상 방향의 내적 ≥ cos(FOV/2).</li>
+      <li><b>거리</b>: 감지 거리 밖이면 즉시 탈락</li>
+      <li><b>시야각</b>: 정면 벡터와 대상 방향의 내적 ≥ cos(FOV/2)</li>
       <li><b>가시선(LOS)</b>: 눈에서 대상까지 레이캐스트해 벽에 막히는지 확인. 가장 비싼 검사라서 마지막에 함.</li>
       <li><b>다중 레이</b>: 중심만 검사하면 몸 절반이 모서리 밖으로 나와도 못 볼 수 있음. 반대로 중심만 보이면 몸 대부분이 가려져도 발각됨.
       그래서 머리, 몸통, 좌우 끝 등 여러 점에 레이를 쏴 <b>보이는 비율</b>을 구함.</li>
     </ol>
     <p>판정 결과를 바로 "발각"으로 쓰지 않음. 대신 <b>감지 게이지</b>에 쌓음.</p>
     <ul>
-      <li>가까울수록, 정면일수록, 많이 보일수록 빨리 참.</li>
-      <li>안 보이면 서서히 줄어듦.</li>
-      <li>30%를 넘으면 <b>의심</b>(마지막 위치를 쳐다봄).</li>
-      <li>100%가 되면 <b>발각</b>(추격).</li>
+      <li>가까울수록, 정면일수록, 많이 보일수록 빨리 참</li>
+      <li>안 보이면 서서히 줄어듦</li>
+      <li>30%를 넘으면 <b>의심</b>(마지막 위치를 쳐다봄)</li>
+      <li>100%가 되면 <b>발각</b>(추격)</li>
     </ul>
-    <p>Splinter Cell, Metal Gear Solid, Thief 등 잠입 게임의 공통 구조.</p>`,
+    <p>Splinter Cell, Metal Gear Solid, Thief 등 잠입 게임의 공통 구조</p>`,
   diagram: (L) => `<svg viewBox="0 0 540 222" xmlns="http://www.w3.org/2000/svg">
     <text x="8" y="14" class="t-a">${L('A: 시야각만 (벽 무시)', 'A: view cone only')}</text>
     <path d="M30,92 L227,20 A210,210 0 0 1 227,164 Z" class="d-a" stroke-dasharray="4 3"/>
@@ -56,15 +56,15 @@ GTL.register({
   </svg>`,
   look: [
     '마우스를 뷰 밖에 두면 A는 플레이어가 벽 뒤에 숨어도 시야각 안이면 게이지가 참. B는 벽이 시야를 정확히 자름.',
-    'B를 지켜보면 시야 다각형(레이 팬)이 벽 모서리에서 잘리고, 플레이어 몸에 초록/빨강 레이가 꽂힘.',
-    '플레이어를 벽 모서리에 반쯤 걸치게 두면 "보이는 비율"이 0.25~0.75 사이로 바뀌고 게이지가 천천히 참.',
-    'B의 판정 방식을 "시야각 + 중심 1개 레이"로 바꾸면 몸 절반이 보여도 감지하지 못할 때가 생김.',
+    'B를 지켜보면 시야 다각형(레이 팬)이 벽 모서리에서 잘리고, 플레이어 몸에 초록/빨강 레이가 꽂힘',
+    '플레이어를 벽 모서리에 반쯤 걸치게 두면 "보이는 비율"이 0.25~0.75 사이로 바뀌고 게이지가 천천히 참',
+    'B의 판정 방식을 "시야각 + 중심 1개 레이"로 바꾸면 몸 절반이 보여도 감지하지 못할 때가 생김',
   ],
   refs: [
     { type: 'talk', title: 'Modeling AI Perception and Awareness in Splinter Cell: Blacklist', year: 2014, note: 'Martin Walsh, GDC 2014. 시야 레이캐스트 지점, 감지 게이지, 주변시 설계.' },
     { type: 'book', title: 'Artificial Intelligence for Games (3rd ed.)', year: 2019, note: 'Ian Millington. 감각 관리(Sense Management) 장.' },
     { type: 'article', title: '2D Visibility (Red Blob Games)', url: 'https://www.redblobgames.com/articles/visibility/', year: 2012, note: 'Amit Patel. 레이/각도 스윕 기반 시야 다각형.' },
-    { type: 'engine', title: 'Unreal Engine - AI Perception (AISense_Sight)', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/ai-perception-in-unreal-engine', note: '시야 반경, 주변시 각도, LOS 트레이스.' },
+    { type: 'engine', title: 'Unreal Engine - AI Perception (AISense_Sight)', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/ai-perception-in-unreal-engine', note: '시야 반경, 주변시 각도, LOS 트레이스' },
   ],
   params: [
     { key: 'check', label: '판정 방식', type: 'select', group: '판정', options: [

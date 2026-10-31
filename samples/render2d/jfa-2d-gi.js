@@ -9,17 +9,17 @@ GTL.register({
   info: `
     <p>2D 조명에서 비싼 부분은 "이 픽셀에서 저 방향으로 가면 무엇에 부딪히나"를 묻는 레이 질의. 한 픽셀씩 전진하면 화면 폭만큼 텍스처를 읽어야 함.</p>
     <p><b>거리장(Distance Field)</b>이 있으면 현재 위치에서 가장 가까운 벽까지의 거리 d만큼 한 번에 건너뛰어도 안전함. 이것이 sphere tracing. 빈 공간에서는 보폭이 커서 수십 번 안에 끝남.</p>
-    <p><b>Jump Flooding</b>(Rong & Tan 2006)은 거리장을 GPU에서 빠르게 만드는 방법.</p>
+    <p><b>Jump Flooding</b>(Rong & Tan 2006)은 거리장을 GPU에서 빠르게 만드는 방법</p>
     <ol>
-    <li>벽 픽셀에 자기 좌표를 씨앗(seed)으로 씀.</li>
-    <li>보폭 k = N/2, N/4, ..., 1로 패스를 반복함. 각 픽셀은 k만큼 떨어진 8개 이웃의 씨앗 중 가장 가까운 것을 가져감.</li>
+    <li>벽 픽셀에 자기 좌표를 씨앗(seed)으로 씀</li>
+    <li>보폭 k = N/2, N/4, ..., 1로 패스를 반복. 각 픽셀은 k만큼 떨어진 8개 이웃의 씨앗 중 가장 가까운 것을 가져감.</li>
     <li>log₂N 패스 뒤 모든 픽셀이 (거의) 가장 가까운 씨앗을 앎. 거리 = |픽셀 - 씨앗|.</li>
     </ol>
-    <p>조명 방식은 셋.</p>
+    <p>조명 방식은 셋</p>
     <ul>
     <li><b>하드 섀도</b>: 광원 중심으로 레이 하나. 막히면 0, 아니면 1.</li>
-    <li><b>소프트 섀도</b>: 같은 레이에서 <code>min(k d / t)</code>를 추적해 벽을 아슬아슬하게 스친 정도로 반그림자를 근사함 (Quilez 방식).</li>
-    <li><b>전역 조명</b>: 모든 방향으로 레이 R개. 부딪힌 픽셀의 발광 색을 평균함. 면광원 크기에 맞는 반그림자와 광원 색 혼합이 저절로 생김. 레이가 적으면 노이즈가 생겨서 프레임마다 각도를 흔들고 시간 누적으로 평균냄.</li>
+    <li><b>소프트 섀도</b>: 같은 레이에서 <code>min(k d / t)</code>를 추적해 벽을 아슬아슬하게 스친 정도로 반그림자를 근사 (Quilez 방식)</li>
+    <li><b>전역 조명</b>: 모든 방향으로 레이 R개. 부딪힌 픽셀의 발광 색을 평균. 면광원 크기에 맞는 반그림자와 광원 색 혼합이 저절로 생김. 레이가 적으면 노이즈가 생겨서 프레임마다 각도를 흔들고 시간 누적으로 평균냄.</li>
     </ul>
     <p>어려운 점(level 4인 이유):</p>
     <ul>
@@ -49,13 +49,13 @@ GTL.register({
     '"JFA 패스 수"를 4 이하로 낮추면 벽에서 먼 영역에 씨앗이 닿지 않음. 빛이 벽을 뚫고 새어 나감. "보기"를 "Voronoi"로 바꾸면 빈 영역이 검게 보임.',
     'B의 "레이 수"를 4로 낮추고 "시간 누적"을 0으로 내리면 화면이 지글거림. 누적을 0.9로 올리면 매끈해지지만 마우스 광원을 움직이면 잔상이 남음.',
     'A를 "소프트 섀도"로 바꾸면 레이 하나로도 반그림자가 생김. 대신 광원이 여러 개여도 색 번짐은 없음.',
-    '"레이 최대 단계"를 8로 낮추면 먼 광원까지 레이가 닿지 못해 그림자가 아닌 곳이 어두워짐.',
+    '"레이 최대 단계"를 8로 낮추면 먼 광원까지 레이가 닿지 못해 그림자가 아닌 곳이 어두워짐',
   ],
   refs: [
     { type: 'paper', title: 'Jump Flooding in GPU with Applications to Voronoi Diagram and Distance Transform (Guodong Rong, Tiow-Seng Tan)', year: 2006, note: 'I3D 2006. log₂N 패스로 근사 Voronoi와 거리 변환을 만드는 JFA 원 논문. JFA+1 같은 오차 보정도 다룸.' },
     { type: 'paper', title: 'Sphere Tracing: A Geometric Method for the Antialiased Ray Tracing of Implicit Surfaces (John C. Hart)', year: 1996, note: 'The Visual Computer 12(10). 거리만큼 건너뛰는 레이 진행.' },
-    { type: 'article', title: 'Soft Shadows in Raymarched SDFs (Inigo Quilez)', url: 'https://iquilezles.org/articles/rmshadows/', note: 'min(k d / t)로 반그림자를 근사하는 방법.' },
-    { type: 'article', title: '2D Global Illumination in Godot (Sam Bigos)', year: 2021, note: 'JFA 거리장 + 레이 수집 2D GI를 게임용으로 구현한 글과 데모.' },
+    { type: 'article', title: 'Soft Shadows in Raymarched SDFs (Inigo Quilez)', url: 'https://iquilezles.org/articles/rmshadows/', note: 'min(k d / t)로 반그림자를 근사하는 방법' },
+    { type: 'article', title: '2D Global Illumination in Godot (Sam Bigos)', year: 2021, note: 'JFA 거리장 + 레이 수집 2D GI를 게임용으로 구현한 글과 데모' },
   ],
   params: [
     { key: 'method', label: '조명 방식', type: 'select', group: '조명', options: [

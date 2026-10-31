@@ -124,7 +124,7 @@
     views: { a: '토글 이벤트', b: '상태 복제' },
     controls: '←↑→↓ / WASD: 캐릭터 이동. 발판을 밟으면 위쪽 문이 열리고 닫힘',
     info: `
-      <p>서버의 변화를 클라이언트에 알리는 방법은 두 가지.</p>
+      <p>서버의 변화를 클라이언트에 알리는 방법은 두 가지</p>
       <ul>
         <li><b>이벤트 복제</b>: 일어난 일을 보냄. 예: "문 3 토글". 패킷이 작고 변화가 드물 때 효율적임.</li>
         <li><b>상태 복제</b>: 현재 값을 보냄. 예: "문 열림 비트 001010". 매번 같은 값을 다시 보냄.</li>
@@ -135,9 +135,9 @@
       <ul>
         <li><b>절대값 이벤트</b>("문 3 = 열림")는 같은 문의 다음 이벤트가 오면 회복됨. 하지만 순서가 뒤바뀌면 틀린 값이 남음.</li>
         <li>Unreal의 프로퍼티 복제, Source의 네트워크 변수는 상태 복제. 일회성 효과(소리, 파티클)만 이벤트(RPC)로 보냄.</li>
-        <li>늦게 접속한 클라이언트도 상태 복제라면 현재 상태를 바로 받음.</li>
+        <li>늦게 접속한 클라이언트도 상태 복제라면 현재 상태를 바로 받음</li>
       </ul>
-      <p>단점: 상태 복제는 바뀌지 않은 값도 반복해서 보냄. 오브젝트가 많으면 델타 압축이나 관심 영역 관리가 필요함.</p>`,
+      <p>단점: 상태 복제는 바뀌지 않은 값도 반복해서 보냄. 오브젝트가 많으면 델타 압축이나 관심 영역 관리 필요.</p>`,
     diagram: (L) => {
       const sx = [120, 180, 240, 300, 360];
       const lane = (y0, labels) => sx.map((x, i) => {
@@ -166,8 +166,8 @@
     ],
     refs: [
       { type: 'article', title: 'State Synchronization', url: 'https://gafferongames.com/post/state_synchronization/', note: 'Glenn Fiedler. 상태를 반복 전송해 손실에 강한 동기화.' },
-      { type: 'engine', title: 'Unreal Engine - Networking Overview (Property Replication, RPCs)', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/networking-overview-for-unreal-engine', note: '지속 상태는 프로퍼티 복제, 일회성 사건은 Unreliable RPC로 보내라는 권장.' },
-      { type: 'engine', title: 'Source Multiplayer Networking', url: 'https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking', note: 'Valve. 엔티티 상태를 스냅샷으로 반복 전송함.' },
+      { type: 'engine', title: 'Unreal Engine - Networking Overview (Property Replication, RPCs)', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/networking-overview-for-unreal-engine', note: '지속 상태는 프로퍼티 복제, 일회성 사건은 Unreliable RPC로 보내라는 권장' },
+      { type: 'engine', title: 'Source Multiplayer Networking', url: 'https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking', note: 'Valve. 엔티티 상태를 스냅샷으로 반복 전송.' },
       { type: 'talk', title: 'I Shot You First: Networking the Gameplay of Halo: Reach', year: 2011, note: 'David Aldridge, GDC 2011. state data와 event(신뢰/비신뢰) 구분.' },
     ],
     params: [

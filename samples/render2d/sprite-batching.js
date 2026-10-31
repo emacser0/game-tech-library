@@ -11,7 +11,7 @@ GTL.register({
     <p>스프라이트 1개마다 draw call 1개를 쓰면 수천 개에서 CPU가 병목이 됨. WebGL은 검증 계층이 있어 더 비쌈.</p>
     <ul>
     <li><b>배칭(Batching)</b>: CPU가 스프라이트의 네 꼭짓점을 변환해 큰 정점 버퍼에 이어 씀. 한 번에 업로드하고 한 번에 그림.
-    단, <b>텍스처가 바뀌면 배치를 끊어야</b> 함. 그래서 텍스처 아틀라스(여러 이미지를 한 장에 모은 것)나 텍스처별 정렬이 중요함.</li>
+    단, <b>텍스처가 바뀌면 배치를 끊어야</b> 함. 그래서 텍스처 아틀라스(여러 이미지를 한 장에 모은 것)나 텍스처별 정렬이 중요.</li>
     <li><b>인스턴싱(Instancing)</b>: 사각형 하나와 인스턴스별 속성(위치, 크기, 회전, UV) 버퍼를 씀. 정점 변환은 GPU가 함 (<code>ANGLE_instanced_arrays</code>).</li>
     </ul>
     <p>"배치 색상화"를 켜면 같은 draw call로 그린 스프라이트가 같은 색으로 칠해짐. 배치가 어떻게 나뉘는지 보임.</p>`,
@@ -34,16 +34,16 @@ GTL.register({
   </svg>`,
   look: [
     '"draw call" 수를 비교하면 A는 스프라이트 수와 같고 B는 1. "스프라이트 수"를 늘리면 A의 "제출 CPU 시간"과 ⏱만 급격히 늘어남.',
-    '"배치 색상화"를 켜면 A는 스프라이트마다 색이 제각각이고, B는 한 색임.',
-    'B에서 아틀라스를 끄면(텍스처 4장) 텍스처가 바뀔 때마다 배치가 끊겨 draw call이 수천 개로 뜀.',
+    '"배치 색상화"를 켜면 A는 스프라이트마다 색이 제각각이고, B는 한 색임',
+    'B에서 아틀라스를 끄면(텍스처 4장) 텍스처가 바뀔 때마다 배치가 끊겨 draw call이 수천 개로 뜀',
     '그 상태에서 "텍스처별 정렬"을 켜면 draw call이 4개로 줄어듦. 대신 그리는 순서(겹침)가 바뀜.',
-    '"최대 배치 크기"를 작게 하면 버퍼가 차서 배치가 끊기는 지점이 생김.',
+    '"최대 배치 크기"를 작게 하면 버퍼가 차서 배치가 끊기는 지점이 생김',
   ],
   refs: [
     { type: 'talk', title: 'Batch, Batch, Batch: What Does It Really Mean? (Matthias Wloka, NVIDIA)', year: 2003, note: 'GDC 2003. draw call당 CPU 비용과 배칭이 필요한 이유.' },
     { type: 'engine', title: 'Unity: Draw call batching', url: 'https://docs.unity3d.com/Manual/DrawCallBatching.html' },
     { type: 'engine', title: 'Unity: Sprite Atlas', url: 'https://docs.unity3d.com/Manual/sprite/atlas/atlas-landing.html' },
-    { type: 'engine', title: 'XNA / MonoGame SpriteBatch (SpriteSortMode.Texture)', note: 'Begin과 End 사이의 스프라이트를 모아 텍스처 단위로 배칭하는 고전 API.' },
+    { type: 'engine', title: 'XNA / MonoGame SpriteBatch (SpriteSortMode.Texture)', note: 'Begin과 End 사이의 스프라이트를 모아 텍스처 단위로 배칭하는 고전 API' },
     { type: 'article', title: 'ANGLE_instanced_arrays (Khronos WebGL Extension)', url: 'https://registry.khronos.org/webgl/extensions/ANGLE_instanced_arrays/' },
   ],
   params: [
@@ -52,7 +52,7 @@ GTL.register({
       { value: 'batch', label: '동적 정점 버퍼 배칭' },
       { value: 'instanced', label: '인스턴싱' },
     ], a: 'individual', b: 'batch' },
-    { key: 'atlas', label: '텍스처 아틀라스', type: 'bool', default: true, help: '끄면 텍스처 4장을 따로 바인딩함' },
+    { key: 'atlas', label: '텍스처 아틀라스', type: 'bool', default: true, help: '끄면 텍스처 4장을 따로 바인딩' },
     { key: 'sort', label: '텍스처별 정렬', type: 'bool', default: false, when: (p) => !p.atlas },
     { key: 'maxBatch', label: '최대 배치 크기', type: 'select', options: [64, 256, 1024, 4096, 16384], default: 16384, when: (p) => p.mode === 'batch' },
     { key: 'tint', label: '배치 색상화', type: 'bool', default: false, group: '표시' },

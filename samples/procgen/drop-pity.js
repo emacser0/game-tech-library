@@ -2,16 +2,16 @@
 GTL.register({
   id: 'drop-pity',
   title: '드롭 확률 보정: 독립 확률 vs 셔플 백 vs 천장',
-  summary: '평균 드롭률이 같은 네 방식의 "연속 실패 길이" 분포 비교. 독립 확률은 운 나쁜 플레이어가 수십 번 연속 실패함. 셔플 백, PRD, 천장은 평균은 지키면서 최악의 경우를 잘라냄.',
+  summary: '평균 드롭률이 같은 네 방식의 "연속 실패 길이" 분포 비교. 독립 확률은 운 나쁜 플레이어가 수십 번 연속 실패. 셔플 백, PRD, 천장은 평균은 지키면서 최악의 경우를 잘라냄.',
   views: { a: '독립 확률', b: '셔플 백' },
   controls: '조작 없음. "기록 지우기"로 처음부터 다시 셈.',
   info: `
     <p><b>문제</b>: 드롭률 10%를 매번 독립으로 굴리면 평균은 10번에 한 번임.
-    하지만 드롭 사이 간격의 약 4%는 30번 넘게 연속 실패함. 플레이어는 이를 "버그"나 "조작"으로 느낌.</p>
+    하지만 드롭 사이 간격의 약 4%는 30번 넘게 연속 실패. 플레이어는 이를 "버그"나 "조작"으로 느낌.</p>
     <p>보정 방식:</p>
     <ul>
       <li><b>독립 확률</b>: 매번 <code>rng() &lt; p</code>. 실패 연속 길이는 기하 분포. 꼬리가 길게 늘어짐.</li>
-      <li><b>PRD(의사 난수 분포)</b>: N번째 시도 확률을 <code>C × N</code>으로 올림. 성공하면 N을 1로 되돌림. 평균이 p가 되도록 C를 미리 계산함. Warcraft III, Dota 2의 치명타와 회피 확률이 이 방식.</li>
+      <li><b>PRD(의사 난수 분포)</b>: N번째 시도 확률을 <code>C × N</code>으로 올림. 성공하면 N을 1로 되돌림. 평균이 p가 되도록 C를 미리 계산. Warcraft III, Dota 2의 치명타와 회피 확률이 이 방식.</li>
       <li><b>셔플 백(Shuffle Bag)</b>: 성공 k개와 실패 n-k개를 주머니에 넣고 섞어서 하나씩 꺼냄. 다 꺼내면 다시 채움. 최악의 실패 연속이 2(n-k)회로 제한됨. 테트리스의 7-bag 방식과 같은 원리.</li>
       <li><b>천장(Pity Timer)</b>: 독립 확률로 굴리다가 정해진 횟수만큼 실패하면 다음은 무조건 성공. 가챠 게임의 천장 시스템.</li>
     </ul>
@@ -43,14 +43,14 @@ GTL.register({
   look: [
     'A의 막대 꼬리를 보면 독립 확률은 평균의 3~4배까지 실패가 이어짐. B(셔플 백)는 막대가 일정 길이에서 끊김.',
     '두 뷰의 "실제 드롭률"을 비교하면 거의 같음. 평균은 같고 분포 모양만 다름.',
-    'B를 천장으로 바꾸고 천장을 15회로 낮추면 실제 드롭률이 목표보다 올라감.',
-    'B를 PRD로 바꾸면 0~2회 실패(연속 당첨)가 크게 줄고 막대가 평균 근처에 몰림.',
-    '백 크기 배수를 5로 올리면 셔플 백 분포가 독립 확률 곡선에 가까워짐.',
+    'B를 천장으로 바꾸고 천장을 15회로 낮추면 실제 드롭률이 목표보다 올라감',
+    'B를 PRD로 바꾸면 0~2회 실패(연속 당첨)가 크게 줄고 막대가 평균 근처에 몰림',
+    '백 크기 배수를 5로 올리면 셔플 백 분포가 독립 확률 곡선에 가까워짐',
   ],
   refs: [
-    { type: 'article', title: 'TetrisWiki: Random Generator (7-bag)', url: 'https://tetris.wiki/Random_Generator', note: '테트로미노 7개를 섞어 한 번씩 내보내는 셔플 백 방식.' },
-    { type: 'game', title: 'Warcraft III / Dota 2: Pseudo-random distribution (PRD)', note: '치명타, 회피 같은 확률 효과에 P(N) = C × N 방식 사용.' },
-    { type: 'talk', title: 'Sid Meier: The Psychology of Game Design (Everything You Know Is Wrong), GDC 2010', year: 2010, note: '플레이어가 확률을 실제와 다르게 체감하는 문제와 보정 사례.' },
+    { type: 'article', title: 'TetrisWiki: Random Generator (7-bag)', url: 'https://tetris.wiki/Random_Generator', note: '테트로미노 7개를 섞어 한 번씩 내보내는 셔플 백 방식' },
+    { type: 'game', title: 'Warcraft III / Dota 2: Pseudo-random distribution (PRD)', note: '치명타, 회피 같은 확률 효과에 P(N) = C × N 방식 사용' },
+    { type: 'talk', title: 'Sid Meier: The Psychology of Game Design (Everything You Know Is Wrong), GDC 2010', year: 2010, note: '플레이어가 확률을 실제와 다르게 체감하는 문제와 보정 사례' },
   ],
   params: [
     { key: 'method', label: '방식', type: 'select', group: '드롭', options: [
@@ -61,7 +61,7 @@ GTL.register({
     ], a: 'independent', b: 'bag' },
     { key: 'rate', label: '목표 드롭률 (%)', type: 'range', min: 2, max: 50, step: 1, default: 10, shared: true, reset: true },
     { key: 'bagMul', label: '백 크기 배수', type: 'int', min: 1, max: 5, default: 1, help: '백 크기 = 배수 × (100 / 드롭률). 클수록 독립 확률에 가까워짐.', when: (p) => p.method === 'bag' },
-    { key: 'pity', label: '천장 (회)', type: 'int', min: 2, max: 80, default: 20, help: '이 횟수만큼 연속 실패하면 다음은 무조건 성공.', when: (p) => p.method === 'pity' },
+    { key: 'pity', label: '천장 (회)', type: 'int', min: 2, max: 80, default: 20, help: '이 횟수만큼 연속 실패하면 다음은 무조건 성공', when: (p) => p.method === 'pity' },
     { key: 'speed', label: '시행/초', type: 'range', min: 10, max: 5000, step: 10, default: 800, shared: true, group: '시뮬레이션' },
     { key: 'theory', label: '독립 확률 이론 곡선', type: 'bool', default: true, shared: true },
     { key: 'clear', label: '기록 지우기', type: 'button', buttonLabel: '기록 지우기' },

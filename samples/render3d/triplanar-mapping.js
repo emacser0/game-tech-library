@@ -8,11 +8,11 @@ GTL.register({
   controls: '마우스 드래그: 카메라 회전, 휠: 줌',
   info: `
     <p><b>UV 매핑</b>은 정점마다 저장한 텍스처 좌표(UV)를 씀. 지형처럼 UV를 위에서 투영(xz)하면 기울어진 면은 넓은 면적에 좁은 UV가 대응됨. 그래서 절벽에 텍스처가 세로 줄무늬처럼 늘어남.</p>
-    <p><b>트라이플래너 매핑(triplanar mapping)</b>은 UV 대신 월드 위치를 씀.</p>
+    <p><b>트라이플래너 매핑(triplanar mapping)</b>은 UV 대신 월드 위치를 씀</p>
     <ol>
-      <li>월드 위치를 YZ, XZ, XY 평면에 각각 투영해 텍스처를 3번 샘플링함.</li>
+      <li>월드 위치를 YZ, XZ, XY 평면에 각각 투영해 텍스처를 3번 샘플링</li>
       <li>법선 성분의 절댓값을 k제곱한 값을 가중치로 씀. 가중치 합은 1로 맞춤.</li>
-      <li>세 색을 가중치로 섞음.</li>
+      <li>세 색을 가중치로 섞음</li>
     </ol>
     <p>장점: UV 펼치기(unwrap) 없이 절차적 지형, 복셀 메시, 크기를 바꾼 오브젝트에 바로 씀. 늘어남이 최대 약 1.73배(√3)로 제한됨.</p>
     <p>단점:</p>
@@ -63,13 +63,13 @@ GTL.register({
   </svg>`,
   look: [
     'A의 지형 절벽을 보면 원과 격자가 세로로 길게 늘어남. B는 절벽에서도 원이 둥긂.',
-    'A의 구 위쪽 극점에서 텍스처가 한 점으로 모이고, 늘린 상자의 긴 면은 가로로 늘어남.',
-    '"가중치 보기"를 켜면 X(빨강), Y(초록), Z(파랑) 투영이 어디에 쓰이는지 보임.',
+    'A의 구 위쪽 극점에서 텍스처가 한 점으로 모이고, 늘린 상자의 긴 면은 가로로 늘어남',
+    '"가중치 보기"를 켜면 X(빨강), Y(초록), Z(파랑) 투영이 어디에 쓰이는지 보임',
     '블렌드 선명도를 1로 낮추면 경사면에서 세 투영이 겹쳐 흐려짐. 16 이상이면 경계가 날카롭게 보임.',
   ],
   refs: [
-    { type: 'book', title: 'GPU Gems 3, Chapter 1: Generating Complex Procedural Terrains Using the GPU (Ryan Geiss)', url: 'https://developer.nvidia.com/gpugems/gpugems3/part-i-geometry/chapter-1-generating-complex-procedural-terrains-using-gpu', year: 2007, note: 'Texturing 절에서 트라이플래너 투영과 법선 가중치를 설명함.' },
-    { type: 'article', title: 'Normal Mapping for a Triplanar Shader (Ben Golus)', url: 'https://bgolus.medium.com/normal-mapping-for-a-triplanar-shader-10bf39dca05a', year: 2017, note: '블렌드 가중치와 축별 노멀 맵 처리.' },
+    { type: 'book', title: 'GPU Gems 3, Chapter 1: Generating Complex Procedural Terrains Using the GPU (Ryan Geiss)', url: 'https://developer.nvidia.com/gpugems/gpugems3/part-i-geometry/chapter-1-generating-complex-procedural-terrains-using-gpu', year: 2007, note: 'Texturing 절에서 트라이플래너 투영과 법선 가중치를 설명' },
+    { type: 'article', title: 'Normal Mapping for a Triplanar Shader (Ben Golus)', url: 'https://bgolus.medium.com/normal-mapping-for-a-triplanar-shader-10bf39dca05a', year: 2017, note: '블렌드 가중치와 축별 노멀 맵 처리' },
     { type: 'engine', title: 'Unity Shader Graph: Triplanar Node', url: 'https://docs.unity3d.com/Packages/com.unity.shadergraph@10.0/manual/Triplanar-Node.html' },
   ],
   params: [

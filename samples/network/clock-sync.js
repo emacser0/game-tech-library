@@ -128,10 +128,10 @@
     views: { a: '타임스탬프 그대로', b: 'RTT/2 보정 + 최소 RTT 필터' },
     controls: '↑↓ / WS: 추가 지연 늘리기, 줄이기 (두 뷰 동시)',
     info: `
-      <p><b>시계 동기화</b>: 클라이언트가 "지금 서버 시각"을 추정하는 일. 라운드 시작 카운트다운, 예약된 폭발, 서버 시간 기반 애니메이션에 필요함.</p>
+      <p><b>시계 동기화</b>: 클라이언트가 "지금 서버 시각"을 추정하는 일. 라운드 시작 카운트다운, 예약된 폭발, 서버 시간 기반 애니메이션에 필요.</p>
       <p>왜 필요한가: 두 컴퓨터의 시계는 시작 시각도 다르고 흐르는 속도도 조금씩 다름(드리프트). 서버 타임스탬프는 받은 순간 이미 편도 지연만큼 과거임.</p>
       <ul>
-        <li>클라이언트가 자기 시각 t0를 담아 요청을 보냄. 서버는 받은 시각 t1과 보낸 시각 t2를 담아 응답함. 클라이언트는 받은 시각 t3를 기록함.</li>
+        <li>클라이언트가 자기 시각 t0를 담아 요청을 보냄. 서버는 받은 시각 t1과 보낸 시각 t2를 담아 응답. 클라이언트는 받은 시각 t3 기록.</li>
         <li>RTT = (t3 − t0) − (t2 − t1). 시계 차이 θ = ((t1 − t0) + (t2 − t3)) / 2. 편도 지연이 RTT/2라고 가정한 식(NTP).</li>
         <li><b>최소 RTT 필터</b>: 최근 N개 표본 중 RTT가 가장 작은 표본의 θ를 씀. 큐에서 덜 기다린 패킷일수록 RTT/2 가정이 잘 맞기 때문.</li>
         <li>추정값이 바뀔 때 한 번에 점프하지 않고 조금씩 따라감(slew). 시간이 뒤로 가면 애니메이션이 튐.</li>
@@ -160,15 +160,15 @@
     look: [
       '왼쪽 시계판의 두 바늘을 비교하면, A의 바늘(주황)은 서버 바늘(초록)보다 뒤처짐. "시간 오차"가 편도 지연보다 큰 음수(-80ms 이하). B는 거의 겹침.',
       '자동 입력이 켜져 있으면 5초마다 지연이 바뀜. A의 오차는 지연을 따라 커지지만 B는 거의 그대로임.',
-      'B의 방식을 "RTT/2 (표본 1개)"로 바꾸면 평균은 맞지만 지터 때문에 오차가 표본마다 ±20ms씩 흔들림.',
+      'B의 방식을 "RTT/2 (표본 1개)"로 바꾸면 평균은 맞지만 지터 때문에 오차가 표본마다 ±20ms씩 흔들림',
       '상향/하향 비대칭을 80ms로 올리면 B에도 약 40ms 오차가 남음. RTT/2 가정이 깨진 결과임.',
-      '시계 드리프트를 크게 올리고 동기화 주기를 0.2Hz로 낮추면 표본 사이에 오차가 쌓임.',
+      '시계 드리프트를 크게 올리고 동기화 주기를 0.2Hz로 낮추면 표본 사이에 오차가 쌓임',
     ],
     refs: [
       { type: 'paper', title: 'RFC 5905 - Network Time Protocol Version 4', url: 'https://www.rfc-editor.org/rfc/rfc5905', year: 2010, note: 't1~t4 타임스탬프로 offset, delay를 구하는 식. 최소 지연 표본 선택(clock filter).' },
       { type: 'paper', title: 'Internet Time Synchronization: the Network Time Protocol', year: 1991, note: 'David L. Mills, IEEE Transactions on Communications.' },
       { type: 'article', title: 'A Stream-based Time Synchronization Technique For Networked Computer Games', note: 'Zachary Booth Simpson. 여러 표본 중 이상치를 버리고 평균하는 게임용 방식.' },
-      { type: 'engine', title: 'Unity Netcode for GameObjects - NetworkTime and Ticks', note: 'ServerTime과 LocalTime을 RTT로 추정하고 부드럽게 보정함.' },
+      { type: 'engine', title: 'Unity Netcode for GameObjects - NetworkTime and Ticks', note: 'ServerTime과 LocalTime을 RTT로 추정하고 부드럽게 보정' },
     ],
     params: [
       { key: 'lat', label: '편도 지연 (ms)', type: 'int', min: 0, max: 300, default: 60, shared: true, group: '네트워크' },
