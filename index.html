@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Game Tech Library</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <aside id="sidebar">
+      <div class="brand">
+        <a href="#" class="brand-title">Game Tech Library</a>
+        <div class="brand-sub" id="sample-count"></div>
+      </div>
+      <div class="seg lang-switch" id="lang-switch" title="언어" data-en-title="Language">
+        <button data-lang="ko">한국어</button>
+        <button data-lang="en">English</button>
+      </div>
+      <div class="seg group-by" id="group-by" title="목록 묶음 기준" data-en-title="Group the list by">
+        <button data-group="topic" data-en="By topic">주제별</button>
+        <button data-group="level" data-en="By difficulty">난이도별</button>
+      </div>
+      <input id="search" type="search" placeholder="이름, 태그 검색 (/)" data-en-ph="Search name or tag (/)" autocomplete="off">
+      <label class="filter-new"><input type="checkbox" id="only-new"> <span data-en="Recent only">최근 추가만</span></label>
+      <nav id="nav"></nav>
+    </aside>
+
+    <main id="main">
+      <header id="topbar">
+        <div class="title-block">
+          <div class="crumb" id="crumb"></div>
+          <h1 id="title">Game Tech Library</h1>
+          <div class="summary" id="summary"></div>
+        </div>
+        <div class="controls" id="controls">
+          <button id="btn-pause" title="일시정지 / 재생 (P)" data-en-title="Pause / play (P)">⏸</button>
+          <button id="btn-step" title="한 프레임 진행 (.)" data-en-title="Step one frame (.)">⏭</button>
+          <button id="btn-reset" title="두 뷰 리셋 (R)" data-en-title="Reset both views (R)">⟲</button>
+          <label title="시간 배율" data-en-title="Time scale"><span data-en="Speed">속도</span>
+            <select id="speed">
+              <option value="0.1">0.1×</option><option value="0.25">0.25×</option><option value="0.5">0.5×</option>
+              <option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option>
+            </select>
+          </label>
+          <div class="seg" id="layout" title="레이아웃" data-en-title="Layout">
+            <button data-layout="h" title="좌우 분할" data-en-title="Side by side">◫</button>
+            <button data-layout="v" title="상하 분할" data-en-title="Top and bottom">⬒</button>
+            <button data-layout="a" title="A만" data-en-title="A only">A</button>
+            <button data-layout="b" title="B만" data-en-title="B only">B</button>
+          </div>
+          <label title="한 뷰의 마우스 입력을 다른 뷰에도 같은 상대 위치로 전달" data-en-title="Send mouse input from one view to the other view at the same relative position"><input type="checkbox" id="mirror" checked> <span data-en="Sync input">입력 동기화</span></label>
+        </div>
+      </header>
+
+      <section id="stage" class="layout-h">
+        <div class="view" data-side="a">
+          <div class="canvas-host"></div>
+          <div class="view-label"><span class="dot"></span><span class="name"></span></div>
+          <div class="view-stats"></div>
+          <pre class="view-error"></pre>
+        </div>
+        <div class="view" data-side="b">
+          <div class="canvas-host"></div>
+          <div class="view-label"><span class="dot"></span><span class="name"></span></div>
+          <div class="view-stats"></div>
+          <pre class="view-error"></pre>
+        </div>
+        <div id="home"></div>
+      </section>
+
+      <div id="splitter" title="드래그해 패널 높이 조절" data-en-title="Drag to resize the panel"></div>
+
+      <section id="bottom">
+        <div id="params-panel">
+          <div class="panel-head">
+            <span data-en="Parameters">파라미터</span>
+            <span class="panel-actions">
+              <button id="copy-ab" title="A의 값을 B로 복사" data-en-title="Copy A values to B">A→B</button>
+              <button id="copy-ba" title="B의 값을 A로 복사" data-en-title="Copy B values to A">B→A</button>
+              <button id="defaults" title="모든 값을 기본값으로 복원" data-en-title="Restore all default values" data-en="Defaults">기본값</button>
+            </span>
+          </div>
+          <div id="params"></div>
+        </div>
+        <div id="info-panel">
+          <div id="info"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="core/util.js"></script>
+  <script src="core/runtime.js"></script>
+  <!-- 카테고리 매니페스트: 새 카테고리를 추가할 때 여기에 한 줄 추가 -->
+  <script src="samples/loop-physics/_manifest.js"></script>
+  <script src="samples/collision/_manifest.js"></script>
+  <script src="samples/game-feel/_manifest.js"></script>
+  <script src="samples/animation/_manifest.js"></script>
+  <script src="samples/ai/_manifest.js"></script>
+  <script src="samples/procgen/_manifest.js"></script>
+  <script src="samples/render2d/_manifest.js"></script>
+  <script src="samples/render3d/_manifest.js"></script>
+  <script src="samples/network/_manifest.js"></script>
+  <script src="samples/audio/_manifest.js"></script>
+  <script src="samples/ui-systems/_manifest.js"></script>
+  <script src="core/ui.js"></script>
+</body>
+</html>

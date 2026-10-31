@@ -1,0 +1,30 @@
+// 카테고리 매니페스트. 샘플을 추가하면 samples 배열에 한 줄 추가함.
+// { id, level(1 입문, 2 초급, 3 중급, 4 고급), title, tags: [...], added: 'YYYY-MM-DD' }, 파일은 samples/procgen/<id>.js
+GTL.category({
+  id: 'procgen',
+  title: '절차적 생성',
+  en: 'Procedural Generation',
+  icon: '🌱',
+  order: 6,
+  samples: [
+    { id: 'noise-types', level: 2, title: '노이즈 종류 (White, Value, Perlin, Simplex, Worley)', en: 'Noise Types (White, Value, Perlin, Simplex, Worley)', tags: ['noise', 'perlin', 'simplex', 'worley'], added: '2026-10-31' },
+    { id: 'fbm-terrain', level: 2, title: 'fBm 옥타브 지형 (Ridged / Billow)', en: 'fBm Octave Terrain (Ridged / Billow)', tags: ['noise', 'fbm', 'terrain', 'heightmap'], added: '2026-10-31' },
+    { id: 'domain-warp', level: 2, title: '도메인 워핑 (Domain Warping)', en: 'Domain Warping', tags: ['noise', 'fbm', 'warp', 'texture'], added: '2026-10-31' },
+    { id: 'poisson-disk', level: 2, title: '포아송 디스크 샘플링 (Bridson): 나무 배치', en: 'Poisson Disk Sampling (Bridson): Tree Placement', tags: ['sampling', 'blue-noise', 'placement'], added: '2026-10-31' },
+    { id: 'cellular-caves', level: 1, title: '셀룰러 오토마타 동굴', en: 'Cellular Automata Caves', tags: ['cellular-automata', 'cave', 'roguelike'], added: '2026-10-31' },
+    { id: 'bsp-dungeon', level: 2, title: 'BSP 던전 vs 랜덤 방 배치', en: 'BSP Dungeon vs Random Room Placement', tags: ['dungeon', 'bsp', 'mst', 'roguelike'], added: '2026-10-31' },
+    { id: 'drunkard-walk', level: 1, title: '드렁커드 워크 (Random Walk) 동굴', en: "Drunkard's Walk (Random Walk) Caves", tags: ['random-walk', 'cave', 'agent'], added: '2026-10-31' },
+    { id: 'wfc-tiled', level: 4, title: '웨이브 펑션 콜랩스 (Tiled WFC)', en: 'Wave Function Collapse (Tiled WFC)', tags: ['wfc', 'constraint', 'tiles'], added: '2026-10-31' },
+    { id: 'voronoi-lloyd', level: 3, title: '보로노이 & 로이드 완화 (Lloyd Relaxation)', en: 'Voronoi & Lloyd Relaxation', tags: ['voronoi', 'lloyd', 'cvt', 'regions'], added: '2026-10-31' },
+    { id: 'lsystem-plants', level: 2, title: 'L-시스템 식물 (결정론적 vs 확률적)', en: 'L-System Plants (Deterministic vs Stochastic)', tags: ['l-system', 'grammar', 'plants', 'turtle'], added: '2026-10-31' },
+    { id: 'marching-squares', level: 3, title: '마칭 스퀘어 (등치선 추출)', en: 'Marching Squares (Isoline Extraction)', tags: ['marching-squares', 'isoline', 'metaballs'], added: '2026-10-31' },
+    { id: 'chunk-seeds', level: 2, title: '시드 & 결정론: 청크 해시 시드 vs 순차 RNG', en: 'Seeds & Determinism: Chunk Hash Seeds vs Sequential RNG', tags: ['seed', 'determinism', 'hash', 'infinite-world'], added: '2026-10-31' },
+    { id: 'drop-pity', level: 1, title: '드롭 확률 보정: 독립 확률 vs 셔플 백 vs 천장', en: 'Drop Rate Correction: Independent vs Shuffle Bag vs Pity', tags: ['random', 'shuffle-bag', 'pity', 'prd', 'loot'], added: '2026-11-01' },
+    { id: 'perlin-worms', level: 2, title: '펄린 웜 (Perlin Worms) 동굴 vs 노이즈 임계값', en: 'Perlin Worms Caves vs Noise Threshold', tags: ['noise', 'perlin', 'cave', 'worms', 'connectivity'], added: '2026-11-01' },
+    { id: 'markov-names', level: 2, title: '마르코프 체인 이름 생성 (n-gram 차수)', en: 'Markov Chain Name Generation (n-gram Order)', tags: ['markov', 'n-gram', 'names', 'text'], added: '2026-11-01' },
+    { id: 'river-flow', level: 3, title: '강 생성: 흐름 누적 vs 노이즈 강', en: 'River Generation: Flow Accumulation vs Noise Rivers', tags: ['river', 'flow-accumulation', 'priority-flood', 'terrain'], added: '2026-11-01' },
+    { id: 'hydraulic-erosion', level: 4, title: '수력 침식 (물방울 방식)', en: 'Hydraulic Erosion (Droplet Method)', tags: ['erosion', 'hydraulic', 'terrain', 'heightmap'], added: '2026-11-01' },
+    { id: 'lock-key-dungeon', level: 4, title: '열쇠-자물쇠 던전: 무작위 배치 vs 미션 우선 생성', en: 'Lock-and-Key Dungeons: Random Placement vs Mission-First Generation', tags: ['dungeon', 'lock-and-key', 'mission-graph', 'cyclic'], added: '2026-11-01' },
+    { id: 'pcg-scatter', level: 2, title: 'PCG 포인트 파이프라인 (Unreal PCG Framework): 나무와 바위 배치', en: 'PCG Point Pipeline (Unreal PCG Framework): Tree and Rock Scatter', tags: ['unreal', 'pcg', 'scatter', 'placement', 'noise'], added: '2026-11-01' },
+  ],
+});

@@ -1,0 +1,31 @@
+// 카테고리 매니페스트. 샘플을 추가하면 samples 배열에 한 줄 추가함.
+// { id, level(1 입문, 2 초급, 3 중급, 4 고급), title, tags: [...], added: 'YYYY-MM-DD' }, 파일은 samples/game-feel/<id>.js
+GTL.category({
+  id: 'game-feel',
+  title: '조작감 & 카메라',
+  en: 'Game Feel & Camera',
+  icon: '🎮',
+  order: 3,
+  samples: [
+    { id: 'coyote-time', level: 1, title: '코요테 타임 (Coyote Time)', en: 'Coyote Time', tags: ['platformer', 'jump', 'forgiveness', 'input'], added: '2026-10-31' },
+    { id: 'jump-buffer', level: 1, title: '점프 버퍼링 (Jump Buffering)', en: 'Jump Buffering', tags: ['platformer', 'jump', 'input buffer', 'forgiveness'], added: '2026-10-31' },
+    { id: 'variable-jump', level: 1, title: '가변 점프 & 중력 비대칭', en: 'Variable Jump & Asymmetric Gravity', tags: ['platformer', 'jump', 'gravity', 'apex hang'], added: '2026-10-31' },
+    { id: 'accel-curves', level: 1, title: '가속, 감속 곡선 & 공중 제어', en: 'Acceleration Curves & Air Control', tags: ['platformer', 'movement', 'acceleration', 'air control'], added: '2026-10-31' },
+    { id: 'corner-correction', level: 2, title: '코너 보정 (Corner Correction)', en: 'Corner Correction', tags: ['platformer', 'collision', 'forgiveness', 'celeste'], added: '2026-10-31' },
+    { id: 'screen-shake', level: 2, title: '화면 흔들림: 트라우마 & 펄린 노이즈', en: 'Screen Shake: Trauma & Perlin Noise', tags: ['camera', 'screen shake', 'trauma', 'perlin'], added: '2026-10-31' },
+    { id: 'hit-stop', level: 1, title: '히트스톱 & 히트 플래시', en: 'Hit Stop & Hit Flash', tags: ['combat', 'hit stop', 'freeze frame', 'feedback'], added: '2026-10-31' },
+    { id: 'squash-stretch', level: 1, title: '스쿼시 & 스트레치', en: 'Squash & Stretch', tags: ['animation', 'squash', 'stretch', 'juice'], added: '2026-10-31' },
+    { id: 'knockback-iframes', level: 1, title: '넉백 & 무적 프레임', en: 'Knockback & Invincibility Frames', tags: ['combat', 'knockback', 'i-frames', 'damage'], added: '2026-10-31' },
+    { id: 'camera-follow', level: 2, title: '카메라 추적 방식', en: 'Camera Follow Methods', tags: ['camera', 'smoothdamp', 'dead zone', 'look-ahead'], added: '2026-10-31' },
+    { id: 'aim-assist', level: 3, title: '에임 어시스트 (마찰 & 자석)', en: 'Aim Assist (Friction & Magnetism)', tags: ['aim', 'aim assist', 'friction', 'magnetism'], added: '2026-10-31' },
+    { id: 'juice', level: 1, title: '주스: Juice it or lose it', en: 'Juice: Juice it or lose it', tags: ['juice', 'particles', 'tween', 'feedback'], added: '2026-10-31' },
+    { id: 'stick-deadzone', level: 1, title: '아날로그 스틱 데드존', en: 'Analog Stick Dead Zone', tags: ['input', 'analog stick', 'dead zone', 'gamepad'], added: '2026-11-01' },
+    { id: 'input-latency', level: 1, title: '입력 지연 체감 (프레임 지연)', en: 'Feeling Input Latency (Frame Delay)', tags: ['input', 'latency', 'input lag', 'responsiveness'], added: '2026-11-01' },
+    { id: 'dash-iframes', level: 1, title: '대시 & 잔상 & 대시 무적', en: 'Dash, Afterimages & Dash I-Frames', tags: ['movement', 'dash', 'i-frames', 'afterimage'], added: '2026-11-01' },
+    { id: 'wall-jump', level: 2, title: '벽 점프 & 벽 미끄러짐', en: 'Wall Jump & Wall Slide', tags: ['platformer', 'wall jump', 'wall slide', 'input lock'], added: '2026-11-01' },
+    { id: 'multi-target-camera', level: 2, title: '다중 대상 카메라 프레이밍', en: 'Multi-Target Camera Framing', tags: ['camera', 'zoom', 'framing', 'multiplayer'], added: '2026-11-01' },
+    { id: 'combo-buffer', level: 3, title: '콤보 입력 버퍼 & 캔슬 윈도우', en: 'Combo Input Buffer & Cancel Windows', tags: ['combat', 'input buffer', 'cancel', 'frame data'], added: '2026-11-01' },
+    { id: 'input-triggers', level: 1, title: '입력 트리거 & 모디파이어 (Enhanced Input)', en: 'Input Triggers & Modifiers (Enhanced Input)', tags: ['input', 'unreal', 'unity', 'enhanced input', 'tap', 'hold'], added: '2026-11-01' },
+    { id: 'spring-arm-camera', level: 2, title: '카메라 충돌 회피 (Spring Arm, Deoccluder)', en: 'Camera Collision (Spring Arm, Deoccluder)', tags: ['camera', 'unreal', 'unity', 'spring arm', 'cinemachine', 'collision'], added: '2026-11-01' },
+  ],
+});

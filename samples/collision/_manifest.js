@@ -1,0 +1,33 @@
+// 카테고리 매니페스트. 샘플을 추가하면 samples 배열에 한 줄 추가함.
+// { id, level(1 입문, 2 초급, 3 중급, 4 고급), title, tags: [...], added: 'YYYY-MM-DD' }  (파일: samples/collision/<id>.js)
+GTL.category({
+  id: 'collision',
+  title: '충돌, 공간 분할, 최적화',
+  en: 'Collision, Spatial Partitioning, Optimization',
+  icon: '▣',
+  order: 2,
+  samples: [
+    { id: 'broadphase-grid', level: 2, title: '브로드페이즈: 전수 검사 vs 균일 그리드 / 공간 해시', en: 'Broadphase: Brute Force vs Uniform Grid / Spatial Hash', tags: ['broadphase', 'uniform grid', 'spatial hash', 'O(n²)'], added: '2026-10-31' },
+    { id: 'quadtree', level: 3, title: '쿼드트리: 적응형 공간 분할과 범위 질의', en: 'Quadtree: Adaptive Spatial Partitioning and Range Queries', tags: ['quadtree', 'spatial partition', 'range query'], added: '2026-10-31' },
+    { id: 'sweep-and-prune', level: 3, title: 'Sweep and Prune: 정렬 축과 시간적 일관성', en: 'Sweep and Prune: Sorted Axes and Temporal Coherence', tags: ['broadphase', 'sweep and prune', 'sort and sweep', 'insertion sort'], added: '2026-10-31' },
+    { id: 'bounding-volumes', level: 2, title: '경계 볼륨: 원, AABB, OBB, 볼록 껍질', en: 'Bounding Volumes: Circle, AABB, OBB, Convex Hull', tags: ['bounding volume', 'AABB', 'OBB', 'convex hull'], added: '2026-10-31' },
+    { id: 'sat', level: 3, title: '분리축 정리 (SAT) & 최소 이동 벡터', en: 'Separating Axis Theorem (SAT) & Minimum Translation Vector', tags: ['SAT', 'narrowphase', 'MTV', 'polygon'], added: '2026-10-31' },
+    { id: 'gjk-minkowski', level: 4, title: '민코프스키 차 & GJK / EPA', en: 'Minkowski Difference & GJK / EPA', tags: ['GJK', 'EPA', 'Minkowski difference', 'narrowphase'], added: '2026-10-31' },
+    { id: 'raycast-dda', level: 3, title: '그리드 레이캐스트: DDA vs 고정 간격 샘플링', en: 'Grid Raycast: DDA vs Fixed-Step Sampling', tags: ['raycast', 'DDA', 'Amanatides & Woo', 'grid traversal'], added: '2026-10-31' },
+    { id: 'tilemap-resolution', level: 2, title: '타일맵 충돌 해결: 축 분리와 모서리 걸림', en: 'Tilemap Collision Resolution: Axis Separation and Edge Snagging', tags: ['tilemap', 'platformer', 'collision response', 'tunneling'], added: '2026-10-31' },
+    { id: 'object-pooling', level: 2, title: '오브젝트 풀링 & GC 스파이크', en: 'Object Pooling & GC Spikes', tags: ['object pool', 'garbage collection', 'allocation', 'hitch'], added: '2026-10-31' },
+    { id: 'view-culling', level: 2, title: '뷰(프러스텀) 컬링: 화면 밖은 그리지 않기', en: 'View (Frustum) Culling: Skip What Is Off Screen', tags: ['culling', 'frustum culling', 'spatial grid', 'draw calls'], added: '2026-10-31' },
+    { id: 'update-lod', level: 2, title: '시간 분할 & 업데이트 LOD', en: 'Time Slicing & Update LOD', tags: ['time slicing', 'AI LOD', 'update rate', 'budget'], added: '2026-10-31' },
+    { id: 'soa-vs-aos', level: 3, title: 'SoA vs AoS: 파티클 업데이트의 메모리 배치', en: 'SoA vs AoS: Memory Layout for Particle Updates', tags: ['data-oriented design', 'SoA', 'AoS', 'TypedArray', 'cache'], added: '2026-10-31' },
+    { id: 'circle-separation', level: 1, title: '원 vs 원 충돌: 겹침 판정 vs 밀어내기', en: 'Circle vs Circle Collision: Overlap Test vs Push Apart', tags: ['circle', 'overlap', 'separation', 'penetration'], added: '2026-11-01' },
+    { id: 'point-in-polygon', level: 2, title: '점-다각형 포함 판정: 교차 수 vs 와인딩 넘버', en: 'Point in Polygon: Crossing Number vs Winding Number', tags: ['point in polygon', 'crossing number', 'winding number', 'even-odd', 'nonzero'], added: '2026-11-01' },
+    { id: 'collide-and-slide', level: 2, title: '원 vs 선분 이동: 충돌 시 멈춤 vs 미끄러짐 (collide and slide)', en: 'Circle vs Segment Movement: Stop vs Slide (Collide and Slide)', tags: ['collide and slide', 'swept circle', 'character movement', 'TOI'], added: '2026-11-01' },
+    { id: 'loose-quadtree', level: 3, title: '느슨한 쿼드트리: 경계에 걸친 오브젝트', en: 'Loose Quadtree: Objects on Cell Boundaries', tags: ['loose quadtree', 'loose octree', 'quadtree', 'hierarchical grid'], added: '2026-11-01' },
+    { id: 'character-slopes-steps', level: 3, title: '캐릭터 컨트롤러: 경사 한계, 계단 오르기, 지면 붙이기', en: 'Character Controller: Slope Limit, Step Up, Ground Snapping', tags: ['character controller', 'slope limit', 'step offset', 'ground snapping'], added: '2026-11-01' },
+    { id: 'dynamic-aabb-tree', level: 4, title: '동적 AABB 트리: fat AABB 증분 갱신 vs 매 프레임 재구축', en: 'Dynamic AABB Tree: Incremental Fat AABB Updates vs Rebuild Every Frame', tags: ['BVH', 'dynamic AABB tree', 'fat AABB', 'Box2D', 'broadphase'], added: '2026-11-01' },
+    { id: 'layer-collision-matrix', level: 1, title: '레이어 충돌 매트릭스 (Unity Layer Collision Matrix, Unreal 콜리전 채널)', en: 'Layer Collision Matrix (Unity Layer Collision Matrix, Unreal Collision Channels)', tags: ['unity', 'unreal', 'collision layer', 'collision filtering', 'broadphase'], added: '2026-11-01' },
+    { id: 'world-partition-streaming', level: 2, title: '월드 스트리밍: 그리드 셀, 로딩 범위, 히스테리시스 (Unreal World Partition)', en: 'World Streaming: Grid Cells, Loading Range, Hysteresis (Unreal World Partition)', tags: ['unreal', 'unity', 'world partition', 'level streaming', 'hysteresis', 'async loading'], added: '2026-11-01' },
+    { id: 'hzb-occlusion', level: 3, title: 'HZB 오클루전 컬링: 깊이 밉 피라미드 (Unreal HZB)', en: 'HZB Occlusion Culling: Depth Mip Pyramid (Unreal HZB)', tags: ['unreal', 'unity', 'occlusion culling', 'HZB', 'hierarchical z-buffer', 'frustum culling'], added: '2026-11-01' },
+    { id: 'ecs-archetype', level: 3, title: 'ECS 아키타입 청크 (Unity Entities, Unreal Mass)', en: 'ECS Archetype Chunks (Unity Entities, Unreal Mass)', tags: ['unity', 'unreal', 'ECS', 'archetype', 'DOTS', 'Mass Entity', 'data-oriented design'], added: '2026-11-01' },
+  ],
+});

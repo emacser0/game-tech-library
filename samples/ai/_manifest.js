@@ -1,0 +1,30 @@
+// 카테고리 매니페스트. 샘플을 추가하면 samples 배열에 한 줄 추가.
+// { id, level(1 입문, 2 초급, 3 중급, 4 고급), title, tags: [...], added: 'YYYY-MM-DD' }, 파일은 samples/ai/<id>.js
+GTL.category({
+  id: 'ai',
+  title: 'AI & 길찾기',
+  en: 'AI & Pathfinding',
+  icon: '🧭',
+  order: 5,
+  samples: [
+    { id: 'pathfinding-algorithms', level: 2, title: '길찾기 알고리즘: BFS, Dijkstra, Greedy, A*', en: 'Pathfinding Algorithms: BFS, Dijkstra, Greedy, A*', tags: ['pathfinding', 'a*', 'dijkstra', 'bfs', 'greedy', 'grid'], added: '2026-10-31' },
+    { id: 'astar-heuristics', level: 3, title: 'A* 휴리스틱, 가중치(ε), 동점 처리', en: 'A* Heuristics, Weight (ε), and Tie-Breaking', tags: ['pathfinding', 'a*', 'heuristic', 'weighted a*', 'tie-breaking'], added: '2026-10-31' },
+    { id: 'jump-point-search', level: 4, title: 'Jump Point Search (JPS) vs A*', en: 'Jump Point Search (JPS) vs A*', tags: ['pathfinding', 'jps', 'a*', 'symmetry', 'grid'], added: '2026-10-31' },
+    { id: 'path-smoothing', level: 3, title: '경로 스무딩: String Pulling, Theta*', en: 'Path Smoothing: String Pulling, Theta*', tags: ['pathfinding', 'smoothing', 'theta*', 'any-angle', 'line of sight'], added: '2026-10-31' },
+    { id: 'flow-field', level: 3, title: '플로우 필드 (Flow Field) vs 유닛별 A*', en: 'Flow Field vs Per-Unit A*', tags: ['pathfinding', 'flow field', 'rts', 'crowd', 'dijkstra'], added: '2026-10-31' },
+    { id: 'steering-behaviors', level: 2, title: '조향 행동: Seek, Arrive, Pursue, Wander', en: 'Steering Behaviors: Seek, Arrive, Pursue, Wander', tags: ['steering', 'seek', 'arrive', 'pursue', 'wander', 'reynolds'], added: '2026-10-31' },
+    { id: 'boids', level: 2, title: '보이드 (Boids): 분리, 정렬, 응집', en: 'Boids: Separation, Alignment, Cohesion', tags: ['boids', 'flocking', 'steering', 'reynolds', 'spatial hash'], added: '2026-10-31' },
+    { id: 'local-avoidance', level: 4, title: '로컬 회피: 반발력 vs RVO', en: 'Local Avoidance: Repulsion vs RVO', tags: ['local avoidance', 'rvo', 'velocity obstacle', 'crowd', 'steering'], added: '2026-10-31' },
+    { id: 'vision-stealth', level: 2, title: '시야 판정 & 잠입 감지 게이지', en: 'Line of Sight & Stealth Detection Meter', tags: ['perception', 'line of sight', 'raycast', 'fov', 'stealth'], added: '2026-10-31' },
+    { id: 'influence-map', level: 3, title: '영향력 맵 (Influence Map): 스탬프 vs 전파', en: 'Influence Map: Stamping vs Propagation', tags: ['influence map', 'tactical ai', 'strategy', 'propagation'], added: '2026-10-31' },
+    { id: 'utility-ai', level: 3, title: '의사결정: 우선순위 FSM vs Utility AI', en: 'Decision Making: Priority FSM vs Utility AI', tags: ['decision making', 'utility ai', 'fsm', 'response curve'], added: '2026-10-31' },
+    { id: 'patrol-waypoints', level: 1, title: '순찰: 무작위 이동 vs 웨이포인트 순찰', en: 'Patrol: Random Wander vs Waypoint Patrol', tags: ['patrol', 'waypoint', 'wander', 'guard', 'coverage'], added: '2026-11-01' },
+    { id: 'last-known-position', level: 2, title: '감각 기억: 마지막으로 본 위치 추적', en: 'Sensory Memory: Tracking the Last Known Position', tags: ['perception', 'memory', 'last known position', 'search', 'stealth'], added: '2026-11-01' },
+    { id: 'fsm-vs-behavior-tree', level: 3, title: '유한 상태 기계 (FSM) vs 행동 트리 (BT)', en: 'Finite State Machine (FSM) vs Behavior Tree (BT)', tags: ['decision making', 'fsm', 'behavior tree', 'state explosion', 'architecture'], added: '2026-11-01' },
+    { id: 'formation-movement', level: 3, title: '대형 이동: 각자 이동 vs 슬롯 기반 대형', en: 'Formation Movement: Individual Moves vs Slot Formation', tags: ['formation', 'squad', 'steering', 'rts', 'slot', 'coordinated movement'], added: '2026-11-01' },
+    { id: 'hpa-star', level: 4, title: '계층적 길찾기: HPA* vs A*', en: 'Hierarchical Pathfinding: HPA* vs A*', tags: ['pathfinding', 'hpa*', 'hierarchical', 'a*', 'abstraction', 'grid'], added: '2026-11-01' },
+    { id: 'navmesh-funnel', level: 4, title: '내비메시 경로: 폴리곤 중심 vs 퍼널 알고리즘', en: 'Navmesh Paths: Polygon Centers vs Funnel Algorithm', tags: ['pathfinding', 'navmesh', 'funnel', 'string pulling', 'recast', 'detour'], added: '2026-11-01' },
+    { id: 'navmesh-carving', level: 3, title: '움직이는 장애물: 회피 vs 내비메시 카빙 (NavMeshObstacle)', en: 'Moving Obstacles: Avoidance vs Navmesh Carving (NavMeshObstacle)', tags: ['unity', 'unreal', 'navmesh', 'carving', 'dynamic obstacle', 'nav modifier', 'replanning'], added: '2026-11-01' },
+    { id: 'eqs-queries', level: 2, title: '위치 선택: 단순 규칙 vs 환경 쿼리 (Unreal EQS)', en: 'Position Selection: Simple Rule vs Environment Query (Unreal EQS)', tags: ['unreal', 'eqs', 'environment query', 'tactical position', 'scoring', 'decision making'], added: '2026-11-01' },
+  ],
+});

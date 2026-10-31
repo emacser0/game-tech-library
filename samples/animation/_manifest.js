@@ -1,0 +1,33 @@
+// 카테고리 매니페스트. 샘플을 추가하면 samples 배열에 한 줄 추가.
+// { id, level(1 입문, 2 초급, 3 중급, 4 고급), title, tags: [...], added: 'YYYY-MM-DD' }, 파일은 samples/animation/<id>.js
+GTL.category({
+  id: 'animation',
+  title: '보간 & 애니메이션',
+  en: 'Interpolation & Animation',
+  icon: '〰',
+  order: 4,
+  samples: [
+    { id: 'easing-functions', level: 1, title: '이징 함수 (Easing Functions)', en: 'Easing Functions', tags: ['easing', 'tween', 'penner', 'interpolation'], added: '2026-10-31' },
+    { id: 'angle-interpolation', level: 1, title: '각도 보간: 최단 경로 (lerpAngle)', en: 'Angle Interpolation: Shortest Path (lerpAngle)', tags: ['angle', 'lerp', 'wrap', 'rotation', 'turret'], added: '2026-10-31' },
+    { id: 'spline-curves', level: 3, title: '스플라인: Catmull-Rom α, Bézier, B-spline', en: 'Splines: Catmull-Rom α, Bézier, B-spline', tags: ['spline', 'catmull-rom', 'centripetal', 'bezier', 'b-spline', 'path'], added: '2026-10-31' },
+    { id: 'arc-length', level: 3, title: '등속 이동: 호 길이 재매개화', en: 'Constant Speed: Arc-Length Reparameterization', tags: ['arc length', 'bezier', 'lut', 'reparameterization', 'constant speed'], added: '2026-10-31' },
+    { id: 'ik-fabrik-ccd', level: 3, title: '역운동학 IK: FABRIK vs CCD', en: 'Inverse Kinematics (IK): FABRIK vs CCD', tags: ['ik', 'fabrik', 'ccd', 'inverse kinematics', 'constraints'], added: '2026-10-31' },
+    { id: 'procedural-walk', level: 3, title: '절차적 보행 (Procedural Walk)', en: 'Procedural Walk', tags: ['procedural animation', 'ik', 'foot planting', 'gait', 'legs'], added: '2026-10-31' },
+    { id: 'second-order-dynamics', level: 3, title: '2차 동역학으로 성격 있는 추종', en: 'Following With Personality: Second-Order Dynamics', tags: ['spring', 'second-order', 'damping', 'procedural animation', 'follow'], added: '2026-10-31' },
+    { id: 'pose-crossfade', level: 2, title: '애니메이션 크로스페이드 블렌딩', en: 'Animation Crossfade Blending', tags: ['blending', 'crossfade', 'transition', 'state machine', 'sync'], added: '2026-10-31' },
+    { id: 'pixel-snap-camera', level: 2, title: '픽셀 스냅 vs 서브픽셀 카메라', en: 'Pixel Snap vs Subpixel Camera', tags: ['pixel art', 'pixel snapping', 'subpixel', 'camera', 'jitter'], added: '2026-10-31' },
+    { id: 'quaternion-slerp', level: 3, title: '회전 보간: 오일러 lerp vs 쿼터니언 slerp', en: 'Rotation Interpolation: Euler Lerp vs Quaternion Slerp', tags: ['quaternion', 'slerp', 'nlerp', 'euler', 'gimbal lock', '3d rotation'], added: '2026-10-31' },
+    { id: 'animation-principles', level: 2, title: '애니메이션 원칙: 예비 동작, 스쿼시 & 스트레치, 후속 동작', en: 'Animation Principles: Anticipation, Squash & Stretch, Follow-Through', tags: ['12 principles', 'squash and stretch', 'anticipation', 'follow-through', 'arcs'], added: '2026-10-31' },
+    { id: 'lerp-smoothing', level: 1, title: 'lerp 스무딩과 프레임레이트 독립성', en: 'Lerp Smoothing and Frame Rate Independence', tags: ['lerp', 'damping', 'frame rate independence', 'exponential decay', 'smoothing'], added: '2026-10-31' },
+    { id: 'flipbook-framerate', level: 1, title: '애니메이션 프레임레이트: 매 프레임 vs 2프레임마다 (on twos)', en: 'Animation Frame Rate: Every Frame vs On Twos', tags: ['frame rate', 'on twos', 'stepped animation', 'limited animation', 'foot sliding'], added: '2026-11-01' },
+    { id: 'root-motion', level: 2, title: '루트 모션 vs 인플레이스 + 코드 이동', en: 'Root Motion vs In-Place + Code Movement', tags: ['root motion', 'in-place', 'foot sliding', 'locomotion', 'displacement'], added: '2026-11-01' },
+    { id: 'look-at-spine', level: 2, title: '룩앳: 머리만 회전 vs 척추 분산 + 각도 제한', en: 'Look At: Head Only vs Spread Over Spine + Angle Limit', tags: ['look at', 'aim offset', 'procedural animation', 'clamp', 'spine'], added: '2026-11-01' },
+    { id: 'ribbon-trail', level: 2, title: '궤적 효과: 점 찍기 vs 연속 리본', en: 'Trail Effects: Dots vs Continuous Ribbon', tags: ['trail', 'ribbon', 'catmull-rom', 'vfx', 'triangle strip'], added: '2026-11-01' },
+    { id: 'additive-layers', level: 3, title: '애디티브 레이어 vs 덮어쓰기 레이어', en: 'Additive Layers vs Override Layers', tags: ['additive', 'animation layers', 'override', 'bone mask', 'hit reaction'], added: '2026-11-01' },
+    { id: 'motion-matching', level: 4, title: '모션 매칭 vs 상태 머신 블렌딩', en: 'Motion Matching vs State Machine Blending', tags: ['motion matching', 'pose search', 'state machine', 'inertialization', 'foot sliding'], added: '2026-11-01' },
+    { id: 'blend-space-2d', level: 3, title: '2D 블렌드 스페이스 (Unreal Blend Space, Unity Blend Tree)', en: '2D Blend Space (Unreal Blend Space, Unity Blend Tree)', tags: ['blend space', 'blend tree', 'barycentric', 'gradient band', 'locomotion', 'unreal', 'unity'], added: '2026-11-01' },
+    { id: 'foot-ik-ground', level: 2, title: '지면 발 IK와 골반 보정 (Unreal Control Rig, Unity Two Bone IK)', en: 'Ground Foot IK and Pelvis Offset (Unreal Control Rig, Unity Two Bone IK)', tags: ['foot ik', 'two bone ik', 'pelvis offset', 'trace', 'stairs', 'unreal', 'unity'], added: '2026-11-01' },
+    { id: 'motion-warping', level: 3, title: '모션 워핑 (Unreal Motion Warping)', en: 'Motion Warping (Unreal Motion Warping)', tags: ['motion warping', 'root motion', 'warp target', 'skew warp', 'target matching', 'unreal', 'unity'], added: '2026-11-01' },
+    { id: 'anim-curve-compression', level: 3, title: '애니메이션 커브 압축: 키프레임 감소', en: 'Animation Curve Compression: Keyframe Reduction', tags: ['compression', 'keyframe reduction', 'error threshold', 'curves', 'memory', 'unreal', 'unity'], added: '2026-11-01' },
+  ],
+});

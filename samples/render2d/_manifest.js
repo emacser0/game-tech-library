@@ -1,0 +1,33 @@
+// 카테고리 매니페스트. 샘플을 추가하면 samples 배열에 한 줄 추가함.
+// { id, level(1 입문, 2 초급, 3 중급, 4 고급), title, tags: [...], added: 'YYYY-MM-DD' }, 파일은 samples/render2d/<id>.js
+GTL.category({
+  id: 'render2d',
+  title: '2D 렌더링 & 셰이더',
+  en: '2D Rendering & Shaders',
+  icon: '🎨',
+  order: 7,
+  samples: [
+    { id: 'dither-patterns', level: 2, title: '디더링 (Ordered, Blue Noise, 오차 확산)', en: 'Dithering (Ordered, Blue Noise, Error Diffusion)', tags: ['dithering', 'bayer', 'floyd-steinberg', 'blue-noise', 'quantization'], added: '2026-10-31' },
+    { id: 'palette-cycling', level: 2, title: '팔레트 LUT, 컬러 사이클링, 팔레트 스왑', en: 'Palette LUT, Color Cycling, Palette Swap', tags: ['palette', 'lut', 'color-cycling', 'shader', 'webgl'], added: '2026-10-31' },
+    { id: 'linear-space-blending', level: 2, title: '감마 보정 블렌딩 (sRGB vs 선형 공간)', en: 'Gamma-Correct Blending (sRGB vs Linear Space)', tags: ['gamma', 'srgb', 'linear', 'blending', 'webgl'], added: '2026-10-31' },
+    { id: 'premultiplied-alpha', level: 2, title: '프리멀티플라이드 알파 vs 스트레이트 알파', en: 'Premultiplied Alpha vs Straight Alpha', tags: ['alpha', 'premultiplied', 'blending', 'filtering', 'webgl'], added: '2026-10-31' },
+    { id: 'normal-mapped-sprites', level: 3, title: '2D 노멀맵 라이팅', en: '2D Normal Map Lighting', tags: ['lighting', 'normal-map', 'sprite', 'shader', 'webgl'], added: '2026-10-31' },
+    { id: 'visibility-polygon', level: 3, title: '2D 시야 다각형 (끝점 레이캐스팅)', en: '2D Visibility Polygon (Endpoint Raycasting)', tags: ['visibility', 'shadow', 'raycast', 'fog-of-war'], added: '2026-10-31' },
+    { id: 'bloom-mip-chain', level: 3, title: '블룸 (Threshold + 다운샘플 체인)', en: 'Bloom (Threshold + Downsample Chain)', tags: ['bloom', 'hdr', 'post-process', 'framebuffer', 'webgl2'], added: '2026-10-31' },
+    { id: 'blur-kernels', level: 3, title: '블러 커널 비교 (Box, Gaussian, Kawase, Dual)', en: 'Blur Kernels Compared (Box, Gaussian, Kawase, Dual)', tags: ['blur', 'gaussian', 'kawase', 'separable', 'performance'], added: '2026-10-31' },
+    { id: 'tonemap-operators', level: 2, title: '톤 매핑 연산자 (Clamp, Reinhard, Filmic, ACES)', en: 'Tone Mapping Operators (Clamp, Reinhard, Filmic, ACES)', tags: ['tonemapping', 'hdr', 'aces', 'reinhard', 'webgl'], added: '2026-10-31' },
+    { id: 'pixel-perfect-scaling', level: 2, title: '픽셀 퍼펙트 스케일링 (정수 배율, Sharp Bilinear)', en: 'Pixel-Perfect Scaling (Integer Scale, Sharp Bilinear)', tags: ['pixel-art', 'scaling', 'nearest', 'sharp-bilinear'], added: '2026-10-31' },
+    { id: 'sdf-shapes', level: 3, title: 'SDF 렌더링 (거리장 텍스처)', en: 'SDF Rendering (Distance Field Textures)', tags: ['sdf', 'distance-field', 'text', 'outline', 'webgl'], added: '2026-10-31' },
+    { id: 'sprite-batching', level: 3, title: '스프라이트 배칭 & 드로우 콜', en: 'Sprite Batching & Draw Calls', tags: ['batching', 'draw-call', 'instancing', 'atlas', 'performance'], added: '2026-10-31' },
+    { id: 'crt-postfx', level: 2, title: 'CRT 포스트 프로세스', en: 'CRT Post-Processing', tags: ['post-process', 'crt', 'scanline', 'retro', 'shader'], added: '2026-10-31' },
+    { id: 'parallax-layers', level: 1, title: '패럴랙스 스크롤링 (깊이별 다중 레이어)', en: 'Parallax Scrolling (Layers by Depth)', tags: ['parallax', 'scrolling', 'background', 'depth', 'camera'], added: '2026-11-01' },
+    { id: 'hit-flash-outline', level: 1, title: '피격 플래시 & 스프라이트 외곽선 셰이더', en: 'Hit Flash & Sprite Outline Shader', tags: ['hit-flash', 'outline', 'sprite', 'shader', 'webgl'], added: '2026-11-01' },
+    { id: 'dissolve-shader', level: 1, title: '디졸브 셰이더 (노이즈 임계값 + 가장자리 발광)', en: 'Dissolve Shader (Noise Threshold + Edge Glow)', tags: ['dissolve', 'noise', 'alpha-test', 'shader', 'webgl'], added: '2026-11-01' },
+    { id: 'heat-distortion', level: 2, title: '열기 왜곡 & 굴절 (UV 오프셋 노이즈)', en: 'Heat Distortion & Refraction (UV Offset Noise)', tags: ['distortion', 'refraction', 'post-process', 'noise', 'webgl'], added: '2026-11-01' },
+    { id: 'metaballs-2d', level: 2, title: '2D 메타볼 (임계값 필드)', en: '2D Metaballs (Threshold Field)', tags: ['metaball', 'implicit', 'field', 'shader', 'webgl'], added: '2026-11-01' },
+    { id: 'fsr-upscale', level: 3, title: '공간 업스케일링 (Bilinear vs 에지 적응 + 샤프닝)', en: 'Spatial Upscaling (Bilinear vs Edge-Adaptive + Sharpening)', tags: ['upscaling', 'fsr', 'easu', 'rcas', 'sharpening', 'webgl'], added: '2026-11-01' },
+    { id: 'jfa-2d-gi', level: 4, title: '2D 전역 조명 (Jump Flood 거리장 + 레이 마칭)', en: '2D Global Illumination (Jump Flood Distance Field + Ray Marching)', tags: ['global-illumination', 'jump-flood', 'distance-field', 'raymarching', 'soft-shadow', 'webgl2'], added: '2026-11-01' },
+    { id: 'gpu-particles', level: 3, title: 'GPU 파티클 시뮬레이션 (Niagara GPU 이미터, VFX Graph)', en: 'GPU Particle Simulation (Niagara GPU Emitters, VFX Graph)', tags: ['particles', 'gpu-simulation', 'ping-pong', 'float-texture', 'webgl2', 'unreal', 'unity'], added: '2026-11-01' },
+    { id: 'virtual-texturing', level: 4, title: '가상 텍스처링 (Unreal Runtime Virtual Texture, 스트리밍 VT)', en: 'Virtual Texturing (Unreal Runtime Virtual Texture, Streaming VT)', tags: ['virtual-texture', 'streaming', 'page-table', 'mipmap', 'lru-cache', 'unreal'], added: '2026-11-01' },
+  ],
+});
